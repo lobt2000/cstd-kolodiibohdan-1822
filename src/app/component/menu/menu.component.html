@@ -1,0 +1,28 @@
+<button class="menu" (click)="changeMenu()">Menu</button>
+<nav class="main-menu" *ngIf="showMenu">
+  <div class="main-box" *ngIf="!openMove || openMove == 'controls'">
+    <button (click)="checkMove('new')">New game</button>
+    <button [disabled]="true" (click)="checkMove('continue')">Continue</button>
+    <button [disabled]="true" (click)="checkMove('score')">Score table</button>
+    <button (click)="checkMove('controls')">Controls</button>
+  </div>
+  <div class="new-game" *ngIf="openMove == 'new'">
+    <button (click)="checkGameMode('menTwo')">Men vs Men</button>
+    <button [disabled]="true">Men vs AI</button>
+    <button [disabled]="true">AI vs AI</button>
+    <button (click)="checkMove('')">Back</button>
+  </div>
+  <div class="new-game" *ngIf="openMove == 'start' && !openResetMenu">
+    <button (click)="checkGameReview('restart')">Start again</button>
+    <button [disabled]="true">Save Game</button>
+    <button (click)="checkGameReview('exit')">Exit</button>
+    <!-- <button (click)="checkMove('')">Back</button> -->
+  </div>
+  <div class="new-game" *ngIf="openResetMenu">
+    <button (click)="checkGameReview('restart')">Start again</button>
+    <button (click)="checkGameReview('exit')">Exit</button>
+    <!-- <button (click)="checkMove('')">Back</button> -->
+  </div>
+</nav>
+
+
