@@ -26,6 +26,9 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
 
+Kolodii Bohdan, student of KI-47, Junior Angular Front-End Developer(Software Engineer) at Binariks Inc.
+Student number - 13,  HW i-face - UART, Game - chrome dragon game, Data driven format - XML
+
 Щоб заранити проект потрібно дістати його з репозиторію. Потім скачати NodeJs версії не нижче 14 і VS code або WebStorm. Бажано налаштувати NodeJs, щоб можна було через термінал запустити скачування пакетів. Потрібно відкрити проект через Vs code чи WebStorm і в терміналі (я використовую термінал cmd) прописати перше команду (npm install), після  того як всі пакети встановляться, слід прописати команду (ng serve -o) - це потрібно для того, щоб запустити проект на локальному сервері.
 
                             GOOGLE DRAGON GAME v1.0 опис
