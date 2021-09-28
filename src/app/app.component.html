@@ -1,7 +1,0 @@
-<header>
-  <app-menu (openGame)=onOpenGame($event)></app-menu>
-</header>
-<main>
-  <app-chrome-dragon-game *ngIf="openGame"></app-chrome-dragon-game>
-  <app-controls-info *ngIf="router.routerState.snapshot.url.split('/')[1] == 'controls'"></app-controls-info>
-</main>
