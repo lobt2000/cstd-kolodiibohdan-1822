@@ -1,25 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   title = 'chrome-dragon-game';
-  openGame: boolean = false;
-  openResetMenu: boolean = false;
-  constructor(public router: Router) { }
-  ngOnInit(): void {
-    this.router.navigateByUrl('game')
-  }
-  onOpenGame(event) {
-    this.openGame = event;
-  }
-  onOpenResetMenu(event) {
-    console.log(event);
-    this.openResetMenu = false;
-    this.openResetMenu = event;
-  }
 }
