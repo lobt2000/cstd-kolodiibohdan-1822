@@ -1,0 +1,10 @@
+<app-header class="w-100"></app-header>
+<main class="container w-100 flex nowrap bc-gray">
+  <app-menu class="bc-black" (resizeMenu)="onResizeValue($event)"
+    [style.width]="(windowWidth < 768) ? '0' : menuWidth + 'px'" [style.transition]="'all 0.3s ease-in-out'"></app-menu>
+  <section class="container__items bc-gray"
+    [style.width]="(windowWidth < 768) ? '100%' : 'calc(100% - ' + menuWidth + 'px)'"
+    [style.transition]="'all 0.3s ease-in-out'">
+    <router-outlet></router-outlet>
+  </section>
+</main>
