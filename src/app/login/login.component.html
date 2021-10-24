@@ -1,0 +1,198 @@
+<main class="w-100 flex aic jcc nowrap">
+  <section class="login-block bc-white flex aic jcc wrap" *ngIf="resetPassword == 'registration'">
+    <div class="login-block__header bc-light-blue flex aic jcc nowrap ">
+      <img class="login-block__header--logo" src="./../../assets/image/Skillcheckers-logo.png" alt="">
+    </div>
+    <p class="login-block__title flex aic jcc font-25 m-t-10 w-100">Welcome</p>
+    <p class="login-block__text flex aic jcc font-13 txt-c-initial w-100">Create an order to start receiving resumes</p>
+    <ng-container *ngIf="isSign == 'signIn'">
+      <form [formGroup]="formLogIn" class="login-block__form flex col m-t-20">
+        <label for="user" class="w-100 m-l-2 font-14 m-b-10">Email</label>
+        <input [formControlName]="'email'" type="text" class="p-t-13 p-b-13 p-l-10 bdc-gray font-14" placeholder="email"
+          name="" id="user">
+        <span *ngIf="this.formLogIn.controls.email.getError('required')" class="font-10 m-l-2 m-t-4 txt-c-red">Field is
+          required</span>
+        <span *ngIf="this.formLogIn.controls.email.getError('pattern')" class="font-10 m-t-4 m-l-2 txt-c-red">Field
+          should
+          contain correct values</span>
+        <label for="password" class="font-14 w-100 m-l-2 m-t-15 m-b-5">Password</label>
+        <div class="flex nowrap jcsb aic p-t-12 p-b-12 p-l-10 bdc-gray">
+          <input [type]="isVisible ? 'text' : 'password'" [formControlName]="'pass'" min="8" max="16" name=""
+            class="bdc-white font-14" id="password" placeholder="password">
+          <button class="font-20 m-r-15 bc-white bdc-white"
+            [class]="isVisible ? 'icon-visibility' : 'icon-visibility-off ' " (click)="ChangeType()"></button>
+        </div>
+        <span *ngIf="this.formLogIn.controls.pass.getError('required')" class="font-10 m-l-2 m-t-4 txt-c-red">Field is
+          required</span>
+        <span *ngIf="this.formLogIn.controls.pass.getError('pattern')" class="font-10 m-l-2 m-t-4 txt-c-red">Field
+          should be
+          from 8 to 16 values</span>
+
+        <button (click)="signIN()" class="m-t-20 w-100 bdc-light-blue btn bdr-5"
+          [class]="isDisabled ? 'bc-light-gray txt-c-black' : 'bc-blue txt-c-white'"
+          [disabled]="isDisabled">Login</button>
+      </form>
+      <p class="m-t-30 txt-c-blue font-14 w-100 flex aic jcc" (click)="resetPasswordByEmail('resetEmail')">Forgot
+        password?</p>
+    </ng-container>
+    <ng-container *ngIf="isSign == 'signUp'">
+      <form [formGroup]="formLogUp" class="login-block__form flex col aic">
+        <mat-stepper orientation="vertical" class="w-100">
+          <mat-step>
+            <ng-template matStepLabel>Step 1</ng-template>
+            <ng-template matStepContent>
+              <div class="w-100 font-14 m-b-5 col flex aic jcsb m-b-5">
+                <div class="flex col aifs jcsa w-100 m-b-5">
+                  <label for="user" class="w-100 m-l-2 font-14 m-b-5">First Name</label>
+                  <input [formControlName]="'firstname'" type="text" class="p-t-13 p-b-13 p-l-10 bdc-gray font-14 w-100"
+                    placeholder="first name" name="" id="firstname">
+                  <span *ngIf="this.formLogUp.controls.firstname.getError('required')"
+                    class="font-10 m-l-2 m-t-4 txt-c-red">Field is
+                    required</span>
+                  <span *ngIf="this.formLogUp.controls.firstname.getError('pattern')"
+                    class="font-10 m-t-4 m-l-2 txt-c-red">Field
+                    should
+                    contain correct values</span>
+                </div>
+                <div class="flex col aifs jcsa w-100">
+                  <label for="user" class="w-100 m-l-2 font-14 m-b-5">Second Name</label>
+                  <input [formControlName]="'secondname'" type="text"
+                    class="p-t-13 p-b-13 p-l-10 bdc-gray font-14 w-100" placeholder="second name" name=""
+                    id="secondname">
+                  <span *ngIf="this.formLogUp.controls.secondname.getError('required')"
+                    class="font-10 m-l-2 m-t-4 txt-c-red">Field is
+                    required</span>
+                  <span *ngIf="this.formLogUp.controls.secondname.getError('pattern')"
+                    class="font-10 m-t-4 m-l-2 txt-c-red">Field
+                    should
+                    contain correct values</span>
+                </div>
+              </div>
+              <div class="w-100 flex col aifs">
+                <label for="user" class="w-95 m-l-2 font-14 m-b-5">Email</label>
+                <input [formControlName]="'email'" type="text" class="p-t-13 p-b-13 p-l-10 bdc-gray font-14 w-100"
+                  placeholder="email" name="" id="email">
+                <span *ngIf="this.formLogUp.controls.email.getError('required')"
+                  class="font-10 m-l-2 m-t-4 txt-c-red">Field
+                  is
+                  required</span>
+                <span *ngIf="this.formLogUp.controls.email.getError('pattern')"
+                  class="font-10 m-t-4 m-l-2 txt-c-red">Field
+                  should
+                  contain correct values</span>
+              </div>
+              <button mat-button matStepperNext
+                class="btn font-14 m-r-15 bdc-light-blue bdr-5 bc-blue m-t-10">Next</button>
+            </ng-template>
+
+          </mat-step>
+          <mat-step>
+            <ng-template matStepLabel>Step 2</ng-template>
+            <ng-template matStepContent>
+              <div class="w-100 font-14 m-b-5 flex aic col jcsb m-b-15">
+                <div class="flex col aifs jcsa w-100">
+                  <label for="password" class="font-14 w-100 m-l-2 m-t-15 m-b-5">Password</label>
+                  <div class="flex nowrap jcsb aic p-t-12 p-b-12 p-l-10 bdc-gray w-100">
+                    <input [type]="isSignUpVisible ? 'text' : 'password'" [formControlName]="'pass'" min="8" max="16"
+                      name="" class="bdc-white font-14 w-100" id="password" placeholder="password">
+                    <button class="font-20 m-r-15 bc-white bdc-white"
+                      [class]="isSignUpVisible ? 'icon-visibility' : 'icon-visibility-off ' "
+                      (click)="ChangeTypeSignUp()"></button>
+                  </div>
+                  <span *ngIf="this.formLogUp.controls.pass.getError('required')"
+                    class="font-10 m-l-2 m-t-4 txt-c-red">Field
+                    is
+                    required</span>
+                  <span *ngIf="this.formLogUp.controls.pass.getError('pattern')"
+                    class="font-10 m-l-2 m-t-4 txt-c-red">Field
+                    should
+                    be
+                    from 8 to 16 values</span>
+                </div>
+                <div class="flex col aifs jcsa w-100">
+                  <label for="password" class="font-14 w-100 m-l-2 m-t-15 m-b-5">Confirm Password</label>
+                  <div class="flex nowrap jcsb aic p-t-12 p-b-12 p-l-10 bdc-gray w-100">
+                    <input [type]="isConfirmVisible ? 'text' : 'password'" [formControlName]="'confirmpass'" min="8"
+                      max="16" name="" class="bdc-white font-14 w-100" id="confirmpassword"
+                      placeholder="confirm password">
+                    <button class="font-20 m-r-15 bc-white bdc-white"
+                      [class]="isConfirmVisible ? 'icon-visibility' : 'icon-visibility-off' "
+                      (click)="ChangeTypeConfirm()"></button>
+                  </div>
+                  <span *ngIf="this.formLogUp.controls.confirmpass.getError('required')"
+                    class="font-10 m-l-2 m-t-4 txt-c-red">Field
+                    is
+                    required</span>
+                  <span *ngIf="this.formLogUp.controls.confirmpass.getError('pattern')"
+                    class="font-10 m-l-2 m-t-4 txt-c-red">Field
+                    should
+                    be
+                    from 8 to 16 values</span>
+                  <span
+                    *ngIf="this.formLogUp.controls.confirmpass.getError('notmatch') && !this.formLogUp.controls.confirmpass.getError('required')"
+                    class="font-10 m-l-2 m-t-4 txt-c-red">Field
+                    should
+                    be
+                    the same as password</span>
+                </div>
+              </div>
+              <button mat-button matStepperPrevious
+                class="btn font-14 m-r-15 bdc-light-blue bdr-5 bc-light-gray">Back</button>
+              <button mat-button matStepperNext class="btn font-14 m-r-15 bdc-light-blue bdr-5 bc-blue">Next</button>
+            </ng-template>
+          </mat-step>
+          <mat-step>
+            <ng-template matStepLabel>Step 3</ng-template>
+            <mat-radio-group aria-label="Select an option" class="flex col nowrap" [formControlName]="'checkPosition'">
+              <mat-radio-button value="user" class="w-100 m-10">User</mat-radio-button>
+              <mat-radio-button value="agent" class="w-100 m-10">Pre-school agent</mat-radio-button>
+            </mat-radio-group>
+            <button mat-button matStepperPrevious
+              class="btn font-14 m-r-15 bc-light-gray bdc-light-blue bdr-5">Back</button>
+          </mat-step>
+        </mat-stepper>
+
+
+        <button (click)="signUP()" class="m-t-20 w-100 bdc-light-blue btn bdr-5"
+          [class]="isDisabled ? 'bc-light-gray txt-c-black' : 'bc-blue txt-c-white'" [disabled]="isDisabled">Sign
+          Up</button>
+      </form>
+    </ng-container>
+
+    <div class="flex aic jcsa w-100 m-t-15 m-b-15">
+      <button [disabled]="isSign == 'signIn'" *ngIf="isSign !== 'signIn'" class="btn font-14 bc-blue bdr-5 txt-c-white"
+        (click)="changeSignForm('signIn')">Sign IN</button>
+      <button [disabled]="isSign == 'signUp'" *ngIf="isSign !== 'signUp'" class="btn font-14 bc-blue txt-c-white bdr-5"
+        (click)="changeSignForm('signUp')">Sign
+        UP</button>
+    </div>
+  </section>
+  <section class="login-block bc-white flex aic jcsb wrap col" *ngIf="resetPassword == 'resetEmail'">
+    <div class="login-block__header bc-light-blue flex aic jcc nowrap">
+      <img class="login-block__header--logo" src="./../../assets/image/Skillcheckers-logo.png" alt="">
+    </div>
+    <p class="login-block__title flex aic jcc font-25 m-t-10 w-100">Resetting password</p>
+    <p class="login-block__text flex aic jcc font-13 txt-c-initial w-100">Please write your email for resetting password
+    </p>
+    <form action="" [formGroup]="formReset" class="w-100 flex aic jcc col">
+      <input type="email" class="reset-email" formControlName="email" name="resetEmail" placeholder="Email">
+      <span *ngIf="formReset.controls.email.getError('required')" class="font-11 m-l-2 m-t-4 txt-c-red">Field is
+        required</span>
+      <span *ngIf="formReset.controls.email.getError('email')" class="font-11 m-t-4 m-l-2 txt-c-red">Field
+        should
+        contain correct values</span>
+    </form>
+
+    <button [class]="formReset.get('email').errors ? 'bc-light-gray txt-c-black' : 'bc-blue txt-c-white'"
+      [disabled]="formReset.get('email').errors" class="m-t-20 w-65 btn bdr-5" (click)="sendEmailForReset()">Sent an
+      email</button>
+    <button class="m-t-20 m-b-100 w-35 bc-blue btn bdr-5" (click)="resetPasswordByEmail('registration')">Back</button>
+  </section>
+  <section class="login-block-wait bc-white flex aic jcsb wrap col" *ngIf="resetPassword == 'waitForEmail'">
+    <div class="login-block-wait__header bc-light-blue flex aic jcc nowrap">
+      <img class="login-block-wait__header--logo" src="./../../assets/image/Skillcheckers-logo.png" alt="">
+    </div>
+    <p class="login-block-wait__title flex aic jcc font-25 m-t-10 w-100">Resetting password</p>
+    <div class="login-block-wait__title flex aic jcc font-25 m-t-10 w-100 m-b-100">Please wait for email</div>
+  </section>
+</main>
