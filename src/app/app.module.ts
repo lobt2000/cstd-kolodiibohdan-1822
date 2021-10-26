@@ -22,6 +22,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 import { DateAdapter, MatNativeDateModule, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MomentDateAdapter, MomentDateModule } from '@angular/material-moment-adapter';
@@ -30,12 +31,12 @@ import { ngxUiLoaderConfig } from './preloader-config';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
+import { SharedModule } from './shared/shared.module';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,7 +47,6 @@ import { LoginComponent } from './login/login.component';
     AngularFireAuthModule,
     FormsModule,
     ReactiveFormsModule,
-    // // QuillModule.forRoot(),
     ClickOutsideModule,
     BrowserAnimationsModule,
     MatInputModule,
@@ -65,7 +65,9 @@ import { LoginComponent } from './login/login.component';
     MatRadioModule,
     NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
     NgxUiLoaderRouterModule,
-    NgxUiLoaderHttpModule
+    NgxUiLoaderHttpModule,
+    SharedModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },

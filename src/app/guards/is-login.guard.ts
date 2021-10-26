@@ -15,17 +15,18 @@ export class IsLoginGuard implements CanActivate, CanLoad {
   private checkLogin(): boolean {
     if (localStorage.getItem('mainuser')) {
       return true;
+    } else {
+      this.router.navigateByUrl('login');
+      return false
     }
-    this.router.navigateByUrl('login');
-    return false
     // console.log('re');
   }
 
   canLoad(route: Route, segments: UrlSegment[]): Observable<boolean> | Promise<boolean> | boolean {
     if (!localStorage.getItem('mainuser')) {
       return true;
+    } else {
+      return false;
     }
-    this.router.navigate(['kindergarten']);
-    return false;
   }
 }

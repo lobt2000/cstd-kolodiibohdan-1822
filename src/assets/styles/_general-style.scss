@@ -2,6 +2,18 @@
   background-color: #25BF50 !important;
 }
 
+.loader-overlay {
+  z-index: 10;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+
 .btn {
   font-family: "Poppins";
   font-size: 13px;
@@ -33,11 +45,13 @@
   font-size: 20px;
   font-weight: 700;
 }
-.txt-overflow{
+
+.txt-overflow {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
 .not-read {
   min-width: 20px;
   min-height: 20px;
@@ -140,8 +154,8 @@ $radiu in $radius {
     border-radius: $radiu;
   }
 }
-$widths: (
-  10: 10%,
+
+$widths: (10: 10%,
   20: 20%,
   30: 30%,
   40: 40%,
@@ -248,7 +262,8 @@ $margins: (1: 1px,
   50: 50px,
   100: 100px);
 
-$line-heights: (1: 1px,
+$line-heights: (one-half: 1.5,
+  1: 1px,
   2: 2px,
   3: 3px,
   4: 4px,
@@ -273,9 +288,9 @@ $line-heights: (1: 1px,
   26: 26px,
   25: 25px,
   28: 28px,
-  30: 30px, 
-  32: 32px, 
-  34: 34px, 
+  30: 30px,
+  32: 32px,
+  34: 34px,
   35: 35px,
   40: 40px,
   50: 50px,
@@ -317,6 +332,7 @@ $text-align in $text-aligns {
     text-align: $text-align;
   }
 }
+
 @each $lineheight,
 $line-height in $line-heights {
   .line-height-#{$lineheight} {

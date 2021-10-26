@@ -6,17 +6,8 @@ import { ResetPasswordComponent } from './shared/components/reset-password/reset
 
 const routes: Routes = [
   {
-    path: 'kindergarten', loadChildren: () => import('./layouts/layouts.module').then((m) => m.LayoutsModule), canActivate: [IsLoginGuard]
+    path: '', loadChildren: () => import('./layouts/layouts.module').then((m) => m.LayoutsModule)
   },
-  { path: 'login', component: LoginComponent, canLoad: [IsLoginGuard] },
-  { path: 'reset-password', component: ResetPasswordComponent },
-  {
-    path: '',
-    redirectTo: 'kindergarten',
-    pathMatch: 'full'
-  }
-
-
 ];
 
 @NgModule({

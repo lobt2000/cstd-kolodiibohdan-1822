@@ -30,10 +30,11 @@ p {
   transition: all 0.3s ease-in-out;
   // overflow: hidden;
   position: relative;
+  z-index: 3;
 }
 
 .select-item {
-  background-color: #464e62;
+  background-color: #464e62 !important;
 }
 
 .icon {
@@ -65,11 +66,12 @@ p {
 
       .active {
         position: absolute;
-        top: calc(50% - 14px);
-        left: -1px;
+        top: calc(-40%);
+        left: 5px;
         width: 5px;
-        height: 28px;
+        height: 50px;
         background-color: #0CACF8;
+        transition: all 0.3s ease-in-out;
       }
 
       .icon {
@@ -135,10 +137,11 @@ p {
 
       .active {
         position: absolute;
-        top: calc(50% - 14px);
-        left: -1px;
+        top: calc(-40%);
+        left: 0px;
         width: 5px;
-        height: 28px;
+        height: 50px;
+        transition: all 0.3s ease-in-out;
         background-color: #0CACF8;
       }
 
@@ -191,10 +194,10 @@ p {
 
       .active {
         position: absolute;
-        top: calc(50% - 14px);
-        left: -1px;
+        top: calc(-40%);
+        left: 0px;
         width: 5px;
-        height: 28px;
+        height: 50px;
         background-color: #0CACF8;
       }
 

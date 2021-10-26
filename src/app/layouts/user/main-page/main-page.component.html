@@ -1,0 +1,39 @@
+<main class="container">
+  <section class="kindergarten-block bc-light-gray">
+    <div class="kindergarten-list" *ngIf="!isLoading">
+      <img class="kindergarten-logo" [src]="firstKinder['logo-img']" alt="">
+      <div class="kindergarten-title header-title"><img class="logo" [src]="firstKinder.logo" alt="">
+        <div class="logo-title">{{firstKinder.title}}</div>
+        <div class="font-15 line-height-one-half">{{firstKinder['logo-description']}}</div>
+        <button class="btn bc-blue go-to-button">Go to kindergarten list</button>
+      </div>
+    </div>
+    <div *ngIf="isLoading" class="loader-overlay">
+      <mat-spinner></mat-spinner>
+    </div>
+  </section>
+  <section class="other-info-container">
+    <div class="message-block bc-light-gray">
+      <img class="message"
+        src="https://firebasestorage.googleapis.com/v0/b/kindergarten-daed8.appspot.com/o/image%2Fmesseges.jpg?alt=media&token=f43e7c8f-aa07-45fd-86be-e01faaa066c0"
+        alt="" *ngIf="!isLoading">
+      <button class="btn bc-blue go-to-button bdr-10 m-b-25">Go to messeges</button>
+    </div>
+    <div class="other-info-block">
+      <div class="other-info-about bc-light-gray">
+        <img class="about" src="../../../../assets/image/contact-img.svg" alt="" *ngIf="!isLoading">
+        <button class="btn bc-blue go-to-button bdr-10 m-b-25">Go to Contact & About</button>
+      </div>
+      <div class="other-info-profile bc-light-gray">
+        <img class="profile" src="../../../../assets/image/profile.jfif" alt="">
+        <button class="btn bc-blue go-to-button bdr-10 m-b-25">Go to Profile</button>
+      </div>
+    </div>
+    <div *ngIf="isLoading" class="loader-overlay">
+      <mat-spinner></mat-spinner>
+    </div>
+  </section>
+  <section class="other-info-block">
+
+  </section>
+</main>

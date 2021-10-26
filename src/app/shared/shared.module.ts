@@ -26,6 +26,9 @@ import { HeaderComponent } from './components/header/header.component';
 import { HeaderItemsComponent } from './components/header/header-items/header-items.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { LayoutsRoutingModule } from '../layouts/layouts-routing.module';
+import { MatCarouselModule } from '@ngbmodule/material-carousel';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 // import { MatRadioModule } from '@angular/material/radio';
 @NgModule({
     declarations: [
@@ -57,6 +60,9 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
         }),
         MatStepperModule,
         MatRadioModule,
+        LayoutsRoutingModule,
+        MatCarouselModule.forRoot(),
+        MatProgressSpinnerModule
     ],
     exports: [
         HeaderComponent,
