@@ -15,14 +15,14 @@ export class IsUserGuard implements CanActivate {
 
   checkUsertype() {
     let userType = JSON.parse(localStorage.getItem('mainuser')).userPos
-    if (userType === "user") {
-      // this.router.navigate(['user'])
-      return true;
+    if (userType !== "user") {
+      this.router.navigate(['/login']);
+      return false;
     } else if (userType === "agent") {
       this.router.navigate(['agent'])
       return false;
     } else {
-      return false;
+      return true;
     }
   }
 

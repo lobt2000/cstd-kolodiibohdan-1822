@@ -20,6 +20,7 @@ p {
   transition: all 0.3s ease-in-out;
   // overflow: hidden;
   position: relative;
+  z-index: 3;
 }
 
 .menu-mobile {
@@ -99,6 +100,7 @@ p {
         opacity: 0;
         white-space: nowrap;
         text-align: center;
+        z-index: 3;
       }
 
       p {

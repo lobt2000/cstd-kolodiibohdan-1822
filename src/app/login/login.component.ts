@@ -77,9 +77,6 @@ export class LoginComponent implements OnInit {
       }
     })
     this.formLogUp.controls.confirmpass.valueChanges.subscribe(res => {
-      if (res) {
-        console.log(res);
-      }
       if (this.formLogUp.valid) {
         this.isDisabled = false
       } else {

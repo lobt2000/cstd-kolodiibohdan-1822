@@ -13,12 +13,11 @@ export class IsLoginGuard implements CanActivate, CanLoad {
     return this.checkLogin();
   }
   private checkLogin(): boolean {
-    if (localStorage.getItem('mainuser')) {
-      return true;
-    } else {
-      this.router.navigateByUrl('login');
-      return false
+    if (!localStorage.getItem('mainuser')) {
+      this.router.navigate(['/login']);
+      return false;
     }
+    return true;
     // console.log('re');
   }
 

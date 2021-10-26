@@ -46,15 +46,14 @@ export class AuthService {
           password: password,
           firstname: userFname,
           secondname: userSname,
-          userPos: userPos
+          userPos: userPos,
+          icon: '@assets/images/profile.svg'
         }
 
         this.db.collection('users').add(user)
           .then(collection => {
             collection.get()
               .then(user => {
-                console.log('asdasd');
-
                 const myUser = {
                   id: user.id,
                   ...user.data() as Users
@@ -94,8 +93,6 @@ export class AuthService {
                 password: password,
 
               }
-              console.log(myUser);
-
               this.update(userRef.id, myUser)
               this.toastr.success(`Hello ${myUser.firstname} ${myUser.secondname}`, 'Login success');
               this.updUser.next(myUser)
@@ -118,7 +115,7 @@ export class AuthService {
     this.auth.signOut()
       .then(() => {
         localStorage.removeItem('mainuser');
-        this.router.navigateByUrl('login');
+        this.router.navigate(['login']);
         this.toastr.success(`Bay`, 'Logout success');
       })
   }

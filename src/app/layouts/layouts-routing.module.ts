@@ -16,7 +16,7 @@ const routes: Routes = [
                 loadChildren: () => import('./user/user.module').then((m) => m.UserModule),
                 canActivate: [IsLoginGuard, IsUserGuard]
             },
-            { path: 'login', loadChildren: () => import('../login/login.module').then((m) => m.LoginModule)},
+            { path: 'login', component: LoginComponent},
             { path: 'reset-password', component: ResetPasswordComponent },
             {
                 path: "**",
