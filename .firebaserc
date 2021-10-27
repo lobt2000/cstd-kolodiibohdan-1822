@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "kindergarten-daed8"
+  },
+  "targets": {
+    "kindergarten-daed8": {
+      "hosting": {
+        "chrome-dragon-game": [
+          "kindergarten-daed8"
+        ]
+      }
+    }
+  }
+}
