@@ -5,6 +5,10 @@
   height: calc(100vh - 100px);
   overflow-y: auto;
   padding: 20px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-flow: row wrap;
 
 
   @media (max-width: 768px) {
@@ -14,34 +18,23 @@
   }
 }
 
-.kindergarten-block {
-  width: 100%;
-  height: 440px;
-  border-radius: 10px;
-  position: relative;
-}
 
-.other-info-container {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-flow: row wrap;
 
-  @media (max-width: 768px) {
-    flex-flow: column;
-  }
-}
+
 
 .message-block {
-  width: 48%;
-  height: 400px;
+  width: 49%;
+  height: 49%;
   border-radius: 10px;
   position: relative;
-  margin-top: 10px;
   display: flex;
   align-items: flex-end;
   justify-content: center;
+
+  @media (max-width: 1268px) {
+    margin-top: 10px;
+    height: 49%;
+  }
 
   @media (max-width: 768px) {
     width: 100%;
@@ -52,7 +45,7 @@
     height: 90%;
     position: absolute;
     z-index: 2;
-    left: 2%;
+    left: 2.5%;
     top: 5%;
     transition: all 0.3s ease-in-out;
     border-radius: 10px;
@@ -87,9 +80,20 @@
   margin-top: 10px;
 }
 
+.kindergarten-block {
+  width: 49%;
+  height: 49%;
+  border-radius: 10px;
+  position: relative;
+
+  @media (max-width: 1268px) {
+    width: 100%;
+  }
+}
+
 .kindergarten-list {
   width: calc(100% - 40px);
-  height: 400px;
+  height: 93%;
   position: relative;
   display: flex;
   align-items: center;
@@ -111,8 +115,8 @@
     box-shadow: 0px 9px 12px 2px #80808078;
     position: absolute;
     z-index: 2;
-    left: 2%;
-    top: 5%;
+    left: 1.8%;
+    top: 4%;
     transition: all 0.3s ease-in-out;
 
     @media (max-width: 578px) {
@@ -181,17 +185,41 @@
 
 }
 
+.other-info-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-flow: row wrap;
+  height: 49%;
 
+  @media (max-width: 1268px) {
+    // margin-top: 10px;
+    flex-flow: column;
+    width: 49%;
+  }
+
+  @media (max-width: 768px) {
+    flex-flow: column;
+    width: 100%;
+  }
+}
 
 .other-info-block {
-  width: 48%;
-  // height: 400px;
+  width: 100%;
+  height: 100%;
   position: relative;
   margin-top: 10px;
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  flex-flow: column;
+  flex-flow: row;
+
+  @media (max-width: 1268px) {
+    // margin-top: 10px;
+    flex-flow: column;
+    // width: 49%;
+  }
 
   @media (max-width: 768px) {
     width: 100%;
@@ -199,13 +227,17 @@
   }
 
   .other-info-profile {
-    width: 100%;
-    height: 195px;
+    width: 49%;
+    height: 100%;
     border-radius: 10px;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: flex-end;
+
+    @media (max-width: 1268px) {
+      width: 100%;
+    }
 
     .profile {
       width: 95%;
@@ -220,7 +252,7 @@
 
     .go-to-button {
       margin-right: 20px;
-      width: 70px;
+      width: 30%;
       height: 70px;
       transition: all 0.3s ease-in-out;
       opacity: 0;
@@ -228,14 +260,19 @@
   }
 
   .other-info-about {
-    width: 100%;
-    height: 195px;
+    width: 49%;
+    height: 100%;
     border-radius: 10px;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    margin-bottom: 10px;
+
+    @media (max-width: 1268px) {
+      width: 100%;
+      margin-bottom: 10px;
+
+    }
 
     .about {
       width: 95%;
@@ -250,9 +287,7 @@
 
     .go-to-button {
       margin-right: 20px;
-      width: 70px;
-      height: 70px;
-      width: 80px;
+      width: 30%;
       height: 100px;
       text-align: center;
       transition: all 0.3s ease-in-out;
