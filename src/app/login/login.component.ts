@@ -13,6 +13,7 @@ export class LoginComponent implements OnInit {
   public formReset: FormGroup;
   pattern = /^.{8,16}$/gm;
   patternName = /^[A-Za-z]{1,}$/gm;
+  patternSecondName = /^[A-Za-z]{1,}$/gm;
   regExpEmail = /^[a-z0-9\-\.]{1,}@gmail\.com|net\.us|org\.ua$/i;
   isDisabled: boolean = true;
   isVisible: boolean = false;
@@ -52,7 +53,7 @@ export class LoginComponent implements OnInit {
   buildFormForSignUp(): void {
     this.formLogUp = this.fb.group({
       firstname: ['', [Validators.required, Validators.pattern(this.patternName)]],
-      secondname: ['', [Validators.required, Validators.pattern(this.patternName)]],
+      secondname: ['', [Validators.required, Validators.pattern(this.patternSecondName)]],
       email: ['', [Validators.required, Validators.pattern(this.regExpEmail)]],
       pass: ['', [Validators.required, Validators.min(8), Validators.max(16), Validators.pattern(this.pattern)]],
       confirmpass: ['', [Validators.required, Validators.min(8), Validators.max(16), this.confirmPassValidator()]],
