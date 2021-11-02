@@ -55,7 +55,8 @@ describe('LoginComponent', () => {
         MatRadioModule,
         SharedModule,
         LoginRoutingModule,
-        RouterTestingModule
+        RouterTestingModule,
+        BrowserAnimationsModule
       ]
     })
       .compileComponents();
@@ -121,7 +122,7 @@ describe('LoginComponent', () => {
   it('Login shouldn`t be valid', () => {
     const spy = spyOn(component, 'resetForm');
     component.buildFormForSignIn();
-    component.formLogIn.setValue({  
+    component.formLogIn.setValue({
       email: 'bkolody20013@gmail.com',
       pass: '',
     })
@@ -216,11 +217,14 @@ describe('LoginComponent', () => {
 
   it('should create form for resetting password by email', () => {
     component.buildFormForResetPass();
-    expect(component.formReset.value).toEqual({email: ''});
+    expect(component.formReset.value).toEqual({ email: '' });
   })
 
   it('should send email for reseting password', () => {
+    component.buildFormForResetPass();
+    component.formReset.setValue({ email: 'bkolodiy20013@gmail.com' })
     component.sendEmailForReset();
+    service.sendEmailForResetPass(component.formReset.get('email').value)
     expect(component.resetPassword).toBe('waitForEmail');
   })
 

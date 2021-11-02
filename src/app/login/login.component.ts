@@ -154,6 +154,6 @@ export class LoginComponent implements OnInit {
 
   sendEmailForReset() {
     this.resetPassword = "waitForEmail"
-    this.authService.sendEmailForResetPass();
+    this.authService.sendEmailForResetPass(this.formReset.get('email').value);
   }
 }

@@ -1,8 +1,9 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ClickOutsideModule } from 'ng-click-outside';
 import { AuthService } from 'src/app/service/auth.service';
@@ -11,7 +12,7 @@ import { environment } from 'src/environments/environment';
 
 import { HeaderItemsComponent } from './header-items.component';
 
-fdescribe('HeaderItemsComponent', () => {
+describe('HeaderItemsComponent', () => {
   let component: HeaderItemsComponent;
   let fixture: ComponentFixture<HeaderItemsComponent>;
   let service: AuthService;
@@ -25,7 +26,8 @@ fdescribe('HeaderItemsComponent', () => {
         AngularFireStorageModule,
         AngularFireAuthModule,
         ClickOutsideModule,
-        RouterTestingModule]
+        RouterTestingModule,
+        BrowserAnimationsModule]
     })
       .compileComponents();
   });
@@ -42,8 +44,20 @@ fdescribe('HeaderItemsComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should contain user', () => {
-    mockAuthService.signIn('bkolodiy20013@gmail.com', 'qwerty1234');
+  it('should contain user', async () => {
+    await mockAuthService.signIn('bkolodiy20013@gmail.com', 'qwerty1234');
+    const user = {
+      email: "bkolodiy20013@gmail.com",
+      firstname: "Bogdan",
+      icon: "assets/image/profile.svg",
+      id: "Pj5Oa7pjLTxlrjR13YRS",
+      password: "qwerty1234",
+      secondname: "Kolodiy",
+      userPos: "user"
+    }
+    localStorage.setItem('mainuser', JSON.stringify(user))
+    service.updUser.next(user);
+    console.log(component.currUser);
     expect(component.currUser.hasOwnProperty('id')).toBeTrue();
   });
 
@@ -59,18 +73,18 @@ fdescribe('HeaderItemsComponent', () => {
 
   it('should change position of drop menu', () => {
     component.dropMenu()
-    
+
     expect(component.dropWay).toBeTrue();
   });
 
   it('should close drop menu if click outside', () => {
-    component.onClickedOutsideItem(event)   
+    component.onClickedOutsideItem(event)
     expect(component.dropWay).toBeFalse();
   });
 
   it('should sign out of the system', () => {
     const spy = spyOn(mockAuthService, 'signOut')
-    component.signOUT()   
+    component.signOUT()
     expect(spy).toHaveBeenCalled();
   });
 });

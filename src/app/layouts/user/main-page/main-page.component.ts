@@ -13,6 +13,10 @@ export class MainPageComponent implements OnInit {
   constructor(private kindergartenService: KindergartenListService) { }
 
   ngOnInit(): void {
+    this.getFirstKindergarten();
+  }
+
+  getFirstKindergarten() {
     this.kindergartenService.getAllKindergartenList().snapshotChanges().pipe(
       map(changes =>
         changes.map(c =>
@@ -26,5 +30,4 @@ export class MainPageComponent implements OnInit {
       this.isLoading = false;
     });
   }
-
 }

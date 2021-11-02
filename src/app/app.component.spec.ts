@@ -1,4 +1,5 @@
 import { TestBed } from '@angular/core/testing';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NgxUiLoaderHttpModule, NgxUiLoaderModule, NgxUiLoaderRouterModule } from 'ngx-ui-loader';
 import { AppComponent } from './app.component';
@@ -13,7 +14,7 @@ describe('AppComponent', () => {
         NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
         NgxUiLoaderRouterModule,
         NgxUiLoaderHttpModule,
-        SharedModule,
+        BrowserAnimationsModule
       ],
       declarations: [
         AppComponent
