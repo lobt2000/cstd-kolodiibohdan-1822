@@ -1,3 +1,11 @@
 export const environment = {
-  production: true
+  production: true,
+  firebaseConfig: {
+    apiKey: "AIzaSyDeU5N-h_3PqSxYGc7ARt9tzXsdnAT9fkA",
+    authDomain: "kindergarten-daed8.firebaseapp.com",
+    projectId: "kindergarten-daed8",
+    storageBucket: "kindergarten-daed8.appspot.com",
+    messagingSenderId: "180925751357",
+    appId: "1:180925751357:web:ae2802aa11481ba73fca54"
+  }
 };

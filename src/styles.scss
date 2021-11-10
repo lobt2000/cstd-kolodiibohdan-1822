@@ -1,1 +1,301 @@
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '~@angular/material' as mat;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$chrome-dragon-game-primary: mat.define-palette(mat.$indigo-palette);
+$chrome-dragon-game-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$chrome-dragon-game-warn: mat.define-palette(mat.$red-palette);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$chrome-dragon-game-theme: mat.define-light-theme((
+  color: (
+    primary: $chrome-dragon-game-primary,
+    accent: $chrome-dragon-game-accent,
+    warn: $chrome-dragon-game-warn,
+  )
+));
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($chrome-dragon-game-theme);
+
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$chrome-dragon-game-primary: mat.define-palette(mat.$indigo-palette);
+$chrome-dragon-game-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$chrome-dragon-game-warn: mat.define-palette(mat.$red-palette);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$chrome-dragon-game-theme: mat.define-light-theme((
+  color: (
+    primary: $chrome-dragon-game-primary,
+    accent: $chrome-dragon-game-accent,
+    warn: $chrome-dragon-game-warn,
+  )
+));
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($chrome-dragon-game-theme);
+
+
 /* You can add global styles to this file, and also import other style files */
+@import "./assets/styles/reset";
+@import "./assets/styles/mixins";
+@import "./assets/styles/font";
+@import "./assets/styles/flexbox";
+@import "./assets/styles/general-style";
+@import "./assets/styles/choose-sorts";
+@import "./assets/styles/dropdown";
+// html, body { height: 100%; }
+// body { margin: 0; font-family: "Poppins"; }
+p {
+  font-family: "Poppins";
+  margin: 0;
+}
+
+:host ::ng-deep .mat-radio-container {
+  font-family: "Poppins";
+  height: 10px;
+  width: 10px;
+}
+
+:host ::ng-deep .mat-radio-outer-circle {
+  font-family: "Poppins";
+  height: 10px;
+  width: 10px;
+}
+
+:host ::ng-deep .mat-radio-inner-circle {
+  font-family: "Poppins";
+  height: 10px;
+  width: 10px;
+  background-color: rgb(66, 134, 244);
+}
+.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+  border-color: rgb(66, 134, 244);
+}
+
+.mat-radio-button.mat-accent .mat-radio-inner-circle {
+  background-color: rgb(66, 134, 244);
+}
+
+.mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element {
+  background-color:rgba(66, 134, 244,.26);
+}
+
+:host ::ng-deep .mat-radio-button .mat-radio-ripple {
+  font-family: "Poppins";
+  height: 15px;
+  /*double of your required circle radius*/
+  width: 15px;
+  /*double of your required circle radius*/
+  left: calc(50% - 7.5px);
+  /*'10px'-same as your required circle radius*/
+  top: calc(50% - 7.5px);
+  /*'10px'-same as your required circle radius*/
+  background-color: #0CACF8;
+}
+
+:host ::ng-deep .mat-radio-button.mat-accent .mat-radio-inner-circle {
+  background-color: rgb(66, 134, 244);
+}
+
+
+mat-form-field-underline ng-tns-c66-0 ng-star-inserted {
+  height: 0%;
+  display: none;
+  font-family: "Poppins";
+}
+
+mat-form-field {
+  width: 50%;
+  height: 40px;
+  font-family: "Poppins";
+  font-size: 14px;
+  font-weight: 500;
+  outline: none;
+  border: 1px solid #CBCBD9;
+
+  mat-form-field-underline ng-tns-c66-0 ng-star-inserted {
+    height: 0%;
+    font-family: "Poppins";
+  }
+}
+.mat-vertical-content {
+  padding: 0 24px 0px 24px!important;
+}
+
+
+
+mat-select {
+  border: none;
+  width: 100%;
+  height: 40px;
+  font-family: "Poppins";
+  font-size: 14px;
+  font-weight: 500;
+  outline: none;
+}
+
+mat-option {
+  font-family: "Poppins";
+  border: none;
+}
+
+.mat-select-trigger {
+  font-family: "Poppins";
+  height: 35px;
+  line-height: 37px;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+  background: transparent;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #b7bac2;
+  border-radius: 10px;
+
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #b7bac2;
+}
+
+.ql-editor {
+  min-height: 100px;
+}
+
+body {
+  overflow: hidden;
+}
+
+html,
+body {
+  font-family: "Poppins";
+  height: 100vh;
+}
+
+body {
+  margin: 0;
+  font-family: "Poppins";
+  transition: all 0.3s ease-in-out;
+}
+
+* {
+  font-family: "Poppins";
+}
+
+$fonts: (9: 9px,
+  10: 10px,
+  11: 11px,
+  12: 12px,
+  13: 13px,
+  14: 14px,
+  15: 15px,
+  16: 16px,
+  17: 17px,
+);
+
+.initial-font {
+  font-family: 'Poppins';
+}
+
+@each $fontSize,
+$font in $fonts {
+  .font-#{$fontSize} {
+    font-family: "Poppins";
+    font-weight: 500;
+    font-style: normal;
+    font-size: $font;
+  }
+}
+
+h2 {
+  font-family: "Poppins";
+  font-weight: 700;
+  font-style: normal;
+  font-size: 17px;
+}
+h4 {
+  font-family: "Poppins";
+  font-weight: 500;
+  font-style: normal;
+  font-size: 14px;
+}
+h3 {
+  font-family: "Poppins";
+  font-weight: 500;
+  font-style: normal;
+  font-size: 15px;
+}
+h1 {
+  font-family: "Poppins";
+  font-weight: 500;
+  font-style: normal;
+  font-size: 20px;
+}
+
+ul {
+  list-style: none;
+}
+
+ul li::before {
+  content: "\2022";
+  color: #0CACF8;
+  font-weight: 900;
+  font-size: 24px;
+  width: 10px;
+  height: 26px;
+  margin-right: 13px;
+  line-height: 25px;
+}
+
+.loader-overlay {
+  z-index: 10;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  background: rgba(255,255,255,.7);
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

@@ -1,0 +1,118 @@
+<!-- <main class="menu flex col nowrap jcsb" [style.width]="(width < 568) ? '100vw' : '100%'"> -->
+<main class="menu flex col nowrap jcsb w-100" *ngIf="!(width < 768)">
+  <section class=" w-100" [class]="(!checkTurn ? 'menu-items' : 'tablet-menu-items')">
+    <!-- <div class="menu-items__dashboard">
+      <div class="menu-items__dashboard--contain">
+        <span routerLinkActive="active"></span>
+        <span aria-hidden="true" data-icon="&#xe900;" class="icon m-l-15 m-r-8" [class]="'icon-dashboard'"></span>
+        <p class="font-18">Dashboard</p>
+      </div>
+  
+    </div> -->
+    <div class="menu-box w-100 flex nowrap jcc aic" routerLinkActive="select-item" [routerLink]="[ 'main-page' ]">
+      <div class="menu-contain w-100 flex nowrap aic" data="Main page" routerLinkActive="select-contain"
+        [routerLink]="[ 'main-page' ]">
+        <span routerLinkActive="active"></span>
+        <span aria-hidden="true" class="icon m-l-15 m-r-8" [class]="'icon-homeassistant'"></span>
+        <p class="font-18">Main page</p>
+      </div>
+    </div>
+    <!-- <div class="menu-items__candidates">
+      <div class="menu-items__candidates--contain">
+        <span routerLinkActive="active"></span>
+        <span aria-hidden="true" class="icon m-l-15 m-r-8" [class]="'icon-candidates'"></span>
+        <p class="font-18">Candidates</p>
+      </div>
+    </div> -->
+    <div class="menu-box w-100 flex nowrap jcc aic" routerLinkActive="select-item" [routerLink]="[ 'interviews' ]">
+      <div class="menu-contain w-100 flex nowrap aic" data="Kindergarten" routerLinkActive="select-contain"
+        [routerLink]="[ 'Kindergarten' ]">
+        <span routerLinkActive="active"></span>
+        <span aria-hidden="true" class="icon m-l-15 m-r-8" [class]="'icon-child'"></span>
+        <p class="font-18">Kindergarten</p>
+      </div>
+    </div>
+    <div class="menu-box w-100 flex nowrap jcc aic" routerLinkActive="select-item" [routerLink]="[ 'messages' ]">
+      <div class="menu-contain w-100 flex nowrap aic " data="Messages" routerLinkActive="select-contain"
+        [routerLink]="[ 'messages' ]">
+        <span routerLinkActive="active"></span>
+        <span aria-hidden="true" data-icon="&#xe900;" class="icon m-l-15 m-r-8" [class]="'icon-conversation'"></span>
+        <p class="font-18">Messages</p>
+      </div>
+    </div>
+    <div class="menu-box w-100 flex nowrap jcc aic" routerLinkActive="select-item" [routerLink]="[ 'messages' ]">
+      <div class="menu-contain w-100 flex nowrap aic" data="About & Contact" routerLinkActive="select-contain"
+        [routerLink]="[ 'messages' ]">
+        <span routerLinkActive="active"></span>
+        <span aria-hidden="true" data-icon="&#xe900;" class="icon m-l-15 m-r-8" [class]="'icon-info'"></span>
+        <p class="font-18">About & Contact</p>
+      </div>
+    </div>
+    <div class="resize-block" [style.display]="resizeButton ? 'flex' : 'none'">
+      <div class="icon m-r-10" [class]="'icon-arrowhead-thin-outline-to-the-left'"
+        [style.margin-right]="!checkTurn ? '20%' : '35%'"
+        [style.transform]="!checkTurn ? 'rotate(0deg)' : 'rotate(180deg)'" (click)="resizeClick()"></div>
+    </div>
+  </section>
+</main>
+<main class="menu-mobile flex col nowrap jcsb"
+  [ngStyle]="{'left': isOpenMenu ? '-100vw' : '0vw' , 'width' : (width < 768) ? '100vw' : '100%', 'height' : '100%'}"
+  *ngIf="(width < 768)">
+  <section class="mobile-menu-items bc-black">
+    <div class="burger-menu flex aic jcc" (click)="openBurgerMenu()">
+      <div class="icon" [class]="'icon-menu'"></div>
+    </div>
+    <!-- <div class="menu-items__dashboard">
+      <div class="menu-items__dashboard--contain">
+        <span routerLinkActive="active"></span>
+        <span aria-hidden="true" data-icon="&#xe900;" class="icon m-l-15 m-r-8" [class]="'icon-dashboard'"></span>
+        <p class="font-18">Dashboard</p>
+      </div>
+  
+    </div> -->
+    <div class="menu-box w-100 flex nowrap jcc aic" routerLinkActive="select-item" [routerLink]="[ 'main-page' ]">
+      <div class="menu-contain w-100 flex nowrap aic" data="Main page" routerLinkActive="select-contain"
+        [routerLink]="[ 'main-page' ]">
+        <span routerLinkActive="active"></span>
+        <span aria-hidden="true" class="icon m-l-15 m-r-8" [class]="'icon-homeassistant'"></span>
+        <p class="font-18">Main page</p>
+      </div>
+    </div>
+    <!-- <div class="menu-items__candidates">
+      <div class="menu-items__candidates--contain">
+        <span routerLinkActive="active"></span>
+        <span aria-hidden="true" class="icon m-l-15 m-r-8" [class]="'icon-candidates'"></span>
+        <p class="font-18">Candidates</p>
+      </div>
+    </div> -->
+    <div class="menu-box w-100 flex nowrap jcc aic" routerLinkActive="select-item" [routerLink]="[ 'Kindergarten' ]">
+      <div class="menu-contain w-100 flex nowrap aic" data="Kindergarten" routerLinkActive="select-contain"
+        [routerLink]="[ 'Kindergarten' ]">
+        <span routerLinkActive="active"></span>
+        <span aria-hidden="true" class="icon m-l-15 m-r-8" [class]="'icon-child'"></span>
+        <p class="font-18">Kindergarten</p>
+      </div>
+    </div>
+    <div class="menu-box w-100 flex nowrap jcc aic" routerLinkActive="select-item" [routerLink]="[ 'messages' ]">
+      <div class="menu-contain w-100 flex nowrap aic " data="Messages" routerLinkActive="select-contain"
+        [routerLink]="[ 'messages' ]">
+        <span routerLinkActive="active"></span>
+        <span aria-hidden="true" data-icon="&#xe900;" class="icon m-l-15 m-r-8" [class]="'icon-conversation'"></span>
+        <p class="font-18">Messages</p>
+      </div>
+    </div>
+    <div class="menu-box w-100 flex nowrap jcc aic" routerLinkActive="select-item" [routerLink]="[ 'messages' ]">
+      <div class="menu-contain w-100 flex nowrap aic" data="About & Contact" routerLinkActive="select-contain"
+        [routerLink]="[ 'messages' ]">
+        <span routerLinkActive="active"></span>
+        <span aria-hidden="true" data-icon="&#xe900;" class="icon m-l-15 m-r-8" [class]="'icon-info'"></span>
+        <p class="font-18">About & Contact</p>
+      </div>
+    </div>
+    <div class="resize-block" [style.display]="resizeButton ? 'flex' : 'none'">
+      <div class="icon m-r-10" [class]="'icon-arrowhead-thin-outline-to-the-left'"
+        [style.margin-right]="!checkTurn ? '20%' : '35%'"
+        [style.transform]="!checkTurn ? 'rotate(0deg)' : 'rotate(180deg)'" (click)="resizeClick()"></div>
+    </div>
+  </section>
+</main>
