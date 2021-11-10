@@ -9,11 +9,13 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { UserRoutingModule } from './user-routing.module';
 import { MainPageComponent } from './main-page/main-page.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { KindergartenListComponent } from './kindergarten-list/kindergarten-list.component';
 
 
 @NgModule({
   declarations: [
-    MainPageComponent
+    MainPageComponent,
+    KindergartenListComponent
   ],
   imports: [
     CommonModule,

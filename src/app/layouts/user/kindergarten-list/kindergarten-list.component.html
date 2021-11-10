@@ -1,0 +1,19 @@
+<div class="kindergarten" *ngIf="!isLoading">
+  <!-- <div class="kindergarten__component" *ngFor="let kinderList of kinderLists">
+    <div class="kindergarten__component--img" [ngStyle]="{ 'background-image': 'url(' + kinderList?.logo + ')'}"
+      [routerLink]="[ '/kindergarten-list/'+kinderList.urlName ]">
+      <p class="title">{{kinderList?.title}}</p>
+    </div>
+  </div> -->
+  <div class="kindergarten-list" *ngFor="let kinderList of kinderLists">
+    <img class="kindergarten-logo" [src]="kinderList['logo-img']" alt="">
+    <div class="kindergarten-title header-title"><img class="logo" [src]="kinderList.logo" alt="">
+      <div class="logo-title">{{kinderList.title}}</div>
+      <div class="font-15 line-height-one-half">{{kinderList['logo-description']}}</div>
+      <button class="btn bc-blue go-to-button">Go to kindergarten list</button>
+    </div>
+  </div>
+</div>
+<div *ngIf="isLoading" class="loader-overlay">
+  <mat-spinner></mat-spinner>
+</div>

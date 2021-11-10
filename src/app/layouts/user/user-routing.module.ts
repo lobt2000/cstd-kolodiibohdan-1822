@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { KindergartenListComponent } from './kindergarten-list/kindergarten-list.component';
 import { MainPageComponent } from './main-page/main-page.component';
 import { UserComponent } from './user.component';
 
@@ -17,6 +18,10 @@ const routes: Routes = [
             {
                 path: 'main-page',
                 component: MainPageComponent                
+            }, 
+            {
+                path: 'kindergarten-list',
+                component: KindergartenListComponent                
             }, 
             {
                 path: "**",
