@@ -10,7 +10,7 @@ import { AuthService } from 'src/app/service/auth.service';
 export class HeaderItemsComponent implements OnInit {
   dropWay = false;
   currUser;
-  constructor(private router: Router, private authService: AuthService) { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
     this.authService.updUser.subscribe(res => {
@@ -36,7 +36,7 @@ export class HeaderItemsComponent implements OnInit {
 
 
   onClickedOutsideItem(e: Event) {
-    e.stopPropagation()
+    e?.stopPropagation()
     this.dropWay = false;
   }
   signOUT(): void {

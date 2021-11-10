@@ -8,9 +8,9 @@ describe('UserComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ UserComponent ]
+      declarations: [UserComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
@@ -21,5 +21,24 @@ describe('UserComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should check resize bigger', () => {
+    event.target['innerWidth'] = 1200
+    component.onResize(event)
+    component.checkSizeOfEvent = false;
+    expect(component.menuWidth).toEqual(270);
+  });
+
+  it('should check resize', () => {
+    event.target['innerWidth'] = 700
+    component.onResize(event)
+    component.checkSizeOfEvent = true;
+    expect(component.menuWidth).toEqual(270);
+  });
+
+  it('should check on resize value', () => {
+    component.onResizeValue(true)
+    expect(component.menuWidth).toEqual(70);
   });
 });

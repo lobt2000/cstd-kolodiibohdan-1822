@@ -24,8 +24,8 @@ export class AuthService {
     this.profRef = this.db.collection(this.dbPath);
   }
 
-  sendEmailForResetPass() {
-    this.auth.sendPasswordResetEmail('bkolodiy20013@gmail.com').then(
+  sendEmailForResetPass(email) {
+    this.auth.sendPasswordResetEmail(email).then(
       () => {
         this.toastr.success(`Email was sent`, 'Success');
       })
