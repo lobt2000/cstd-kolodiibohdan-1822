@@ -2,114 +2,40 @@
   width: calc(100% - 20px);
   height: calc(100vh - 100px);
   overflow-y: auto;
-  //   padding: 25px 10px 10px 0px;
   padding-top: 25px;
   padding-bottom: 15px;
   padding-left: 10px;
-  padding-left: 10px;
+  padding-right: 10px;
   display: flex;
   align-items: flex-start;
-  justify-content: center;
+  justify-content: space-around;
+  flex-flow: row wrap;
   transition: all 0.3s ease-in-out;
 
   @media (max-width: 768px) {
-    width: calc(100% - 40px);
+    width: calc(100% - 20px);
     height: calc(100vh - 130px);
     padding-top: 60px;
     justify-content: center;
   }
 
-
-  &__component {
-    width: 50%;
-    height: 60vh;
-    overflow: hidden;
-    box-shadow: 0 0 1px #fff, 0 0 5px #fff, 0 0 5px #0073e6, 0 0 10px #0073e6, 0 0 15px #0073e6, 0 0 20px #0073e6, 0 0 25px #0073e6;
-    border-radius: 10px;
-    cursor: pointer;
-    margin: 10px;
-    transition: all 0.3s ease-in-out;
-
-    &--img {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      flex-flow: row wrap;
-      align-items: flex-end;
-      // @include flexbox(row, wrap, none, flex-end);
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-position: 50%;
-      background-position-y: 25%;
-      filter: saturate(100%) brightness(100%);
-      transition: all 0.3s ease-in-out;
-      transition: transform 600ms ease-in-out, filter 600ms ease-in-out;
-
-
-      .title {
-        position: relative;
-        width: 100%;
-        min-height: 10px;
-        margin: 0 0 calc(15%) calc(12%);
-        color: white;
-        font-size: 24px;
-        font-style: italic;
-        transition: all 0.3s ease-in-out;
-
-      }
-
-      .title::before {
-        content: '';
-        width: 5.3333em;
-        height: 5px;
-        min-height: 1.5em;
-        border-bottom: 0.5em solid rgb(221, 90, 18);
-        position: absolute;
-        top: calc(80%);
-        left: calc(-5%);
-        box-sizing: border-box;
-        transition: all 0.3s ease-in-out;
-        transition: width 1000ms ease-in-out;
-
-      }
-    }
-
-    &--img:hover {
-      transform: scale(1.1);
-      filter: saturate(125%) brightness(125%);
-    }
-
-    &--img:hover>.title::before {
-      width: 7.5em;
-
-    }
-  }
-
   .kindergarten-list {
     width: 48%;
-    height: 60vh;
+    height: 500px;
     overflow: hidden;
     box-shadow: 0 0 1px #fff, 0 0 5px #fff, 0 0 5px #0073e6, 0 0 10px #0073e6, 0 0 15px #0073e6, 0 0 20px #0073e6, 0 0 25px #0073e6;
     cursor: pointer;
-    // margin: 10px;
-    transition: all 0.3s ease-in-out;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: flex-end;
     transition: all 0.3s ease-in-out;
-    // padding: 20px;
     border-radius: 10px;
     text-align: center;
-    margin-right: 25px;
-    margin-left: 25px;
+    margin-right: 15px;
+    margin-left: 15px;
     margin-bottom: 40px;
 
-    @media (max-width: 1250px) {
-      //   width: 55%;
-      //   align-items: center;
-      //   visibility: visible;
-    }
 
     @media (max-width: 768px) {
       width: 90%;
@@ -133,6 +59,9 @@
       left: 0%;
       top: 0%;
       transition: all 0.3s ease-in-out;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
 
       @media (max-width: 578px) {
         width: 100%;
@@ -153,6 +82,7 @@
       color: #f30ced;
       opacity: 0;
       margin-right: 20px;
+      
 
       .go-to-button {
         border-radius: 10px;

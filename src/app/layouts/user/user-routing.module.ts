@@ -17,12 +17,12 @@ const routes: Routes = [
             },
             {
                 path: 'main-page',
-                component: MainPageComponent                
-            }, 
+                component: MainPageComponent
+            },
             {
                 path: 'kindergarten-list',
-                component: KindergartenListComponent                
-            }, 
+                loadChildren: () => import('./kindergarten-list/kindergarten-list.module').then((m) => m.UserModule)
+            },
             {
                 path: "**",
                 redirectTo: "main-page"

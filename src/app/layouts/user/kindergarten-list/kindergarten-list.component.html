@@ -1,16 +1,11 @@
 <div class="kindergarten" *ngIf="!isLoading">
-  <!-- <div class="kindergarten__component" *ngFor="let kinderList of kinderLists">
-    <div class="kindergarten__component--img" [ngStyle]="{ 'background-image': 'url(' + kinderList?.logo + ')'}"
-      [routerLink]="[ '/kindergarten-list/'+kinderList.urlName ]">
-      <p class="title">{{kinderList?.title}}</p>
-    </div>
-  </div> -->
-  <div class="kindergarten-list" *ngFor="let kinderList of kinderLists">
-    <img class="kindergarten-logo" [src]="kinderList['logo-img']" alt="">
-    <div class="kindergarten-title header-title"><img class="logo" [src]="kinderList.logo" alt="">
-      <div class="logo-title">{{kinderList.title}}</div>
-      <div class="font-15 line-height-one-half">{{kinderList['logo-description']}}</div>
-      <button class="btn bc-blue go-to-button">Go to kindergarten list</button>
+  <div class="kindergarten-list" *ngFor="let kinderElem of kinderLists"
+    [style.width]="(windowSize < 1120 && !isOpen) || windowSize < 850 ? '90%' : '46%'">
+    <div class="kindergarten-logo" [style.background-image]="'url(' + kinderElem['logo-img'] + ')'" alt=""></div>
+    <div class="kindergarten-title header-title"><img class="logo" [src]="kinderElem?.logo" alt="">
+      <div class="logo-title">{{kinderElem?.title}}</div>
+      <div class="font-15 line-height-one-half">{{kinderElem['logo-description']}}</div>
+      <button class="btn bc-blue go-to-button" (click)="onGoToDetails(kinderElem)">Go to {{kinderElem?.title}}</button>
     </div>
   </div>
 </div>

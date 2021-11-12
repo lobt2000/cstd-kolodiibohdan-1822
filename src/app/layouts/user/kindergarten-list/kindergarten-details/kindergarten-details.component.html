@@ -1,0 +1,19 @@
+<main class="main-block" *ngIf="!isLoading">
+  <section class="header-block">
+    <div class="img" [style.background-image]="'url(' + currkinder?.backgroundImg + ')'"></div>
+    <div class="header-title">
+      <p class="text">
+        {{currkinder?.title}}
+      </p>
+      <button class="btn bc-green record">Записатися</button>
+      <span class="arrow"></span>
+    </div>
+  </section>
+  <section></section>
+  <section></section>
+  <section></section>
+
+</main>
+<div *ngIf="isLoading" class="loader-overlay">
+  <mat-spinner></mat-spinner>
+</div>

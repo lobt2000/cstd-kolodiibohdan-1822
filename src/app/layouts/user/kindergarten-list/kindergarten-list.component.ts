@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { map, take } from 'rxjs/operators';
 import { KindergartenListService } from 'src/app/service/kindergarten-list.service';
 
@@ -10,10 +11,22 @@ import { KindergartenListService } from 'src/app/service/kindergarten-list.servi
 export class KindergartenListComponent implements OnInit {
   kinderLists: Array<any> = [];
   isLoading: boolean = true;
-  constructor(private kindergartenService: KindergartenListService) { }
+  windowSize: number;
+  isOpen: boolean;
+  constructor(private kindergartenService: KindergartenListService, private router: Router) { }
 
   ngOnInit(): void {
+    this.windowSize = window.innerWidth
     this.getKindergarten();
+    this.kindergartenService.menuPosition.subscribe(res => {
+      this.isOpen = res;
+    })
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    this.windowSize = window.innerWidth;
+
   }
 
   getKindergarten() {
@@ -23,14 +36,15 @@ export class KindergartenListComponent implements OnInit {
           ({ id: c.payload.doc.id, ...c.payload.doc.data() })
         )
       ),
-      take(1)
+      // take(1)
     ).subscribe(data => {
       this.kinderLists = data;
-      console.log(data);
-      
-    }, (e) => { }, () => {
       this.isLoading = false;
     });
+  }
+
+  onGoToDetails(kinderElem) {
+    this.router.navigate(['/user', 'kindergarten-list', kinderElem.title])
   }
 
 }
