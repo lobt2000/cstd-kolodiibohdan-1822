@@ -26,7 +26,6 @@ export class KindergartenListComponent implements OnInit {
   @HostListener('window:resize', ['$event'])
   onResize(event) {
     this.windowSize = window.innerWidth;
-
   }
 
   getKindergarten() {

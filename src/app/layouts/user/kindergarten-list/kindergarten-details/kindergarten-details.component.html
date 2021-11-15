@@ -1,16 +1,38 @@
 <main class="main-block" *ngIf="!isLoading">
   <section class="header-block">
-    <div class="img" [style.background-image]="'url(' + currkinder?.backgroundImg + ')'"></div>
+    <div class="img"
+      [style.background-image]="'url(' + (currkinder?.backgroundImg || 'https://firebasestorage.googleapis.com/v0/b/kindergarten-daed8.appspot.com/o/image%2FbacgroundImg.jpg?alt=media&token=b106542f-b902-4200-a394-e8255aba22ab') + ')'">
+    </div>
     <div class="header-title">
-      <p class="text">
+      <p class="text" [style.color]="(currkinder?.titleColor + '!important' || 'black')">
         {{currkinder?.title}}
       </p>
-      <button class="btn bc-green record">Записатися</button>
+      <button class="btn record"
+        [ngStyle]="{'background-color': (currkinder?.titleButtonColor || 'green'), 'color' : (currkinder?.titleButtonTextColor || 'white')}">Apply
+        to kindergarten</button>
       <span class="arrow"></span>
     </div>
   </section>
-  <section></section>
-  <section></section>
+  <section class="description-block"
+    [style.flex-flow]="(windowSize < 1120 && !isOpen) || windowSize < 850 ? 'column' : 'row'">
+    <img class="description-logo" [src]="currkinder?.descriptionImg" alt=""
+      [style.margin-bottom]="(windowSize < 1120 && !isOpen) || windowSize < 850 ? '40px' : '0px'">
+    <!-- <div class="description-logo" [style.background-image]="'url(' + currkinder?.descriptionImg + ')'"></div> -->
+    <div class="description-text" [innerHTML]="currkinder?.descriptionText"
+      [style.width]="(windowSize < 1120 && !isOpen) || windowSize < 850 ? '90%' : '48%'"></div>
+  </section>
+  <section class="group-block">
+    <div class="group-content" *ngFor="let item of currkinder?.kindergartenGroup">
+      <div class="group-img"
+        [style.background-image]="'url(' + (item?.groupImg || '../../../../../assets/image/nursery-group-default.jpg') + ')'">
+      </div>
+      <div class="group-info">
+        <div class="group-name">{{item?.name}}</div>
+        <div class="group-age-range">{{item?.ageRange}}</div>
+        <button class="group-detail">Go to Details</button>
+      </div>
+    </div>
+  </section>
   <section></section>
 
 </main>
