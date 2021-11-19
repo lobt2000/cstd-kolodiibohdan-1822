@@ -89,31 +89,37 @@
         <label for="">Your first name</label>
         <input type="text" [formControlName]="'firstName'"
           [style.border-bottom]="form.get('firstName').valid ? '' : '2px solid red'">
+          <span *ngIf="this.form.get('firstName').getError('required')">Field should be required</span>
       </div>
       <div class="form-elem">
         <label for="">Your last name</label>
         <input type="text" [formControlName]="'lastName'"
           [style.border-bottom]="form.get('lastName').valid ? '' : '2px solid red'">
+          <span *ngIf="this.form.get('lastName').getError('required')">Field should be required</span>
       </div>
       <div class="form-elem">
         <label for="">Your email</label>
         <input type="text" [formControlName]="'email'"
           [style.border-bottom]="form.get('email').valid ? '' : '2px solid red'">
+          <span *ngIf="this.form.get('email').getError('required')">Field should be required</span>
       </div>
       <div class="form-elem">
         <label for="">Your child name</label>
         <input type="text" [formControlName]="'childName'"
           [style.border-bottom]="form.get('childName').valid ? '' : '2px solid red'">
+          <span *ngIf="this.form.get('childName').getError('required')">Field should be required</span>
       </div>
       <div class="form-elem">
         <label for="">Your child year old</label>
         <input type="number" [formControlName]="'childYear'" min="1" max="6"
           [style.border-bottom]="form.get('childYear').valid ? '' : '2px solid red'">
+          <span *ngIf="this.form.get('childYear').getError('required')">Field should be required</span>
       </div>
       <div class="form-elem">
         <label for="">Your child sex</label>
         <input type="text" [formControlName]="'childSex'"
           [style.border-bottom]="form.get('childSex').valid ? '' : '2px solid red'">
+          <span *ngIf="this.form.get('childSex').getError('required')">Field should be required</span>
       </div>
       <div class="form-elem">
         <label>Choose group</label>
@@ -123,7 +129,7 @@
           <div class="choose-sort p-4 m-l-5 flex nowrap jcsa aic bc-gray"
             [innerHTML]="form.get('groupType').value.name">
           </div>
-
+          <span class="error" *ngIf="this.form.get('groupType').getError('required')">Field should be required</span>
           <span aria-hidden="true" data-icon="&#xe900;"
             [class]="!isGroupCheck ? 'icon-drop-down-arrow' : 'icon-drop-up-arrow'" class="drop-icon"></span>
           <div class="hidden bc-white" [style.display]="isGroupCheck ? 'flex' : 'none'"
@@ -143,7 +149,7 @@
           <div class="choose-sort p-4 m-l-5 flex nowrap jcsa aic bc-gray"
             [innerHTML]="form.get('typeOfReg').value.formTitleType">
           </div>
-
+          <span class="error" *ngIf="this.form.get('typeOfReg').getError('required')">Field should be required</span>
           <span aria-hidden="true" data-icon="&#xe900;"
             [class]="!isType ? 'icon-drop-down-arrow' : 'icon-drop-up-arrow'" class="drop-icon"></span>
           <div class="hidden bc-white" [style.display]="isType ? 'flex' : 'none'"

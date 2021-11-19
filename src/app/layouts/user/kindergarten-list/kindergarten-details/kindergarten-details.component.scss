@@ -653,6 +653,18 @@
         outline: none;
       }
 
+      span {
+        width: 60%;
+        border: none;
+        height: 20px;
+        font-size: 12px;
+        font-family: 'Poppins';
+        font-weight: normal;
+        color: brown;
+        line-height: 20px;
+        margin-top: 3px;
+      }
+
 
       .form-elem-select {
         width: 60%;
@@ -667,6 +679,22 @@
         font-size: 16px;
         font-family: 'Poppins';
         font-weight: normal;
+
+
+        .error {
+          width: 60%;
+          border: none;
+          height: 20px;
+          font-size: 12px;
+          font-family: 'Poppins';
+          font-weight: normal;
+          color: brown;
+          line-height: 20px;
+          margin-top: 3px;
+          position: absolute;
+          bottom: -25px;
+          left: 7px;
+        }
 
         .drop-icon {
           width: 9px;

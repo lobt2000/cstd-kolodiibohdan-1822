@@ -65,7 +65,8 @@ export class KindergartenDetailsComponent implements OnInit {
       groupType: ['', [Validators.required]],
       typeOfReg: ['', [Validators.required]],
     });
-
+    // console.log(this.form.get('email'));
+    
 
   }
 
