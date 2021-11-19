@@ -4,6 +4,8 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/comp
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
+import { map } from 'rxjs/operators';
+
 
 @Injectable({
   providedIn: 'root'
@@ -27,8 +29,16 @@ export class KindergartenListService {
     return this.kinderRef;
   }
 
-  getOne(title: string): any {
-    return this.kinderRef.ref.where('title', '==', title);
+  getOne(title: string, id?): any {
+   return this.kinderRef.snapshotChanges().pipe(
+      map(changes =>
+        changes.map(c =>
+          ({ id: c.payload.doc.id, ...c.payload.doc.data() })
+        )
+      ),
+      map(res => res.filter(item => item.title == title)[0])
+      // take(1)
+    )
   }
 
   updateKinderApply(id, data) {

@@ -21,11 +21,15 @@ export class KindergartenDetailsComponent implements OnInit {
   @ViewChild('content') content: ElementRef;
   constructor(private kindergartenServise: KindergartenListService, private route: ActivatedRoute, private fb: FormBuilder) { }
 
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    this.windowSize = window.innerWidth;
+  }
+
   ngOnInit(): void {
     this.buildForm();
     this.windowSize = window.innerWidth;
     this.kinderTitle = this.route.snapshot.params.title;
-    console.log(this.kinderTitle);
     this.kindergartenServise.menuPosition.subscribe(
       res => {
         this.isOpen = res;
@@ -36,30 +40,18 @@ export class KindergartenDetailsComponent implements OnInit {
 
   }
 
-  @HostListener('window:resize', ['$event'])
-  onResize(event) {
-    this.windowSize = window.innerWidth;
-  }
 
 
   getKindergarten() {
-    this.kindergartenServise.getOne(this.kinderTitle).onSnapshot(
-      document => {
-        document.forEach(kinder => {
-          const kindergarten = {
-            id: kinder.id,
-            ...kinder.data()
-          };
-          this.currkinder = kindergarten;
-          console.log(this.currkinder);
+    this.kindergartenServise.getOne(this.kinderTitle)
+      .subscribe(kindergarten => {
+        this.currkinder = kindergarten;
 
-          setTimeout(() => {
-            this.isLoading = false;
-          }, 300)
+        setTimeout(() => {
+          this.isLoading = false;
+        }, 300)
 
-        });
-      }
-    );
+      });
   }
 
   buildForm(): void {
@@ -117,7 +109,6 @@ export class KindergartenDetailsComponent implements OnInit {
   }
 
   sendApply() {
-    console.log(this.form.value.title)
     if (this.form.valid) this.kindergartenServise.updateKinderApply(this.currkinder.title, this.form.value)
   }
 

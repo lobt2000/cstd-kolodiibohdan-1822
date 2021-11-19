@@ -15,6 +15,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { MatStepperModule } from '@angular/material/stepper';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ClickOutsideModule } from 'ng-click-outside';
 import { ToastrModule } from 'ngx-toastr';
@@ -26,9 +27,9 @@ import { MainPageComponent } from './main-page.component';
 describe('MainPageComponent', () => {
   let component: MainPageComponent;
   let fixture: ComponentFixture<MainPageComponent>;
-
   let service: KindergartenListService;
   let mockKindergartenListService: KindergartenListService;
+  let router: Router
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [MainPageComponent],
@@ -65,12 +66,14 @@ describe('MainPageComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(MainPageComponent);
     component = fixture.componentInstance;
+    mockKindergartenListService = TestBed.inject(KindergartenListService);
+    router = TestBed.inject(Router);
     service = fixture.debugElement.injector.get(KindergartenListService);
-    mockKindergartenListService = TestBed.get(KindergartenListService);
     fixture.detectChanges();
   });
 
   it('should create', () => {
+    service.getAllKindergartenList()
     expect(component).toBeTruthy();
   });
 
@@ -80,5 +83,11 @@ describe('MainPageComponent', () => {
     await component.getFirstKindergarten();
     await expect(spy).toHaveBeenCalled();
     await done()
+  });
+
+  it('should go to kindergarten-details', () => {
+    component.onGoToDetails({ title: 'Kindergarten' })
+    const routerSpy = { navigate: jasmine.createSpy('navigate') };
+    expect(routerSpy.navigate).toBeDefined();
   });
 });
