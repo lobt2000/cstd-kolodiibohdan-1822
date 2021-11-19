@@ -206,14 +206,15 @@ body {
 
 html,
 body {
-  font-family: "Poppins";
+  font-family: "Poppins"!important;
   height: 100vh;
 }
 
 body {
   margin: 0;
-  font-family: "Poppins";
+  font-family: "Poppins"!important;
   transition: all 0.3s ease-in-out;
+  box-sizing: border-box;
 }
 
 * {
