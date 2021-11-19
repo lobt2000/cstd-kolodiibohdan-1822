@@ -9,6 +9,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { KindergartenListRoutingModule } from './kindergarten-list-routing.module';
 import { KindergartenDetailsComponent } from './kindergarten-details/kindergarten-details.component';
+import { ClickOutsideModule } from 'ng-click-outside';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { KindergartenDetailsComponent } from './kindergarten-details/kindergarte
     SharedModule,
     FormsModule,
     ReactiveFormsModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    ClickOutsideModule,
   ],
   providers: [
     { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
