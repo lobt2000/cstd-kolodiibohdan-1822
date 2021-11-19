@@ -5,7 +5,7 @@
       <div class="kindergarten-title header-title"><img class="logo" [src]="firstKinder.logo" alt="">
         <div class="logo-title">{{firstKinder.title}}</div>
         <div class="font-15 line-height-one-half">{{firstKinder['logo-description']}}</div>
-        <button class="btn bc-blue go-to-button">Go to kindergarten list</button>
+        <button class="btn bc-blue go-to-button" (click)="onGoToDetails(firstKinder)">Go to kindergarten list</button>
       </div>
     </div>
     <div *ngIf="isLoading" class="loader-overlay">
@@ -28,9 +28,6 @@
         <img class="profile" src="../../../../assets/image/profile.jfif" alt="">
         <button class="btn bc-blue go-to-button bdr-10 m-b-25">Go to Profile</button>
       </div>
-    </div>
-    <div *ngIf="isLoading" class="loader-overlay">
-      <mat-spinner></mat-spinner>
     </div>
   </section>
 </main>

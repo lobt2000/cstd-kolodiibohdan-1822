@@ -1,4 +1,5 @@
 import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
+import { KindergartenListService } from 'src/app/service/kindergarten-list.service';
 
 @Component({
   selector: 'app-menu',
@@ -13,7 +14,7 @@ export class MenuComponent implements OnInit {
   openMenuwidth: number;
   @Input() resizeWidth;
   @Output() resizeMenu: EventEmitter<any> = new EventEmitter();
-  constructor() { }
+  constructor(private kindergartenListServise: KindergartenListService) { }
 
   ngOnInit(): void {
     this.width = window.innerWidth;
@@ -29,6 +30,7 @@ export class MenuComponent implements OnInit {
 
   resizeClick() {
     this.checkTurn = !this.checkTurn;
+    this.kindergartenListServise.menuPosition.next(this.checkTurn)
     this.resizeMenu.emit(this.checkTurn)
   }
   openBurgerMenu() {

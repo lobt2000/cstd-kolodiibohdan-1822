@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
@@ -15,24 +15,26 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { MatStepperModule } from '@angular/material/stepper';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ClickOutsideModule } from 'ng-click-outside';
-import { ToastrModule } from 'ngx-toastr';
 import { KindergartenListService } from 'src/app/service/kindergarten-list.service';
+import { SharedModule } from 'src/app/shared/shared.module';
 import { environment } from 'src/environments/environment';
+import { KindergartenListRoutingModule } from './kindergarten-list-routing.module';
 
-import { MainPageComponent } from './main-page.component';
+import { KindergartenListComponent } from './kindergarten-list.component';
 
-describe('MainPageComponent', () => {
-  let component: MainPageComponent;
-  let fixture: ComponentFixture<MainPageComponent>;
+describe('KindergartenListComponent', () => {
+  let component: KindergartenListComponent;
+  let fixture: ComponentFixture<KindergartenListComponent>;
+  let route: ActivatedRoute
   let service: KindergartenListService;
   let mockKindergartenListService: KindergartenListService;
-  let router: Router
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [MainPageComponent],
+      declarations: [KindergartenListComponent],
       imports: [
         BrowserAnimationsModule,
         FormsModule,
@@ -41,48 +43,43 @@ describe('MainPageComponent', () => {
         AngularFirestoreModule,
         AngularFireStorageModule,
         AngularFireAuthModule,
-        ClickOutsideModule,
-        MatInputModule,
-        MatFormFieldModule,
-        MatSelectModule,
-        MatRadioModule,
-        MatDatepickerModule,
-        MatNativeDateModule,
-        MomentDateModule,
         CommonModule,
-        MatStepperModule,
-        MatRadioModule,
+        KindergartenListRoutingModule,
+        SharedModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatProgressSpinnerModule,
+        ClickOutsideModule,
         RouterTestingModule,
-        ToastrModule.forRoot({
-          positionClass: 'toast-bottom-right',
-          preventDuplicates: true,
-        }),
-        MatProgressSpinnerModule
       ]
     })
       .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MainPageComponent);
+    fixture = TestBed.createComponent(KindergartenListComponent);
     component = fixture.componentInstance;
+    route = TestBed.inject(ActivatedRoute)
     mockKindergartenListService = TestBed.inject(KindergartenListService);
-    router = TestBed.inject(Router);
     service = fixture.debugElement.injector.get(KindergartenListService);
     fixture.detectChanges();
   });
 
   it('should create', () => {
     service.getAllKindergartenList()
+    service.menuPosition.next(true)
     expect(component).toBeTruthy();
   });
 
-  it('should get all kindergarten', async (done) => {
-    const spy = spyOn(mockKindergartenListService, 'getAllKindergartenList');
-    await service.getAllKindergartenList()
-    await component.getFirstKindergarten();
-    await expect(spy).toHaveBeenCalled();
-    await done()
+  it('should check resize', () => {
+    let event = {
+      target: {
+        innerWidth: 1200
+      }
+    }
+    event.target.innerWidth = 1200
+    component.onResize(event)
+    expect(component.windowSize).toEqual(component.windowSize);
   });
 
   it('should go to kindergarten-details', () => {

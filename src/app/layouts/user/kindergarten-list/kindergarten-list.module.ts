@@ -6,24 +6,24 @@ import { DateAdapter, MatNativeDateModule, MAT_DATE_FORMATS, MAT_DATE_LOCALE } f
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { MY_FORMATS } from 'src/app/shared/const/myformat';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { UserRoutingModule } from './user-routing.module';
-import { MainPageComponent } from './main-page/main-page.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { KindergartenListComponent } from './kindergarten-list/kindergarten-list.component';
+import { KindergartenListRoutingModule } from './kindergarten-list-routing.module';
+import { KindergartenDetailsComponent } from './kindergarten-details/kindergarten-details.component';
+import { ClickOutsideModule } from 'ng-click-outside';
 
 
 @NgModule({
   declarations: [
-    MainPageComponent,
-    KindergartenListComponent
+    KindergartenDetailsComponent
   ],
   imports: [
     CommonModule,
-    UserRoutingModule,
+    KindergartenListRoutingModule,
     SharedModule,
     FormsModule,
     ReactiveFormsModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    ClickOutsideModule,
   ],
   providers: [
     { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
