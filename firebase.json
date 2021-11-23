@@ -19,8 +19,8 @@
       ]
     },
     {
-      "target": "chrome-dragon-game",
-      "public": "dist/chrome-dragon-game",
+      "target": "kindergarten",
+      "public": "dist/kindergarten",
       "ignore": [
         "**/.*"
       ],

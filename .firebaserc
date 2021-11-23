@@ -5,7 +5,7 @@
   "targets": {
     "kindergarten-daed8": {
       "hosting": {
-        "chrome-dragon-game": [
+        "kindergarten": [
           "kindergarten-daed8"
         ]
       }
