@@ -1,0 +1,121 @@
+// @import "../../../assets/styles/mixins";
+@import "../../../../assets/styles/styles";
+
+.select-item {
+  //   background-color: #eef0f8 !important;
+}
+
+.choose {
+  position: absolute;
+  height: 70%;
+  width: 5px;
+  top: calc(15%);
+  background-color: #0CACF8;
+  left: 0px;
+
+}
+
+.missing {
+  background-color: #fdf5ec;
+}
+
+main {
+  width: calc(100%);
+  height: calc(100vh - 60px);
+  overflow-y: auto;
+  overflow: hidden;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+
+  @media (max-width: 768px) {
+    height: calc(100vh - 100px);
+    padding-top: 40px;
+  }
+}
+
+.users {
+  width: 316px;
+  height: calc(100vh - 60px);
+  overflow-y: scroll;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+
+  &__all {
+    min-height: 5rem;
+
+    &--members {
+      margin-top: 1px;
+      cursor: pointer;
+      min-height: 80px;
+      position: relative;
+
+      .person {
+        height: 50px;
+        position: relative;
+
+        &__logo {
+          width: 50px;
+          height: 50px;
+          position: relative;
+
+          &--img {
+            width: 50px;
+            height: 50px;
+          }
+
+          &--active {
+            position: absolute;
+            display: block;
+            bottom: 0px;
+            right: 0px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+          }
+        }
+
+        &__person-data {
+          width: 60%;
+          min-height: 43px;
+
+          &--title {
+            font-weight: 600;
+          }
+        }
+
+        &__other-data {
+          width: 30px;
+          height: 43px;
+
+          &--missing {
+            border-radius: 50%;
+            width: 16px;
+            height: 16px;
+            line-height: 16px;
+          }
+
+        }
+      }
+    }
+
+  }
+}
+
+.users-messages {
+  height: 100%;
+  overflow: hidden;
+  width: calc(100% - 316px);
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 3px;
+  height: 6px;
+  background: transparent;
+}

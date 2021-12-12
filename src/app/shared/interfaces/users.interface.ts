@@ -1,5 +1,7 @@
 // import { mesUser } from "./mesUser.interface";
 
+import { contacts } from "./contacts.interface";
+
 export interface Users {
     id?: string,
     email: string,
@@ -8,5 +10,5 @@ export interface Users {
     firstname: string,
     secondname: string,
     userPos: string
-    // usersMess : Array<mesUser>
+    contacts? : Array<contacts>
 }
