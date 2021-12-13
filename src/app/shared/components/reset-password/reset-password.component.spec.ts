@@ -96,7 +96,7 @@ describe('ResetPasswordComponent', () => {
   it('Reset password form shouldn`t be valid', () => {
     component.buildForm();
     component.resetPass.setValue({
-      pass: 'qwerty1234',
+      pass: 'qwerty123',
       confirmpass: '',
     })
     expect(component.resetPass.valid).toBeFalse();
@@ -113,22 +113,22 @@ describe('ResetPasswordComponent', () => {
 
   it('Reset password form shouldn`t be valid', () => {
     component.buildForm();
-    component.resetPass.get('pass').setValue('qwerty1234')
+    component.resetPass.get('pass').setValue('qwerty123')
     expect(component.resetPass.valid).toBeFalse();
   })
 
   it('Reset password form should be valid', () => {
     component.buildForm();
     component.resetPass.setValue({
-      pass: 'qwerty1234',
-      confirmpass: 'qwerty1234',
+      pass: 'qwerty123',
+      confirmpass: 'qwerty123',
     })
     expect(component.resetPass.valid).toBeTrue();
   })
 
   it('should get error if password don`t match', () => {
     component.buildForm();
-    component.resetPass.get('pass').setValue('qwerty1234')
+    component.resetPass.get('pass').setValue('qwerty123')
     component.resetPass.get('confirmpass').setValue('qwerty');
     expect(component.resetPass.controls.confirmpass.getError('notmatch')).toEqual('This value should be the same as password');
   })
@@ -137,19 +137,19 @@ describe('ResetPasswordComponent', () => {
     const spy = spyOn(mockAuthService, 'resetPassword')
     component.buildForm();
     component.resetPass.setValue({
-      pass: 'qwerty1234',
-      confirmpass: 'qwerty1234',
+      pass: 'qwerty123',
+      confirmpass: 'qwerty123',
     })
     router.snapshot.queryParams['oobCode'] = 'bsoJIDN21E3rFppviob1cSjZUMJ_xc6nx1WeQIfvPlkAAAF837V6eg'
     component.sendNewPass();
-    expect(spy).toHaveBeenCalledWith('bsoJIDN21E3rFppviob1cSjZUMJ_xc6nx1WeQIfvPlkAAAF837V6eg', 'qwerty1234');
+    expect(spy).toHaveBeenCalledWith('bsoJIDN21E3rFppviob1cSjZUMJ_xc6nx1WeQIfvPlkAAAF837V6eg', 'qwerty123');
   })
 
   it('Password shouldn`t change', () => {
     const spy = spyOn(mockAuthService, 'resetPassword')
     component.buildForm();
     component.resetPass.setValue({
-      pass: 'qwerty1234',
+      pass: 'qwerty123',
       confirmpass: '',
     })
     component.sendNewPass();

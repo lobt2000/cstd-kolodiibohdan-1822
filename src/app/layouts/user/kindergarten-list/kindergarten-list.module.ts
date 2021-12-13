@@ -30,4 +30,4 @@ import { ClickOutsideModule } from 'ng-click-outside';
     { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS }
   ],
 })
-export class UserModule { }
+export class KindergartenListModule { }

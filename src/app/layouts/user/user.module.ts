@@ -10,12 +10,14 @@ import { UserRoutingModule } from './user-routing.module';
 import { MainPageComponent } from './main-page/main-page.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { KindergartenListComponent } from './kindergarten-list/kindergarten-list.component';
+import { MessagesComponent } from './messages/messages.component';
 
 
 @NgModule({
   declarations: [
     MainPageComponent,
-    KindergartenListComponent
+    KindergartenListComponent,
+    MessagesComponent
   ],
   imports: [
     CommonModule,

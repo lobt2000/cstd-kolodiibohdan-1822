@@ -21,7 +21,11 @@ const routes: Routes = [
             },
             {
                 path: 'kindergarten-list',
-                loadChildren: () => import('./kindergarten-list/kindergarten-list.module').then((m) => m.UserModule)
+                loadChildren: () => import('./kindergarten-list/kindergarten-list.module').then((m) => m.KindergartenListModule)
+            },
+            {
+                path: 'messages',
+                loadChildren: () => import('./messages/messages.module').then((m) => m.MessagesModule)
             },
             {
                 path: "**",
