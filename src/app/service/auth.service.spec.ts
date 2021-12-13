@@ -45,13 +45,13 @@ describe('AuthService', () => {
 
   it('should sign in to the system', () => {
     const spy = spyOn(service, 'signIn')
-    service.signIn('bkolodiy20013@gmail.com', 'qwerty1234');
+    service.signIn('bkolodiy20013@gmail.com', 'qwerty123');
     expect(spy).toHaveBeenCalledTimes(1);
   });
 
   it('should sign up to the system', () => {
     const spy = spyOn(service, 'signUp')
-    service.signUp('bkolodiy20013@gmail.com', 'qwerty1234', 'Bohdan', 'Kolodii', 'user');
+    service.signUp('bkolodiy20013@gmail.com', 'qwerty123', 'Bohdan', 'Kolodii', 'user');
     expect(spy).toHaveBeenCalled();
   });
 

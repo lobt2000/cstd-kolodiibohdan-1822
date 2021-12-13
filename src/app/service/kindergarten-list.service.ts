@@ -16,6 +16,7 @@ export class KindergartenListService {
   menuPosition: Subject<any> = new Subject();
   kinderRef: AngularFirestoreCollection<any> = null;
   kinderListApplyRef: AngularFirestoreCollection<any> = null;
+  isConversationOpen: Subject<any> = new Subject();
 
   constructor(private db: AngularFirestore,
     private auth: AngularFireAuth,
@@ -30,7 +31,7 @@ export class KindergartenListService {
   }
 
   getOne(title: string, id?): any {
-   return this.kinderRef.snapshotChanges().pipe(
+    return this.kinderRef.snapshotChanges().pipe(
       map(changes =>
         changes.map(c =>
           ({ id: c.payload.doc.id, ...c.payload.doc.data() })

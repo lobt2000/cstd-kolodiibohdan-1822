@@ -1,10 +1,11 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostListener, OnInit, Output, ViewChild } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment';
 import { Subject } from 'rxjs';
 import { AuthService } from 'src/app/service/auth.service';
+import { KindergartenListService } from 'src/app/service/kindergarten-list.service';
 import { contacts } from 'src/app/shared/interfaces/contacts.interface';
 import { Files } from 'src/app/shared/interfaces/file.interface';
 import { Users } from 'src/app/shared/interfaces/users.interface';
@@ -38,23 +39,35 @@ export class MessagesChatComponent implements OnInit {
   isEdit: boolean = false;
   isModal: boolean = false;
   searchText: string;
+  windowSize: number;
+  isOpen: boolean;
   constructor(private activatedRoute: ActivatedRoute,
     private router: Router,
-    // private monthService: MonthService,
-    private authService: AuthService,
-    // private mesUser: MesUserService,
+    private kindergartenListService: KindergartenListService,
     private storage: AngularFireStorage) {
-    // this.router.events.subscribe(res => {
-    //   if (res.hasOwnProperty('routerEvent')) {
-    //     this.ngOnInit();
-    //   }
-    // })
   }
 
   ngOnInit(): void {
-    console.log(moment().format('Do MMMM YYYY'));
+    this.windowSize = window.innerWidth;
+    this.kindergartenListService.menuPosition.subscribe(res => {
+      this.isOpen = res;
+    })
+    this.backInLocation(true)
+    // console.log(moment().format('Do MMMM YYYY'));
     this.getUser();
 
+  }
+
+  backInLocation(bool = false) {
+    if (!bool) {
+      this.router.navigateByUrl('/user/messages')
+    }
+    this.kindergartenListService.isConversationOpen.next(bool)
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    this.windowSize = window.innerWidth;
   }
 
   ngAfterViewChecked() {

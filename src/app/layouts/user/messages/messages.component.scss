@@ -29,8 +29,9 @@ main {
   justify-content: flex-start;
 
   @media (max-width: 768px) {
-    height: calc(100vh - 100px);
-    padding-top: 40px;
+    height: calc(100vh - 105px);
+    padding-top: 45px;
+    justify-content: center;
   }
 }
 
@@ -40,7 +41,8 @@ main {
   overflow-y: scroll;
 
   @media (max-width: 768px) {
-    display: none;
+    width: 90%;
+    // display: none;
   }
 
   &__all {

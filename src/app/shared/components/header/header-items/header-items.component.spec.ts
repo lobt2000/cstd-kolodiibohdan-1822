@@ -45,13 +45,13 @@ describe('HeaderItemsComponent', () => {
   });
 
   it('should contain user', async () => {
-    await mockAuthService.signIn('bkolodiy20013@gmail.com', 'qwerty1234');
+    await mockAuthService.signIn('bkolodiy20013@gmail.com', 'qwerty123');
     const user = {
       email: "bkolodiy20013@gmail.com",
       firstname: "Bogdan",
       icon: "assets/image/profile.svg",
       id: "Pj5Oa7pjLTxlrjR13YRS",
-      password: "qwerty1234",
+      password: "qwerty123",
       secondname: "Kolodiy",
       userPos: "user"
     }

@@ -2,6 +2,7 @@
 @import "../../../../../assets/styles/styles";
 
 main {
+  // width: 100%;
   height: calc(100vh - 90px);
   padding: 15px;
 
@@ -27,34 +28,47 @@ main {
     &--icon {
       width: 15px;
       height: 15px;
-      margin-left: 20px;
+      // margin-left: 20px;
       line-height: 14px;
       font-size: 14px;
     }
 
     &--input {
-      width: 84%;
+      width: calc(84% - 50px);
       height: 30px;
       border: none;
+      border-bottom: 1px solid blue;
+      margin-right: 5%;
+
     }
 
-    &--setting {
+    &--back {
       width: 30px;
       height: 30px;
       padding: 0;
       border: none;
+      border-radius: 50%;
 
-      .settings {
-        width: 15px;
-        height: 15px;
-        line-height: 16px;
-        font-size: 15px;
-        color: #6E7585;
-        transition: transform 400ms linear;
-      }
+      // .settings {
+      //   width: 15px;
+      //   height: 15px;
+      //   line-height: 16px;
+      //   // font-size: 15px;
+      //   // color: #6E7585;
+      //   transition: transform 400ms linear;
 
-      .icon-settings::before {
-        color: #6E7585;
+      // }
+
+
+    }
+
+    .icon-arrowhead-thin-outline-to-the-left::before {
+      font-size: 22px;
+      margin-right: 2px;
+      color: #0CACF8;
+
+      @media (max-width: 450px) {
+        font-size: 18px;
       }
     }
   }

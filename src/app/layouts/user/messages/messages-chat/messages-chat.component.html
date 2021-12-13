@@ -1,12 +1,14 @@
 <main class="bc-gray flex nowrap jcsb aifs">
   <section class="chat bc-white flex col nowrap jcsb aic">
-    <div class="chat__search w-100 flex nowrap jcsb aic">
+    <div class="chat__search w-100 flex nowrap jcsa aic">
+      <button class="chat__search--back m-l-20 m-r-7 flex nowrap jcc aic icon-arrowhead-thin-outline-to-the-left"
+        (click)="backInLocation()"
+        [style.display]="(windowSize < 1150 && !isOpen) || windowSize < 945 ? 'flex' : 'none'">
+        <!-- <span aria-hidden="true" class="icon-arrowhead-thin-outline-to-the-left"></span> -->
+      </button>
       <span aria-hidden="true" class="chat__search--icon icon-icons8-search txt-c-blue"></span>
       <input type="text" class="chat__search--input p-l-10 font-13 bc-white" [(ngModel)]="searchText" name="searchText"
         placeholder="Search this conversation">
-      <button class="chat__search--setting m-l-20 m-r-7 bc-gray flex nowrap jcc aic">
-        <span aria-hidden="true" class="icon-settings"></span>
-      </button>
     </div>
     <!-- <div class="chat__conversation flex nowrap jcc aicc " #scroll [scrollTop]="scroll.scrollHeight"> -->
     <div class="chat__conversation flex nowrap jcc aicc " #scroll>

@@ -113,7 +113,7 @@ describe('LoginComponent', () => {
     const spy = spyOn(mockAuthService, 'signIn');
     component.formLogIn.setValue({
       email: 'bkolody20013@gmail.com',
-      pass: 'qwerty1234'
+      pass: 'qwerty123'
     })
     component.signIN();
     expect(spy).toHaveBeenCalled();
@@ -137,8 +137,8 @@ describe('LoginComponent', () => {
       firstname: 'Bohdan',
       secondname: 'Kolodii',
       email: 'bkolody20013@gmail.com',
-      pass: 'qwerty1234',
-      confirmpass: 'qwerty1234',
+      pass: 'qwerty123',
+      confirmpass: 'qwerty123',
       checkPosition: 'user'
     })
     component.signUP();
@@ -152,7 +152,7 @@ describe('LoginComponent', () => {
       firstname: 'Bohdan',
       secondname: 'Kolodii',
       email: 'bkolody20013@gmail.com',
-      pass: 'qwerty1234',
+      pass: 'qwerty123',
       confirmpass: '',
       checkPosition: 'user'
     })
@@ -165,8 +165,8 @@ describe('LoginComponent', () => {
       firstname: 'Bohdan',
       secondname: 'Kolodii',
       email: 'bkolody20013@gmail.com',
-      pass: 'qwerty1234',
-      confirmpass: 'qwerty1234',
+      pass: 'qwerty123',
+      confirmpass: 'qwerty123',
       checkPosition: 'user'
     })
     component.resetForm();
@@ -176,7 +176,7 @@ describe('LoginComponent', () => {
   it('should reset login form', () => {
     component.formLogIn = fb.group({
       email: 'bkolody20013@gmail.com',
-      pass: 'qwerty1234',
+      pass: 'qwerty123',
     })
     component.resetForm();
     expect(component.formLogIn.value.email && component.formLogIn.value.pass).toBeNull();
@@ -187,8 +187,8 @@ describe('LoginComponent', () => {
       firstname: 'Bohdan',
       secondname: 'Kolodii',
       email: 'bkolody20013@gmail.com',
-      pass: 'qwerty1234',
-      confirmpass: 'qwerty1234',
+      pass: 'qwerty123',
+      confirmpass: 'qwerty123',
       checkPosition: 'user'
     })
     component.changeSignForm('signIn');
@@ -198,7 +198,7 @@ describe('LoginComponent', () => {
   it('should change type of form', () => {
     component.formLogIn = fb.group({
       email: 'bkolody20013@gmail.com',
-      pass: 'qwerty1234',
+      pass: 'qwerty123',
     })
     component.changeSignForm('signUp');
     expect(component.formLogUp.value.hasOwnProperty('email')).toBeTrue();
@@ -230,7 +230,7 @@ describe('LoginComponent', () => {
 
   it('should get error if password don`t match', () => {
     component.buildFormForSignUp();
-    component.formLogUp.get('pass').patchValue('qwerty1234')
+    component.formLogUp.get('pass').patchValue('qwerty123')
     component.formLogUp.get('confirmpass').patchValue('qwerty');
     // component.confirmPassValidator()
     expect(component.formLogUp.controls.confirmpass.getError('notmatch')).toEqual('This value should be the same as password');
