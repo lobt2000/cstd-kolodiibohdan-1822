@@ -47,6 +47,8 @@ export class AuthService {
           firstname: userFname,
           secondname: userSname,
           userPos: userPos,
+          username: `${userFname} ${userSname}`,
+          url: `${userFname}_${userSname}`,
           icon: '@assets/images/profile.svg'
         }
 
