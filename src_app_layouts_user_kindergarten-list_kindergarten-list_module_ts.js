@@ -45,7 +45,7 @@ function KindergartenDetailsComponent_main_0_section_13_div_1_Template(rf, ctx) 
 } if (rf & 2) {
     const item_r17 = ctx.$implicit;
     _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵstyleProp"]("background-image", "url(" + ((item_r17 == null ? null : item_r17.groupImg) || "../../../../../assets/image/nursery-group-default.jpg") + ")");
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵstyleProp"]("background-image", "url(" + ((item_r17 == null ? null : item_r17.groupImg) || "assets/image/nursery-group-default.jpg") + ")");
     _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](3);
     _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtextInterpolate"](item_r17 == null ? null : item_r17.name);
     _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](2);
@@ -115,7 +115,7 @@ function KindergartenDetailsComponent_main_0_section_16_div_4_Template(rf, ctx) 
 } if (rf & 2) {
     const kinderAddress_r22 = ctx.$implicit;
     _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵstyleProp"]("background-image", "url(" + (kinderAddress_r22.addressPosImg || "../../../../../assets/image/crown.jpg") + ")");
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵstyleProp"]("background-image", "url(" + (kinderAddress_r22.addressPosImg || "assets/image/crown.jpg") + ")");
     _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](2);
     _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtextInterpolate"](kinderAddress_r22 == null ? null : kinderAddress_r22.addressName);
 } }
@@ -133,7 +133,7 @@ function KindergartenDetailsComponent_main_0_section_16_Template(rf, ctx) { if (
     _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](2);
     _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtextInterpolate1"]("", ctx_r6.currkinder == null ? null : ctx_r6.currkinder.title, " addresses");
     _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵstyleProp"]("background-image", "url(" + ((ctx_r6.currkinder == null ? null : ctx_r6.currkinder.addressBackground) || "../../../../../assets/image/addresses-background.jpg") + ")");
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵstyleProp"]("background-image", "url(" + ((ctx_r6.currkinder == null ? null : ctx_r6.currkinder.addressBackground) || "assets/image/addresses-background.jpg") + ")");
     _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](1);
     _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("ngForOf", ctx_r6.currkinder == null ? null : ctx_r6.currkinder.kinderAddresses);
 } }
