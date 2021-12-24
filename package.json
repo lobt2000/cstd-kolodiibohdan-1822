@@ -45,6 +45,7 @@
     "firebase": "^9.1.1",
     "firebase-tools": "^9.19.0",
     "fuzzy": "^0.1.3",
+    "gh-pages": "^3.2.3",
     "inquirer": "^6.2.2",
     "inquirer-autocomplete-prompt": "^1.0.1",
     "jasmine-core": "~3.6.0",

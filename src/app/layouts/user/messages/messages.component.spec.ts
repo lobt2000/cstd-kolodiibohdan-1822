@@ -76,7 +76,7 @@ describe('MessagesComponent', () => {
           text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eget",
           time: "10:45 AM",
           user: "Bogdan Kolodiy",
-          userIcon: "@assets/images/profile.svg"
+          userIcon: "assets/images/profile.svg"
         }],
         missing: "0",
         name: "Guy Hawkins",
@@ -129,7 +129,7 @@ describe('MessagesComponent', () => {
           text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eget",
           time: "10:45 AM",
           user: "Bogdan Kolodiy",
-          userIcon: "@assets/images/profile.svg"
+          userIcon: "assets/images/profile.svg"
         }],
         missing: "0",
         name: "Guy Hawkins",

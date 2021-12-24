@@ -10,7 +10,7 @@ export class MenuComponent implements OnInit {
   checkTurn: boolean;
   resizeButton: boolean;
   width: number;
-  isOpenMenu: boolean;
+  isOpenMenu: boolean = true;
   openMenuwidth: number;
   @Input() resizeWidth;
   @Output() resizeMenu: EventEmitter<any> = new EventEmitter();
@@ -37,4 +37,7 @@ export class MenuComponent implements OnInit {
     this.isOpenMenu = !this.isOpenMenu;
   }
 
+  closeAfterClick(){
+    this.isOpenMenu = true
+  }
 }
