@@ -55,7 +55,13 @@ export class MessagesChatComponent implements OnInit {
     this.backInLocation(true)
     // console.log(moment().format('Do MMMM YYYY'));
     this.getUser();
-
+    this.kindergartenListService.applyFile.subscribe(res => {
+      if (res) {
+        setTimeout(() => {
+          this.getFile(res)
+        }, 1000)
+      }
+    })
   }
 
   backInLocation(bool = false) {
@@ -91,7 +97,9 @@ export class MessagesChatComponent implements OnInit {
 
 
   getFile(event): void {
-    const file = event.target.files[0];
+    const file = event.target ? event.target.files[0] : event;
+    console.log(file);
+
     const filePath = `message-file/${file.name}`;
     const upload = this.storage.upload(filePath, file);
     this.isDisabled = true;

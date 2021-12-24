@@ -17,6 +17,8 @@ export class KindergartenListService {
   kinderRef: AngularFirestoreCollection<any> = null;
   kinderListApplyRef: AngularFirestoreCollection<any> = null;
   isConversationOpen: Subject<any> = new Subject();
+  updList: Subject<any> = new Subject();
+  applyFile: Subject<any> = new Subject();
 
   constructor(private db: AngularFirestore,
     private auth: AngularFireAuth,
@@ -41,19 +43,50 @@ export class KindergartenListService {
       // take(1)
     )
   }
+  addKinderApply(apply) {
+    this.kinderListApplyRef.add({ ...apply }).then(
+      data => {
+        this.updList.next(data.id);
+
+      }
+    );
+  }
+  update(id: string, data: any): Promise<void> {
+    return this.kinderListApplyRef.doc(id).update({ ...data });
+  }
 
   updateKinderApply(id, data) {
-    this.kinderListApplyRef.ref.where('title', '==', id).onSnapshot(res => {
-      res.forEach(kinder => {
-
-        this.kinderListApplyRef.doc(kinder.data().id).update({ ...data })
-          .catch(err => {
-            this.toastr.error(`Denied`, 'Smth go wrong try again later');
-          })
-          .finally(() => {
-            this.toastr.success(`Success`, 'Your apply send sucessful');
-          })
-      });
-    })
+    try {
+      this.kinderListApplyRef.ref.where('title', '==', id).get().then(res => {
+        if (res.size == 0) {
+          this.addKinderApply(data)
+          this.updList.subscribe(
+            id => {
+              data.id = id
+              this.update(id, data)
+            }
+          )
+        }
+        else {
+          res.forEach(kinder => {
+            const apply = {
+              ...kinder.data(),
+              ...data,
+              listOfApply: [...data.listOfApply, ...kinder.data().listOfApply]
+            }
+            this.kinderListApplyRef.doc(kinder.data().id).update({ ...apply })
+              .catch(err => {
+                this.toastr.error(`Denied`, 'Smth go wrong try again later');
+              })
+              .finally(() => {
+                this.toastr.success(`Success`, 'Your apply send sucessful');
+              })
+          });
+        }
+      })
+    }
+    catch (e) {
+      console.log(e);
+    }
   }
 }

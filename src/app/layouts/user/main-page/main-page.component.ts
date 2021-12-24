@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { KindergartenListService } from 'src/app/service/kindergarten-list.service';
 import { map, take } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/service/auth.service';
 
 @Component({
   selector: 'app-main-page',
@@ -11,7 +12,7 @@ import { Router } from '@angular/router';
 export class MainPageComponent implements OnInit {
   firstKinder: any = {};
   isLoading: boolean = true;
-  constructor(private kindergartenService: KindergartenListService, private router: Router) { }
+  constructor(private kindergartenService: KindergartenListService, private router: Router, private s: AuthService) { }
 
   ngOnInit(): void {
     this.getFirstKindergarten();
@@ -34,5 +35,9 @@ export class MainPageComponent implements OnInit {
 
   onGoToDetails(kinderElem) {
     this.router.navigate(['/user', 'kindergarten-list', kinderElem.title])
+  }
+
+  onGoToAnotherPage(page) {
+    this.router.navigate(['/user', `${page}`])
   }
 }

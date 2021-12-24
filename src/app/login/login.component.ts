@@ -12,8 +12,8 @@ export class LoginComponent implements OnInit {
   public formLogUp: FormGroup;
   public formReset: FormGroup;
   pattern = /^.{8,16}$/gm;
-  patternName = /^[A-Za-z]{1,}$/gm;
-  patternSecondName = /^[A-Za-z]{1,}$/gm;
+  patternName = /^[A-Za-z]{1,}$/;
+  patternSecondName = /^[A-Za-z]{1,}$/;
   regExpEmail = /^[a-z0-9\-\.]{1,}@gmail\.com|net\.us|org\.ua$/i;
   isDisabled: boolean = true;
   isVisible: boolean = false;

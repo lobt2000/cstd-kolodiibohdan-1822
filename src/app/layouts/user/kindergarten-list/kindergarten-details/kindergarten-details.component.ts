@@ -1,6 +1,6 @@
 import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { KindergartenListService } from 'src/app/service/kindergarten-list.service';
 
 @Component({
@@ -19,7 +19,7 @@ export class KindergartenDetailsComponent implements OnInit {
   isType: boolean;
   regExpEmail = /^[a-z0-9\-\.]{1,}@gmail\.com|net\.us|org\.ua$/i;
   @ViewChild('content') content: ElementRef;
-  constructor(private kindergartenServise: KindergartenListService, private route: ActivatedRoute, private fb: FormBuilder) { }
+  constructor(private kindergartenServise: KindergartenListService, private route: ActivatedRoute, private fb: FormBuilder, private router: Router) { }
 
   @HostListener('window:resize', ['$event'])
   onResize(event) {
@@ -27,7 +27,6 @@ export class KindergartenDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.buildForm();
     this.windowSize = window.innerWidth;
     this.kinderTitle = this.route.snapshot.params.title;
     this.kindergartenServise.menuPosition.subscribe(
@@ -46,7 +45,7 @@ export class KindergartenDetailsComponent implements OnInit {
     this.kindergartenServise.getOne(this.kinderTitle)
       .subscribe(kindergarten => {
         this.currkinder = kindergarten;
-
+        this.buildForm();
         setTimeout(() => {
           this.isLoading = false;
         }, 300)
@@ -61,13 +60,19 @@ export class KindergartenDetailsComponent implements OnInit {
       lastName: ['', [Validators.required]],
       childName: ['', [Validators.required]],
       childYear: ['', [Validators.required, Validators.min(0), Validators.max(6)]],
-      childSex: ['', [Validators.required]],
-      groupType: ['', [Validators.required]],
-      typeOfReg: ['', [Validators.required]],
+      childSex: ['', [Validators.required]]
     });
     // console.log(this.form.get('email'));
-    
-
+    if (this.currkinder.kindergartenGroup) {
+      this.form.addControl(
+        'groupType', new FormControl('', Validators.required)
+      )
+    }
+    if (this.currkinder.kinderForm) {
+      this.form.addControl(
+        'typeOfReg', new FormControl('', Validators.required)
+      )
+    }
   }
 
   openHidden(item: string): void {
@@ -110,7 +115,20 @@ export class KindergartenDetailsComponent implements OnInit {
   }
 
   sendApply() {
-    if (this.form.valid) this.kindergartenServise.updateKinderApply(this.currkinder.title, this.form.value)
+    if (this.form.valid) {
+      const apply = {
+        title: this.currkinder.title,
+        listOfApply: [
+          this.form.value
+        ]
+      }
+      var fileObj = new File([`${JSON.stringify(apply)}`], 'apply_file.txt', {
+        type: 'contentType'
+      });
+      this.kindergartenServise.applyFile.next(fileObj)
+      this.kindergartenServise.updateKinderApply(this.currkinder.title, apply);
+      this.router.navigate(['/user', `messages`, 'Guy_Hawkins'])
+    }
   }
 
 }
