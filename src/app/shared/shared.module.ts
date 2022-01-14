@@ -29,14 +29,15 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
 import { LayoutsRoutingModule } from '../layouts/layouts-routing.module';
 import { MatCarouselModule } from '@ngbmodule/material-carousel';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { AgentMenuComponent } from './components/agent-menu/agent-menu.component';
 // import { MatRadioModule } from '@angular/material/radio';
 @NgModule({
     declarations: [
         HeaderComponent,
         HeaderItemsComponent,
         MenuComponent,
-        ResetPasswordComponent
-
+        ResetPasswordComponent,
+        AgentMenuComponent
     ],
     imports: [
         CommonModule,
@@ -68,7 +69,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
         HeaderComponent,
         HeaderItemsComponent,
         MenuComponent,
-        ResetPasswordComponent
+        ResetPasswordComponent,
+        AgentMenuComponent
     ],
     providers: [
         { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },

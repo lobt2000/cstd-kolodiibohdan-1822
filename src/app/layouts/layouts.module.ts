@@ -11,11 +11,13 @@ import { SharedModule } from '../shared/shared.module';
 import { LayoutsComponent } from './layouts.component';
 import { UserComponent } from './user/user.component';
 import { LoginModule } from '../login/login.module';
+import { AgentComponent } from './agent/agent.component';
 
 @NgModule({
   declarations: [
     LayoutsComponent,
-    UserComponent
+    UserComponent,
+    AgentComponent
   ],
   imports: [
     CommonModule,
