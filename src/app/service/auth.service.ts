@@ -92,7 +92,7 @@ export class AuthService {
                 this.toastr.success(`Hello ${myUser.firstname} ${myUser.secondname}`, 'Sing up success');
                 localStorage.setItem('mainuser', JSON.stringify(myUser))
                 this.localUser = JSON.parse(localStorage.getItem('user'))
-                this.router.navigate(['user'])
+                myUser.userPos == 'user' ? this.router.navigate(['user']) : this.router.navigate(['agent']);
               })
           })
 
@@ -129,7 +129,7 @@ export class AuthService {
               this.updUser.next(myUser)
               localStorage.setItem('mainuser', JSON.stringify(myUser))
               this.localUser = JSON.parse(localStorage.getItem('user'))
-              this.router.navigate(['user']);
+              myUser.userPos == 'user' ? this.router.navigate(['user']) : this.router.navigate(['agent']);
             })
           }
         )
