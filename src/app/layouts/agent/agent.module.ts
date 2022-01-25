@@ -14,11 +14,13 @@ import { KindergartenComponent } from './kindergarten/kindergarten.component';
 import { MatRippleModule } from '@angular/material/core';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ClickOutsideModule } from 'ng-click-outside';
+import { ApplicationsComponent } from './applications/applications.component';
 @NgModule({
   declarations: [
 
     MainPageComponent,
-    KindergartenComponent
+    KindergartenComponent,
+    ApplicationsComponent
   ],
   imports: [
     CommonModule,

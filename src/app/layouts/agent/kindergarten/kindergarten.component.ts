@@ -1,6 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { take } from 'rxjs/operators';
 import { AuthService } from 'src/app/service/auth.service';
@@ -45,15 +45,23 @@ export class KindergartenComponent implements OnInit {
     )
 
     this.getKindergarten();
+
     this.kindergarten.valueChanges.subscribe(res => {
       localStorage.setItem('kindergarten', JSON.stringify(res));
     })
+
   }
 
   getKindergarten() {
     const user = JSON.parse(localStorage.getItem('mainuser'))
     if (user.kinderId) this.kindergartenServise.getOneById(user.kinderId).pipe(take(1)).subscribe(res => {
-      this.updateForm(res)
+      if (localStorage.getItem('kindergarten')) {
+        const storage = JSON.parse(localStorage.getItem('kindergarten'));
+        this.updateForm(storage)
+      } else {
+        this.updateForm(res)
+
+      }
     })
   }
 
@@ -72,74 +80,77 @@ export class KindergartenComponent implements OnInit {
       titleButtonColor: '3dsfds',
       titleButtonTextColor: '',
       descriptionText: '',
-      // descriptionImg: 'https://firebasestorage.googleapis.com/v0/b/kindergarten-daed8.appspot.com/o/image%2FbacgroundImg.jpg?alt=media&token=b106542f-b902-4200-a394-e8255aba22ab',
       descriptionImg: '',
-      kindergartenGroup: this.fb.array([]),
-      kinderAdvantages: this.fb.array([]),
-      kinderAddresses: this.fb.array([]),
+      kindergartenGroup: this.fb.array([this.newGroup()]),
+      kinderAdvantages: this.fb.array([this.newAdvantages()]),
+      kinderAddresses: this.fb.array([this.newAddresses()]),
       addressBackground: '',
-      kinderForm: this.fb.array([])
+      kinderForm: this.fb.array([this.newKinderForm()])
     })
     if (localStorage.getItem('kindergarten')) {
       const storage = JSON.parse(localStorage.getItem('kindergarten'));
       this.updateForm(storage)
     }
+
   }
 
   updateForm(storage) {
-    delete storage.id
-    this.kindergarten = this.fb.group({
+    delete storage.id;
+    
+    this.kindergarten.setValue({
       ...storage,
-      kindergartenGroup: this.fb.array(
-        storage?.kindergartenGroup?.map(res => {
-          return this.fb.group({
-            ageRange: this.fb.control(res?.ageRange),
-            groupImg: this.fb.control(res?.groupImg),
-            name: this.fb.control(res?.name),
-            groupNameColor: this.fb.control(res?.groupNameColor),
-            groupAgeRangeColor: this.fb.control(res?.groupAgeRangeColor),
-          })
-        })
-      ),
-      kinderAdvantages: this.fb.array(
-        storage?.kinderAdvantages?.map(res => {
-          return this.fb.group({
-            numImg: this.fb.control(res?.numImg),
-            text: this.fb.control(res?.text),
-            title: this.fb.control(res?.title),
-            advantagesTitleColor: this.fb.control(res?.advantagesTitleColor),
-            advantagesTextColor: this.fb.control(res?.advantagesTextColor),
-          })
-        })
-      ),
-      kinderAddresses: this.fb.array(
-        storage?.kinderAddresses?.map(res => {
-          return this.fb.group({
-            addressName: this.fb.control(res?.addressName),
-            addressPosImg: this.fb.control(res?.addressPosImg),
-            addressesTextColor: this.fb.control(res?.addressesTextColor),
-          })
-        })),
-      kinderForm: this.fb.array(
-        storage?.kinderForm?.map(res => {
-          return this.fb.group({
-            formTitleAdditional: this.fb.control(res?.formTitleAdditional),
-            formTitlePrice: this.fb.control(res?.formTitlePrice),
-            formTitleTime: this.fb.control(res?.formTitleTime),
-            formTitleType: this.fb.control(res?.formTitleType),
-            kinderFormTitleColor: this.fb.control(res?.kinderFormTitleColor),
-            kinderFormTextColor: this.fb.control(res?.kinderFormTextColor),
-            kinderFormTitleBackgroundColor: this.fb.control(res?.kinderFormTitleBackgroundColor),
-            kinderFormTextBackgroundColor: this.fb.control(res?.kinderFormTextBackgroundColor),
-            formDescription: this.fb.array(res?.formDescription.map(item => {
-              return this.fb.group({
-                descText: this.fb.control(item?.descText),
-                numImg: this.fb.control(item?.numImg)
-              })
-            }))
-          })
-        })
-      )
+      kindergartenGroup:
+        storage?.kindergartenGroup
+      // ?.map(res => {
+      //   return this.fb.group({
+      //     ageRange: this.fb.control(res?.ageRange),
+      //     groupImg: this.fb.control(res?.groupImg),
+      //     name: this.fb.control(res?.name),
+      //     groupNameColor: this.fb.control(res?.groupNameColor),
+      //     groupAgeRangeColor: this.fb.control(res?.groupAgeRangeColor),
+      //   })
+      // })
+      ,
+      kinderAdvantages: storage?.kinderAdvantages
+      // ?.map(res => {
+      //   return this.fb.group({
+      //     numImg: this.fb.control(res?.numImg),
+      //     text: this.fb.control(res?.text),
+      //     title: this.fb.control(res?.title),
+      //     advantagesTitleColor: this.fb.control(res?.advantagesTitleColor),
+      //     advantagesTextColor: this.fb.control(res?.advantagesTextColor),
+      //   })
+      // })
+      ,
+      kinderAddresses: storage?.kinderAddresses
+      // .map(res => {
+      //   return this.fb.group({
+      //     addressName: this.fb.control(res?.addressName),
+      //     addressPosImg: this.fb.control(res?.addressPosImg),
+      //     addressesTextColor: this.fb.control(res?.addressesTextColor),
+      //   })
+      // })
+      ,
+      kinderForm: storage?.kinderForm
+      // .map(res => {
+      //   return this.fb.group({
+      //     formTitleAdditional: this.fb.control(res?.formTitleAdditional),
+      //     formTitlePrice: this.fb.control(res?.formTitlePrice),
+      //     formTitleTime: this.fb.control(res?.formTitleTime),
+      //     formTitleType: this.fb.control(res?.formTitleType),
+      //     kinderFormTitleColor: this.fb.control(res?.kinderFormTitleColor),
+      //     kinderFormTextColor: this.fb.control(res?.kinderFormTextColor),
+      //     kinderFormTitleBackgroundColor: this.fb.control(res?.kinderFormTitleBackgroundColor),
+      //     kinderFormTextBackgroundColor: this.fb.control(res?.kinderFormTextBackgroundColor),
+      //     formDescription: this.fb.array(res?.formDescription.map(item => {
+      //       return this.fb.group({
+      //         descText: this.fb.control(item?.descText),
+      //         numImg: this.fb.control(item?.numImg)
+      //       })
+      //     }))
+      //   })
+      // })
+
     });
 
     if (storage?.kinderAdvantages?.length) this.addAdvantages = true;
@@ -248,7 +259,7 @@ export class KindergartenComponent implements OnInit {
   }
 
   addNewGroup() {
-    this.getGroup.push(this.fb.group({
+    return this.getGroup.push(this.fb.group({
       ageRange: this.fb.control(''),
       groupImg: this.fb.control(''),
       name: this.fb.control(''),
@@ -257,25 +268,73 @@ export class KindergartenComponent implements OnInit {
 
     }))
   }
-  addNewAdvantages() {
-    this.getAdvantages.push(this.fb.group({
+
+  newGroup(): AbstractControl {
+    return this.fb.group({
+      ageRange: this.fb.control(''),
+      groupImg: this.fb.control(''),
+      name: this.fb.control(''),
+      groupNameColor: this.fb.control(''),
+      groupAgeRangeColor: this.fb.control(''),
+
+    })
+  }
+
+  newAdvantages(): AbstractControl {
+    return this.fb.group({
       numImg: this.fb.control(''),
       text: this.fb.control(''),
       title: this.fb.control(''),
       advantagesTitleColor: this.fb.control(''),
       advantagesTextColor: this.fb.control('')
 
+    })
+  }
+
+  newAddresses(): AbstractControl {
+    return this.fb.group({
+      addressName: this.fb.control(''),
+      addressPosImg: this.fb.control(''),
+      addressesTextColor: this.fb.control(''),
+    })
+  }
+  newKinderForm(): AbstractControl {
+    return this.fb.group({
+      formTitleAdditional: this.fb.control(''),
+      formTitlePrice: this.fb.control(''),
+      formTitleTime: this.fb.control(''),
+      formTitleType: this.fb.control(''),
+      kinderFormTitleColor: this.fb.control(''),
+      kinderFormTextColor: this.fb.control(''),
+      kinderFormTitleBackgroundColor: this.fb.control(''),
+      kinderFormTextBackgroundColor: this.fb.control(''),
+      formDescription: this.fb.array([
+        this.fb.group({
+          descText: this.fb.control(''),
+          numImg: this.fb.control('')
+        })
+      ])
+    })
+  }
+
+  addNewAdvantages() {
+    return this.getAdvantages.push(this.fb.group({
+      numImg: this.fb.control(''),
+      text: this.fb.control(''),
+      title: this.fb.control(''),
+      advantagesTitleColor: this.fb.control(''),
+      advantagesTextColor: this.fb.control('')
     }))
   }
   addNewAddresses() {
-    this.getAddresses.push(this.fb.group({
+    return this.getAddresses.push(this.fb.group({
       addressName: this.fb.control(''),
       addressPosImg: this.fb.control(''),
       addressesTextColor: this.fb.control(''),
     }))
   }
   addKinderForm() {
-    this.getKinderForm.push(this.fb.group({
+    return this.getKinderForm.push(this.fb.group({
       formTitleAdditional: this.fb.control(''),
       formTitlePrice: this.fb.control(''),
       formTitleTime: this.fb.control(''),

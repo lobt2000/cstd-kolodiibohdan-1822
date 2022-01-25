@@ -23,6 +23,10 @@ const routes: Routes = [
                 path: 'kindergarten',
                 component: KindergartenComponent
             },
+            {
+                path: 'kindergarten-apply',
+                loadChildren: () => import('./applications/applications.module').then((m) => m.ApplicationsModule)
+            },
         //     {
         //         path: 'kindergarten-list',
         //         loadChildren: () => import('./kindergarten-list/kindergarten-list.module').then((m) => m.KindergartenListModule)
