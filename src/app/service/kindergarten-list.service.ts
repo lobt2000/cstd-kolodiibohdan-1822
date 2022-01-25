@@ -18,6 +18,7 @@ export class KindergartenListService {
   kinderListApplyRef: AngularFirestoreCollection<any> = null;
   isConversationOpen: Subject<any> = new Subject();
   updList: Subject<any> = new Subject();
+  updKinderList: Subject<any> = new Subject();
   applyFile: Subject<any> = new Subject();
 
   constructor(private db: AngularFirestore,
@@ -43,6 +44,17 @@ export class KindergartenListService {
       // take(1)
     )
   }
+  getOneById(id: string): any {
+    return this.kinderRef.snapshotChanges().pipe(
+      map(changes =>
+        changes.map(c =>
+          ({ id: c.payload.doc.id, ...c.payload.doc.data() })
+        )
+      ),
+      map(res => res.filter(item => item.id == id)[0])
+      // take(1)
+    )
+  }
   addKinderApply(apply) {
     this.kinderListApplyRef.add({ ...apply }).then(
       data => {
@@ -51,8 +63,27 @@ export class KindergartenListService {
       }
     );
   }
+  addKinder(kindergarten) {
+    this.kinderRef.add({ ...kindergarten }).then(
+      data => {
+        this.toastr.success(`Success`, 'Your kindergarten was added sucessful');
+        this.updKinderList.next(data.id);
+      }
+    ).catch(e => {
+      this.toastr.error(`Denied`, 'Smth go wrong try again later');
+    });
+  }
   update(id: string, data: any): Promise<void> {
     return this.kinderListApplyRef.doc(id).update({ ...data });
+  }
+  updateKindergarten(id: string, data: any): Promise<void> {
+    return this.kinderRef.doc(id).update({ ...data }).then(
+      () => {
+        this.toastr.success(`Success`, 'Your kindergarten was updated sucessful');
+      }
+    ).catch(e => {
+      this.toastr.error(`Denied`, 'Smth go wrong try again later');
+    });
   }
 
   updateKinderApply(id, data) {
@@ -87,6 +118,31 @@ export class KindergartenListService {
     }
     catch (e) {
       console.log(e);
+    }
+  }
+
+  updateKinder(id, data) {
+    if (id) {
+      const kinder = {
+        ...data,
+        id: id
+      }
+      this.kinderRef.doc(id).update({ ...kinder })
+        .catch(err => {
+          this.toastr.error(`Denied`, 'Smth go wrong try again later');
+        })
+        .finally(() => {
+          this.toastr.success(`Success`, 'Your kindergarten was updated sucessful');
+        })
+    }
+    else {
+      this.addKinder(data)
+      this.updKinderList.subscribe(
+        id => {
+          data.id = id
+          this.updateKindergarten(id, data)
+        }
+      )
     }
   }
 }

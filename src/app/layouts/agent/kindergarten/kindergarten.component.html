@@ -3,11 +3,11 @@
     <div class="input">
       <div class="input__upload">
         <div class="upload-btn-wrapper">
-          <button *ngIf="!kindergarten.value?.backgroundImg" class="btn">Upload blog Image</button>
+          <button *ngIf="!kindergarten.value?.backgroundImg" class="btn">Upload Image</button>
           <div *ngIf="kindergarten.value?.backgroundImg"
             [style.background-image]="'url(' + (kindergarten.value?.backgroundImg || 'https://firebasestorage.googleapis.com/v0/b/kindergarten-daed8.appspot.com/o/image%2FbacgroundImg.jpg?alt=media&token=b106542f-b902-4200-a394-e8255aba22ab') + ')'"
             class="img"></div>
-          <input type="file" name="myfile" />
+          <input type="file" name="myfile" (change)="uploadImage($event, 'backgroundImg')" />
         </div>
       </div>
     </div>
@@ -20,6 +20,7 @@
           (clickOutside)="onClickedOutsideItem($event, 'titleColor')" [matTooltipPosition]="'below'"
           matTooltipClass="mat-custom-tooltip-below" (click)="chooseTitleColor=true">
           <div class="color-rainbow" [style.display]="chooseTitleColor ? 'flex' : 'none'">
+            <div class="close icon-close" (click)="onClickedOutsideItem($event, 'titleColor')"></div>
             <div class="write-color">
               <input type="text" placeholder="write here title color(hex)" [formControlName]="'titleColor'">
             </div>
@@ -33,7 +34,7 @@
 
       </div>
       <button class="btn record"
-        [ngStyle]="{'background-color': (kindergarten.value?.titleButtonColor || 'green'), 'color' : (kindergarten.value?.titleButtonTextColor || 'white')}"
+        [ngStyle]="{'background-color': (kindergarten.value?.titleButtonColor || 'green'), 'color' : (kindergarten.value?.titleButtonTextColor || 'black')}"
         [matTooltip]="'Click on the button to choose the title color'" [matTooltipPosition]="'below'"
         matTooltipClass="mat-custom-tooltip-below" (clickOutside)="onClickedOutsideItem($event, 'titleButtonColor')"
         (click)="$event.target['className'].includes('choose-color') ? chooseTitleButtonColor=false : chooseTitleButtonColor=true">Apply
@@ -42,6 +43,7 @@
           (clickOutside)="onClickedOutsideItem($event, 'titleButtonTextColor')" [matTooltipPosition]="'below'"
           matTooltipClass="mat-custom-tooltip-below" (click)="chooseTitleButtonTextColor=true">
           <div class="color-rainbow" [style.display]="chooseTitleButtonTextColor ? 'flex' : 'none'">
+            <div class="close icon-close" (click)="onClickedOutsideItem($event, 'titleButtonTextColor')"></div>
             <div class="write-color">
               <input type="text" placeholder="write here title color(hex)" [formControlName]="'titleButtonTextColor'">
             </div>
@@ -53,6 +55,7 @@
           </div>
         </div>
         <div class="color-rainbow" [style.display]="chooseTitleButtonColor ? 'flex' : 'none'">
+          <div class="close icon-close" (click)="onClickedOutsideItem($event, 'titleButtonColor')"></div>
           <div class="write-color">
             <input type="text" placeholder="write here title color(hex)" [formControlName]="'titleButtonColor'">
           </div>
@@ -66,156 +69,440 @@
       <span class="arrow"></span>
     </div>
   </section>
-  <!-- <section class="description-block"
-      [style.flex-flow]="(windowSize < 1120 && !isOpen) || windowSize < 850 ? 'column' : 'row'">
-      <img class="description-logo" [src]="currkinder?.descriptionImg" alt=""
-        [style.margin-bottom]="(windowSize < 1120 && !isOpen) || windowSize < 850 ? '40px' : '0px'">
-      <div class="description-text" [innerHTML]="currkinder?.descriptionText"
-        [style.width]="(windowSize < 1120 && !isOpen) || windowSize < 850 ? '90%' : '48%'"></div>
-    </section>
-    <section class="group-block" *ngIf="currkinder?.kindergartenGroup">
-      <div class="group-content" *ngFor="let item of currkinder?.kindergartenGroup">
-        <div class="group-img"
-          [style.background-image]="'url(' + (item?.groupImg || 'assets/image/nursery-group-default.jpg') + ')'">
+  <section class="description-block"
+    [style.flex-flow]="(windowSize < 1120 && !isOpen) || windowSize < 850 ? 'column' : 'row'">
+    <div class="input" [style.margin-bottom]="(windowSize < 1120 && !isOpen) || windowSize < 850 ? '40px' : '0px'">
+      <div class="input__upload">
+        <div class="upload-btn-wrapper">
+          <button *ngIf="!kindergarten.value?.descriptionImg" class="btn">Upload Image</button>
+          <img *ngIf="kindergarten.value?.descriptionImg" class="description-logo"
+            [src]="kindergarten.value?.descriptionImg" alt="" [matTooltip]="'Click here the to choose the photo'"
+            [matTooltipPosition]="'above'" matTooltipClass="mat-custom-tooltip">
+          <input type="file" name="myfile" (change)="uploadImage($event, 'descriptionImg')" />
+        </div>
+      </div>
+    </div>
+    <textarea class="description-text" name="text" id="" cols="30" rows="16" [formControlName]="'descriptionText'"
+      placeholder="Write here your description"
+      [style.width]="(windowSize < 1120 && !isOpen) || windowSize < 850 ? '90%' : '48%'"></textarea>
+  </section>
+  <section class="group-block">
+    <div class="group-header" *ngIf="kindergarten.value?.kindergartenGroup">{{kindergarten.value?.title}} groups</div>
+    <div class="group-content" [formArrayName]="'kindergartenGroup'"
+      *ngFor="let group of kindergarten.get('kindergartenGroup')?.controls;let i=index">
+      <ng-container [formGroupName]="i">
+        <div class="close icon-close" (click)="deleteGroupControl('kindergartenGroup', i)"></div>
+        <div class="input">
+          <div class="input__upload">
+            <div class="upload-btn-wrapper">
+              <button *ngIf="!group?.value?.groupImg" class="btn">Upload Image</button>
+              <div class="group-img"
+                [style.background-image]="'url(' + (group?.value?.groupImg || 'assets/image/nursery-group-default.jpg') + ')'">
+              </div>
+              <input type="file" name="myfile" (change)="uploadImage($event, 'kindergartenGroup', i)" />
+            </div>
+          </div>
         </div>
         <div class="group-info">
-          <div class="group-name">{{item?.name}}</div>
-          <div class="group-age-range">{{item?.ageRange}}</div>
+          <div class="group-name"><input type="text" class="write-group-name" [formControlName]="'name'"
+              [style.color]="group.value?.groupNameColor || ''">
+            <div class="choose-color" [matTooltip]="'Click to rainbow to choose title color'"
+              (clickOutside)="onClickedOutsideItem($event, 'groupNameColor', i)" [matTooltipPosition]="'below'"
+              matTooltipClass="mat-custom-tooltip-below" (click)="chooseGroupName=i">
+              <div class="color-rainbow" [style.display]="chooseGroupName == i ? 'flex' : 'none'">
+                <div class="close icon-close" (click)="onClickedOutsideItem($event, 'groupNameColor', i)"></div>
+                <div class="write-color">
+                  <input type="text" placeholder="write here title color(hex)" [formControlName]="'groupNameColor'">
+                </div>
+                <div class="color-range">
+                  <div *ngFor="let item of items" [style.background-color]="item"
+                    (mouseover)="changeColor(item, 'groupNameColor', i)"
+                    (click)="onClickedOutsideItem($event, 'groupNameColor', i)">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="group-age-range"><input type="text" class="write-group-age-range" [formControlName]="'ageRange'"
+              [style.color]="group.value?.groupAgeRangeColor || ''">
+            <div class="choose-color" [matTooltip]="'Click to rainbow to choose group age range color'"
+              (clickOutside)="onClickedOutsideItem($event, 'groupAgeRangeColor', i)" [matTooltipPosition]="'below'"
+              matTooltipClass="mat-custom-tooltip-below" (click)="chooseGroupAgeRange=i">
+              <div class="color-rainbow" [style.display]="chooseGroupAgeRange == i ? 'flex' : 'none'">
+                <div class="close icon-close" (click)="onClickedOutsideItem($event, 'groupAgeRangeColor', i)"></div>
+                <div class="write-color">
+                  <input type="text" placeholder="write here title color(hex)" [formControlName]="'groupAgeRangeColor'">
+                </div>
+                <div class="color-range">
+                  <div *ngFor="let item of items" [style.background-color]="item"
+                    (mouseover)="changeColor(item, 'groupAgeRangeColor', i)"
+                    (click)="onClickedOutsideItem($event, 'groupAgeRangeColor', i)">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
           <button class="group-detail">Go to Details</button>
         </div>
+      </ng-container>
+
+    </div>
+    <button class="add-group" (click)="addNewGroup()">
+      Add new group
+    </button>
+  </section>
+  <ng-container *ngIf="!addAdvantages">
+    <div class="add-section-block">
+      <button class="add-section" (click)="addSection('advantages')"> Add Advantages </button>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="addAdvantages">
+    <div class="advantage-header" *ngIf="kindergarten.value?.kinderAdvantages">Why {{kindergarten.value?.title}}</div>
+    <section class="advantage-block" *ngIf="kindergarten.value?.kinderAdvantages">
+      <div class="advantage-content" [formArrayName]="'kinderAdvantages'"
+        *ngFor="let advantage of kindergarten.get('kinderAdvantages')?.controls; let i=index">
+        <ng-container [formGroupName]="i">
+          <div class="close icon-close" (click)="deleteGroupControl('kinderAdvantages', i)"></div>
+          <div class="advantage-title">
+            <div class="input"
+              [matTooltip]="'If you don`t choose any image for enumeration it will be changed by numeric enumeration '"
+              [matTooltipPosition]="'above'" matTooltipClass="mat-custom-tooltip">
+              <div class="input__upload">
+                <div class="upload-btn-wrapper">
+                  <button *ngIf="!advantage.value?.numImg" class="btn">Upload Image</button>
+                  <span [class]="advantage.value?.numImg ? 'numImg' : 'number'"
+                    [style.background-image]="'url(' + (advantage.value?.numImg || '') + ')'">{{advantage.value?.numImg ? '' : (i+1)}}</span>
+                  <input type="file" name="myfile" (change)="uploadImage($event, 'kinderAdvantages', i)" />
+                </div>
+              </div>
+            </div>
+
+            <span class="title">
+              <textarea type="text" [style.color]="advantage.value?.advantagesTitleColor || ''"
+                class="advantages-write-title" [formControlName]="'title'" placeholder="Write here your title"
+                maxlength="40"></textarea>
+              <div class="choose-color" [matTooltip]="'Click to rainbow to choose group age range color'"
+                (clickOutside)="onClickedOutsideItem($event, 'advantagesTitleColor', i)" [matTooltipPosition]="'below'"
+                matTooltipClass="mat-custom-tooltip-below" (click)="chooseAdvantagesTitle=i">
+                <div class="color-rainbow" [style.display]="chooseAdvantagesTitle==i ? 'flex' : 'none'">
+                  <div class="close icon-close" (click)="onClickedOutsideItem($event, 'advantagesTitleColor', i)"></div>
+                  <div class="write-color">
+                    <input type="text" placeholder="write here title color(hex)"
+                      [formControlName]="'advantagesTitleColor'">
+                  </div>
+                  <div class="color-range">
+                    <div *ngFor="let item of items" [style.background-color]="item"
+                      (mouseover)="changeColor(item, 'advantagesTitleColor', i)"
+                      (click)="onClickedOutsideItem($event, 'advantagesTitleColor', i)">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </span>
+          </div>
+          <textarea type="text" [style.color]="advantage.value?.advantagesTextColor || ''" class="advantage-text"
+            [formControlName]="'text'" placeholder="Write your text here">
+          </textarea>
+          <div class="advantages-text-color">
+            <div class="choose-color" [matTooltip]="'Click to rainbow to choose group age range color'"
+              (clickOutside)="onClickedOutsideItem($event, 'advantagesTextColor', i)" [matTooltipPosition]="'below'"
+              matTooltipClass="mat-custom-tooltip-below" (click)="chooseAdvantagesText=i">
+              <div class="color-rainbow" [style.display]="chooseAdvantagesText==i ? 'flex' : 'none'">
+                <div class="close icon-close" (click)="onClickedOutsideItem($event, 'advantagesTextColor', i)"></div>
+                <div class="write-color">
+                  <input type="text" placeholder="write here title color(hex)"
+                    [formControlName]="'advantagesTextColor'">
+                </div>
+                <div class="color-range">
+                  <div *ngFor="let item of items" [style.background-color]="item"
+                    (mouseover)="changeColor(item, 'advantagesTextColor', i)"
+                    (click)="onClickedOutsideItem($event, 'advantagesTextColor', i)">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+
+
       </div>
+      <button class="add-advantages" (click)="addNewAdvantages()">
+        Add new advantage
+      </button>
     </section>
-    <div class="advantage-header" *ngIf="currkinder?.kinderAdvantages">Why {{currkinder?.title}}</div>
-    <section class="advantage-block" *ngIf="currkinder?.kinderAdvantages">
-      <div class="advantage-content" *ngFor="let advantage of currkinder?.kinderAdvantages; let i=index">
-        <div class="advantage-title"><span [class]="advantage?.numImg ? 'numImg' : 'number'"
-            [style.background-image]="'url(' + (advantage?.numImg || '') + ')'">{{advantage?.numImg ? '' : (i+1)}}</span><span
-            class="title">{{advantage.title}}</span>
+  </ng-container>
+
+  <ng-container *ngIf="!addAddresses">
+    <div class="add-section-block">
+      <button class="add-section" (click)="addSection('addresses')"> Add addresses </button>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="addAddresses">
+    <section class="address-block" *ngIf="kindergarten.value?.kinderAddresses">
+      <div class="address-header">{{kindergarten.value?.title}} addresses</div>
+
+      <div class="input" [matTooltip]="'Click on the image to choose another image'" [matTooltipPosition]="'below'"
+        matTooltipClass="mat-custom-tooltip-below">
+        <div class="input__upload">
+          <div class="upload-btn-wrapper">
+            <div class="address-container"
+              [style.background-image]="'url(' + ( kindergarten.value?.addressBackground || 'assets/image/addresses-background.jpg') + ')'">
+              <div class="address-content" [formArrayName]="'kinderAddresses'"
+                *ngFor="let kinderAddress of kindergarten.get('kinderAddresses')?.controls; let i=index;">
+                <ng-container [formGroupName]="i">
+                  <div class="close icon-close" (click)="deleteGroupControl('kinderAddresses', i)"></div>
+                  <span class="address-pos"
+                    [style.background-image]="'url(' + ( kinderAddress.value.addressPosImg || 'assets/image/crown.jpg') + ')'"></span>
+                  <input type="text" class="address-name" [formControlName]="'addressName'"
+                    [style.color]="kinderAddress.value?.addressesTextColor">
+                  <div class="choose-color" [matTooltip]="'Click to rainbow to choose street text color'"
+                    (clickOutside)="onClickedOutsideItem($event, 'addressesTextColor', i)"
+                    [matTooltipPosition]="'below'" matTooltipClass="mat-custom-tooltip-below"
+                    (click)="chooseAddressesText=i">
+                    <div class="color-rainbow" [style.display]="chooseAddressesText==i ? 'flex' : 'none'">
+                      <div class="close icon-close" (click)="onClickedOutsideItem($event, 'addressesTextColor', i)">
+                      </div>
+                      <div class="write-color">
+                        <input type="text" placeholder="write here title color(hex)"
+                          [formControlName]="'addressesTextColor'">
+                      </div>
+                      <div class="color-range">
+                        <div *ngFor="let item of items" [style.background-color]="item"
+                          (mouseover)="changeColor(item, 'addressesTextColor', i)"
+                          (click)="onClickedOutsideItem($event, 'addressesTextColor', i)">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </ng-container>
+              </div>
+              <button class="add-addresses" (click)="addNewAddresses()">
+                Add new addresses
+              </button>
+            </div>
+            <input type="file" name="myfile" (change)="uploadImage($event, 'addressBackground')" />
+          </div>
         </div>
-        <div class="advantage-text">{{advantage.text}}</div>
       </div>
     </section>
-  
-    <section class="address-block" *ngIf="currkinder?.kinderAddresses">
-      <div class="address-header">{{currkinder?.title}} addresses</div>
-      <div class="address-container"
-        [style.background-image]="'url(' + ( currkinder?.addressBackground || 'assets/image/addresses-background.jpg') + ')'">
-        <div class="address-content" *ngFor="let kinderAddress of currkinder?.kinderAddresses">
-          <span class="address-pos"
-            [style.background-image]="'url(' + ( kinderAddress.addressPosImg || 'assets/image/crown.jpg') + ')'"></span>
-          <span class="address-name">{{kinderAddress?.addressName}}</span>
-        </div>
-      </div>
-    </section>
-  
-    <section class="form-block" *ngIf="currkinder?.kinderForm">
-      <div class="form-header">Forms of stay in {{currkinder?.title}}</div>
+  </ng-container>
+
+
+  <ng-container *ngIf="!addkinderForm">
+    <div class="add-section-block">
+      <button class="add-section" (click)="addSection('kinderForm')"> Add form of stay in kindergarten </button>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="addkinderForm">
+    <section class="form-block" *ngIf="kindergarten.value?.kinderForm">
+      <div class="form-header">Forms of stay in {{kindergarten.value?.title}}</div>
       <div class="form-container">
-        <div class="form-content" *ngFor="let form of currkinder?.kinderForm">
-          <div class="form-title-info">
-            <div class="form-title-type">{{form?.formTitleType}}</div>
-            <div class="form-title-time">{{form?.formTitleTime}}</div>
-            <div class="form-title-price">{{form?.formTitlePrice}}</div>
-            <div class="form-title-additional">{{form?.formTitleAdditional}}</div>
+        <div class="form-content" [formArrayName]="'kinderForm'"
+          *ngFor="let form of kindergarten.get('kinderForm')?.controls; let i=index">
+          <ng-container [formGroupName]="i">
+            <div class="closed icon-close" (click)="deleteGroupControl('kinderForm', i)"></div>
+            <div class="form-title-info" [matTooltip]="'Click to the corner of block to choose color of part of block'"
+              [matTooltipPosition]="'above'" matTooltipClass="mat-custom-tooltip"
+              (click)="$event.target['className'].includes('choose-color') ? chooseKinderFormTitleBackground=null : chooseKinderFormTitleBackground=i"
+              [style.background-color]="form.value?.kinderFormTitleBackgroundColor">
+              <input type="text" class="form-title-type" [style.color]="form.value?.kinderFormTitleColor"
+                [formControlName]="'formTitleType'" placeholder="Part-time day">
+              <input type="text" class="form-title-time" [style.color]="form.value?.kinderFormTitleColor"
+                [formControlName]="'formTitleTime'" placeholder="from 8:00 to 13:00">
+              <input type="text" class="form-title-price" [style.color]="form.value?.kinderFormTitleColor"
+                [formControlName]="'formTitlePrice'" placeholder="5000-5500 grn/month">
+              <input type="text" class="form-title-additional" [style.color]="form.value?.kinderFormTitleColor"
+                [formControlName]="'formTitleAdditional'" placeholder="(Depends by location)">
+              <div class="color-rainbow" [style.display]="chooseKinderFormTitleBackground==i ? 'flex' : 'none'">
+                <div class="close icon-close"
+                  (click)="onClickedOutsideItem($event, 'kinderFormTitleBackgroundColor', i)">
+                </div>
+                <div class="write-color">
+                  <input type="text" placeholder="write here title color(hex)"
+                    [formControlName]="'kinderFormTitleBackgroundColor'">
+                </div>
+                <div class="color-range">
+                  <div *ngFor="let item of items" [style.background-color]="item"
+                    (mouseover)="changeColor(item, 'kinderFormTitleBackgroundColor', i)"
+                    (click)="onClickedOutsideItem($event, 'kinderFormTitleBackgroundColor', i)">
+                  </div>
+                </div>
+              </div>
+              <div class="choose-color" [matTooltip]="'Click to rainbow to choose all title text color'"
+                (clickOutside)="onClickedOutsideItem($event, 'kinderFormTitleColor', i)" [matTooltipPosition]="'below'"
+                matTooltipClass="mat-custom-tooltip-below" (click)="chooseKinderFormTitle=i">
+                <div class="color-rainbow" [style.display]="chooseKinderFormTitle==i ? 'flex' : 'none'">
+                  <div class="close icon-close" (click)="onClickedOutsideItem($event, 'kinderFormTitleColor', i)"></div>
+                  <div class="write-color">
+                    <input type="text" placeholder="write here title color(hex)"
+                      [formControlName]="'kinderFormTitleColor'">
+                  </div>
+                  <div class="color-range">
+                    <div *ngFor="let item of items" [style.background-color]="item"
+                      (mouseover)="changeColor(item, 'kinderFormTitleColor', i)"
+                      (click)="onClickedOutsideItem($event, 'kinderFormTitleColor', i)">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-description-block"
+              (click)="$event.target['className'].includes('choose-color') ? chooseKinderFormTextBackground=null : chooseKinderFormTextBackground=i"
+              [style.background-color]="form.value?.kinderFormTextBackgroundColor"
+              [matTooltip]="'Click to the corner of block to choose color of part of block'"
+              [matTooltipPosition]="'above'" matTooltipClass="mat-custom-tooltip">
+              <div class="form-description-content" [formArrayName]="'formDescription'"
+                *ngFor="let description of form?.get('formDescription')['controls']; let j=index">
+                <ng-container [formGroupName]="j">
+                  <div class="closed icon-close" (click)="deleteGroupControl('kinderForm', i, j)"></div>
+                  <div class="input"
+                    [matTooltip]="'If you don`t choose any image for enumeration it will be changed by numeric enumeration '"
+                    [matTooltipPosition]="'above'" matTooltipClass="mat-custom-tooltip">
+                    <div class="input__upload">
+                      <div class="upload-btn-wrapper">
+                        <span [class]="description.value?.numImg ? 'form-pos-img' : 'form-pos-num'"
+                          [style.background-image]="'url(' + (description.value?.numImg || '') + ')'">{{description.value?.numImg ? '' : '1'}}</span>
+                        <input type="file" name="myfile" (change)="uploadImage($event, 'kinderForm', i, j)" />
+                      </div>
+                    </div>
+                  </div>
+                  <input class="form-name" type="text" [formControlName]="'descText'"
+                    [style.color]="form.value?.kinderFormTextColor">
+                </ng-container>
+              </div>
+              <div class="choose-color" [matTooltip]="'Click to rainbow to choose all title text color'"
+                (clickOutside)="onClickedOutsideItem($event, 'kinderFormTextColor', i)" [matTooltipPosition]="'below'"
+                matTooltipClass="mat-custom-tooltip-below" (click)="chooseKinderFormText=i">
+                <div class="color-rainbow" [style.display]="chooseKinderFormText==i ? 'flex' : 'none'">
+                  <div class="close icon-close" (click)="onClickedOutsideItem($event, 'kinderFormTextColor', i)"></div>
+                  <div class="write-color">
+                    <input type="text" placeholder="write here title color(hex)"
+                      [formControlName]="'kinderFormTextColor'">
+                  </div>
+                  <div class="color-range">
+                    <div *ngFor="let item of items" [style.background-color]="item"
+                      (mouseover)="changeColor(item, 'kinderFormTextColor', i)"
+                      (click)="onClickedOutsideItem($event, 'kinderFormTextColor', i)">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <button class="add-kinderform-description"
+                (click)="addKinderFormDescription(form?.get('formDescription'))">
+                Add new description section
+              </button>
+              <div class="form-description-button">
+                <button class="ask-for-details btn">Ask for details</button>
+                <button class="recort-to-kinder btn" (click)="goToApply()">Apply into group</button>
+              </div>
+              <div class="color-rainbow" [style.display]="chooseKinderFormTextBackground==i ? 'flex' : 'none'">
+                <div class="close icon-close"
+                  (click)="onClickedOutsideItem($event, 'kinderFormTextBackgroundColor', i)">
+                </div>
+                <div class="write-color">
+                  <input type="text" placeholder="write here title color(hex)"
+                    [formControlName]="'kinderFormTextBackgroundColor'">
+                </div>
+                <div class="color-range">
+                  <div *ngFor="let item of items" [style.background-color]="item"
+                    (mouseover)="changeColor(item, 'kinderFormTextBackgroundColor', i)"
+                    (click)="onClickedOutsideItem($event, 'kinderFormTextBackgroundColor', i)">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+
+        </div>
+        <button class="add-kinderform" (click)="addKinderForm()">
+          Add new form of stay
+        </button>
+      </div>
+    </section>
+  </ng-container>
+
+
+  <section class="child-registr-block">
+    <div class="child-registr-header">Fill out the form for child registration</div>
+    <form class="child-registr-form">
+      <div class="form-elem">
+        <label for="">Your first name</label>
+        <input type="text" disabled>
+        <span>Field should be required</span>
+      </div>
+      <div class="form-elem">
+        <label for="">Your last name</label>
+        <input type="text" disabled>
+        <span>Field should be required</span>
+      </div>
+      <div class="form-elem">
+        <label for="">Your email</label>
+        <input type="text" disabled>
+        <span>Field should be required</span>
+      </div>
+      <div class="form-elem">
+        <label for="">Your child name</label>
+        <input type="text" disabled>
+        <span>Field should be required</span>
+      </div>
+      <div class="form-elem">
+        <label for="">Your child year old</label>
+        <input type="number" disabled>
+        <span>Field should be required</span>
+      </div>
+      <div class="form-elem">
+        <label for="">Your child sex</label>
+        <input type="text" disabled>
+        <span>Field should be required</span>
+      </div>
+      <div class="form-elem" *ngIf="kindergarten.value?.kindergartenGroup">
+        <label>Choose group</label>
+        <div class="form-elem-select p-l-0 p-r-5 flex wrap aic bc-white"
+          (clickOutside)="onClickedOutsideItem($event, 'groupType')" (click)="isGroupCheck=true">
+          <div class="choose-sort p-4 m-l-5 flex nowrap jcsa aic bc-gray">
           </div>
-          <div class="form-description-block">
-            <div class="form-description-content" *ngFor="let description of form?.formDescription; let j=index">
-              <span [class]="description?.numImg ? 'form-pos-img' : 'form-pos-num'"
-                [style.background-image]="'url(' + (description?.numImg || '') + ')'">{{description?.numImg ? '' : '❤'}}</span>
-              <span class="form-name">{{description.descText}}</span>
-            </div>
-            <div class="form-description-button">
-              <button class="ask-for-details btn">Ask for details</button>
-              <button class="recort-to-kinder btn" (click)="goToApply()">Apply into group</button>
-            </div>
+          <span class="error">Field should be required</span>
+          <span aria-hidden="true" data-icon="&#xe900;"
+            [class]="!isGroupCheck ? 'icon-drop-down-arrow' : 'icon-drop-up-arrow'" class="drop-icon"></span>
+          <div class="hidden bc-white" [style.display]="isGroupCheck ? 'flex' : 'none'"
+            [style.transition]="'display 300ms ease-in-out'">
+            <p class="p-l-10 txt-c-black font-16"
+              *ngFor="let item of kindergarten.value?.kindergartenGroup; let i=index;" (click)="isGroupCheck=false"
+              [style.border-bottom]="i == kindergarten.value?.kindergartenGroup.length-1 ? 'none' : ''">
+              {{item?.name}}</p>
           </div>
         </div>
       </div>
-    </section>
-  
-    <section class="child-registr-block">
-      <div class="child-registr-header">Fill out the form</div>
-      <form class="child-registr-form" [formGroup]="form">
-        <div class="form-elem">
-          <label for="">Your first name</label>
-          <input type="text" [formControlName]="'firstName'"
-            [style.border-bottom]="form.get('firstName').valid ? '' : '2px solid red'">
-          <span *ngIf="this.form.get('firstName').getError('required')">Field should be required</span>
-        </div>
-        <div class="form-elem">
-          <label for="">Your last name</label>
-          <input type="text" [formControlName]="'lastName'"
-            [style.border-bottom]="form.get('lastName').valid ? '' : '2px solid red'">
-          <span *ngIf="this.form.get('lastName').getError('required')">Field should be required</span>
-        </div>
-        <div class="form-elem">
-          <label for="">Your email</label>
-          <input type="text" [formControlName]="'email'"
-            [style.border-bottom]="form.get('email').valid ? '' : '2px solid red'">
-          <span *ngIf="this.form.get('email').getError('required')">Field should be required</span>
-        </div>
-        <div class="form-elem">
-          <label for="">Your child name</label>
-          <input type="text" [formControlName]="'childName'"
-            [style.border-bottom]="form.get('childName').valid ? '' : '2px solid red'">
-          <span *ngIf="this.form.get('childName').getError('required')">Field should be required</span>
-        </div>
-        <div class="form-elem">
-          <label for="">Your child year old</label>
-          <input type="number" [formControlName]="'childYear'" min="1" max="6"
-            [style.border-bottom]="form.get('childYear').valid ? '' : '2px solid red'">
-          <span *ngIf="this.form.get('childYear').getError('required')">Field should be required</span>
-        </div>
-        <div class="form-elem">
-          <label for="">Your child sex</label>
-          <input type="text" [formControlName]="'childSex'"
-            [style.border-bottom]="form.get('childSex').valid ? '' : '2px solid red'">
-          <span *ngIf="this.form.get('childSex').getError('required')">Field should be required</span>
-        </div>
-        <div class="form-elem" *ngIf="currkinder?.kindergartenGroup">
-          <label>Choose group</label>
-          <div class="form-elem-select p-l-0 p-r-5 flex wrap aic bc-white"
-            (clickOutside)="onClickedOutsideItem($event, 'groupType')" (click)="openHidden('groupType')"
-            [style.border-bottom]="form.get('groupType')?.valid ? '' : '2px solid red'">
-            <div class="choose-sort p-4 m-l-5 flex nowrap jcsa aic bc-gray"
-              [innerHTML]="form.get('groupType').value.name">
-            </div>
-            <span class="error" *ngIf="this.form.get('groupType').getError('required')">Field should be required</span>
-            <span aria-hidden="true" data-icon="&#xe900;"
-              [class]="!isGroupCheck ? 'icon-drop-down-arrow' : 'icon-drop-up-arrow'" class="drop-icon"></span>
-            <div class="hidden bc-white" [style.display]="isGroupCheck ? 'flex' : 'none'"
-              [style.transition]="'display 300ms ease-in-out'">
-              <p class="p-l-10 txt-c-black font-16" *ngFor="let item of currkinder?.kindergartenGroup; let i=index;"
-                (click)="groupCheckType(item, 'groupType')"
-                [style.border-bottom]="i == currkinder?.kindergartenGroup.length-1 ? 'none' : ''">
-                {{item?.name}}</p>
-            </div>
+      <div class="form-elem" *ngIf="kindergarten.value?.kinderForm">
+        <label>Choose form of stay</label>
+        <div class="form-elem-select p-l-0 p-r-5 flex wrap aic bc-white"
+          (clickOutside)="onClickedOutsideItem($event, 'typeOfReg')" (click)="isType=true">
+          <div class="choose-sort p-4 m-l-5 flex nowrap jcsa aic bc-gray">
+          </div>
+          <span class="error">Field should be required</span>
+          <span aria-hidden="true" data-icon="&#xe900;"
+            [class]="!isType ? 'icon-drop-down-arrow' : 'icon-drop-up-arrow'" class="drop-icon"></span>
+          <div class="hidden bc-white" [style.display]="isType ? 'flex' : 'none'"
+            [style.transition]="'display 300ms ease-in-out'">
+            <p class="p-l-10 txt-c-black font-16" *ngFor="let item of kindergarten.value?.kinderForm; let i=index;"
+              (click)="isType=false" [style.border-bottom]="i == kindergarten.value?.kinderForm-1 ? 'none' : ''">
+              {{item?.formTitleType}}</p>
           </div>
         </div>
-        <div class="form-elem" *ngIf="currkinder?.kinderForm">
-          <label>Choose form of stay</label>
-          <div class="form-elem-select p-l-0 p-r-5 flex wrap aic bc-white"
-            (clickOutside)="onClickedOutsideItem($event, 'typeOfReg')" (click)="openHidden('typeOfReg')"
-            [style.border-bottom]="form.get('typeOfReg').valid ? '' : '2px solid red'">
-            <div class="choose-sort p-4 m-l-5 flex nowrap jcsa aic bc-gray"
-              [innerHTML]="form.get('typeOfReg').value.formTitleType">
-            </div>
-            <span class="error" *ngIf="this.form.get('typeOfReg').getError('required')">Field should be required</span>
-            <span aria-hidden="true" data-icon="&#xe900;"
-              [class]="!isType ? 'icon-drop-down-arrow' : 'icon-drop-up-arrow'" class="drop-icon"></span>
-            <div class="hidden bc-white" [style.display]="isType ? 'flex' : 'none'"
-              [style.transition]="'display 300ms ease-in-out'">
-              <p class="p-l-10 txt-c-black font-16" *ngFor="let item of currkinder?.kinderForm; let i=index;"
-                (click)="groupCheckType(item, 'typeOfReg')"
-                [style.border-bottom]="i == currkinder?.kinderForm-1 ? 'none' : ''">
-                {{item?.formTitleType}}</p>
-            </div>
-          </div>
-        </div>
-  
-      </form>
-      <button class="btn send-child-registr-form" (click)="sendApply()">Send registration form</button>
-    </section> -->
+      </div>
+
+    </form>
+    <button class="btn send-child-registr-form">Send registration form</button>
+  </section>
+
+  <div class="options">
+    <div class="icon-menu"></div>
+    <div class="edit-menu">
+      <p (click)="saveEdition()">Save</p>
+      <p (click)="declineEdition()">Decline</p>
+    </div>
+  </div>
 
 </main>
 <div *ngIf="isLoading" class="loader-overlay">
