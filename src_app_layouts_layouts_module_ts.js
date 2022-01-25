@@ -11,17 +11,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "LayoutsModule": () => (/* binding */ LayoutsModule)
 /* harmony export */ });
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/forms */ 1707);
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/common */ 4364);
-/* harmony import */ var _angular_material_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/material/core */ 2220);
-/* harmony import */ var _angular_material_moment_adapter__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/material-moment-adapter */ 3737);
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/forms */ 1707);
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/common */ 4364);
+/* harmony import */ var _angular_material_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/material/core */ 2220);
+/* harmony import */ var _angular_material_moment_adapter__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/material-moment-adapter */ 3737);
 /* harmony import */ var _shared_const_myformat__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../shared/const/myformat */ 1591);
 /* harmony import */ var _layouts_routing_module__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./layouts-routing.module */ 4875);
 /* harmony import */ var _shared_shared_module__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../shared/shared.module */ 4466);
 /* harmony import */ var _layouts_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./layouts.component */ 2710);
 /* harmony import */ var _user_user_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./user/user.component */ 2758);
 /* harmony import */ var _login_login_module__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../login/login.module */ 107);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/core */ 2316);
+/* harmony import */ var _agent_agent_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./agent/agent.component */ 9877);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/core */ 2316);
+
 
 
 
@@ -36,24 +38,25 @@ __webpack_require__.r(__webpack_exports__);
 class LayoutsModule {
 }
 LayoutsModule.ɵfac = function LayoutsModule_Factory(t) { return new (t || LayoutsModule)(); };
-LayoutsModule.ɵmod = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵdefineNgModule"]({ type: LayoutsModule });
-LayoutsModule.ɵinj = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵdefineInjector"]({ providers: [
-        { provide: _angular_material_core__WEBPACK_IMPORTED_MODULE_7__.DateAdapter, useClass: _angular_material_moment_adapter__WEBPACK_IMPORTED_MODULE_8__.MomentDateAdapter, deps: [_angular_material_core__WEBPACK_IMPORTED_MODULE_7__.MAT_DATE_LOCALE] },
-        { provide: _angular_material_core__WEBPACK_IMPORTED_MODULE_7__.MAT_DATE_FORMATS, useValue: _shared_const_myformat__WEBPACK_IMPORTED_MODULE_0__.MY_FORMATS }
+LayoutsModule.ɵmod = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵdefineNgModule"]({ type: LayoutsModule });
+LayoutsModule.ɵinj = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵdefineInjector"]({ providers: [
+        { provide: _angular_material_core__WEBPACK_IMPORTED_MODULE_8__.DateAdapter, useClass: _angular_material_moment_adapter__WEBPACK_IMPORTED_MODULE_9__.MomentDateAdapter, deps: [_angular_material_core__WEBPACK_IMPORTED_MODULE_8__.MAT_DATE_LOCALE] },
+        { provide: _angular_material_core__WEBPACK_IMPORTED_MODULE_8__.MAT_DATE_FORMATS, useValue: _shared_const_myformat__WEBPACK_IMPORTED_MODULE_0__.MY_FORMATS }
     ], imports: [[
-            _angular_common__WEBPACK_IMPORTED_MODULE_9__.CommonModule,
+            _angular_common__WEBPACK_IMPORTED_MODULE_10__.CommonModule,
             _layouts_routing_module__WEBPACK_IMPORTED_MODULE_1__.LayoutsRoutingModule,
             _shared_shared_module__WEBPACK_IMPORTED_MODULE_2__.SharedModule,
-            _angular_forms__WEBPACK_IMPORTED_MODULE_10__.FormsModule,
-            _angular_forms__WEBPACK_IMPORTED_MODULE_10__.ReactiveFormsModule,
+            _angular_forms__WEBPACK_IMPORTED_MODULE_11__.FormsModule,
+            _angular_forms__WEBPACK_IMPORTED_MODULE_11__.ReactiveFormsModule,
             _login_login_module__WEBPACK_IMPORTED_MODULE_5__.LoginModule
         ]] });
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵsetNgModuleScope"](LayoutsModule, { declarations: [_layouts_component__WEBPACK_IMPORTED_MODULE_3__.LayoutsComponent,
-        _user_user_component__WEBPACK_IMPORTED_MODULE_4__.UserComponent], imports: [_angular_common__WEBPACK_IMPORTED_MODULE_9__.CommonModule,
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵsetNgModuleScope"](LayoutsModule, { declarations: [_layouts_component__WEBPACK_IMPORTED_MODULE_3__.LayoutsComponent,
+        _user_user_component__WEBPACK_IMPORTED_MODULE_4__.UserComponent,
+        _agent_agent_component__WEBPACK_IMPORTED_MODULE_6__.AgentComponent], imports: [_angular_common__WEBPACK_IMPORTED_MODULE_10__.CommonModule,
         _layouts_routing_module__WEBPACK_IMPORTED_MODULE_1__.LayoutsRoutingModule,
         _shared_shared_module__WEBPACK_IMPORTED_MODULE_2__.SharedModule,
-        _angular_forms__WEBPACK_IMPORTED_MODULE_10__.FormsModule,
-        _angular_forms__WEBPACK_IMPORTED_MODULE_10__.ReactiveFormsModule,
+        _angular_forms__WEBPACK_IMPORTED_MODULE_11__.FormsModule,
+        _angular_forms__WEBPACK_IMPORTED_MODULE_11__.ReactiveFormsModule,
         _login_login_module__WEBPACK_IMPORTED_MODULE_5__.LoginModule] }); })();
 
 

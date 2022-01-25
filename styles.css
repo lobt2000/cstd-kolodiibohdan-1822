@@ -6167,6 +6167,26 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+.mat-custom-tooltip {
+  border-radius: 3px;
+  box-shadow: 0 0 16px 0 rgba(0, 0, 0, 0.27);
+  background-color: rgba(11, 15, 55, 0.9);
+  padding: 10px 15px !important;
+  font-size: 14px;
+  line-height: 1.14;
+  color: #ffffff;
+  margin: 0 0 15px 15px !important;
+}
+.mat-custom-tooltip-below {
+  border-radius: 3px;
+  box-shadow: 0 0 16px 0 rgba(0, 0, 0, 0.27);
+  background-color: rgba(11, 15, 55, 0.9);
+  padding: 10px 15px !important;
+  font-size: 14px;
+  line-height: 1.14;
+  color: #ffffff;
+  margin: 15px 0 0px 15px !important;
+}
 /*!****************************************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].rules[0].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].rules[0].oneOf[1].use[2]!./node_modules/ngx-toastr/toastr.css ***!
   \****************************************************************************************************************************************************************************************************************************/
