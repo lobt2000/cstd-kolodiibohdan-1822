@@ -362,7 +362,7 @@
                     <div class="input__upload">
                       <div class="upload-btn-wrapper">
                         <span [class]="description.value?.numImg ? 'form-pos-img' : 'form-pos-num'"
-                          [style.background-image]="'url(' + (description.value?.numImg || '') + ')'">{{description.value?.numImg ? '' : '1'}}</span>
+                          [style.background-image]="'url(' + (description.value?.numImg || '') + ')'">{{description.value?.numImg ? '' : j+1}}</span>
                         <input type="file" name="myfile" (change)="uploadImage($event, 'kinderForm', i, j)" />
                       </div>
                     </div>

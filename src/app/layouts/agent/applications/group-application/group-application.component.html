@@ -1,1 +1,65 @@
-<p>group-application works!</p>
+<main class="main-block">
+  <section class="header">
+    <button class="back-apply-list icon-arrowhead-thin-outline-to-the-left" (click)="backToApplyList()"
+      [style.display]="checkDisplayType('applyDetails')">
+      <!-- <span aria-hidden=" true" class="icon-arrowhead-thin-outline-to-the-left"></span> -->
+    </button>
+    <div class="apply-header">
+      Application
+    </div>
+  </section>
+  <section class="application-details">
+    <ng-container *ngIf="applylists.length; else withoutApply">
+      <div class="apply-list" [style.display]="checkDisplayType('applylist')"
+        [style.width]="(windowSize < 1020 && !isOpen) || windowSize < 850 ? '100%' : ''">
+        <div class="short-apply-info" *ngFor="let applylist of applylists; let i=index"
+          (click)="openApplyDetails(applylist, i)" [style.background-color]="i == currentApply?.id ? 'white' : ''">
+          <p class="child-info"><span>{{applylist?.childName}}</span><span>{{applylist?.childYear}} years old</span></p>
+          <p class="child-info"><span>{{applylist?.typeOfReg?.formTitleType}}</span> <span *ngIf="!applylist?.isRead"
+              class="not-read bc-blue"></span></p>
+        </div>
+      </div>
+      <div class="apply-details"
+        [style.width]="(windowSize < 1020 && !isOpen) || windowSize < 850 ? '100%' : 'calc(100% - 345px)'"
+        [style.display]="checkDisplayType('applyDetails')">
+        <ng-container *ngIf="currentApply.hasOwnProperty('childName')">
+          <div class="details-apply-info">
+            <div class="details-info">Child name: <span class="text">{{currentApply?.childName}}</span></div>
+            <div class="details-info">Child age: <span class="text">{{currentApply?.childYear}}</span></div>
+            <div class="details-info">Parent firstname: <span class="text">{{currentApply?.firstName}}</span></div>
+            <div class="details-info">Parent lastname: <span class="text">{{currentApply?.lastName}}</span></div>
+            <div class="details-info">Parent email: <span class="text">{{currentApply?.email}}</span></div>
+          </div>
+          <div class="form-header">Forms of stay in {{applyKindergarten?.title}}</div>
+          <div class="form-content">
+            <div class="form-title-info">
+              <div class="form-title-type">{{currentApply?.typeOfReg?.formTitleType}}</div>
+              <div class="form-title-time">{{currentApply?.typeOfReg?.formTitleTime}}</div>
+              <div class="form-title-price">{{currentApply?.typeOfReg?.formTitlePrice}}</div>
+              <div class="form-title-additional">{{currentApply?.typeOfReg?.formTitleAdditional}}</div>
+            </div>
+            <div class="form-description-block">
+              <div class="form-description-content"
+                *ngFor="let description of currentApply?.typeOfReg?.formDescription; let j=index">
+                <span [class]="description?.numImg ? 'form-pos-img' : 'form-pos-num'"
+                  [style.background-image]="'url(' + (description?.numImg || '') + ')'">{{description?.numImg ? '' : j+1}}</span>
+                <span class="form-name">{{description.descText}}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="apply-button">
+            <button class="ask-for-details btn">Accept</button>
+            <button class="recort-to-kinder btn" (click)="goToApply()">Decline</button>
+          </div>
+        </ng-container>
+
+
+      </div>
+    </ng-container>
+    <ng-template #withoutApply>
+      <div class="withoutApply">Your kindergarten doesn`t have any applications</div>
+    </ng-template>
+
+  </section>
+</main>
