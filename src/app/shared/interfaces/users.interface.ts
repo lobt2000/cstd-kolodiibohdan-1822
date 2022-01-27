@@ -10,6 +10,7 @@ export interface Users {
     firstname: string,
     secondname: string,
     userPos: string
-    contacts? : Array<contacts>,
-    kinderId?: string
+    contacts?: Array<contacts>,
+    kinderId?: string,
+    phone?: string
 }

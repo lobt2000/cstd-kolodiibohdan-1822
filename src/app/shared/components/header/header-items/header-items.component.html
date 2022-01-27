@@ -25,8 +25,8 @@
         </button>
         <div class="user-menu__hidden flex col jcc aic" [style.height]="dropWay ? 'auto' : '0px'"
           [style.display]="dropWay ? 'flex' : 'none'" [style.transition]="'height 600ms ease-in-out'">
-          <p class="user-menu__hidden--profile w-100 btn flex nowrap jcc aic " (click)="dropMenu()"> <img
-              class="btn-icon-left" [src]="currUser?.icon" alt=""> Profile</p>
+          <p class="user-menu__hidden--profile w-100 btn flex nowrap jcc aic " (click)="dropMenu()"
+            [routerLink]="[ 'profile' ]"> <img class="btn-icon-left" [src]="currUser?.icon" alt=""> Profile</p>
           <hr>
           <p (click)="signOUT()" class="user-menu__hidden--sighOut w-100 btn flex nowrap jcc aic" (click)="dropMenu()">
             <span aria-hidden="true" data-icon="&#xe900;" class="icon-logout btn-icon-left"></span> Sigh Out</p>

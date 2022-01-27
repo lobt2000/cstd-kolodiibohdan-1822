@@ -30,6 +30,7 @@ import { LayoutsRoutingModule } from '../layouts/layouts-routing.module';
 import { MatCarouselModule } from '@ngbmodule/material-carousel';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { AgentMenuComponent } from './components/agent-menu/agent-menu.component';
+import { AgentProfileComponent } from './components/agent-profile/agent-profile.component';
 // import { MatRadioModule } from '@angular/material/radio';
 @NgModule({
     declarations: [
@@ -37,7 +38,8 @@ import { AgentMenuComponent } from './components/agent-menu/agent-menu.component
         HeaderItemsComponent,
         MenuComponent,
         ResetPasswordComponent,
-        AgentMenuComponent
+        AgentMenuComponent,
+        AgentProfileComponent
     ],
     imports: [
         CommonModule,

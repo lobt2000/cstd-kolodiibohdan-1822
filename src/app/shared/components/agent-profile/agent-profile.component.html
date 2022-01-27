@@ -1,0 +1,52 @@
+<main class="profile">
+  <h1>Account details</h1>
+  <div class="profile__container">
+    <div class="profile__container--photo">
+      <img [attr.src]="userFrom.value?.icon" alt="">
+    </div>
+    <div class="profile__container--inform">
+      <div class="userTitle">
+        <p>Email</p>
+        <p>First Name</p>
+        <p>Second Name</p>
+        <p>Phone</p>
+      </div>
+      <div [style.display]="!isEdit ? 'block' : 'none'" [style.transition]="'display 1s ease-in-out'" class="userData">
+        <p *ngIf="userFrom.value?.email">{{userFrom.value?.email}}</p>
+        <p *ngIf="!userFrom.value?.email">No data</p>
+        <p *ngIf="userFrom.value?.firstname">{{userFrom.value?.firstname}}</p>
+        <p *ngIf="!userFrom.value?.firstname">No data</p>
+        <p *ngIf="userFrom.value?.secondname">{{userFrom.value?.secondname}}</p>
+        <p *ngIf="!userFrom.value?.secondname">No data</p>
+        <p *ngIf="userFrom.value?.phone">{{userFrom.value?.phone}}</p>
+        <p *ngIf="!userFrom.value?.phone">No data</p>
+
+      </div>
+      <!-- <ng-template #data> -->
+      <div class="userData" [style.display]="isEdit ? 'block' : 'none'" [style.transition]="'display 1s ease-in-out'"
+        [formGroup]="userFrom">
+        <input type="text" placeholder="Write data here" [formControlName]="'email'"
+          [style.borderColor]="!userFrom.controls.email?.getError('required') && !userFrom.controls.email?.getError('pattern') ? 'green' : 'red'">
+        <input type="text" placeholder="Write data here" [formControlName]="'firstname'"
+          [style.borderColor]="!userFrom.controls.firstname?.getError('required') && !userFrom.controls.firstname?.getError('pattern') ? 'green' : 'red'">
+        <input type="text" placeholder="Write data here" [formControlName]="'secondname'"
+          [style.borderColor]="!userFrom.controls.secondname?.getError('required') && !userFrom.controls.secondname?.getError('pattern') ? 'green' : 'red'">
+        <input type="text" placeholder="Write data here" [formControlName]="'phone'"
+          [style.borderColor]="!userFrom.controls.phone?.getError('required') && !userFrom.controls.phone?.getError('pattern')  ? 'green' : 'red'">
+        <div class="upload-btn-wrapper">
+          <button class="btn">Upload blog Image</button>
+          <input type="file" (change)="uploadFile($event)" name="myfile" />
+        </div>
+      </div>
+
+      <!-- </ng-template> -->
+
+    </div>
+
+  </div>
+  <div class="profile__button">
+    <button *ngIf="!isEdit" (click)="edit()" class="prof__button--edit">Edit</button>
+    <button *ngIf="isEdit" (click)="save()" class="prof__button--save">Save</button>
+  </div>
+
+</main>
