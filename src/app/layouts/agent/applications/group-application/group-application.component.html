@@ -7,13 +7,24 @@
     <div class="apply-header">
       Application
     </div>
+    <div class="apply-statistic icon-paste">
+      <div class="statistic-info">
+        <div class="statistic-details">Reviewed: <span [style.color]="'green'">{{getStatistic('reviewed')}}</span></div>
+        <div class="statistic-details">Unreviewed: <span [style.color]="'gray'">{{getStatistic('unreviewed')}}</span>
+        </div>
+        <div class="statistic-details">Accepted: <span [style.color]="'green'">{{getStatistic('accepted')}}</span></div>
+        <div class="statistic-details">Declined: <span [style.color]="'red'">{{getStatistic('declined')}}</span></div>
+        <div class="statistic-details">All: <span>{{applylists.length}}</span></div>
+      </div>
+    </div>
   </section>
   <section class="application-details">
     <ng-container *ngIf="applylists.length; else withoutApply">
       <div class="apply-list" [style.display]="checkDisplayType('applylist')"
         [style.width]="(windowSize < 1020 && !isOpen) || windowSize < 850 ? '100%' : ''">
         <div class="short-apply-info" *ngFor="let applylist of applylists; let i=index"
-          (click)="openApplyDetails(applylist, i)" [style.background-color]="i == currentApply?.id ? 'white' : ''">
+          (click)="openApplyDetails(applylist, i)"
+          [style.background-color]="applylist?.id == currentApply?.id ? 'white' : ''">
           <p class="child-info"><span>{{applylist?.childName}}</span><span>{{applylist?.childYear}} years old</span></p>
           <p class="child-info"><span>{{applylist?.typeOfReg?.formTitleType}}</span> <span *ngIf="!applylist?.isRead"
               class="not-read bc-blue"></span></p>
@@ -49,8 +60,8 @@
           </div>
 
           <div class="apply-button">
-            <button class="ask-for-details btn">Accept</button>
-            <button class="recort-to-kinder btn" (click)="goToApply()">Decline</button>
+            <button class="ask-for-details btn" (click)="changeStatusOfApplication('accept')">Accept</button>
+            <button class="recort-to-kinder btn" (click)="changeStatusOfApplication('decline')">Decline</button>
           </div>
         </ng-container>
 

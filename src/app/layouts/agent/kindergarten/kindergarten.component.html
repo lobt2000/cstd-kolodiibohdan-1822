@@ -1,4 +1,40 @@
 <main class="main-block" #content [formGroup]="kindergarten">
+  <h1>Kindergarten main view</h1>
+  <section class="kindergarten">
+    <div class="kindergarten-list">
+      <div class="input kindergarten-logo">
+        <div class="input__upload">
+          <div class="upload-btn-wrapper">
+            <button *ngIf="!kindergarten.value['logo-img']" class="btn">Upload Image</button>
+            <div class="kindergarten-logo-img" *ngIf="kindergarten.value['logo-img']"
+              [style.background-image]="'url(' + kindergarten.value['logo-img'] + ')'" alt="">
+            </div>
+            <input type="file" name="myfile" (change)="uploadImage($event, 'logo-img')" />
+          </div>
+        </div>
+      </div>
+      <div class="kindergarten-title header-title">
+        <div class="input logo">
+          <div class="input__upload">
+            <div class="upload-btn-wrapper">
+              <button *ngIf="!kindergarten.value?.logo" class="btn">Upload Image</button>
+              <img class="logo" *ngIf="kindergarten.value?.logo"
+                [src]="kindergarten.value?.logo || 'https://firebasestorage.googleapis.com/v0/b/kindergarten-daed8.appspot.com/o/image%2FbacgroundImg.jpg?alt=media&token=b106542f-b902-4200-a394-e8255aba22ab'"
+                alt="">
+              <input type="file" name="myfile" (change)="uploadImage($event, 'logo')" />
+            </div>
+          </div>
+        </div>
+
+        <div class="logo-title">{{kindergarten.value?.title}}</div>
+        <textarea class="font-15 line-height-one-half logo-text p-5 txt-a-c" [formControlName]="'logo-description'"
+          cols="16" rows="5" maxlength="60"></textarea>
+        <button class="btn bc-blue go-to-button">Go to
+          {{kindergarten.value?.title}}</button>
+      </div>
+    </div>
+  </section>
+  <h1>Kindergarten details view</h1>
   <section class="header-block">
     <div class="input">
       <div class="input__upload">

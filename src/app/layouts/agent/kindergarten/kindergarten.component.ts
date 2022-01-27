@@ -85,7 +85,10 @@ export class KindergartenComponent implements OnInit {
       kinderAdvantages: this.fb.array([this.newAdvantages()]),
       kinderAddresses: this.fb.array([this.newAddresses()]),
       addressBackground: '',
-      kinderForm: this.fb.array([this.newKinderForm()])
+      kinderForm: this.fb.array([this.newKinderForm()]),
+      logo: '',
+      "logo-description": '',
+      "logo-img": '',
     })
     if (localStorage.getItem('kindergarten')) {
       const storage = JSON.parse(localStorage.getItem('kindergarten'));
@@ -96,7 +99,7 @@ export class KindergartenComponent implements OnInit {
 
   updateForm(storage) {
     delete storage.id;
-    
+
     this.kindergarten.setValue({
       ...storage,
       kindergartenGroup:

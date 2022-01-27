@@ -2,7 +2,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { KindergartenApplicationService } from 'src/app/service/kindergarten-application.service';
 import { KindergartenListService } from 'src/app/service/kindergarten-list.service';
-
+import { v4 } from 'uuid';
 @Component({
   selector: 'app-group-application',
   templateUrl: './group-application.component.html',
@@ -17,6 +17,7 @@ export class GroupApplicationComponent implements OnInit {
   isOpen: boolean;
   isApplicationOpen: boolean;
   applyKindergarten;
+  group: string = this.route.snapshot.params.name;
   ngOnInit(): void {
     this.kindergartenServise.menuPosition.subscribe(
       res => {
@@ -24,7 +25,6 @@ export class GroupApplicationComponent implements OnInit {
       }
     )
     const user = JSON.parse(localStorage.getItem('mainuser'));
-    const group = this.route.snapshot.params.name;
     this.kindergartenApplication.getGroupApplyList(user.kinderId).onSnapshot(
       document => {
         document.forEach(prod => {
@@ -33,13 +33,10 @@ export class GroupApplicationComponent implements OnInit {
             ...prod.data()
           };
           this.applyKindergarten = apply;
-          this.applylists = apply.listOfApply.filter(res => res.groupType.name == group);
+          this.applylists = apply.listOfApply.filter(res => res.groupType.name == this.group);
           this.route.queryParams.subscribe((params) => {
             if (params.hasOwnProperty('applicationId')) {
-              this.currentApply = {
-                ...this.applylists[params.applicationId],
-                id: params.applicationId
-              }
+              this.currentApply = this.applylists.find(item => item.id == params.applicationId)
               this.isApplicationOpen = true;
             }
             else {
@@ -59,13 +56,7 @@ export class GroupApplicationComponent implements OnInit {
   }
 
   openApplyDetails(applyDetails, i) {
-    const group = this.route.snapshot.params.name;
-
-    this.currentApply = {
-      ...applyDetails,
-      id: i
-    }
-
+    this.currentApply = applyDetails;
     this.router.navigate([], {
       relativeTo: this.route,
       queryParams: {
@@ -77,7 +68,7 @@ export class GroupApplicationComponent implements OnInit {
       const apply = {
         ...this.applyKindergarten,
         listOfApply: this.applyKindergarten.listOfApply.map(res => {
-          if (res.groupType.name == group) {
+          if (res.groupType.name == this.group && res.id == applyDetails.id) {
             res.isRead = true;
           }
           return res;
@@ -113,6 +104,27 @@ export class GroupApplicationComponent implements OnInit {
         return 'flex';
       }
     }
+  }
+
+  changeStatusOfApplication(name) {
+    const apply = {
+      ...this.applyKindergarten,
+      listOfApply: this.applyKindergarten.listOfApply.map(res => {
+        if (res.groupType.name == this.group && res.id == this.currentApply.id) {
+          res.status = name;
+        }
+        return res;
+      })
+    }
+    this.kindergartenApplication.update(this.applyKindergarten.id, apply)
+  }
+
+
+  getStatistic(name) {
+    if (name == 'reviewed') return this.applylists.filter(res => res.isRead).length;
+    if (name == 'unreviewed') return this.applylists.filter(res => !res.isRead).length;
+    if (name == 'accepted') return this.applylists.filter(res => res.status == 'accept').length;
+    if (name == 'declined') return this.applylists.filter(res => res.status == 'decline').length;
   }
 
 }

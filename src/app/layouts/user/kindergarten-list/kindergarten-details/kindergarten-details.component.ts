@@ -2,6 +2,7 @@ import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { KindergartenListService } from 'src/app/service/kindergarten-list.service';
+import { v4 } from 'uuid';
 
 @Component({
   selector: 'app-kindergarten-details',
@@ -116,10 +117,15 @@ export class KindergartenDetailsComponent implements OnInit {
 
   sendApply() {
     if (this.form.valid) {
+      const form = {
+        ...this.form.value,
+        id: v4()
+      }
       const apply = {
         title: this.currkinder.title,
+        kinderId: this.currkinder.id,
         listOfApply: [
-          this.form.value
+          form
         ]
       }
       var fileObj = new File([`${JSON.stringify(apply)}`], 'apply_file.txt', {
