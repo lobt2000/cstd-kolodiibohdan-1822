@@ -4626,8 +4626,8 @@ textarea {
   text-overflow: ellipsis;
 }
 .not-read {
-  min-width: 20px;
-  min-height: 20px;
+  min-width: 14px;
+  min-height: 14px;
   font-family: "Poppins";
   font-weight: 500;
   font-style: normal;
@@ -6052,7 +6052,7 @@ body {
   box-sizing: border-box;
 }
 * {
-  font-family: "Poppins";
+  font-family: "Poppins" !important;
 }
 .initial-font {
   font-family: "Poppins";
