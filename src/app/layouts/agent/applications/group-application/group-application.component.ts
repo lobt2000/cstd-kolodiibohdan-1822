@@ -13,7 +13,7 @@ export class GroupApplicationComponent implements OnInit {
   constructor(private kindergartenApplication: KindergartenApplicationService, private route: ActivatedRoute, private kindergartenServise: KindergartenListService, private router: Router) { }
   applylists: Array<any> = [];
   currentApply;
-  windowSize: number;
+  windowSize: number = window.innerWidth;
   isOpen: boolean;
   isApplicationOpen: boolean;
   applyKindergarten;

@@ -10,7 +10,7 @@ import { contacts } from 'src/app/shared/interfaces/contacts.interface';
 })
 export class MessagesComponent implements OnInit {
   userContacts: Array<contacts> = [];
-  windowSize: number;
+  windowSize: number = window.innerWidth;
   isOpen: boolean;
   isConversationOpen: boolean = false;
   constructor(private kindergartenListService: KindergartenListService) { }

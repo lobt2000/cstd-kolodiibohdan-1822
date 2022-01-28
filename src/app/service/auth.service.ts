@@ -145,7 +145,7 @@ export class AuthService {
   signOut(): void {
     this.auth.signOut()
       .then(() => {
-        localStorage.removeItem('mainuser');
+        localStorage.clear();
         this.router.navigate(['login']);
         this.toastr.success(`Bay`, 'Logout success');
       })

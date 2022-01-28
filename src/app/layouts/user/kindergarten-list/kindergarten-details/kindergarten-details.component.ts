@@ -14,7 +14,7 @@ export class KindergartenDetailsComponent implements OnInit {
   kinderTitle: string;
   currkinder;
   isLoading: boolean = true;
-  windowSize: number;
+  windowSize: number = window.innerWidth;
   isOpen: boolean;
   isGroupCheck: boolean;
   isType: boolean;
@@ -117,9 +117,11 @@ export class KindergartenDetailsComponent implements OnInit {
 
   sendApply() {
     if (this.form.valid) {
+      const user = JSON.parse(localStorage.getItem('mainuser'))
       const form = {
         ...this.form.value,
-        id: v4()
+        id: v4(),
+        userId: user.id
       }
       const apply = {
         title: this.currkinder.title,

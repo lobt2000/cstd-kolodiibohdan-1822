@@ -19,7 +19,7 @@ export class KindergartenComponent implements OnInit {
   chooseTitleButtonTextColor: boolean = false;
   isGroupCheck: boolean;
   isType: boolean;
-  windowSize: number;
+  windowSize: number = window.innerWidth;
   isOpen: boolean;
   addAdvantages: boolean = false;
   addAddresses: boolean = false;

@@ -3,6 +3,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { map, take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -24,5 +25,24 @@ export class KindergartenApplicationService {
 
   update(id: string, data: any): Promise<void> {
     return this.kinderApplyRef.doc(id).update({ ...data });
+  }
+
+  getUsersApplications(userId) {
+    return this.kinderApplyRef.snapshotChanges().pipe(
+      map(changes =>
+        changes.map(c =>
+          ({ id: c.payload.doc.id, ...c.payload.doc.data() })
+        )
+      ),
+      map(res => res.map(
+        item => item.listOfApply.filter(el => {
+          if (el.userId == userId) {
+            console.log(item.title);
+            el.kinderTitle = item.title;
+            return el;
+          }
+        })))
+      // take(1)
+    )
   }
 }

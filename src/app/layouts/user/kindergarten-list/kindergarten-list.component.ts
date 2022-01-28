@@ -11,7 +11,7 @@ import { KindergartenListService } from 'src/app/service/kindergarten-list.servi
 export class KindergartenListComponent implements OnInit {
   kinderLists: Array<any> = [];
   isLoading: boolean = true;
-  windowSize: number;
+  windowSize: number = window.innerWidth;
   isOpen: boolean;
   constructor(private kindergartenService: KindergartenListService, private router: Router) { }
 

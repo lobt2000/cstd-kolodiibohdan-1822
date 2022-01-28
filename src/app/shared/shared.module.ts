@@ -31,6 +31,7 @@ import { MatCarouselModule } from '@ngbmodule/material-carousel';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { AgentMenuComponent } from './components/agent-menu/agent-menu.component';
 import { AgentProfileComponent } from './components/agent-profile/agent-profile.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
 // import { MatRadioModule } from '@angular/material/radio';
 @NgModule({
     declarations: [
@@ -39,7 +40,8 @@ import { AgentProfileComponent } from './components/agent-profile/agent-profile.
         MenuComponent,
         ResetPasswordComponent,
         AgentMenuComponent,
-        AgentProfileComponent
+        AgentProfileComponent,
+        UserProfileComponent
     ],
     imports: [
         CommonModule,

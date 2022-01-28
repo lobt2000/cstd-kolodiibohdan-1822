@@ -49,14 +49,6 @@
               <div class="form-title-price">{{currentApply?.typeOfReg?.formTitlePrice}}</div>
               <div class="form-title-additional">{{currentApply?.typeOfReg?.formTitleAdditional}}</div>
             </div>
-            <div class="form-description-block">
-              <div class="form-description-content"
-                *ngFor="let description of currentApply?.typeOfReg?.formDescription; let j=index">
-                <span [class]="description?.numImg ? 'form-pos-img' : 'form-pos-num'"
-                  [style.background-image]="'url(' + (description?.numImg || '') + ')'">{{description?.numImg ? '' : j+1}}</span>
-                <span class="form-name">{{description.descText}}</span>
-              </div>
-            </div>
           </div>
 
           <div class="apply-button">

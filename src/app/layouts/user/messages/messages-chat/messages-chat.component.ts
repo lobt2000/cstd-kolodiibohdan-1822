@@ -39,7 +39,7 @@ export class MessagesChatComponent implements OnInit {
   isEdit: boolean = false;
   isModal: boolean = false;
   searchText: string;
-  windowSize: number;
+  windowSize: number = window.innerWidth;
   isOpen: boolean;
   constructor(private activatedRoute: ActivatedRoute,
     private router: Router,
