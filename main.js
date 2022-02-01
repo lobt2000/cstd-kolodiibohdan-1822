@@ -1066,6 +1066,7 @@ class AuthService {
         this.auth = auth;
         this.router = router;
         this.toastr = toastr;
+        // localUser: any;
         this.dbPath = '/users';
         this.updUser = new rxjs__WEBPACK_IMPORTED_MODULE_0__.Subject();
         this.profRef = null;
@@ -1091,7 +1092,7 @@ class AuthService {
                 userPos: userPos,
                 username: `${userFname} ${userSname}`,
                 url: `${userFname}_${userSname}`,
-                icon: 'assets/images/profile.svg',
+                icon: '',
                 contacts: [
                     {
                         "time": "11:15",
@@ -1127,9 +1128,10 @@ class AuthService {
                 collection.get()
                     .then(user => {
                     const myUser = Object.assign({ id: user.id }, user.data());
+                    this.update(user.id, myUser);
                     this.toastr.success(`Hello ${myUser.firstname} ${myUser.secondname}`, 'Sing up success');
                     localStorage.setItem('mainuser', JSON.stringify(myUser));
-                    this.localUser = JSON.parse(localStorage.getItem('user'));
+                    // this.localUser = JSON.parse(localStorage.getItem('user'))
                     myUser.userPos == 'user' ? this.router.navigate(['user']) : this.router.navigate(['agent']);
                 });
             });
@@ -1145,11 +1147,10 @@ class AuthService {
             this.db.collection('users').ref.where('email', '==', userResponse.user.email).onSnapshot(snap => {
                 snap.forEach(userRef => {
                     const myUser = Object.assign(Object.assign({ id: userRef.id }, userRef.data()), { password: password });
-                    this.update(userRef.id, myUser);
                     this.toastr.success(`Hello ${myUser.firstname} ${myUser.secondname}`, 'Login success');
                     this.updUser.next(myUser);
                     localStorage.setItem('mainuser', JSON.stringify(myUser));
-                    this.localUser = JSON.parse(localStorage.getItem('user'));
+                    // this.localUser = JSON.parse(localStorage.getItem('mainuser'))
                     myUser.userPos == 'user' ? this.router.navigate(['user']) : this.router.navigate(['agent']);
                 });
             });
@@ -1850,7 +1851,6 @@ class AgentProfileComponent {
     save() {
         if (this.userFrom.valid) {
             const user = Object.assign(Object.assign({}, this.profUser), this.userFrom.getRawValue());
-            console.log(this.profUser, this.userFrom.value);
             this.profService.update(this.profUser.id, user).then(() => {
                 this.updateLocal(user);
                 this.profUser = user;
