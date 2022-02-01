@@ -1850,9 +1850,10 @@ class AgentProfileComponent {
     save() {
         if (this.userFrom.valid) {
             const user = Object.assign(Object.assign({}, this.profUser), this.userFrom.getRawValue());
+            console.log(this.profUser, this.userFrom.value);
             this.profService.update(this.profUser.id, user).then(() => {
-                this.updateLocal(this.userFrom.value);
-                this.profUser = this.userFrom.value;
+                this.updateLocal(user);
+                this.profUser = user;
                 this.toastr.success('Changes saved success!', 'Success');
                 this.edit();
             });
@@ -3016,8 +3017,8 @@ class UserProfileComponent {
         if (this.userFrom.valid) {
             const user = Object.assign(Object.assign({}, this.profUser), this.userFrom.getRawValue());
             this.profService.update(this.profUser.id, user).then(() => {
-                this.updateLocal(this.userFrom.value);
-                this.profUser = this.userFrom.value;
+                this.updateLocal(user);
+                this.profUser = user;
                 this.toastr.success('Changes saved success!', 'Success');
                 this.edit();
             });
