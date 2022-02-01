@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AgentProfileComponent } from 'src/app/shared/components/agent-profile/agent-profile.component';
+import { ContactComponent } from 'src/app/shared/components/contact/contact.component';
 import { AgentComponent } from './agent.component';
 import { KindergartenComponent } from './kindergarten/kindergarten.component';
 import { MainPageComponent } from './main-page/main-page.component';
@@ -36,6 +37,10 @@ const routes: Routes = [
             //         path: 'messages',
             //         loadChildren: () => import('./messages/messages.module').then((m) => m.MessagesModule)
             //     },
+            {
+                path: 'contact',
+                component: ContactComponent
+            },
             {
                 path: "**",
                 redirectTo: "main-page"

@@ -28,9 +28,9 @@
         [style.background-image]="'url(' + (item?.groupImg || 'assets/image/nursery-group-default.jpg') + ')'">
       </div>
       <div class="group-info">
-        <div class="group-name">{{item?.name}}</div>
-        <div class="group-age-range">{{item?.ageRange}}</div>
-        <button class="group-detail">Go to Details</button>
+        <div class="group-name" [style.color]="(item?.groupNameColor + '!important')">{{item?.name}}</div>
+        <div class="group-age-range" [style.color]="(item?.ageRange + '!important')">{{item?.ageRange}}
+        </div>
       </div>
     </div>
   </section>
@@ -39,9 +39,10 @@
     <div class="advantage-content" *ngFor="let advantage of currkinder?.kinderAdvantages; let i=index">
       <div class="advantage-title"><span [class]="advantage?.numImg ? 'numImg' : 'number'"
           [style.background-image]="'url(' + (advantage?.numImg || '') + ')'">{{advantage?.numImg ? '' : (i+1)}}</span><span
-          class="title">{{advantage.title}}</span>
+          class="title" [style.color]="(advantage?.advantagesTitleColor + '!important')">{{advantage.title}}</span>
       </div>
-      <div class="advantage-text">{{advantage.text}}</div>
+      <div class="advantage-text" [style.color]="(advantage?.advantagesTextColor + '!important')">{{advantage.text}}
+      </div>
     </div>
   </section>
 
@@ -52,7 +53,8 @@
       <div class="address-content" *ngFor="let kinderAddress of currkinder?.kinderAddresses">
         <span class="address-pos"
           [style.background-image]="'url(' + ( kinderAddress.addressPosImg || 'assets/image/crown.jpg') + ')'"></span>
-        <span class="address-name">{{kinderAddress?.addressName}}</span>
+        <span class="address-name"
+          [style.color]="(kinderAddress?.addressesTextColor + '!important')">{{kinderAddress?.addressName}}</span>
       </div>
     </div>
   </section>
@@ -61,20 +63,22 @@
     <div class="form-header">Forms of stay in {{currkinder?.title}}</div>
     <div class="form-container">
       <div class="form-content" *ngFor="let form of currkinder?.kinderForm">
-        <div class="form-title-info">
+        <div class="form-title-info"
+          [ngStyle]="{'background-color': form?.kinderFormTitleBackgroundColor, 'color' : form?.kinderFormTitleColor}">
           <div class="form-title-type">{{form?.formTitleType}}</div>
           <div class="form-title-time">{{form?.formTitleTime}}</div>
           <div class="form-title-price">{{form?.formTitlePrice}}</div>
           <div class="form-title-additional">{{form?.formTitleAdditional}}</div>
         </div>
-        <div class="form-description-block">
+        <div class="form-description-block"
+          [ngStyle]="{'background-color': form?.kinderFormTextBackgroundColor, 'color' : form?.kinderFormTextColor}">
           <div class="form-description-content" *ngFor="let description of form?.formDescription; let j=index">
             <span [class]="description?.numImg ? 'form-pos-img' : 'form-pos-num'"
-              [style.background-image]="'url(' + (description?.numImg || '') + ')'">{{description?.numImg ? '' : '❤'}}</span>
+              [style.background-image]="'url(' + (description?.numImg || '') + ')'">{{description?.numImg ? '' : j}}</span>
             <span class="form-name">{{description.descText}}</span>
           </div>
           <div class="form-description-button">
-            <button class="ask-for-details btn">Ask for details</button>
+            <!-- <button class="ask-for-details btn">Ask for details</button> -->
             <button class="recort-to-kinder btn" (click)="goToApply()">Apply into group</button>
           </div>
         </div>

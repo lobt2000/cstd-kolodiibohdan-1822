@@ -32,6 +32,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { AgentMenuComponent } from './components/agent-menu/agent-menu.component';
 import { AgentProfileComponent } from './components/agent-profile/agent-profile.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { ContactComponent } from './components/contact/contact.component';
 // import { MatRadioModule } from '@angular/material/radio';
 @NgModule({
     declarations: [
@@ -41,7 +42,8 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
         ResetPasswordComponent,
         AgentMenuComponent,
         AgentProfileComponent,
-        UserProfileComponent
+        UserProfileComponent,
+        ContactComponent
     ],
     imports: [
         CommonModule,
