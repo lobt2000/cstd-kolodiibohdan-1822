@@ -204,6 +204,7 @@ class MessagesChatComponent {
         this.editMessage = null;
         this.isEdit = false;
         this.isModal = false;
+        this.windowSize = window.innerWidth;
     }
     ngOnInit() {
         this.windowSize = window.innerWidth;
