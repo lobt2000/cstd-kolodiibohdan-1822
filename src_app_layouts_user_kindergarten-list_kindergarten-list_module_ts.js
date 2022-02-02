@@ -756,7 +756,7 @@ class KindergartenDetailsComponent {
             });
             this.kindergartenServise.applyFile.next(fileObj);
             this.kindergartenServise.updateKinderApply(this.currkinder.title, apply);
-            this.router.navigate(['/user', `messages`, 'Guy_Hawkins']);
+            // this.router.navigate(['/user', `messages`, 'Guy_Hawkins'])
         }
     }
 }
