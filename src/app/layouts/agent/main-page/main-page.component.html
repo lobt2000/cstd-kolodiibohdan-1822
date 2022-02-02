@@ -22,11 +22,11 @@
       <div class="other-info-block">
         <div class="other-info-about bc-light-gray">
           <img class="about" src="assets/image/contact-img.svg" alt="" *ngIf="!isLoading">
-          <button class="btn bc-blue go-to-button bdr-10 m-b-25">Go to Contact & About</button>
+          <button class="btn bc-blue go-to-button bdr-10 m-b-25" (click)="onGoToAnotherPage('contact')">Go to Contact & About</button>
         </div>
         <div class="other-info-profile bc-light-gray">
           <img class="profile" src="assets/image/profile.jfif" alt="">
-          <button class="btn bc-blue go-to-button bdr-10 m-b-25">Go to Profile</button>
+          <button class="btn bc-blue go-to-button bdr-10 m-b-25" (click)="onGoToAnotherPage('profile')">Go to Profile</button>
         </div>
       </div>
     </section>

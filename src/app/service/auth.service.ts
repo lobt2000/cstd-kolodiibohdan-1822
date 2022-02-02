@@ -13,7 +13,7 @@ import { Users } from '../shared/interfaces/users.interface';
   providedIn: 'root'
 })
 export class AuthService {
-  localUser: any;
+  // localUser: any;
   private dbPath = '/users';
   updUser: Subject<any> = new Subject<any>();
   profRef: AngularFirestoreCollection<any> = null;
@@ -49,7 +49,7 @@ export class AuthService {
           userPos: userPos,
           username: `${userFname} ${userSname}`,
           url: `${userFname}_${userSname}`,
-          icon: 'assets/images/profile.svg',
+          icon: '',
           contacts: [
             {
               "time": "11:15",
@@ -89,9 +89,10 @@ export class AuthService {
                   id: user.id,
                   ...user.data() as Users
                 }
+                this.update(user.id, myUser)
                 this.toastr.success(`Hello ${myUser.firstname} ${myUser.secondname}`, 'Sing up success');
                 localStorage.setItem('mainuser', JSON.stringify(myUser))
-                this.localUser = JSON.parse(localStorage.getItem('user'))
+                // this.localUser = JSON.parse(localStorage.getItem('user'))
                 myUser.userPos == 'user' ? this.router.navigate(['user']) : this.router.navigate(['agent']);
               })
           })
@@ -124,12 +125,11 @@ export class AuthService {
                 password: password,
 
               }
-              this.update(userRef.id, myUser)
-              this.toastr.success(`Hello ${myUser.firstname} ${myUser.secondname}`, 'Login success');
-              this.updUser.next(myUser)
-              localStorage.setItem('mainuser', JSON.stringify(myUser))
-              this.localUser = JSON.parse(localStorage.getItem('user'))
-              myUser.userPos == 'user' ? this.router.navigate(['user']) : this.router.navigate(['agent']);
+                this.toastr.success(`Hello ${myUser.firstname} ${myUser.secondname}`, 'Login success');
+                this.updUser.next(myUser)
+                localStorage.setItem('mainuser', JSON.stringify(myUser))
+                // this.localUser = JSON.parse(localStorage.getItem('mainuser'))
+                myUser.userPos == 'user' ? this.router.navigate(['user']) : this.router.navigate(['agent']);
             })
           }
         )

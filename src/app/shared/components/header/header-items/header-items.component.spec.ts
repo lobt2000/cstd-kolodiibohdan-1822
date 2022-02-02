@@ -57,7 +57,6 @@ describe('HeaderItemsComponent', () => {
     }
     localStorage.setItem('mainuser', JSON.stringify(user))
     service.updUser.next(user);
-    console.log(component.currUser);
     expect(component.currUser.hasOwnProperty('id')).toBeTrue();
   });
 

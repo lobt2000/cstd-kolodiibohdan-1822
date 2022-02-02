@@ -74,8 +74,8 @@ export class AgentProfileComponent implements OnInit {
       }
       this.profService.update(this.profUser.id, user).then(
         () => {
-          this.updateLocal(this.userFrom.value)
-          this.profUser = this.userFrom.value;
+          this.updateLocal(user)
+          this.profUser = user;
           this.toastr.success('Changes saved success!', 'Success');
           this.edit();
         }

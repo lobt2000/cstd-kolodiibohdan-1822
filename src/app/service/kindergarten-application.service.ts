@@ -37,7 +37,6 @@ export class KindergartenApplicationService {
       map(res => res.map(
         item => item.listOfApply.filter(el => {
           if (el.userId == userId) {
-            console.log(item.title);
             el.kinderTitle = item.title;
             return el;
           }

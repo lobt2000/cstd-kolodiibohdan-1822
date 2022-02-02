@@ -35,7 +35,6 @@ export class ContactComponent implements OnInit {
       )
     ).subscribe(data => {
       this.comments = data;
-      console.log(this.comments);
     });
 
   }

@@ -38,6 +38,6 @@ export class MainPageComponent implements OnInit {
   }
 
   onGoToAnotherPage(page) {
-    // this.router.navigate(['/agent', `${page}`])
+    this.router.navigate(['/agent', `${page}`])
   }
 }

@@ -51,24 +51,32 @@
   </div>
 
   <div class="user-application-container">
-    <div class="user-application-block" *ngFor="let item of userApplies">
-      <div class="application-title"> Application in {{item?.kinderTitle}} for {{item?.childName}} </div>
-      <div class="application-details">
-        <div class="application-children-details">
-          <div class="child-info">Child age: <span> {{item?.childYear}}</span> </div>
-          <div class="child-info">Child sex: <span> {{item?.childSex}}</span> </div>
+    <ng-container *ngIf="userApplies.length; else withoutApplication">
+      <div class="user-application-block" *ngFor="let item of userApplies">
+        <div class="application-title"> Application in {{item?.kinderTitle}} for {{item?.childName}} </div>
+        <div class="application-details">
+          <div class="application-children-details">
+            <div class="child-info">Child age: <span> {{item?.childYear}}</span> </div>
+            <div class="child-info">Child sex: <span> {{item?.childSex}}</span> </div>
+          </div>
+          <div class="application-kindergarten-details">
+            <div class="kindergarten-info">Group type: <span> {{item?.groupType.name}}</span> </div>
+            <div class="kindergarten-info">Type of registration: <span> {{item?.typeOfReg.formTitleType}}</span> </div>
+          </div>
         </div>
-        <div class="application-kindergarten-details">
-          <div class="kindergarten-info">Group type: <span> {{item?.groupType.name}}</span> </div>
-          <div class="kindergarten-info">Type of registration: <span> {{item?.typeOfReg.formTitleType}}</span> </div>
+        <div class="application-status">
+          Status: <span *ngIf="item?.isRead" [style.color]="'green'"> Reviewed</span>
+          <span *ngIf="!item?.isRead" [style.color]="'gray'"> Unreviewed</span>
+          <span *ngIf="item?.status" [style.color]="item?.status == 'accept' ? 'green' : 'red'"> {{item?.status}}</span>
         </div>
       </div>
-      <div class="application-status">
-        Status: <span *ngIf="item?.isRead" [style.color]="'green'"> Reviewed</span>
-        <span *ngIf="!item?.isRead" [style.color]="'gray'"> Unreviewed</span>
-        <span *ngIf="item?.status" [style.color]="item?.status == 'accept' ? 'green' : 'red'"> {{item?.status}}</span>
+    </ng-container>
+    <ng-template #withoutApplication>
+      <div class="withoutApply">You doesn`t send any applications
       </div>
-    </div>
+    </ng-template>
+
+
   </div>
 
 </main>
