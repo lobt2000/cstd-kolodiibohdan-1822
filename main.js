@@ -1093,35 +1093,7 @@ class AuthService {
                 username: `${userFname} ${userSname}`,
                 url: `${userFname}_${userSname}`,
                 icon: '',
-                contacts: [
-                    {
-                        "time": "11:15",
-                        "url": "Guy_Hawkins",
-                        "messages": [
-                            {
-                                "userIcon": "https://firebasestorage.googleapis.com/v0/b/skillcheckers-ac855.appspot.com/o/userImg%2Fuser1.png?alt=media&token=5338afc7-46ed-408a-b3e4-db03ed8303c2",
-                                "time": "10:45 AM",
-                                "date": "6 JULY 2020",
-                                "user": "Guy Hawkins",
-                                "text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eget",
-                                "file": ""
-                            },
-                            {
-                                "user": "Bogdan Kolodiy",
-                                "time": "10:45 AM",
-                                "userIcon": "assets/images/profile.svg",
-                                "file": "",
-                                "text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eget",
-                                "date": "6 JULY 2020"
-                            }
-                        ],
-                        "id": "",
-                        "text": "Please give us feedback...",
-                        "img": "https://firebasestorage.googleapis.com/v0/b/skillcheckers-ac855.appspot.com/o/userImg%2Fuser1.png?alt=media&token=5338afc7-46ed-408a-b3e4-db03ed8303c2",
-                        "missing": "0",
-                        "name": "Guy Hawkins"
-                    }
-                ]
+                contacts: []
             };
             this.db.collection('users').add(user)
                 .then(collection => {
@@ -1147,11 +1119,13 @@ class AuthService {
             this.db.collection('users').ref.where('email', '==', userResponse.user.email).onSnapshot(snap => {
                 snap.forEach(userRef => {
                     const myUser = Object.assign(Object.assign({ id: userRef.id }, userRef.data()), { password: password });
-                    this.toastr.success(`Hello ${myUser.firstname} ${myUser.secondname}`, 'Login success');
-                    this.updUser.next(myUser);
-                    localStorage.setItem('mainuser', JSON.stringify(myUser));
-                    // this.localUser = JSON.parse(localStorage.getItem('mainuser'))
-                    myUser.userPos == 'user' ? this.router.navigate(['user']) : this.router.navigate(['agent']);
+                    if (!JSON.parse(localStorage.getItem('mainuser'))) {
+                        this.toastr.success(`Hello ${myUser.firstname} ${myUser.secondname}`, 'Login success');
+                        this.updUser.next(myUser);
+                        localStorage.setItem('mainuser', JSON.stringify(myUser));
+                        // this.localUser = JSON.parse(localStorage.getItem('mainuser'))
+                        myUser.userPos == 'user' ? this.router.navigate(['user']) : this.router.navigate(['agent']);
+                    }
                 });
             });
         })
@@ -1849,7 +1823,7 @@ class AgentProfileComponent {
     }
     save() {
         if (this.userFrom.valid) {
-            const user = Object.assign(Object.assign({}, this.profUser), this.userFrom.getRawValue());
+            const user = Object.assign(Object.assign(Object.assign({}, this.profUser), this.userFrom.getRawValue()), { username: `${this.userFrom.value.firstname} ${this.userFrom.value.secondname}`, url: `${this.userFrom.value.firstname}_${this.userFrom.value.secondname}` });
             this.profService.update(this.profUser.id, user).then(() => {
                 this.updateLocal(user);
                 this.profUser = user;
@@ -2222,9 +2196,9 @@ class HeaderItemsComponent {
         this.dropWay = false;
     }
     ngOnInit() {
-        this.authService.updUser.subscribe(res => {
-            this.currUser = res;
-        });
+        // this.authService.updUser.subscribe(res => {
+        //   this.currUser = res;
+        // })
         if (localStorage.getItem('mainuser')) {
             this.currUser = JSON.parse(localStorage.getItem('mainuser'));
         }
@@ -3027,7 +3001,7 @@ class UserProfileComponent {
     }
     save() {
         if (this.userFrom.valid) {
-            const user = Object.assign(Object.assign({}, this.profUser), this.userFrom.getRawValue());
+            const user = Object.assign(Object.assign(Object.assign({}, this.profUser), this.userFrom.getRawValue()), { username: `${this.userFrom.value.firstname} ${this.userFrom.value.secondname}`, url: `${this.userFrom.value.firstname}_${this.userFrom.value.secondname}` });
             this.profService.update(this.profUser.id, user).then(() => {
                 this.updateLocal(user);
                 this.profUser = user;
@@ -3197,6 +3171,34 @@ const MY_FORMATS = {
 
 /***/ }),
 
+/***/ 7525:
+/*!******************************************************!*\
+  !*** ./src/app/shared/pipes/search-messages.pipe.ts ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "SearchMessagesPipe": () => (/* binding */ SearchMessagesPipe)
+/* harmony export */ });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ 2316);
+
+class SearchMessagesPipe {
+    transform(messages, value) {
+        if (!messages)
+            return messages;
+        if (!value)
+            return messages;
+        return messages.filter(mes => mes.text.toLowerCase().includes(value));
+    }
+}
+SearchMessagesPipe.ɵfac = function SearchMessagesPipe_Factory(t) { return new (t || SearchMessagesPipe)(); };
+SearchMessagesPipe.ɵpipe = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefinePipe"]({ name: "searchMessages", type: SearchMessagesPipe, pure: true });
+
+
+/***/ }),
+
 /***/ 4466:
 /*!*****************************************!*\
   !*** ./src/app/shared/shared.module.ts ***!
@@ -3208,36 +3210,38 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "SharedModule": () => (/* binding */ SharedModule)
 /* harmony export */ });
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @angular/forms */ 1707);
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @angular/common */ 4364);
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @angular/forms */ 1707);
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @angular/common */ 4364);
 /* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! src/environments/environment */ 2340);
-/* harmony import */ var _angular_material_stepper__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! @angular/material/stepper */ 8210);
-/* harmony import */ var _angular_material_input__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! @angular/material/input */ 4742);
-/* harmony import */ var _angular_material_select__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! @angular/material/select */ 7007);
-/* harmony import */ var _angular_material_radio__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! @angular/material/radio */ 5644);
-/* harmony import */ var _angular_material_datepicker__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! @angular/material/datepicker */ 2937);
-/* harmony import */ var _angular_material_form_field__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! @angular/material/form-field */ 5788);
-/* harmony import */ var _angular_material_core__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @angular/material/core */ 2220);
-/* harmony import */ var _angular_material_moment_adapter__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @angular/material-moment-adapter */ 3737);
-/* harmony import */ var _angular_fire_compat__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @angular/fire/compat */ 5908);
-/* harmony import */ var _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! @angular/fire/compat/firestore */ 6303);
-/* harmony import */ var _angular_fire_compat_storage__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! @angular/fire/compat/storage */ 4416);
-/* harmony import */ var _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! @angular/fire/compat/auth */ 7018);
+/* harmony import */ var _angular_material_stepper__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! @angular/material/stepper */ 8210);
+/* harmony import */ var _angular_material_input__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! @angular/material/input */ 4742);
+/* harmony import */ var _angular_material_select__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! @angular/material/select */ 7007);
+/* harmony import */ var _angular_material_radio__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! @angular/material/radio */ 5644);
+/* harmony import */ var _angular_material_datepicker__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! @angular/material/datepicker */ 2937);
+/* harmony import */ var _angular_material_form_field__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! @angular/material/form-field */ 5788);
+/* harmony import */ var _angular_material_core__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @angular/material/core */ 2220);
+/* harmony import */ var _angular_material_moment_adapter__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @angular/material-moment-adapter */ 3737);
+/* harmony import */ var _angular_fire_compat__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! @angular/fire/compat */ 5908);
+/* harmony import */ var _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! @angular/fire/compat/firestore */ 6303);
+/* harmony import */ var _angular_fire_compat_storage__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! @angular/fire/compat/storage */ 4416);
+/* harmony import */ var _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! @angular/fire/compat/auth */ 7018);
 /* harmony import */ var _shared_const_myformat__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../shared/const/myformat */ 1591);
 /* harmony import */ var ng_click_outside__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ng-click-outside */ 5754);
-/* harmony import */ var ngx_toastr__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ngx-toastr */ 3315);
+/* harmony import */ var ngx_toastr__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ngx-toastr */ 3315);
 /* harmony import */ var _components_header_header_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/header/header.component */ 6290);
 /* harmony import */ var _components_header_header_items_header_items_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/header/header-items/header-items.component */ 5887);
 /* harmony import */ var _components_menu_menu_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/menu/menu.component */ 3686);
 /* harmony import */ var _components_reset_password_reset_password_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/reset-password/reset-password.component */ 5396);
 /* harmony import */ var _layouts_layouts_routing_module__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../layouts/layouts-routing.module */ 4875);
-/* harmony import */ var _ngbmodule_material_carousel__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! @ngbmodule/material-carousel */ 3302);
-/* harmony import */ var _angular_material_progress_spinner__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! @angular/material/progress-spinner */ 181);
+/* harmony import */ var _ngbmodule_material_carousel__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! @ngbmodule/material-carousel */ 3302);
+/* harmony import */ var _angular_material_progress_spinner__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! @angular/material/progress-spinner */ 181);
 /* harmony import */ var _components_agent_menu_agent_menu_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/agent-menu/agent-menu.component */ 7598);
 /* harmony import */ var _components_agent_profile_agent_profile_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/agent-profile/agent-profile.component */ 5862);
 /* harmony import */ var _components_user_profile_user_profile_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/user-profile/user-profile.component */ 4046);
 /* harmony import */ var _components_contact_contact_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/contact/contact.component */ 6189);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @angular/core */ 2316);
+/* harmony import */ var _pipes_search_messages_pipe__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./pipes/search-messages.pipe */ 7525);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @angular/core */ 2316);
+
 
 
 
@@ -3275,62 +3279,64 @@ __webpack_require__.r(__webpack_exports__);
 class SharedModule {
 }
 SharedModule.ɵfac = function SharedModule_Factory(t) { return new (t || SharedModule)(); };
-SharedModule.ɵmod = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_12__["ɵɵdefineNgModule"]({ type: SharedModule });
-SharedModule.ɵinj = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_12__["ɵɵdefineInjector"]({ providers: [
-        { provide: _angular_material_core__WEBPACK_IMPORTED_MODULE_13__.DateAdapter, useClass: _angular_material_moment_adapter__WEBPACK_IMPORTED_MODULE_14__.MomentDateAdapter, deps: [_angular_material_core__WEBPACK_IMPORTED_MODULE_13__.MAT_DATE_LOCALE] },
-        { provide: _angular_material_core__WEBPACK_IMPORTED_MODULE_13__.MAT_DATE_FORMATS, useValue: _shared_const_myformat__WEBPACK_IMPORTED_MODULE_1__.MY_FORMATS }
+SharedModule.ɵmod = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_13__["ɵɵdefineNgModule"]({ type: SharedModule });
+SharedModule.ɵinj = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_13__["ɵɵdefineInjector"]({ providers: [
+        { provide: _angular_material_core__WEBPACK_IMPORTED_MODULE_14__.DateAdapter, useClass: _angular_material_moment_adapter__WEBPACK_IMPORTED_MODULE_15__.MomentDateAdapter, deps: [_angular_material_core__WEBPACK_IMPORTED_MODULE_14__.MAT_DATE_LOCALE] },
+        { provide: _angular_material_core__WEBPACK_IMPORTED_MODULE_14__.MAT_DATE_FORMATS, useValue: _shared_const_myformat__WEBPACK_IMPORTED_MODULE_1__.MY_FORMATS }
     ], imports: [[
-            _angular_common__WEBPACK_IMPORTED_MODULE_15__.CommonModule,
-            _angular_forms__WEBPACK_IMPORTED_MODULE_16__.FormsModule,
-            _angular_forms__WEBPACK_IMPORTED_MODULE_16__.ReactiveFormsModule,
-            _angular_fire_compat__WEBPACK_IMPORTED_MODULE_17__.AngularFireModule.initializeApp(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.firebaseConfig),
-            _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_18__.AngularFirestoreModule,
-            _angular_fire_compat_storage__WEBPACK_IMPORTED_MODULE_19__.AngularFireStorageModule,
-            _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_20__.AngularFireAuthModule,
+            _angular_common__WEBPACK_IMPORTED_MODULE_16__.CommonModule,
+            _angular_forms__WEBPACK_IMPORTED_MODULE_17__.FormsModule,
+            _angular_forms__WEBPACK_IMPORTED_MODULE_17__.ReactiveFormsModule,
+            _angular_fire_compat__WEBPACK_IMPORTED_MODULE_18__.AngularFireModule.initializeApp(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.firebaseConfig),
+            _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_19__.AngularFirestoreModule,
+            _angular_fire_compat_storage__WEBPACK_IMPORTED_MODULE_20__.AngularFireStorageModule,
+            _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_21__.AngularFireAuthModule,
             ng_click_outside__WEBPACK_IMPORTED_MODULE_2__.ClickOutsideModule,
-            _angular_material_input__WEBPACK_IMPORTED_MODULE_21__.MatInputModule,
-            _angular_material_form_field__WEBPACK_IMPORTED_MODULE_22__.MatFormFieldModule,
-            _angular_material_select__WEBPACK_IMPORTED_MODULE_23__.MatSelectModule,
-            _angular_material_radio__WEBPACK_IMPORTED_MODULE_24__.MatRadioModule,
-            _angular_material_datepicker__WEBPACK_IMPORTED_MODULE_25__.MatDatepickerModule,
-            _angular_material_core__WEBPACK_IMPORTED_MODULE_13__.MatNativeDateModule,
-            _angular_material_moment_adapter__WEBPACK_IMPORTED_MODULE_14__.MomentDateModule,
-            ngx_toastr__WEBPACK_IMPORTED_MODULE_26__.ToastrModule.forRoot({
+            _angular_material_input__WEBPACK_IMPORTED_MODULE_22__.MatInputModule,
+            _angular_material_form_field__WEBPACK_IMPORTED_MODULE_23__.MatFormFieldModule,
+            _angular_material_select__WEBPACK_IMPORTED_MODULE_24__.MatSelectModule,
+            _angular_material_radio__WEBPACK_IMPORTED_MODULE_25__.MatRadioModule,
+            _angular_material_datepicker__WEBPACK_IMPORTED_MODULE_26__.MatDatepickerModule,
+            _angular_material_core__WEBPACK_IMPORTED_MODULE_14__.MatNativeDateModule,
+            _angular_material_moment_adapter__WEBPACK_IMPORTED_MODULE_15__.MomentDateModule,
+            ngx_toastr__WEBPACK_IMPORTED_MODULE_27__.ToastrModule.forRoot({
                 positionClass: 'toast-bottom-right',
                 preventDuplicates: true,
             }),
-            _angular_material_stepper__WEBPACK_IMPORTED_MODULE_27__.MatStepperModule,
-            _angular_material_radio__WEBPACK_IMPORTED_MODULE_24__.MatRadioModule,
+            _angular_material_stepper__WEBPACK_IMPORTED_MODULE_28__.MatStepperModule,
+            _angular_material_radio__WEBPACK_IMPORTED_MODULE_25__.MatRadioModule,
             _layouts_layouts_routing_module__WEBPACK_IMPORTED_MODULE_7__.LayoutsRoutingModule,
-            _ngbmodule_material_carousel__WEBPACK_IMPORTED_MODULE_28__.MatCarouselModule.forRoot(),
-            _angular_material_progress_spinner__WEBPACK_IMPORTED_MODULE_29__.MatProgressSpinnerModule
+            _ngbmodule_material_carousel__WEBPACK_IMPORTED_MODULE_29__.MatCarouselModule.forRoot(),
+            _angular_material_progress_spinner__WEBPACK_IMPORTED_MODULE_30__.MatProgressSpinnerModule
         ]] });
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_12__["ɵɵsetNgModuleScope"](SharedModule, { declarations: [_components_header_header_component__WEBPACK_IMPORTED_MODULE_3__.HeaderComponent,
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_13__["ɵɵsetNgModuleScope"](SharedModule, { declarations: [_components_header_header_component__WEBPACK_IMPORTED_MODULE_3__.HeaderComponent,
         _components_header_header_items_header_items_component__WEBPACK_IMPORTED_MODULE_4__.HeaderItemsComponent,
         _components_menu_menu_component__WEBPACK_IMPORTED_MODULE_5__.MenuComponent,
         _components_reset_password_reset_password_component__WEBPACK_IMPORTED_MODULE_6__.ResetPasswordComponent,
         _components_agent_menu_agent_menu_component__WEBPACK_IMPORTED_MODULE_8__.AgentMenuComponent,
         _components_agent_profile_agent_profile_component__WEBPACK_IMPORTED_MODULE_9__.AgentProfileComponent,
         _components_user_profile_user_profile_component__WEBPACK_IMPORTED_MODULE_10__.UserProfileComponent,
-        _components_contact_contact_component__WEBPACK_IMPORTED_MODULE_11__.ContactComponent], imports: [_angular_common__WEBPACK_IMPORTED_MODULE_15__.CommonModule,
-        _angular_forms__WEBPACK_IMPORTED_MODULE_16__.FormsModule,
-        _angular_forms__WEBPACK_IMPORTED_MODULE_16__.ReactiveFormsModule, _angular_fire_compat__WEBPACK_IMPORTED_MODULE_17__.AngularFireModule, _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_18__.AngularFirestoreModule,
-        _angular_fire_compat_storage__WEBPACK_IMPORTED_MODULE_19__.AngularFireStorageModule,
-        _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_20__.AngularFireAuthModule,
+        _components_contact_contact_component__WEBPACK_IMPORTED_MODULE_11__.ContactComponent,
+        _pipes_search_messages_pipe__WEBPACK_IMPORTED_MODULE_12__.SearchMessagesPipe], imports: [_angular_common__WEBPACK_IMPORTED_MODULE_16__.CommonModule,
+        _angular_forms__WEBPACK_IMPORTED_MODULE_17__.FormsModule,
+        _angular_forms__WEBPACK_IMPORTED_MODULE_17__.ReactiveFormsModule, _angular_fire_compat__WEBPACK_IMPORTED_MODULE_18__.AngularFireModule, _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_19__.AngularFirestoreModule,
+        _angular_fire_compat_storage__WEBPACK_IMPORTED_MODULE_20__.AngularFireStorageModule,
+        _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_21__.AngularFireAuthModule,
         ng_click_outside__WEBPACK_IMPORTED_MODULE_2__.ClickOutsideModule,
-        _angular_material_input__WEBPACK_IMPORTED_MODULE_21__.MatInputModule,
-        _angular_material_form_field__WEBPACK_IMPORTED_MODULE_22__.MatFormFieldModule,
-        _angular_material_select__WEBPACK_IMPORTED_MODULE_23__.MatSelectModule,
-        _angular_material_radio__WEBPACK_IMPORTED_MODULE_24__.MatRadioModule,
-        _angular_material_datepicker__WEBPACK_IMPORTED_MODULE_25__.MatDatepickerModule,
-        _angular_material_core__WEBPACK_IMPORTED_MODULE_13__.MatNativeDateModule,
-        _angular_material_moment_adapter__WEBPACK_IMPORTED_MODULE_14__.MomentDateModule, ngx_toastr__WEBPACK_IMPORTED_MODULE_26__.ToastrModule, _angular_material_stepper__WEBPACK_IMPORTED_MODULE_27__.MatStepperModule,
-        _angular_material_radio__WEBPACK_IMPORTED_MODULE_24__.MatRadioModule,
-        _layouts_layouts_routing_module__WEBPACK_IMPORTED_MODULE_7__.LayoutsRoutingModule, _ngbmodule_material_carousel__WEBPACK_IMPORTED_MODULE_28__.MatCarouselModule, _angular_material_progress_spinner__WEBPACK_IMPORTED_MODULE_29__.MatProgressSpinnerModule], exports: [_components_header_header_component__WEBPACK_IMPORTED_MODULE_3__.HeaderComponent,
+        _angular_material_input__WEBPACK_IMPORTED_MODULE_22__.MatInputModule,
+        _angular_material_form_field__WEBPACK_IMPORTED_MODULE_23__.MatFormFieldModule,
+        _angular_material_select__WEBPACK_IMPORTED_MODULE_24__.MatSelectModule,
+        _angular_material_radio__WEBPACK_IMPORTED_MODULE_25__.MatRadioModule,
+        _angular_material_datepicker__WEBPACK_IMPORTED_MODULE_26__.MatDatepickerModule,
+        _angular_material_core__WEBPACK_IMPORTED_MODULE_14__.MatNativeDateModule,
+        _angular_material_moment_adapter__WEBPACK_IMPORTED_MODULE_15__.MomentDateModule, ngx_toastr__WEBPACK_IMPORTED_MODULE_27__.ToastrModule, _angular_material_stepper__WEBPACK_IMPORTED_MODULE_28__.MatStepperModule,
+        _angular_material_radio__WEBPACK_IMPORTED_MODULE_25__.MatRadioModule,
+        _layouts_layouts_routing_module__WEBPACK_IMPORTED_MODULE_7__.LayoutsRoutingModule, _ngbmodule_material_carousel__WEBPACK_IMPORTED_MODULE_29__.MatCarouselModule, _angular_material_progress_spinner__WEBPACK_IMPORTED_MODULE_30__.MatProgressSpinnerModule], exports: [_components_header_header_component__WEBPACK_IMPORTED_MODULE_3__.HeaderComponent,
         _components_header_header_items_header_items_component__WEBPACK_IMPORTED_MODULE_4__.HeaderItemsComponent,
         _components_menu_menu_component__WEBPACK_IMPORTED_MODULE_5__.MenuComponent,
         _components_reset_password_reset_password_component__WEBPACK_IMPORTED_MODULE_6__.ResetPasswordComponent,
-        _components_agent_menu_agent_menu_component__WEBPACK_IMPORTED_MODULE_8__.AgentMenuComponent] }); })();
+        _components_agent_menu_agent_menu_component__WEBPACK_IMPORTED_MODULE_8__.AgentMenuComponent,
+        _pipes_search_messages_pipe__WEBPACK_IMPORTED_MODULE_12__.SearchMessagesPipe] }); })();
 
 
 /***/ }),

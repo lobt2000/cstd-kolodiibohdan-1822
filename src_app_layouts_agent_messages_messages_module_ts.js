@@ -1,10 +1,10 @@
 "use strict";
-(self["webpackChunkkindergarten"] = self["webpackChunkkindergarten"] || []).push([["src_app_layouts_user_messages_messages_module_ts"],{
+(self["webpackChunkkindergarten"] = self["webpackChunkkindergarten"] || []).push([["src_app_layouts_agent_messages_messages_module_ts"],{
 
-/***/ 5833:
-/*!********************************************************************************!*\
-  !*** ./src/app/layouts/user/messages/messages-chat/messages-chat.component.ts ***!
-  \********************************************************************************/
+/***/ 3266:
+/*!*********************************************************************************!*\
+  !*** ./src/app/layouts/agent/messages/messages-chat/messages-chat.component.ts ***!
+  \*********************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -574,10 +574,10 @@ MessagesChatComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODU
 
 /***/ }),
 
-/***/ 8162:
-/*!******************************************************************!*\
-  !*** ./src/app/layouts/user/messages/messages-routing.module.ts ***!
-  \******************************************************************/
+/***/ 1276:
+/*!*******************************************************************!*\
+  !*** ./src/app/layouts/agent/messages/messages-routing.module.ts ***!
+  \*******************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -585,8 +585,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "MessagesRoutingModule": () => (/* binding */ MessagesRoutingModule)
 /* harmony export */ });
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ 1258);
-/* harmony import */ var _messages_chat_messages_chat_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./messages-chat/messages-chat.component */ 5833);
-/* harmony import */ var _messages_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./messages.component */ 9609);
+/* harmony import */ var _messages_chat_messages_chat_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./messages-chat/messages-chat.component */ 3266);
+/* harmony import */ var _messages_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./messages.component */ 481);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 2316);
 
 
@@ -615,10 +615,10 @@ MessagesRoutingModule.ɵinj = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODU
 
 /***/ }),
 
-/***/ 1919:
-/*!**********************************************************!*\
-  !*** ./src/app/layouts/user/messages/messages.module.ts ***!
-  \**********************************************************/
+/***/ 1928:
+/*!***********************************************************!*\
+  !*** ./src/app/layouts/agent/messages/messages.module.ts ***!
+  \***********************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -633,8 +633,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var src_app_shared_shared_module__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! src/app/shared/shared.module */ 4466);
 /* harmony import */ var _angular_material_progress_spinner__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/material/progress-spinner */ 181);
 /* harmony import */ var ng_click_outside__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ng-click-outside */ 5754);
-/* harmony import */ var _messages_routing_module__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./messages-routing.module */ 8162);
-/* harmony import */ var _messages_chat_messages_chat_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./messages-chat/messages-chat.component */ 5833);
+/* harmony import */ var _messages_routing_module__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./messages-routing.module */ 1276);
+/* harmony import */ var _messages_chat_messages_chat_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./messages-chat/messages-chat.component */ 3266);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ 2316);
 
 
@@ -647,6 +647,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+// import { MessagesChatComponent } from './messages-chat/messages-chat.component';
 class MessagesModule {
 }
 MessagesModule.ɵfac = function MessagesModule_Factory(t) { return new (t || MessagesModule)(); };
@@ -675,4 +676,4 @@ MessagesModule.ɵinj = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_5__[
 /***/ })
 
 }]);
-//# sourceMappingURL=src_app_layouts_user_messages_messages_module_ts.js.map
+//# sourceMappingURL=src_app_layouts_agent_messages_messages_module_ts.js.map
