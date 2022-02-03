@@ -1,8 +1,8 @@
-export interface contacts{
+export interface contacts {
     id?: string,
-    img: string,
-    name: string,
-    time:  string,
+    icon: string,
+    username: string,
+    time: string,
     missing: number,
     text: string,
     url: string,

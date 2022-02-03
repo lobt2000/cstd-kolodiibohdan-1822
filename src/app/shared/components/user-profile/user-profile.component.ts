@@ -75,7 +75,9 @@ export class UserProfileComponent implements OnInit {
     if (this.userFrom.valid) {
       const user = {
         ...this.profUser,
-        ...this.userFrom.getRawValue()
+        ...this.userFrom.getRawValue(),
+        username: `${this.userFrom.value.firstname} ${this.userFrom.value.secondname}`,
+        url: `${this.userFrom.value.firstname}_${this.userFrom.value.secondname}`,
       }
       this.profService.update(this.profUser.id, user).then(
         () => {

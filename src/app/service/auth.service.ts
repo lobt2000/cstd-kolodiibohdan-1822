@@ -50,35 +50,7 @@ export class AuthService {
           username: `${userFname} ${userSname}`,
           url: `${userFname}_${userSname}`,
           icon: '',
-          contacts: [
-            {
-              "time": "11:15",
-              "url": "Guy_Hawkins",
-              "messages": [
-                {
-                  "userIcon": "https://firebasestorage.googleapis.com/v0/b/skillcheckers-ac855.appspot.com/o/userImg%2Fuser1.png?alt=media&token=5338afc7-46ed-408a-b3e4-db03ed8303c2",
-                  "time": "10:45 AM",
-                  "date": "6 JULY 2020",
-                  "user": "Guy Hawkins",
-                  "text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eget",
-                  "file": ""
-                },
-                {
-                  "user": "Bogdan Kolodiy",
-                  "time": "10:45 AM",
-                  "userIcon": "assets/images/profile.svg",
-                  "file": "",
-                  "text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eget",
-                  "date": "6 JULY 2020"
-                }
-              ],
-              "id": "",
-              "text": "Please give us feedback...",
-              "img": "https://firebasestorage.googleapis.com/v0/b/skillcheckers-ac855.appspot.com/o/userImg%2Fuser1.png?alt=media&token=5338afc7-46ed-408a-b3e4-db03ed8303c2",
-              "missing": "0",
-              "name": "Guy Hawkins"
-            }
-          ]
+          contacts: []
         }
 
         this.db.collection('users').add(user)
@@ -125,11 +97,13 @@ export class AuthService {
                 password: password,
 
               }
+              if (!JSON.parse(localStorage.getItem('mainuser'))) {
                 this.toastr.success(`Hello ${myUser.firstname} ${myUser.secondname}`, 'Login success');
                 this.updUser.next(myUser)
                 localStorage.setItem('mainuser', JSON.stringify(myUser))
                 // this.localUser = JSON.parse(localStorage.getItem('mainuser'))
                 myUser.userPos == 'user' ? this.router.navigate(['user']) : this.router.navigate(['agent']);
+              }
             })
           }
         )

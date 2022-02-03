@@ -13,9 +13,9 @@ export class HeaderItemsComponent implements OnInit {
   constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
-    this.authService.updUser.subscribe(res => {
-      this.currUser = res;
-    })
+    // this.authService.updUser.subscribe(res => {
+    //   this.currUser = res;
+    // })
     if (localStorage.getItem('mainuser')) {
       this.currUser = JSON.parse(localStorage.getItem('mainuser'));
     }

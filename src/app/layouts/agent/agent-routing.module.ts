@@ -33,10 +33,10 @@ const routes: Routes = [
                 path: 'profile',
                 component: AgentProfileComponent
             },
-            //     {
-            //         path: 'messages',
-            //         loadChildren: () => import('./messages/messages.module').then((m) => m.MessagesModule)
-            //     },
+            {
+                path: 'messages',
+                loadChildren: () => import('./messages/messages.module').then((m) => m.MessagesModule)
+            },
             {
                 path: 'contact',
                 component: ContactComponent
