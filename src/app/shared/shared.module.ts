@@ -34,6 +34,8 @@ import { AgentProfileComponent } from './components/agent-profile/agent-profile.
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { SearchMessagesPipe } from './pipes/search-messages.pipe';
+import { SearchApplicationPipe } from './pipes/search-application.pipe';
+import { SearchKindergartenPipe } from './pipes/search-kindergarten.pipe';
 // import { MatRadioModule } from '@angular/material/radio';
 @NgModule({
     declarations: [
@@ -45,7 +47,9 @@ import { SearchMessagesPipe } from './pipes/search-messages.pipe';
         AgentProfileComponent,
         UserProfileComponent,
         ContactComponent,
-        SearchMessagesPipe
+        SearchMessagesPipe,
+        SearchApplicationPipe,
+        SearchKindergartenPipe,
     ],
     imports: [
         CommonModule,
@@ -79,7 +83,9 @@ import { SearchMessagesPipe } from './pipes/search-messages.pipe';
         MenuComponent,
         ResetPasswordComponent,
         AgentMenuComponent,
-        SearchMessagesPipe
+        SearchMessagesPipe,
+        SearchApplicationPipe,
+        SearchKindergartenPipe,
     ],
     providers: [
         { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },

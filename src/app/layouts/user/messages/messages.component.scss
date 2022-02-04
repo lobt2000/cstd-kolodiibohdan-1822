@@ -39,7 +39,7 @@ main {
   position: relative;
 
   @media (max-width: 768px) {
-    height: calc(100%);
+    height: calc(100% - 45px);
     padding-top: 45px;
     justify-content: center;
   }

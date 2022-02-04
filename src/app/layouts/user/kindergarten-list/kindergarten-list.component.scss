@@ -1,3 +1,30 @@
+.kindergarten-search {
+  width: 90%;
+  padding: 2.5px;
+  margin-left: 53px;
+  height: 33px;
+  border-radius: 10px;
+  margin-top: 10px;
+  box-shadow: 0px 2px 7px 1px gray;
+
+  .icon-search {
+    margin-left: 5px;
+    height: 15px;
+    width: 15px;
+    font-size: 15px;
+    color: #0CACF8;
+  }
+
+  .input-search {
+    width: 85%;
+    // padding-left: 5px;
+    height: 100%;
+    border: none;
+    // font-size: 13px;
+  }
+
+}
+
 .kindergarten {
   width: calc(100% - 20px);
   height: calc(100% - 40px);

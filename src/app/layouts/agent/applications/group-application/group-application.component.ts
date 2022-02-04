@@ -1,5 +1,8 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subject } from 'rxjs';
+import { debounceTime, map, takeUntil } from 'rxjs/operators';
+import { AuthService } from 'src/app/service/auth.service';
 import { KindergartenApplicationService } from 'src/app/service/kindergarten-application.service';
 import { KindergartenListService } from 'src/app/service/kindergarten-list.service';
 import { v4 } from 'uuid';
@@ -8,9 +11,9 @@ import { v4 } from 'uuid';
   templateUrl: './group-application.component.html',
   styleUrls: ['./group-application.component.scss']
 })
-export class GroupApplicationComponent implements OnInit {
+export class GroupApplicationComponent implements OnInit, OnDestroy {
 
-  constructor(private kindergartenApplication: KindergartenApplicationService, private route: ActivatedRoute, private kindergartenServise: KindergartenListService, private router: Router) { }
+  constructor(private kindergartenApplication: KindergartenApplicationService, private route: ActivatedRoute, private kindergartenServise: KindergartenListService, private router: Router, private authService: AuthService) { }
   applylists: Array<any> = [];
   currentApply;
   windowSize: number = window.innerWidth;
@@ -18,6 +21,8 @@ export class GroupApplicationComponent implements OnInit {
   isApplicationOpen: boolean;
   applyKindergarten;
   group: string = this.route.snapshot.params.name;
+  destroy$ = new Subject<any>();
+  searchText: string = '';
   ngOnInit(): void {
     this.kindergartenServise.menuPosition.subscribe(
       res => {
@@ -119,6 +124,22 @@ export class GroupApplicationComponent implements OnInit {
     this.kindergartenApplication.update(this.applyKindergarten.id, apply)
   }
 
+  goToUserMessage() {
+    this.authService.getAllusers().snapshotChanges().pipe(
+      map(changes =>
+        changes.map(c =>
+          ({ id: c.payload.doc.id, ...c.payload.doc.data() })
+        )
+      ),
+      debounceTime(600),
+      takeUntil(this.destroy$)
+    ).subscribe(res => {
+      const user = res.find(item => item.id == this.currentApply.userId);
+      if (user) this.router.navigate(['/agent', `messages`, `${user.id}`])
+    })
+
+  }
+
 
   getStatistic(name) {
     if (name == 'reviewed') return this.applylists.filter(res => res.isRead).length;
@@ -127,4 +148,8 @@ export class GroupApplicationComponent implements OnInit {
     if (name == 'declined') return this.applylists.filter(res => res.status == 'decline').length;
   }
 
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.unsubscribe();
+  }
 }

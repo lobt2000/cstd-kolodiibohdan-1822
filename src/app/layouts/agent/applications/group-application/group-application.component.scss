@@ -144,6 +144,117 @@
     justify-content: flex-start;
     flex-flow: column nowrap;
 
+    .apply-search {
+      width: calc(100%);
+      // padding: 20px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .icon-search {
+        width: 15px;
+        height: 15px;
+        margin-right: 20px;
+        line-height: 14px;
+        font-size: 14px;
+      }
+
+      .search {
+        width: calc(84% - 50px);
+        // height: 30px;
+        border: none;
+        border-bottom: 1px solid blue;
+        // margin-right: 5%;
+      }
+
+      .apply-filter {
+        width: 30px;
+        height: 30px;
+        position: relative;
+
+        .filter-info {
+          position: absolute;
+          width: 250px;
+          height: 150px;
+          display: flex;
+          // align-items: center;
+          justify-content: space-around;
+          flex-flow: column;
+          left: -250px;
+          z-index: 3;
+          border-radius: 10px;
+          box-shadow: 0px 2px 7px 1px gray;
+          // display: none;
+          background-color: white;
+          padding: 10px;
+          padding-left: 15px;
+
+          .filter-details {
+            width: 100%;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            .filter-select {
+              width: 60%;
+              border: none;
+              min-height: 40px;
+              border-bottom: 2px solid blue;
+              padding-left: 10px;
+              transition: all 0.3s ease-in-out;
+              background-color: transparent;
+              cursor: pointer;
+              position: relative;
+              font-size: 16px;
+              font-family: 'Poppins';
+              font-weight: normal;
+
+              .drop-icon {
+                width: 9px;
+                height: 6px;
+                line-height: 12px;
+                font-size: 10px;
+                color: #6E7585;
+                position: absolute;
+                top: 15px;
+                right: 11px;
+              }
+
+
+              .hidden {
+                overflow-y: auto;
+                z-index: 3;
+                position: absolute;
+                min-height: 58px;
+                top: -3px;
+                left: -5px;
+                width: 105%;
+                box-shadow: 3px 6px 8px 4px rgba(0, 0, 0, 0.25);
+                border-radius: 5px;
+                display: flex;
+                align-items: center;
+                justify-content: space-evenly;
+                flex-flow: column;
+
+                p {
+                  width: 95%;
+                  height: 45px;
+                  line-height: 45px;
+                }
+
+                p:hover {
+                  background-color: rgba(0, 0, 0, 0.04);
+                }
+              }
+
+            }
+          }
+        }
+      }
+    }
+
     .short-apply-info {
       width: calc(100% - 24px);
       min-height: 60px;

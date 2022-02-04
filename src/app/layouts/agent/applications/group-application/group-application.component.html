@@ -22,7 +22,11 @@
     <ng-container *ngIf="applylists.length; else withoutApply">
       <div class="apply-list" [style.display]="checkDisplayType('applylist')"
         [style.width]="(windowSize < 1020 && !isOpen) || windowSize < 850 ? '100%' : ''">
-        <div class="short-apply-info" *ngFor="let applylist of applylists; let i=index"
+        <div class="apply-search">
+          <span aria-hidden="true" class="icon-search icon-icons8-search txt-c-blue"></span>
+          <input type="text" name="searchText" id="" class="search" [(ngModel)]="searchText">
+        </div>
+        <div class="short-apply-info" *ngFor="let applylist of applylists | searchApplication: searchText; let i=index"
           (click)="openApplyDetails(applylist, i)"
           [style.background-color]="applylist?.id == currentApply?.id ? 'white' : ''">
           <p class="child-info"><span>{{applylist?.childName}}</span><span>{{applylist?.childYear}} years old</span></p>
@@ -53,6 +57,7 @@
 
           <div class="apply-button">
             <button class="ask-for-details btn" (click)="changeStatusOfApplication('accept')">Accept</button>
+            <button class="ask-for-details btn" (click)="goToUserMessage()">Write to a parent</button>
             <button class="recort-to-kinder btn" (click)="changeStatusOfApplication('decline')">Decline</button>
           </div>
         </ng-container>

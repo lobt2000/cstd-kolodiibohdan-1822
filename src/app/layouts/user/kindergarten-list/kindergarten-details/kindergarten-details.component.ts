@@ -1,6 +1,9 @@
-import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subject } from 'rxjs';
+import { debounceTime, map, takeUntil } from 'rxjs/operators';
+import { AuthService } from 'src/app/service/auth.service';
 import { KindergartenListService } from 'src/app/service/kindergarten-list.service';
 import { v4 } from 'uuid';
 
@@ -9,7 +12,7 @@ import { v4 } from 'uuid';
   templateUrl: './kindergarten-details.component.html',
   styleUrls: ['./kindergarten-details.component.scss']
 })
-export class KindergartenDetailsComponent implements OnInit {
+export class KindergartenDetailsComponent implements OnInit, OnDestroy {
   form: FormGroup;
   kinderTitle: string;
   currkinder;
@@ -19,8 +22,9 @@ export class KindergartenDetailsComponent implements OnInit {
   isGroupCheck: boolean;
   isType: boolean;
   regExpEmail = /^[a-z0-9\-\.]{1,}@gmail\.com|net\.us|org\.ua$/i;
+  destroy$ = new Subject<any>();
   @ViewChild('content') content: ElementRef;
-  constructor(private kindergartenServise: KindergartenListService, private route: ActivatedRoute, private fb: FormBuilder, private router: Router) { }
+  constructor(private kindergartenServise: KindergartenListService, private route: ActivatedRoute, private fb: FormBuilder, private router: Router, private authService: AuthService) { }
 
   @HostListener('window:resize', ['$event'])
   onResize(event) {
@@ -135,8 +139,39 @@ export class KindergartenDetailsComponent implements OnInit {
       });
       this.kindergartenServise.applyFile.next(fileObj)
       this.kindergartenServise.updateKinderApply(this.currkinder.title, apply);
-      // this.router.navigate(['/user', `messages`, 'Guy_Hawkins'])
+      this.form.patchValue({
+        email: '',
+        firstName: '',
+        lastName: '',
+        childName: '',
+        childYear: '',
+        childSex: '',
+        groupType: '',
+        typeOfReg: ''
+      });
     }
   }
+
+  goToKinderAgent() {
+    this.authService.getAllusers().snapshotChanges().pipe(
+      map(changes =>
+        changes.map(c =>
+          ({ id: c.payload.doc.id, ...c.payload.doc.data() })
+        )
+      ),
+      debounceTime(600),
+      takeUntil(this.destroy$)
+    ).subscribe(res => {
+      const agent = res.find(item => item.kinderId == this.currkinder.id);
+      if (agent) this.router.navigate(['/user', `messages`, `${agent.id}`])
+    })
+
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.unsubscribe();
+  }
+
 
 }

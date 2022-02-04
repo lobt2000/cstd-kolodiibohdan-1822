@@ -1,5 +1,10 @@
+<div class="kindergarten-search flex jcsa aic nowrap bc-white" *ngIf="!isLoading">
+  <span aria-hidden="true" data-icon="&#xe902;" class="icon-icons8-search"></span>
+  <input type="search" name="searchText" class="input-search font-13 p-l-5 bc-white" placeholder="Search"
+    [(ngModel)]="searchText">
+</div>
 <div class="kindergarten" *ngIf="!isLoading">
-  <div class="kindergarten-list" *ngFor="let kinderElem of kinderLists"
+  <div class="kindergarten-list" *ngFor="let kinderElem of kinderLists | searchKindergarten: searchText"
     [style.width]="(windowSize < 1120 && !isOpen) || windowSize < 850 ? '90%' : '46%'">
     <div class="kindergarten-logo" [style.background-image]="'url(' + kinderElem['logo-img'] + ')'" alt=""></div>
     <div class="kindergarten-title header-title"><img class="logo" [src]="kinderElem?.logo" alt="">

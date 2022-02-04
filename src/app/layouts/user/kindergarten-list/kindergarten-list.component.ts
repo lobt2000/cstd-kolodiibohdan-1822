@@ -13,6 +13,7 @@ export class KindergartenListComponent implements OnInit {
   isLoading: boolean = true;
   windowSize: number = window.innerWidth;
   isOpen: boolean;
+  searchText: string;
   constructor(private kindergartenService: KindergartenListService, private router: Router) { }
 
   ngOnInit(): void {
