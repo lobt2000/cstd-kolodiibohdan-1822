@@ -74,7 +74,7 @@ export class MessagesChatComponent implements OnInit {
 
   backInLocation(bool = false) {
     if (!bool) {
-      this.router.navigateByUrl('/user/messages')
+      this.router.navigateByUrl('/agent/messages')
     }
     this.kindergartenListService.isConversationOpen.next(bool)
   }

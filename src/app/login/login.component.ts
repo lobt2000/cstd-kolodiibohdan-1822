@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from '../service/auth.service';
 
 @Component({
@@ -22,9 +23,14 @@ export class LoginComponent implements OnInit {
   isSign: string = 'signIn';
   confirmPass: string = '';
   resetPassword: string = 'registration';
-  constructor(private fb: FormBuilder, private authService: AuthService) { }
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
+    if (JSON.parse(localStorage.getItem('mainuser'))) {
+      JSON.parse(localStorage.getItem('mainuser')).userPos == 'user' ?
+        this.router.navigateByUrl("/user") :
+        this.router.navigateByUrl('/agent')
+    }
     this.buildFormForSignIn();
   }
   buildFormForSignIn(): void {
