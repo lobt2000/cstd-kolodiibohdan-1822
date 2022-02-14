@@ -40,136 +40,77 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const _c0 = ["scroll"];
-function MessagesChatComponent_div_9_div_25_div_1_div_1_Template(rf, ctx) { if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](0, "div", 42);
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](1, "p", 43);
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](2);
+function MessagesChatComponent_div_9_div_1_Template(rf, ctx) { if (rf & 1) {
+    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](0, "div", 38);
+    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](1, "div", 38);
+    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](2, "div", 39);
+    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](3, "p", 40);
+    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](4);
     _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelement"](3, "hr", 44);
+    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelement"](5, "hr", 41);
     _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
-} if (rf & 2) {
-    const i_r7 = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵnextContext"](3).index;
-    const ctx_r14 = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵnextContext"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵadvance"](2);
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtextInterpolate1"](" ", ctx_r14.currDate == (ctx_r14.currMesUser == null ? null : ctx_r14.currMesUser.messages[i_r7 + 1] == null ? null : ctx_r14.currMesUser.messages[i_r7 + 1].date) ? "TODAY" : ctx_r14.currMesUser == null ? null : ctx_r14.currMesUser.messages[i_r7 + 1] == null ? null : ctx_r14.currMesUser.messages[i_r7 + 1].date, " ");
-} }
-function MessagesChatComponent_div_9_div_25_div_1_Template(rf, ctx) { if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](0, "div", 40);
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtemplate"](1, MessagesChatComponent_div_9_div_25_div_1_div_1_Template, 4, 1, "div", 41);
     _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
-} if (rf & 2) {
-    const i_r7 = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵnextContext"](2).index;
-    const ctx_r13 = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵnextContext"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵproperty"]("ngIf", (ctx_r13.currMesUser == null ? null : ctx_r13.currMesUser.messages[i_r7] == null ? null : ctx_r13.currMesUser.messages[i_r7].dateForCheck) !== (ctx_r13.currMesUser == null ? null : ctx_r13.currMesUser.messages[i_r7 + 1] == null ? null : ctx_r13.currMesUser.messages[i_r7 + 1].dateForCheck) && (ctx_r13.currMesUser == null ? null : ctx_r13.currMesUser.messages[i_r7 + 1] == null ? null : ctx_r13.currMesUser.messages[i_r7 + 1].dateForCheck));
-} }
-function MessagesChatComponent_div_9_div_25_Template(rf, ctx) { if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](0, "div", 40);
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtemplate"](1, MessagesChatComponent_div_9_div_25_div_1_Template, 2, 1, "div", 37);
     _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
 } if (rf & 2) {
     const i_r7 = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵnextContext"]().index;
-    const _r9 = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵreference"](27);
     const ctx_r8 = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵnextContext"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵproperty"]("ngIf", +(ctx_r8.currMesUser == null ? null : ctx_r8.currMesUser.messages[i_r7] == null ? null : ctx_r8.currMesUser.messages[i_r7].dateForCheck == null ? null : ctx_r8.currMesUser.messages[i_r7].dateForCheck.split("/")[0]) <= +(ctx_r8.currMesUser == null ? null : ctx_r8.currMesUser.messages[i_r7 + 1] == null ? null : ctx_r8.currMesUser.messages[i_r7 + 1].dateForCheck == null ? null : ctx_r8.currMesUser.messages[i_r7 + 1].dateForCheck.split("/")[0]))("ngIfElse", _r9);
-} }
-function MessagesChatComponent_div_9_ng_template_26_div_0_Template(rf, ctx) { if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](0, "div", 42);
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](1, "p", 43);
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](2);
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelement"](3, "hr", 44);
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
-} if (rf & 2) {
-    const i_r7 = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵnextContext"](2).index;
-    const ctx_r18 = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵnextContext"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵadvance"](2);
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtextInterpolate1"](" ", ctx_r18.currDate == (ctx_r18.currMesUser == null ? null : ctx_r18.currMesUser.messages[i_r7 + 1] == null ? null : ctx_r18.currMesUser.messages[i_r7 + 1].date) ? "TODAY" : ctx_r18.currMesUser == null ? null : ctx_r18.currMesUser.messages[i_r7 + 1] == null ? null : ctx_r18.currMesUser.messages[i_r7 + 1].date, " ");
-} }
-function MessagesChatComponent_div_9_ng_template_26_Template(rf, ctx) { if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtemplate"](0, MessagesChatComponent_div_9_ng_template_26_div_0_Template, 4, 1, "div", 45);
-} if (rf & 2) {
-    const i_r7 = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵnextContext"]().index;
-    const _r11 = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵreference"](29);
-    const ctx_r10 = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵnextContext"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵproperty"]("ngIf", (ctx_r10.currMesUser == null ? null : ctx_r10.currMesUser.messages[i_r7 + 1] == null ? null : ctx_r10.currMesUser.messages[i_r7 + 1].dateForCheck == null ? null : ctx_r10.currMesUser.messages[i_r7 + 1].dateForCheck.split("/")[1]) && (ctx_r10.currMesUser == null ? null : ctx_r10.currMesUser.messages[i_r7] == null ? null : ctx_r10.currMesUser.messages[i_r7].dateForCheck == null ? null : ctx_r10.currMesUser.messages[i_r7].dateForCheck.split("/")[1]) > (ctx_r10.currMesUser == null ? null : ctx_r10.currMesUser.messages[i_r7 + 1] == null ? null : ctx_r10.currMesUser.messages[i_r7 + 1].dateForCheck == null ? null : ctx_r10.currMesUser.messages[i_r7 + 1].dateForCheck.split("/")[1]))("ngIfElse", _r11);
-} }
-function MessagesChatComponent_div_9_ng_template_28_div_0_Template(rf, ctx) { if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](0, "div", 42);
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](1, "p", 43);
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](2);
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelement"](3, "hr", 44);
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
-} if (rf & 2) {
-    const i_r7 = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵnextContext"](2).index;
-    const ctx_r21 = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵnextContext"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵadvance"](2);
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtextInterpolate1"](" ", ctx_r21.currDate == (ctx_r21.currMesUser == null ? null : ctx_r21.currMesUser.messages[i_r7 + 1] == null ? null : ctx_r21.currMesUser.messages[i_r7 + 1].date) ? "TODAY" : ctx_r21.currMesUser == null ? null : ctx_r21.currMesUser.messages[i_r7 + 1] == null ? null : ctx_r21.currMesUser.messages[i_r7 + 1].date, " ");
-} }
-function MessagesChatComponent_div_9_ng_template_28_Template(rf, ctx) { if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtemplate"](0, MessagesChatComponent_div_9_ng_template_28_div_0_Template, 4, 1, "div", 46);
-} if (rf & 2) {
-    const i_r7 = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵnextContext"]().index;
-    const ctx_r12 = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵnextContext"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵproperty"]("ngIf", (ctx_r12.currMesUser == null ? null : ctx_r12.currMesUser.messages[i_r7] == null ? null : ctx_r12.currMesUser.messages[i_r7].dateForCheck == null ? null : ctx_r12.currMesUser.messages[i_r7].dateForCheck.split("/")[1]) < (ctx_r12.currMesUser == null ? null : ctx_r12.currMesUser.messages[i_r7 + 1] == null ? null : ctx_r12.currMesUser.messages[i_r7 + 1].dateForCheck == null ? null : ctx_r12.currMesUser.messages[i_r7 + 1].dateForCheck.split("/")[1]));
+    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵadvance"](4);
+    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtextInterpolate1"](" ", ctx_r8.currDate == (ctx_r8.currMesUser == null ? null : ctx_r8.currMesUser.messages[i_r7] == null ? null : ctx_r8.currMesUser.messages[i_r7].date) ? "TODAY" : ctx_r8.currMesUser == null ? null : ctx_r8.currMesUser.messages[i_r7] == null ? null : ctx_r8.currMesUser.messages[i_r7].date, " ");
 } }
 function MessagesChatComponent_div_9_Template(rf, ctx) { if (rf & 1) {
-    const _r25 = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵgetCurrentView"]();
+    const _r11 = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵgetCurrentView"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](0, "div", 20);
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](1, "div", 21);
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelement"](2, "img", 22);
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](3, "div", 23);
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](4, "p", 24);
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](5);
+    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtemplate"](1, MessagesChatComponent_div_9_div_1_Template, 6, 1, "div", 21);
+    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](2, "div", 22);
+    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelement"](3, "img", 23);
+    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](4, "div", 24);
+    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](5, "p", 25);
+    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](6);
     _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](6, "p", 25);
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](7, "span", 26);
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵlistener"]("click", function MessagesChatComponent_div_9_Template_span_click_7_listener() { const restoredCtx = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵrestoreView"](_r25); const message_r6 = restoredCtx.$implicit; const ctx_r24 = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵnextContext"](); return ctx_r24.downloadFile(message_r6 == null ? null : message_r6.file); });
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](8);
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](7, "p", 26);
+    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](8, "span", 27);
+    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵlistener"]("click", function MessagesChatComponent_div_9_Template_span_click_8_listener() { const restoredCtx = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵrestoreView"](_r11); const message_r6 = restoredCtx.$implicit; const ctx_r10 = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵnextContext"](); return ctx_r10.downloadFile(message_r6 == null ? null : message_r6.file); });
     _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](9);
     _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](10);
     _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](10, "div", 27);
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](11, "p", 28);
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](12);
     _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](13, "div", 29);
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵlistener"]("clickOutside", function MessagesChatComponent_div_9_Template_div_clickOutside_13_listener($event) { const restoredCtx = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵrestoreView"](_r25); const i_r7 = restoredCtx.index; const ctx_r26 = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵnextContext"](); return ctx_r26.onClickedOutsideOption($event, i_r7); })("click", function MessagesChatComponent_div_9_Template_div_click_13_listener($event) { const restoredCtx = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵrestoreView"](_r25); const i_r7 = restoredCtx.index; const ctx_r27 = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵnextContext"](); return ctx_r27.openOption(i_r7, $event); });
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](14, "button", 30);
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵlistener"]("mouseover", function MessagesChatComponent_div_9_Template_button_mouseover_14_listener() { const restoredCtx = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵrestoreView"](_r25); const i_r7 = restoredCtx.index; const ctx_r28 = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵnextContext"](); return ctx_r28.changeText = i_r7; });
+    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](11, "div", 28);
+    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](12, "p", 29);
+    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](13);
     _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](15, "div", 31);
+    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](14, "div", 30);
+    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵlistener"]("clickOutside", function MessagesChatComponent_div_9_Template_div_clickOutside_14_listener($event) { const restoredCtx = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵrestoreView"](_r11); const i_r7 = restoredCtx.index; const ctx_r12 = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵnextContext"](); return ctx_r12.onClickedOutsideOption($event, i_r7); })("click", function MessagesChatComponent_div_9_Template_div_click_14_listener($event) { const restoredCtx = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵrestoreView"](_r11); const i_r7 = restoredCtx.index; const ctx_r13 = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵnextContext"](); return ctx_r13.openOption(i_r7, $event); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](15, "button", 31);
+    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵlistener"]("mouseover", function MessagesChatComponent_div_9_Template_button_mouseover_15_listener() { const restoredCtx = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵrestoreView"](_r11); const i_r7 = restoredCtx.index; const ctx_r14 = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵnextContext"](); return ctx_r14.changeText = i_r7; });
+    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](16, "div", 32);
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵlistener"]("click", function MessagesChatComponent_div_9_Template_div_click_16_listener() { const restoredCtx = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵrestoreView"](_r25); const message_r6 = restoredCtx.$implicit; const i_r7 = restoredCtx.index; const ctx_r29 = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵnextContext"](); return ctx_r29.editCurrMess(message_r6, i_r7); })("click", function MessagesChatComponent_div_9_Template_div_click_16_listener($event) { const restoredCtx = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵrestoreView"](_r25); const i_r7 = restoredCtx.index; const ctx_r30 = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵnextContext"](); return ctx_r30.openOption(i_r7, $event); });
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelement"](17, "span", 33);
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](18, "p", 34);
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](19, "Edit");
+    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](17, "div", 33);
+    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵlistener"]("click", function MessagesChatComponent_div_9_Template_div_click_17_listener() { const restoredCtx = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵrestoreView"](_r11); const message_r6 = restoredCtx.$implicit; const i_r7 = restoredCtx.index; const ctx_r15 = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵnextContext"](); return ctx_r15.editCurrMess(message_r6, i_r7); })("click", function MessagesChatComponent_div_9_Template_div_click_17_listener($event) { const restoredCtx = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵrestoreView"](_r11); const i_r7 = restoredCtx.index; const ctx_r16 = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵnextContext"](); return ctx_r16.openOption(i_r7, $event); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelement"](18, "span", 34);
+    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](19, "p", 35);
+    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](20, "Edit");
     _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelement"](20, "span", 35);
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](21, "div", 32);
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵlistener"]("click", function MessagesChatComponent_div_9_Template_div_click_21_listener() { const restoredCtx = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵrestoreView"](_r25); const i_r7 = restoredCtx.index; const ctx_r31 = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵnextContext"](); return ctx_r31.deleteCurrMess(i_r7); })("click", function MessagesChatComponent_div_9_Template_div_click_21_listener($event) { const restoredCtx = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵrestoreView"](_r25); const i_r7 = restoredCtx.index; const ctx_r32 = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵnextContext"](); return ctx_r32.openOption(i_r7, $event); });
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelement"](22, "span", 36);
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](23, "p", 34);
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](24, "Delete");
+    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelement"](21, "span", 36);
+    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](22, "div", 33);
+    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵlistener"]("click", function MessagesChatComponent_div_9_Template_div_click_22_listener() { const restoredCtx = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵrestoreView"](_r11); const i_r7 = restoredCtx.index; const ctx_r17 = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵnextContext"](); return ctx_r17.deleteCurrMess(i_r7); })("click", function MessagesChatComponent_div_9_Template_div_click_22_listener($event) { const restoredCtx = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵrestoreView"](_r11); const i_r7 = restoredCtx.index; const ctx_r18 = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵnextContext"](); return ctx_r18.openOption(i_r7, $event); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelement"](23, "span", 37);
+    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](24, "p", 35);
+    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](25, "Delete");
     _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtemplate"](25, MessagesChatComponent_div_9_div_25_Template, 2, 2, "div", 37);
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtemplate"](26, MessagesChatComponent_div_9_ng_template_26_Template, 1, 2, "ng-template", null, 38, _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtemplateRefExtractor"]);
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtemplate"](28, MessagesChatComponent_div_9_ng_template_28_Template, 1, 1, "ng-template", null, 39, _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtemplateRefExtractor"]);
     _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
 } if (rf & 2) {
     const message_r6 = ctx.$implicit;
     const i_r7 = ctx.index;
-    const _r9 = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵreference"](27);
     const ctx_r1 = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵnextContext"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵadvance"](1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵproperty"]("ngIf", ctx_r1.checkDate(i_r7) || ctx_r1.currDate !== (ctx_r1.currMesUser == null ? null : ctx_r1.currMesUser.messages[i_r7 - 1] == null ? null : ctx_r1.currMesUser.messages[i_r7 - 1].date) && ctx_r1.currDate == (ctx_r1.currMesUser == null ? null : ctx_r1.currMesUser.messages[i_r7] == null ? null : ctx_r1.currMesUser.messages[i_r7].date));
     _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵadvance"](1);
     _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵclassMap"]((ctx_r1.mainUser == null ? null : ctx_r1.mainUser.username) == (message_r6 == null ? null : message_r6.user) ? "row-rev" : "");
     _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵadvance"](1);
@@ -190,16 +131,14 @@ function MessagesChatComponent_div_9_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵclassMap"]((ctx_r1.mainUser == null ? null : ctx_r1.mainUser.username) == (message_r6 == null ? null : message_r6.user) ? "jcfs" : "jcc");
     _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵadvance"](1);
     _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵstyleProp"]("top", i_r7 === (ctx_r1.currMesUser == null ? null : ctx_r1.currMesUser.messages.length) - 1 && (ctx_r1.currMesUser == null ? null : ctx_r1.currMesUser.messages.length) > 2 || i_r7 === (ctx_r1.currMesUser == null ? null : ctx_r1.currMesUser.messages.length) - 2 && (ctx_r1.currMesUser == null ? null : ctx_r1.currMesUser.messages.length) > 3 ? "-100px" : "20px")("left", (ctx_r1.mainUser == null ? null : ctx_r1.mainUser.username) == (message_r6 == null ? null : message_r6.user) ? "0px" : "-50px")("height", ctx_r1.checkOption == i_r7 ? "100px" : "0px")("z-index", ctx_r1.checkOption == i_r7 ? "1" : "-1")("opacity", ctx_r1.checkOption == i_r7 ? "1" : "0");
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵadvance"](10);
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵproperty"]("ngIf", +(ctx_r1.currMesUser == null ? null : ctx_r1.currMesUser.messages[i_r7] == null ? null : ctx_r1.currMesUser.messages[i_r7].dateForCheck == null ? null : ctx_r1.currMesUser.messages[i_r7].dateForCheck.split("/")[2]) <= +(ctx_r1.currMesUser == null ? null : ctx_r1.currMesUser.messages[i_r7 + 1] == null ? null : ctx_r1.currMesUser.messages[i_r7 + 1].dateForCheck == null ? null : ctx_r1.currMesUser.messages[i_r7 + 1].dateForCheck.split("/")[2]))("ngIfElse", _r9);
 } }
 function MessagesChatComponent_span_16_Template(rf, ctx) { if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelement"](0, "span", 47);
+    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelement"](0, "span", 42);
 } }
 function MessagesChatComponent_button_19_Template(rf, ctx) { if (rf & 1) {
-    const _r34 = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵgetCurrentView"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](0, "button", 48);
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵlistener"]("click", function MessagesChatComponent_button_19_Template_button_click_0_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵrestoreView"](_r34); const ctx_r33 = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵnextContext"](); return ctx_r33.sendMessage(); });
+    const _r20 = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵgetCurrentView"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](0, "button", 43);
+    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵlistener"]("click", function MessagesChatComponent_button_19_Template_button_click_0_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵrestoreView"](_r20); const ctx_r19 = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵnextContext"](); return ctx_r19.sendMessage(); });
     _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](1, " Send ");
     _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
 } if (rf & 2) {
@@ -208,9 +147,9 @@ function MessagesChatComponent_button_19_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵproperty"]("disabled", !ctx_r3.isDisabled);
 } }
 function MessagesChatComponent_button_20_Template(rf, ctx) { if (rf & 1) {
-    const _r36 = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵgetCurrentView"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](0, "button", 48);
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵlistener"]("click", function MessagesChatComponent_button_20_Template_button_click_0_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵrestoreView"](_r36); const ctx_r35 = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵnextContext"](); return ctx_r35.sendEditMessage(); });
+    const _r22 = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵgetCurrentView"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](0, "button", 43);
+    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵlistener"]("click", function MessagesChatComponent_button_20_Template_button_click_0_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵrestoreView"](_r22); const ctx_r21 = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵnextContext"](); return ctx_r21.sendEditMessage(); });
     _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](1, " Edit ");
     _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
 } if (rf & 2) {
@@ -219,33 +158,33 @@ function MessagesChatComponent_button_20_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵproperty"]("disabled", !ctx_r4.isDisabled);
 } }
 function MessagesChatComponent_section_21_Template(rf, ctx) { if (rf & 1) {
-    const _r38 = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵgetCurrentView"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](0, "section", 49);
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](1, "div", 50);
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵlistener"]("clickOutside", function MessagesChatComponent_section_21_Template_div_clickOutside_1_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵrestoreView"](_r38); const ctx_r37 = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵnextContext"](); return ctx_r37.onClickedOutsideItem($event); });
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](2, "div", 51);
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵlistener"]("click", function MessagesChatComponent_section_21_Template_div_click_2_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵrestoreView"](_r38); const ctx_r39 = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵnextContext"](); return ctx_r39.closeModal(); });
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelement"](3, "span", 52);
+    const _r24 = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵgetCurrentView"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](0, "section", 44);
+    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](1, "div", 45);
+    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵlistener"]("clickOutside", function MessagesChatComponent_section_21_Template_div_clickOutside_1_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵrestoreView"](_r24); const ctx_r23 = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵnextContext"](); return ctx_r23.onClickedOutsideItem($event); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](2, "div", 46);
+    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵlistener"]("click", function MessagesChatComponent_section_21_Template_div_click_2_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵrestoreView"](_r24); const ctx_r25 = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵnextContext"](); return ctx_r25.closeModal(); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelement"](3, "span", 47);
     _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](4, "div", 53);
+    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](4, "div", 48);
     _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](5, "Delete message");
     _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](6, "div", 54);
+    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](6, "div", 49);
     _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](7, "Do you really want to delete this message?");
     _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](8, "div", 55);
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelement"](9, "input", 56);
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](10, "p", 57);
+    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](8, "div", 50);
+    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelement"](9, "input", 51);
+    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](10, "p", 52);
     _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](11);
     _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](12, "div", 58);
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](13, "button", 59);
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵlistener"]("click", function MessagesChatComponent_section_21_Template_button_click_13_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵrestoreView"](_r38); const ctx_r40 = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵnextContext"](); return ctx_r40.closeModal(); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](12, "div", 53);
+    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](13, "button", 54);
+    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵlistener"]("click", function MessagesChatComponent_section_21_Template_button_click_13_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵrestoreView"](_r24); const ctx_r26 = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵnextContext"](); return ctx_r26.closeModal(); });
     _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](14, "Cancel");
     _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](15, "button", 60);
-    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵlistener"]("click", function MessagesChatComponent_section_21_Template_button_click_15_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵrestoreView"](_r38); const ctx_r41 = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵnextContext"](); return ctx_r41.delete(); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](15, "button", 55);
+    _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵlistener"]("click", function MessagesChatComponent_section_21_Template_button_click_15_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵrestoreView"](_r24); const ctx_r27 = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵnextContext"](); return ctx_r27.delete(); });
     _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](16, "Delete");
     _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
@@ -340,6 +279,7 @@ class MessagesChatComponent {
                 url: user.url,
                 messages: user.messages || []
             };
+            this.checkDate(0);
         }
     }
     getAllUsers() {
@@ -392,6 +332,11 @@ class MessagesChatComponent {
         localStorage.setItem('mainuser', JSON.stringify(user));
         this.updUser();
         this.authService.update(this.mainUser.id, user);
+    }
+    keyDownSending(event) {
+        console.log(event);
+        if (event.key == "Enter")
+            this.isEdit ? this.sendEditMessage() : this.sendMessage();
     }
     getFile(event) {
         const file = event.target ? event.target.files[0] : event;
@@ -502,6 +447,10 @@ class MessagesChatComponent {
         e.stopPropagation();
         this.closeModal();
     }
+    checkDate(i) {
+        var _a, _b, _c, _d;
+        return ((_b = (_a = this.currMesUser) === null || _a === void 0 ? void 0 : _a.messages[i - 1]) === null || _b === void 0 ? void 0 : _b.dateForCheck) !== ((_d = (_c = this.currMesUser) === null || _c === void 0 ? void 0 : _c.messages[i]) === null || _d === void 0 ? void 0 : _d.dateForCheck);
+    }
     ngOnDestroy() {
         this.destroy$.next();
         this.destroy$.unsubscribe();
@@ -515,7 +464,7 @@ MessagesChatComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODU
         _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵqueryRefresh"](_t = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵloadQuery"]()) && (ctx.myScrollContainer = _t.first);
     } }, hostBindings: function MessagesChatComponent_HostBindings(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵlistener"]("resize", function MessagesChatComponent_resize_HostBindingHandler($event) { return ctx.onResize($event); }, false, _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵresolveWindow"]);
-    } }, decls: 22, vars: 12, consts: [[1, "bc-gray", "flex", "nowrap", "jcsb", "aifs"], [1, "chat", "bc-white", "flex", "col", "nowrap", "jcsb", "aic"], [1, "chat__search", "w-100", "flex", "nowrap", "jcsa", "aic"], [1, "chat__search--back", "m-l-20", "m-r-7", "flex", "nowrap", "jcc", "aic", "icon-arrowhead-thin-outline-to-the-left", 3, "click"], ["aria-hidden", "true", 1, "chat__search--icon", "icon-icons8-search", "txt-c-blue"], ["type", "text", "name", "searchText", "placeholder", "Search this conversation", 1, "chat__search--input", "p-l-10", "font-13", "bc-white", 3, "ngModel", "ngModelChange"], [1, "chat__conversation", "flex", "nowrap", "jcc", "aicc", "aife"], ["scroll", ""], [1, "chat__conversation--text", "flex", "col", "nowrap", "jcfs", "aife"], ["class", "w-100 flex col nowrap aife jcsa", 4, "ngFor", "ngForOf"], [1, "chat__message", "bc-light-blue", "flex", "nowrap", "jcsb", "aic", "w-100", 3, "formGroup"], [1, "chat__message--upload", "flex", "wrap", "aic", "jcc"], [1, "upload-btn-wrapper", "m-l-5"], [1, "btn", "flex", "wrap", "aic", "jcsa", "font-12"], ["aria-hidden", "true", 1, "btn__paper-clip", "icon-paper-clip"], ["class", "btn__isfile bc-red", 4, "ngIf"], ["type", "file", "name", "myfile", 3, "change"], ["type", "text", "formControlName", "text", "placeholder", "Write a message...", 1, "chat__message--input", "p-l-10", "bdc-light-gray"], ["class", "chat__message--send m-l-10 m-r-10 font-13", 3, "class", "disabled", "click", 4, "ngIf"], ["class", "modal w-100 flex aic jcc nowrap", 4, "ngIf"], [1, "w-100", "flex", "col", "nowrap", "aife", "jcsa"], [1, "message", "w-100", "flex", "jcsa", "aifs"], ["alt", "", 1, "message__logo", 3, "src"], [1, "message__person-data", "m-t-3", "flex", "col", "nowrap", "jcfs", "aifs"], [1, "message__person-data--title", "m-b-5", "m-t-14", "w-100"], [1, "message__person-data--text", "m-b-17", "w-100", "txt-c-black"], [1, "file", "txt-c-blue", "w-100", 3, "click"], [1, "message__other-data", "flex", "col", "nowrap", "jcfs", "aifs"], [1, "message__other-data--time", "m-b-5", "m-t-14", "txt-c-initial"], [1, "option", 3, "clickOutside", "click"], ["aria-hidden", "true", 1, "option__button", "btn", "bc-white", "flex", "aic", "bc-white", "icon-more-option", 3, "mouseover"], [1, "option__menu", "bc-white", "flex", "col", "nowrap", "jcsa", "aic"], [1, "option__menu--items", "w-100", "flex", "nowrap", "aic", "jcc", 3, "click"], ["aria-hidden", "true", 1, "items-edit", "icon-edit"], [1, "items-text", "font-14", "txt-c-initial"], [1, "option__menu--line", "bc-light-gray"], ["aria-hidden", "true", 1, "items-turn-off", "icon-turn-off"], ["class", "w-100", 4, "ngIf", "ngIfElse"], ["today", ""], ["day", ""], [1, "w-100"], ["class", "date-period w-100 flex nowrap jcsa aic", 4, "ngIf"], [1, "date-period", "w-100", "flex", "nowrap", "jcsa", "aic"], [1, "date-period__date", "m-l-7", "m-r-15", "txt-c-initial", "font-12"], [1, "date-period__hr", "w-100"], ["class", "date-period w-100 flex nowrap jcsa aic ", 4, "ngIf", "ngIfElse"], ["class", "date-period w-100 flex nowrap jcsa aic ", 4, "ngIf"], [1, "btn__isfile", "bc-red"], [1, "chat__message--send", "m-l-10", "m-r-10", "font-13", 3, "disabled", "click"], [1, "modal", "w-100", "flex", "aic", "jcc", "nowrap"], [1, "modal__block", "flex", "col", "aic", "jcsb", "p-10", 3, "clickOutside"], [1, "modal__block--cross", "w-100", "flex", "m-t-4", "m-r-4", "aic", "jcfe", 3, "click"], [1, "icon-close"], [1, "modal__block--title", "w-100", "flex", "aic", "jcc", "nowrap", "txt-c-blue", "font-25"], [1, "modal__block--text", "w-100", "flex", "aic", "jcc", "nowrap", "font-20", "txt-c-black"], [1, "w-100", "flex", "nowrap", "aic", "jcc", 3, "formGroup"], ["type", "checkbox", "formControlName", "checkbox", 1, "checkbox"], [1, "font-16", "m-l-20"], [1, "modal__block--button", "m-b-35", "flex", "aic", "jcc", "nowrap"], [1, "btn", "cancel", "bc-blue", "bdc-blue", "m-r-10", "font-13", "txt-c-white", 3, "click"], [1, "submit", "btn", "bc-red", "bdc-red", "font-13", 3, "click"]], template: function MessagesChatComponent_Template(rf, ctx) { if (rf & 1) {
+    } }, decls: 22, vars: 12, consts: [[1, "bc-gray", "flex", "nowrap", "jcsb", "aifs"], [1, "chat", "bc-white", "flex", "col", "nowrap", "jcsb", "aic"], [1, "chat__search", "w-100", "flex", "nowrap", "jcsa", "aic"], [1, "chat__search--back", "m-l-20", "m-r-7", "flex", "nowrap", "jcc", "aic", "icon-arrowhead-thin-outline-to-the-left", 3, "click"], ["aria-hidden", "true", 1, "chat__search--icon", "icon-icons8-search", "txt-c-blue"], ["type", "text", "name", "searchText", "placeholder", "Search this conversation", 1, "chat__search--input", "p-l-10", "font-13", "bc-white", 3, "ngModel", "ngModelChange"], [1, "chat__conversation", "flex", "nowrap", "jcc", "aicc", "aife"], ["scroll", ""], [1, "chat__conversation--text", "flex", "col", "nowrap", "jcfs", "aife"], ["class", "w-100 flex col nowrap aife jcsa", 4, "ngFor", "ngForOf"], [1, "chat__message", "bc-light-blue", "flex", "nowrap", "jcsb", "aic", "w-100", 3, "formGroup"], [1, "chat__message--upload", "flex", "wrap", "aic", "jcc"], [1, "upload-btn-wrapper", "m-l-5"], [1, "btn", "flex", "wrap", "aic", "jcsa", "font-12"], ["aria-hidden", "true", 1, "btn__paper-clip", "icon-paper-clip"], ["class", "btn__isfile bc-red", 4, "ngIf"], ["type", "file", "name", "myfile", 3, "change"], ["type", "text", "formControlName", "text", "placeholder", "Write a message...", 1, "chat__message--input", "p-l-10", "bdc-light-gray"], ["class", "chat__message--send m-l-10 m-r-10 font-13", 3, "class", "disabled", "click", 4, "ngIf"], ["class", "modal w-100 flex aic jcc nowrap", 4, "ngIf"], [1, "w-100", "flex", "col", "nowrap", "aife", "jcsa"], ["class", "w-100", 4, "ngIf"], [1, "message", "w-100", "flex", "jcsa", "aifs"], ["alt", "", 1, "message__logo", 3, "src"], [1, "message__person-data", "m-t-3", "flex", "col", "nowrap", "jcfs", "aifs"], [1, "message__person-data--title", "m-b-5", "m-t-14", "w-100"], [1, "message__person-data--text", "m-b-17", "w-100", "txt-c-black"], [1, "file", "txt-c-blue", "w-100", 3, "click"], [1, "message__other-data", "flex", "col", "nowrap", "jcfs", "aifs"], [1, "message__other-data--time", "m-b-5", "m-t-14", "txt-c-initial"], [1, "option", 3, "clickOutside", "click"], ["aria-hidden", "true", 1, "option__button", "btn", "bc-white", "flex", "aic", "bc-white", "icon-more-option", 3, "mouseover"], [1, "option__menu", "bc-white", "flex", "col", "nowrap", "jcsa", "aic"], [1, "option__menu--items", "w-100", "flex", "nowrap", "aic", "jcc", 3, "click"], ["aria-hidden", "true", 1, "items-edit", "icon-edit"], [1, "items-text", "font-14", "txt-c-initial"], [1, "option__menu--line", "bc-light-gray"], ["aria-hidden", "true", 1, "items-turn-off", "icon-turn-off"], [1, "w-100"], [1, "date-period", "w-100", "flex", "nowrap", "jcsa", "aic"], [1, "date-period__date", "m-l-7", "m-r-15", "txt-c-initial", "font-12"], [1, "date-period__hr", "w-100"], [1, "btn__isfile", "bc-red"], [1, "chat__message--send", "m-l-10", "m-r-10", "font-13", 3, "disabled", "click"], [1, "modal", "w-100", "flex", "aic", "jcc", "nowrap"], [1, "modal__block", "flex", "col", "aic", "jcsb", "p-10", 3, "clickOutside"], [1, "modal__block--cross", "w-100", "flex", "m-t-4", "m-r-4", "aic", "jcfe", 3, "click"], [1, "icon-close"], [1, "modal__block--title", "w-100", "flex", "aic", "jcc", "nowrap", "txt-c-blue", "font-25"], [1, "modal__block--text", "w-100", "flex", "aic", "jcc", "nowrap", "font-20", "txt-c-black"], [1, "w-100", "flex", "nowrap", "aic", "jcc", 3, "formGroup"], ["type", "checkbox", "formControlName", "checkbox", 1, "checkbox"], [1, "font-16", "m-l-20"], [1, "modal__block--button", "m-b-35", "flex", "aic", "jcc", "nowrap"], [1, "btn", "cancel", "bc-blue", "bdc-blue", "m-r-10", "font-13", "txt-c-white", 3, "click"], [1, "submit", "btn", "bc-red", "bdc-red", "font-13", 3, "click"]], template: function MessagesChatComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](0, "main", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](1, "section", 1);
         _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](2, "div", 2);
@@ -529,7 +478,7 @@ MessagesChatComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODU
         _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](6, "div", 6, 7);
         _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](8, "div", 8);
-        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtemplate"](9, MessagesChatComponent_div_9_Template, 30, 25, "div", 9);
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtemplate"](9, MessagesChatComponent_div_9_Template, 26, 24, "div", 9);
         _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵpipe"](10, "searchMessages");
         _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
