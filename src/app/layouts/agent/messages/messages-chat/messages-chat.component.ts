@@ -302,6 +302,10 @@ export class MessagesChatComponent implements OnInit {
     this.isEdit = false;
   }
 
+  checkDate(i) {
+    return (this.currMesUser?.messages[i - 1]?.dateForCheck) !== this.currMesUser?.messages[i]?.dateForCheck
+  }
+
   onClickedOutsideItem(e: Event) {
     e.stopPropagation()
     this.closeModal();

@@ -15,6 +15,17 @@
       <div class="chat__conversation--text flex col nowrap jcfs aife">
         <div class="w-100 flex col nowrap aife jcsa"
           *ngFor="let message of currMesUser?.messages | searchMessages: searchText; let i=index">
+          <div class="w-100"
+            *ngIf="checkDate(i) || (currDate !== this.currMesUser?.messages[i - 1]?.date && currDate == this.currMesUser?.messages[i]?.date)">
+            <div class="w-100">
+              <div class="date-period w-100 flex nowrap jcsa aic">
+                <p class="date-period__date m-l-7 m-r-15 txt-c-initial font-12">
+                  {{currDate == this.currMesUser?.messages[i]?.date ? 'TODAY' : this.currMesUser?.messages[i]?.date}}
+                </p>
+                <hr class="date-period__hr w-100">
+              </div>
+            </div>
+          </div>
           <div class="message w-100 flex jcsa aifs" [class]="mainUser?.username == message?.user ? 'row-rev' : ''">
             <img class="message__logo"
               [src]="mainUser?.username == message?.user ? message?.userIcon : currMesUser?.icon" alt="">
@@ -57,39 +68,6 @@
               </div>
             </div>
           </div>
-          <div class="w-100"
-            *ngIf="+this.currMesUser?.messages[i]?.dateForCheck?.split('/')[2] <= +this.currMesUser?.messages[i+1]?.dateForCheck?.split('/')[2] ; else today">
-            <div class="w-100"
-              *ngIf="+this.currMesUser?.messages[i]?.dateForCheck?.split('/')[0] <= +this.currMesUser?.messages[i+1]?.dateForCheck?.split('/')[0] ; else today">
-              <div class="date-period w-100 flex nowrap jcsa aic"
-                *ngIf="(this.currMesUser?.messages[i]?.dateForCheck !== this.currMesUser?.messages[i+1]?.dateForCheck) && this.currMesUser?.messages[i+1]?.dateForCheck">
-                <p class="date-period__date m-l-7 m-r-15 txt-c-initial font-12">
-                  {{currDate == this.currMesUser?.messages[i+1]?.date ? 'TODAY' : this.currMesUser?.messages[i+1]?.date}}
-                </p>
-                <hr class="date-period__hr w-100">
-              </div>
-            </div>
-          </div>
-
-          <ng-template #today>
-            <div class="date-period w-100 flex nowrap jcsa aic "
-              *ngIf="this.currMesUser?.messages[i+1]?.dateForCheck?.split('/')[1] && (this.currMesUser?.messages[i]?.dateForCheck?.split('/')[1] > this.currMesUser?.messages[i+1]?.dateForCheck?.split('/')[1]) ; else day">
-              <p class="date-period__date m-l-7 m-r-15 txt-c-initial font-12">
-                {{currDate == this.currMesUser?.messages[i+1]?.date ? 'TODAY' : this.currMesUser?.messages[i+1]?.date}}
-              </p>
-              <hr class="date-period__hr w-100">
-            </div>
-          </ng-template>
-          <ng-template #day>
-            <div class="date-period w-100 flex nowrap jcsa aic "
-              *ngIf="this.currMesUser?.messages[i]?.dateForCheck?.split('/')[1] < this.currMesUser?.messages[i+1]?.dateForCheck?.split('/')[1]">
-              <p class="date-period__date m-l-7 m-r-15 txt-c-initial font-12">
-                {{currDate == this.currMesUser?.messages[i+1]?.date ? 'TODAY' : this.currMesUser?.messages[i+1]?.date}}
-              </p>
-              <hr class="date-period__hr w-100">
-            </div>
-          </ng-template>
-
         </div>
       </div>
     </div>

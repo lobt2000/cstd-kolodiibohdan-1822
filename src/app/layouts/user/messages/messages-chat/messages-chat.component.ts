@@ -108,6 +108,8 @@ export class MessagesChatComponent implements OnInit {
         url: user.url,
         messages: user.messages || []
       };
+
+      this.checkDate(0);
     }
   }
 
@@ -177,6 +179,12 @@ export class MessagesChatComponent implements OnInit {
     this.updUser();
     this.authService.update(this.mainUser.id, user)
 
+  }
+
+  keyDownSending(event) {
+    console.log(event);
+    
+    if (event.key == "Enter") this.isEdit ? this.sendEditMessage() : this.sendMessage();
   }
 
   getFile(event): void {
@@ -305,6 +313,10 @@ export class MessagesChatComponent implements OnInit {
   onClickedOutsideItem(e: Event) {
     e.stopPropagation()
     this.closeModal();
+  }
+
+  checkDate(i) {
+    return (this.currMesUser?.messages[i - 1]?.dateForCheck) !== this.currMesUser?.messages[i]?.dateForCheck
   }
 
   ngOnDestroy(): void {
