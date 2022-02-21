@@ -169,6 +169,13 @@
     </form>
     <button class="btn send-child-registr-form" (click)="sendApply()">Send registration form</button>
   </section>
+  <section class="fixed-section">
+    <button class="button_messager icon-conversation" [matTooltip]="'Click here to contact in messager'"
+      [matTooltipPosition]="'above'" matTooltipClass="mat-custom-tooltip" (click)="goToKinderAgent()"></button>
+    <button class="phone_number" *ngIf="currkinder?.phoneNumber" (click)="copyNumber()"
+      [matTooltip]="'Click here to copy the phone'" [matTooltipPosition]="'above'"
+      matTooltipClass="mat-custom-tooltip"></button>
+  </section>
 
 </main>
 <div *ngIf="isLoading" class="loader-overlay">

@@ -1,10 +1,12 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { AbstractControl, FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { take } from 'rxjs/operators';
 import { AuthService } from 'src/app/service/auth.service';
 import { KindergartenListService } from 'src/app/service/kindergarten-list.service';
+import { PhoneModalComponent } from 'src/app/shared/components/phone-modal/phone-modal.component';
 
 @Component({
   selector: 'app-kindergarten',
@@ -34,7 +36,7 @@ export class KindergartenComponent implements OnInit {
   chooseKinderFormTitleBackground: number = null;
   chooseKinderFormTextBackground: number = null;
   items = ['white', 'blue', 'black', 'brown', 'pink', 'purple', 'red', 'green', 'gold', 'white', 'blue', 'black', 'brown', 'pink', 'purple', 'red', 'green', 'gold', 'white', 'blue', 'black', 'brown', 'pink', 'purple', 'red', 'green', 'gold', 'white', 'blue', 'black', 'brown', 'pink', 'purple', 'red', 'green', 'gold']
-  constructor(private fb: FormBuilder, private kindergartenServise: KindergartenListService, private storage: AngularFireStorage, private toastr: ToastrService, private authService: AuthService) { }
+  constructor(private fb: FormBuilder, private kindergartenServise: KindergartenListService, private storage: AngularFireStorage, private toastr: ToastrService, private authService: AuthService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.buildForm();
@@ -89,6 +91,7 @@ export class KindergartenComponent implements OnInit {
       logo: '',
       "logo-description": '',
       "logo-img": '',
+      phoneNumber: ''
     })
     // if (localStorage.getItem('kindergarten')) {
     //   const storage = JSON.parse(localStorage.getItem('kindergarten'));
@@ -402,6 +405,13 @@ export class KindergartenComponent implements OnInit {
         formDescription.removeAt(j)
       }
     }
+  }
+
+  openPhoneDialog() {
+    const dialogRef = this.dialog.open(PhoneModalComponent, {});
+    dialogRef.afterClosed().subscribe(result => {
+      this.kindergarten.get('phoneNumber').setValue(result);
+    });
   }
 
   declineEdition() {

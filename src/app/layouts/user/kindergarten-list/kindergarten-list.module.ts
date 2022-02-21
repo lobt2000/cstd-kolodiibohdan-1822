@@ -10,6 +10,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { KindergartenListRoutingModule } from './kindergarten-list-routing.module';
 import { KindergartenDetailsComponent } from './kindergarten-details/kindergarten-details.component';
 import { ClickOutsideModule } from 'ng-click-outside';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { ClickOutsideModule } from 'ng-click-outside';
     ReactiveFormsModule,
     MatProgressSpinnerModule,
     ClickOutsideModule,
+    MatTooltipModule
   ],
   providers: [
     { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },

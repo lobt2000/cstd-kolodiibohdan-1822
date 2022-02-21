@@ -36,6 +36,9 @@ import { ContactComponent } from './components/contact/contact.component';
 import { SearchMessagesPipe } from './pipes/search-messages.pipe';
 import { SearchApplicationPipe } from './pipes/search-application.pipe';
 import { SearchKindergartenPipe } from './pipes/search-kindergarten.pipe';
+import { PhoneModalComponent } from './components/phone-modal/phone-modal.component';
+import { MatDialogModule } from '@angular/material/dialog';
+
 // import { MatRadioModule } from '@angular/material/radio';
 @NgModule({
     declarations: [
@@ -50,6 +53,7 @@ import { SearchKindergartenPipe } from './pipes/search-kindergarten.pipe';
         SearchMessagesPipe,
         SearchApplicationPipe,
         SearchKindergartenPipe,
+        PhoneModalComponent,
     ],
     imports: [
         CommonModule,
@@ -75,7 +79,8 @@ import { SearchKindergartenPipe } from './pipes/search-kindergarten.pipe';
         MatRadioModule,
         LayoutsRoutingModule,
         MatCarouselModule.forRoot(),
-        MatProgressSpinnerModule
+        MatProgressSpinnerModule,
+        MatDialogModule
     ],
     exports: [
         HeaderComponent,
@@ -86,6 +91,7 @@ import { SearchKindergartenPipe } from './pipes/search-kindergarten.pipe';
         SearchMessagesPipe,
         SearchApplicationPipe,
         SearchKindergartenPipe,
+        PhoneModalComponent
     ],
     providers: [
         { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },

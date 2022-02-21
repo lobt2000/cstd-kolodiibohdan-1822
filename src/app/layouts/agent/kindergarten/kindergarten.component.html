@@ -531,6 +531,10 @@
     </form>
     <button class="btn send-child-registr-form">Send registration form</button>
   </section>
+  <section class="fixed-section">
+    <button class="phone_number" [matTooltip]="'Click here to write the phone'" [matTooltipPosition]="'above'"
+      matTooltipClass="mat-custom-tooltip" (click)="openPhoneDialog()"></button>
+  </section>
 
   <div class="options">
     <div class="icon-menu"></div>

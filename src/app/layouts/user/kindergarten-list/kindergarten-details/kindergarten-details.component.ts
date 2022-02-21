@@ -1,6 +1,7 @@
 import { Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { debounceTime, map, takeUntil } from 'rxjs/operators';
 import { AuthService } from 'src/app/service/auth.service';
@@ -24,7 +25,7 @@ export class KindergartenDetailsComponent implements OnInit, OnDestroy {
   regExpEmail = /^[a-z0-9\-\.]{1,}@gmail\.com|net\.us|org\.ua$/i;
   destroy$ = new Subject<any>();
   @ViewChild('content') content: ElementRef;
-  constructor(private kindergartenServise: KindergartenListService, private route: ActivatedRoute, private fb: FormBuilder, private router: Router, private authService: AuthService) { }
+  constructor(private kindergartenServise: KindergartenListService, private route: ActivatedRoute, private fb: FormBuilder, private router: Router, private authService: AuthService, private toastrService: ToastrService) { }
 
   @HostListener('window:resize', ['$event'])
   onResize(event) {
@@ -166,6 +167,11 @@ export class KindergartenDetailsComponent implements OnInit, OnDestroy {
       if (agent) this.router.navigate(['/user', `messages`, `${agent.id}`])
     })
 
+  }
+
+  copyNumber() {
+    navigator.clipboard.writeText(this.currkinder.phoneNumber);
+    this.toastrService.success('Text copied')
   }
 
   ngOnDestroy(): void {

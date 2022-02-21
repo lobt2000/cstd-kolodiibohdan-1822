@@ -32,6 +32,7 @@ import { ngxUiLoaderConfig } from './preloader-config';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { SharedModule } from './shared/shared.module';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 @NgModule({
@@ -67,7 +68,8 @@ import { SharedModule } from './shared/shared.module';
     NgxUiLoaderRouterModule,
     NgxUiLoaderHttpModule,
     SharedModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatDialogModule
   ],
   providers: [
     { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
