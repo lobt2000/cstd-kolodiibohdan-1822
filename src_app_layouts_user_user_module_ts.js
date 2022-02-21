@@ -492,7 +492,7 @@ const routes = [
             },
             {
                 path: 'kindergarten-list',
-                loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_layouts_user_kindergarten-list_kindergarten-list_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./kindergarten-list/kindergarten-list.module */ 2493)).then((m) => m.KindergartenListModule)
+                loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-node_modules_angular_material___ivy_ngcc___fesm2015_tooltip_js"), __webpack_require__.e("src_app_layouts_user_kindergarten-list_kindergarten-list_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./kindergarten-list/kindergarten-list.module */ 2493)).then((m) => m.KindergartenListModule)
             },
             {
                 path: 'messages',
