@@ -54,8 +54,8 @@
           [formControlName]="'title'" class="title-text" placeholder="Write here your title" maxlength="40"></textarea>
         <div class="choose-color" [matTooltip]="'Click to rainbow to choose title color'"
           (clickOutside)="onClickedOutsideItem($event, 'titleColor')" [matTooltipPosition]="'below'"
-          matTooltipClass="mat-custom-tooltip-below" (click)="chooseTitleColor=true">
-          <div class="color-rainbow" [style.display]="chooseTitleColor ? 'flex' : 'none'">
+          matTooltipClass="mat-custom-tooltip-below" (click)="kinderStyleState.chooseTitleColor=true">
+          <div class="color-rainbow" [style.display]="kinderStyleState.chooseTitleColor ? 'flex' : 'none'">
             <div class="close icon-close" (click)="onClickedOutsideItem($event, 'titleColor')"></div>
             <div class="write-color">
               <input type="text" placeholder="write here title color(hex)" [formControlName]="'titleColor'">
@@ -73,12 +73,12 @@
         [ngStyle]="{'background-color': (kindergarten.value?.titleButtonColor || 'green'), 'color' : (kindergarten.value?.titleButtonTextColor || 'black')}"
         [matTooltip]="'Click on the button to choose the title color'" [matTooltipPosition]="'below'"
         matTooltipClass="mat-custom-tooltip-below" (clickOutside)="onClickedOutsideItem($event, 'titleButtonColor')"
-        (click)="$event.target['className'].includes('choose-color') ? chooseTitleButtonColor=false : chooseTitleButtonColor=true">Apply
+        (click)="$event.target['className'].includes('choose-color') ? kinderStyleState.chooseTitleButtonColor=false : kinderStyleState.chooseTitleButtonColor=true">Apply
         to kindergarten
         <div class="choose-color" [matTooltip]="'Click to rainbow to choose title color'"
           (clickOutside)="onClickedOutsideItem($event, 'titleButtonTextColor')" [matTooltipPosition]="'below'"
-          matTooltipClass="mat-custom-tooltip-below" (click)="chooseTitleButtonTextColor=true">
-          <div class="color-rainbow" [style.display]="chooseTitleButtonTextColor ? 'flex' : 'none'">
+          matTooltipClass="mat-custom-tooltip-below" (click)="kinderStyleState.chooseTitleButtonTextColor=true">
+          <div class="color-rainbow" [style.display]="kinderStyleState.chooseTitleButtonTextColor ? 'flex' : 'none'">
             <div class="close icon-close" (click)="onClickedOutsideItem($event, 'titleButtonTextColor')"></div>
             <div class="write-color">
               <input type="text" placeholder="write here title color(hex)" [formControlName]="'titleButtonTextColor'">
@@ -90,7 +90,7 @@
             </div>
           </div>
         </div>
-        <div class="color-rainbow" [style.display]="chooseTitleButtonColor ? 'flex' : 'none'">
+        <div class="color-rainbow" [style.display]="kinderStyleState.chooseTitleButtonColor ? 'flex' : 'none'">
           <div class="close icon-close" (click)="onClickedOutsideItem($event, 'titleButtonColor')"></div>
           <div class="write-color">
             <input type="text" placeholder="write here title color(hex)" [formControlName]="'titleButtonColor'">
@@ -144,8 +144,8 @@
               [style.color]="group.value?.groupNameColor || ''">
             <div class="choose-color" [matTooltip]="'Click to rainbow to choose title color'"
               (clickOutside)="onClickedOutsideItem($event, 'groupNameColor', i)" [matTooltipPosition]="'below'"
-              matTooltipClass="mat-custom-tooltip-below" (click)="chooseGroupName=i">
-              <div class="color-rainbow" [style.display]="chooseGroupName == i ? 'flex' : 'none'">
+              matTooltipClass="mat-custom-tooltip-below" (click)="kinderStyleState.chooseGroupName=i">
+              <div class="color-rainbow" [style.display]="kinderStyleState.chooseGroupName == i ? 'flex' : 'none'">
                 <div class="close icon-close" (click)="onClickedOutsideItem($event, 'groupNameColor', i)"></div>
                 <div class="write-color">
                   <input type="text" placeholder="write here title color(hex)" [formControlName]="'groupNameColor'">
@@ -163,8 +163,8 @@
               [style.color]="group.value?.groupAgeRangeColor || ''">
             <div class="choose-color" [matTooltip]="'Click to rainbow to choose group age range color'"
               (clickOutside)="onClickedOutsideItem($event, 'groupAgeRangeColor', i)" [matTooltipPosition]="'below'"
-              matTooltipClass="mat-custom-tooltip-below" (click)="chooseGroupAgeRange=i">
-              <div class="color-rainbow" [style.display]="chooseGroupAgeRange == i ? 'flex' : 'none'">
+              matTooltipClass="mat-custom-tooltip-below" (click)="kinderStyleState.chooseGroupAgeRange=i">
+              <div class="color-rainbow" [style.display]="kinderStyleState.chooseGroupAgeRange == i ? 'flex' : 'none'">
                 <div class="close icon-close" (click)="onClickedOutsideItem($event, 'groupAgeRangeColor', i)"></div>
                 <div class="write-color">
                   <input type="text" placeholder="write here title color(hex)" [formControlName]="'groupAgeRangeColor'">
@@ -178,7 +178,7 @@
               </div>
             </div>
           </div>
-          <!-- <button class="group-detail">Go to Details</button> -->
+          <button class="group-detail" (click)="openGroupDetails(group)">Go to Details</button>
         </div>
       </ng-container>
 
@@ -219,8 +219,9 @@
                 maxlength="40"></textarea>
               <div class="choose-color" [matTooltip]="'Click to rainbow to choose group age range color'"
                 (clickOutside)="onClickedOutsideItem($event, 'advantagesTitleColor', i)" [matTooltipPosition]="'below'"
-                matTooltipClass="mat-custom-tooltip-below" (click)="chooseAdvantagesTitle=i">
-                <div class="color-rainbow" [style.display]="chooseAdvantagesTitle==i ? 'flex' : 'none'">
+                matTooltipClass="mat-custom-tooltip-below" (click)="kinderStyleState.chooseAdvantagesTitle=i">
+                <div class="color-rainbow"
+                  [style.display]="kinderStyleState.chooseAdvantagesTitle==i ? 'flex' : 'none'">
                   <div class="close icon-close" (click)="onClickedOutsideItem($event, 'advantagesTitleColor', i)"></div>
                   <div class="write-color">
                     <input type="text" placeholder="write here title color(hex)"
@@ -242,8 +243,8 @@
           <div class="advantages-text-color">
             <div class="choose-color" [matTooltip]="'Click to rainbow to choose group age range color'"
               (clickOutside)="onClickedOutsideItem($event, 'advantagesTextColor', i)" [matTooltipPosition]="'below'"
-              matTooltipClass="mat-custom-tooltip-below" (click)="chooseAdvantagesText=i">
-              <div class="color-rainbow" [style.display]="chooseAdvantagesText==i ? 'flex' : 'none'">
+              matTooltipClass="mat-custom-tooltip-below" (click)="kinderStyleState.chooseAdvantagesText=i">
+              <div class="color-rainbow" [style.display]="kinderStyleState.chooseAdvantagesText==i ? 'flex' : 'none'">
                 <div class="close icon-close" (click)="onClickedOutsideItem($event, 'advantagesTextColor', i)"></div>
                 <div class="write-color">
                   <input type="text" placeholder="write here title color(hex)"
@@ -295,8 +296,9 @@
                   <div class="choose-color" [matTooltip]="'Click to rainbow to choose street text color'"
                     (clickOutside)="onClickedOutsideItem($event, 'addressesTextColor', i)"
                     [matTooltipPosition]="'below'" matTooltipClass="mat-custom-tooltip-below"
-                    (click)="chooseAddressesText=i">
-                    <div class="color-rainbow" [style.display]="chooseAddressesText==i ? 'flex' : 'none'">
+                    (click)="kinderStyleState.chooseAddressesText=i">
+                    <div class="color-rainbow"
+                      [style.display]="kinderStyleState.chooseAddressesText==i ? 'flex' : 'none'">
                       <div class="close icon-close" (click)="onClickedOutsideItem($event, 'addressesTextColor', i)">
                       </div>
                       <div class="write-color">
@@ -340,7 +342,7 @@
             <div class="closed icon-close" (click)="deleteGroupControl('kinderForm', i)"></div>
             <div class="form-title-info" [matTooltip]="'Click to the corner of block to choose color of part of block'"
               [matTooltipPosition]="'above'" matTooltipClass="mat-custom-tooltip"
-              (click)="$event.target['className'].includes('choose-color') ? chooseKinderFormTitleBackground=null : chooseKinderFormTitleBackground=i"
+              (click)="$event.target['className'].includes('choose-color') ? kinderStyleState.chooseKinderFormTitleBackground=null : kinderStyleState.chooseKinderFormTitleBackground=i"
               [style.background-color]="form.value?.kinderFormTitleBackgroundColor">
               <input type="text" class="form-title-type" [style.color]="form.value?.kinderFormTitleColor"
                 [formControlName]="'formTitleType'" placeholder="Part-time day">
@@ -350,7 +352,8 @@
                 [formControlName]="'formTitlePrice'" placeholder="5000-5500 grn/month">
               <input type="text" class="form-title-additional" [style.color]="form.value?.kinderFormTitleColor"
                 [formControlName]="'formTitleAdditional'" placeholder="(Depends by location)">
-              <div class="color-rainbow" [style.display]="chooseKinderFormTitleBackground==i ? 'flex' : 'none'">
+              <div class="color-rainbow"
+                [style.display]="kinderStyleState.chooseKinderFormTitleBackground==i ? 'flex' : 'none'">
                 <div class="close icon-close"
                   (click)="onClickedOutsideItem($event, 'kinderFormTitleBackgroundColor', i)">
                 </div>
@@ -367,8 +370,9 @@
               </div>
               <div class="choose-color" [matTooltip]="'Click to rainbow to choose all title text color'"
                 (clickOutside)="onClickedOutsideItem($event, 'kinderFormTitleColor', i)" [matTooltipPosition]="'below'"
-                matTooltipClass="mat-custom-tooltip-below" (click)="chooseKinderFormTitle=i">
-                <div class="color-rainbow" [style.display]="chooseKinderFormTitle==i ? 'flex' : 'none'">
+                matTooltipClass="mat-custom-tooltip-below" (click)="kinderStyleState.chooseKinderFormTitle=i">
+                <div class="color-rainbow"
+                  [style.display]="kinderStyleState.chooseKinderFormTitle==i ? 'flex' : 'none'">
                   <div class="close icon-close" (click)="onClickedOutsideItem($event, 'kinderFormTitleColor', i)"></div>
                   <div class="write-color">
                     <input type="text" placeholder="write here title color(hex)"
@@ -384,7 +388,7 @@
               </div>
             </div>
             <div class="form-description-block"
-              (click)="$event.target['className'].includes('choose-color') ? chooseKinderFormTextBackground=null : chooseKinderFormTextBackground=i"
+              (click)="$event.target['className'].includes('choose-color') ? kinderStyleState.chooseKinderFormTextBackground=null : kinderStyleState.chooseKinderFormTextBackground=i"
               [style.background-color]="form.value?.kinderFormTextBackgroundColor"
               [matTooltip]="'Click to the corner of block to choose color of part of block'"
               [matTooltipPosition]="'above'" matTooltipClass="mat-custom-tooltip">
@@ -409,8 +413,8 @@
               </div>
               <div class="choose-color" [matTooltip]="'Click to rainbow to choose all title text color'"
                 (clickOutside)="onClickedOutsideItem($event, 'kinderFormTextColor', i)" [matTooltipPosition]="'below'"
-                matTooltipClass="mat-custom-tooltip-below" (click)="chooseKinderFormText=i">
-                <div class="color-rainbow" [style.display]="chooseKinderFormText==i ? 'flex' : 'none'">
+                matTooltipClass="mat-custom-tooltip-below" (click)="kinderStyleState.chooseKinderFormText=i">
+                <div class="color-rainbow" [style.display]="kinderStyleState.chooseKinderFormText==i ? 'flex' : 'none'">
                   <div class="close icon-close" (click)="onClickedOutsideItem($event, 'kinderFormTextColor', i)"></div>
                   <div class="write-color">
                     <input type="text" placeholder="write here title color(hex)"
@@ -432,7 +436,8 @@
                 <button class="ask-for-details btn" disabled>Ask for details</button>
                 <button class="recort-to-kinder btn" (click)="goToApply()">Apply into group</button>
               </div>
-              <div class="color-rainbow" [style.display]="chooseKinderFormTextBackground==i ? 'flex' : 'none'">
+              <div class="color-rainbow"
+                [style.display]="kinderStyleState.chooseKinderFormTextBackground==i ? 'flex' : 'none'">
                 <div class="close icon-close"
                   (click)="onClickedOutsideItem($event, 'kinderFormTextBackgroundColor', i)">
                 </div>
@@ -495,7 +500,7 @@
       <div class="form-elem" *ngIf="kindergarten.value?.kindergartenGroup">
         <label>Choose group</label>
         <div class="form-elem-select p-l-0 p-r-5 flex wrap aic bc-white"
-          (clickOutside)="onClickedOutsideItem($event, 'groupType')" (click)="isGroupCheck=true">
+          (clickOutside)="onClickedOutsideItem($event, 'groupType')" (click)="kinderStyleState.isGroupCheck=true">
           <div class="choose-sort p-4 m-l-5 flex nowrap jcsa aic bc-gray">
           </div>
           <span class="error">Field should be required</span>
@@ -513,7 +518,7 @@
       <div class="form-elem" *ngIf="kindergarten.value?.kinderForm">
         <label>Choose form of stay</label>
         <div class="form-elem-select p-l-0 p-r-5 flex wrap aic bc-white"
-          (clickOutside)="onClickedOutsideItem($event, 'typeOfReg')" (click)="isType=true">
+          (clickOutside)="onClickedOutsideItem($event, 'typeOfReg')" (click)="kinderStyleState.isType=true">
           <div class="choose-sort p-4 m-l-5 flex nowrap jcsa aic bc-gray">
           </div>
           <span class="error">Field should be required</span>

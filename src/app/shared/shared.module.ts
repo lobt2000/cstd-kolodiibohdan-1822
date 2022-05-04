@@ -10,7 +10,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { DateAdapter, MatNativeDateModule, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import { DateAdapter, MatNativeDateModule, MatRippleModule, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MomentDateAdapter, MomentDateModule } from '@angular/material-moment-adapter';
 
 import { AngularFireModule } from '@angular/fire/compat';
@@ -38,6 +38,8 @@ import { SearchApplicationPipe } from './pipes/search-application.pipe';
 import { SearchKindergartenPipe } from './pipes/search-kindergarten.pipe';
 import { PhoneModalComponent } from './components/phone-modal/phone-modal.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { GroupDetailsComponent } from './components/group-details/group-details.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 // import { MatRadioModule } from '@angular/material/radio';
 @NgModule({
@@ -54,6 +56,7 @@ import { MatDialogModule } from '@angular/material/dialog';
         SearchApplicationPipe,
         SearchKindergartenPipe,
         PhoneModalComponent,
+        GroupDetailsComponent,
     ],
     imports: [
         CommonModule,
@@ -80,7 +83,9 @@ import { MatDialogModule } from '@angular/material/dialog';
         LayoutsRoutingModule,
         MatCarouselModule.forRoot(),
         MatProgressSpinnerModule,
-        MatDialogModule
+        MatDialogModule,
+        MatRippleModule,
+        MatTooltipModule,
     ],
     exports: [
         HeaderComponent,

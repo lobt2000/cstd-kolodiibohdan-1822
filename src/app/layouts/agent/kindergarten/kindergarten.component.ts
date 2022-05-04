@@ -6,7 +6,9 @@ import { ToastrService } from 'ngx-toastr';
 import { take } from 'rxjs/operators';
 import { AuthService } from 'src/app/service/auth.service';
 import { KindergartenListService } from 'src/app/service/kindergarten-list.service';
+import { GroupDetailsComponent } from 'src/app/shared/components/group-details/group-details.component';
 import { PhoneModalComponent } from 'src/app/shared/components/phone-modal/phone-modal.component';
+import { kinderChangeState } from 'src/app/shared/module/kindergarten.mudule';
 
 @Component({
   selector: 'app-kindergarten',
@@ -16,25 +18,27 @@ import { PhoneModalComponent } from 'src/app/shared/components/phone-modal/phone
 export class KindergartenComponent implements OnInit {
   isLoading: boolean = false;
   kindergarten: FormGroup;
-  chooseTitleColor: boolean = false;
-  chooseTitleButtonColor: boolean = false;
-  chooseTitleButtonTextColor: boolean = false;
-  isGroupCheck: boolean;
-  isType: boolean;
   windowSize: number = window.innerWidth;
   isOpen: boolean;
   addAdvantages: boolean = false;
   addAddresses: boolean = false;
   addkinderForm: boolean = false;
-  chooseGroupName: number = null;
-  chooseGroupAgeRange: number = null;
-  chooseAdvantagesTitle: number = null;
-  chooseAdvantagesText: number = null;
-  chooseAddressesText: number = null;
-  chooseKinderFormTitle: number = null;
-  chooseKinderFormText: number = null;
-  chooseKinderFormTitleBackground: number = null;
-  chooseKinderFormTextBackground: number = null;
+  kinderStyleState = {
+    chooseTitleColor: false,
+    chooseTitleButtonColor: false,
+    chooseTitleButtonTextColor: false,
+    chooseGroupName: null,
+    chooseGroupAgeRange: null,
+    chooseAdvantagesTitle: null,
+    chooseAdvantagesText: null,
+    chooseAddressesText: null,
+    chooseKinderFormTitle: null,
+    chooseKinderFormText: null,
+    chooseKinderFormTitleBackground: null,
+    chooseKinderFormTextBackground: null,
+    isGroupCheck: false,
+    isType: false
+  }
   items = ['white', 'blue', 'black', 'brown', 'pink', 'purple', 'red', 'green', 'gold', 'white', 'blue', 'black', 'brown', 'pink', 'purple', 'red', 'green', 'gold', 'white', 'blue', 'black', 'brown', 'pink', 'purple', 'red', 'green', 'gold', 'white', 'blue', 'black', 'brown', 'pink', 'purple', 'red', 'green', 'gold']
   constructor(private fb: FormBuilder, private kindergartenServise: KindergartenListService, private storage: AngularFireStorage, private toastr: ToastrService, private authService: AuthService, private dialog: MatDialog) { }
 
@@ -114,6 +118,9 @@ export class KindergartenComponent implements OnInit {
         name: this.fb.control(res?.name),
         groupNameColor: this.fb.control(res?.groupNameColor),
         groupAgeRangeColor: this.fb.control(res?.groupAgeRangeColor),
+        groupDetails: res.groupDetails ? this.fb.array(res.groupDetails.map(item => {
+          return this.fb.group(item);
+        })) : this.fb.array([])
       })
       )
     })
@@ -171,63 +178,63 @@ export class KindergartenComponent implements OnInit {
 
   onClickedOutsideItem(e: Event, item: string, i?) {
     e.stopPropagation();
-    if (item == 'titleColor' && this.chooseTitleColor) {
-      this.chooseTitleColor = false;
+    if (item == kinderChangeState.titleColor && this.kinderStyleState.chooseTitleColor) {
+      this.kinderStyleState.chooseTitleColor = false;
     }
-    else if (item == 'titleButtonTextColor' && this.chooseTitleButtonTextColor) {
-      this.chooseTitleButtonTextColor = false;
+    else if (item == kinderChangeState.titleButtonTextColor && this.kinderStyleState.chooseTitleButtonTextColor) {
+      this.kinderStyleState.chooseTitleButtonTextColor = false;
     }
-    else if (item == 'titleButtonColor' && this.chooseTitleButtonColor && !e.target['className'].includes('choose-color')) {
-      this.chooseTitleButtonColor = false;
+    else if (item == kinderChangeState.titleButtonColor && this.kinderStyleState.chooseTitleButtonColor && !e.target['className'].includes('choose-color')) {
+      this.kinderStyleState.chooseTitleButtonColor = false;
     }
-    else if (item == 'groupNameColor' && this.chooseGroupName == i) {
-      this.chooseGroupName = null;
+    else if (item == kinderChangeState.groupNameColor && this.kinderStyleState.chooseGroupName == i) {
+      this.kinderStyleState.chooseGroupName = null;
     }
-    else if (item == 'groupAgeRangeColor' && this.chooseGroupAgeRange == i) {
-      this.chooseGroupAgeRange = null;
+    else if (item == kinderChangeState.groupAgeRangeColor && this.kinderStyleState.chooseGroupAgeRange == i) {
+      this.kinderStyleState.chooseGroupAgeRange = null;
     }
-    else if (item == 'advantagesTitleColor' && this.chooseAdvantagesTitle == i) {
-      this.chooseAdvantagesTitle = null;
+    else if (item == kinderChangeState.advantagesTitleColor && this.kinderStyleState.chooseAdvantagesTitle == i) {
+      this.kinderStyleState.chooseAdvantagesTitle = null;
     }
-    else if (item == 'advantagesTextColor' && this.chooseAdvantagesText == i) {
-      this.chooseAdvantagesText = null;
+    else if (item == kinderChangeState.advantagesTextColor && this.kinderStyleState.chooseAdvantagesText == i) {
+      this.kinderStyleState.chooseAdvantagesText = null;
     }
-    else if (item == 'addressesTextColor' && this.chooseAddressesText == i) {
-      this.chooseAddressesText = null;
+    else if (item == kinderChangeState.addressesTextColor && this.kinderStyleState.chooseAddressesText == i) {
+      this.kinderStyleState.chooseAddressesText = null;
     }
-    else if (item == 'typeOfReg' && this.isType) {
-      this.isType = false;
+    else if (item == kinderChangeState.typeOfReg && this.kinderStyleState.isType) {
+      this.kinderStyleState.isType = false;
     }
-    else if (item == 'groupType' && this.isGroupCheck) {
-      this.isGroupCheck = false;
+    else if (item == kinderChangeState.groupType && this.kinderStyleState.isGroupCheck) {
+      this.kinderStyleState.isGroupCheck = false;
     }
-    else if (item == 'kinderFormTitleColor' && this.chooseKinderFormTitle == i) {
-      this.chooseKinderFormTitle = null;
+    else if (item == kinderChangeState.kinderFormTitleColor && this.kinderStyleState.chooseKinderFormTitle == i) {
+      this.kinderStyleState.chooseKinderFormTitle = null;
     }
-    else if (item == 'kinderFormTextColor' && this.chooseKinderFormText == i) {
-      this.chooseKinderFormText = null;
+    else if (item == kinderChangeState.kinderFormTextColor && this.kinderStyleState.chooseKinderFormText == i) {
+      this.kinderStyleState.chooseKinderFormText = null;
     }
-    else if (item == 'kinderFormTitleBackgroundColor' && this.chooseKinderFormTitleBackground == i && !e.target['className'].includes('choose-color')) {
-      this.chooseKinderFormTitleBackground = null;
+    else if (item == kinderChangeState.kinderFormTitleBackgroundColor && this.kinderStyleState.chooseKinderFormTitleBackground == i && !e.target['className'].includes('choose-color')) {
+      this.kinderStyleState.chooseKinderFormTitleBackground = null;
     }
-    else if (item == 'kinderFormTextBackgroundColor' && this.chooseKinderFormTextBackground == i && !e.target['className'].includes('choose-color')) {
-      this.chooseKinderFormTextBackground = null;
+    else if (item == kinderChangeState.kinderFormTextBackgroundColor && this.kinderStyleState.chooseKinderFormTextBackground == i && !e.target['className'].includes('choose-color')) {
+      this.kinderStyleState.chooseKinderFormTextBackground = null;
     }
   }
 
   changeColor(item, where, i?) {
-    if (where == 'titleColor') this.kindergarten.get('titleColor').setValue(item)
-    if (where == 'titleButtonTextColor') this.kindergarten.get('titleButtonTextColor').setValue(item)
-    if (where == 'titleButtonColor') this.kindergarten.get('titleButtonColor').setValue(item)
-    if (where == 'groupNameColor') this.kindergarten.get('kindergartenGroup')['controls'][i].get('groupNameColor').setValue(item)
-    if (where == 'groupAgeRangeColor') this.kindergarten.get('kindergartenGroup')['controls'][i].get('groupAgeRangeColor').setValue(item)
-    if (where == 'advantagesTitleColor') this.kindergarten.get('kinderAdvantages')['controls'][i].get('advantagesTitleColor').setValue(item)
-    if (where == 'advantagesTextColor') this.kindergarten.get('kinderAdvantages')['controls'][i].get('advantagesTextColor').setValue(item)
-    if (where == 'addressesTextColor') this.kindergarten.get('kinderAddresses')['controls'][i].get('addressesTextColor').setValue(item)
-    if (where == 'kinderFormTitleColor') this.kindergarten.get('kinderForm')['controls'][i].get('kinderFormTitleColor').setValue(item)
-    if (where == 'kinderFormTextColor') this.kindergarten.get('kinderForm')['controls'][i].get('kinderFormTextColor').setValue(item)
-    if (where == 'kinderFormTitleBackgroundColor') this.kindergarten.get('kinderForm')['controls'][i].get('kinderFormTitleBackgroundColor').setValue(item)
-    if (where == 'kinderFormTextBackgroundColor') this.kindergarten.get('kinderForm')['controls'][i].get('kinderFormTextBackgroundColor').setValue(item)
+    if (where == kinderChangeState.titleColor) this.kindergarten.get('titleColor').setValue(item)
+    if (where == kinderChangeState.titleButtonTextColor) this.kindergarten.get('titleButtonTextColor').setValue(item)
+    if (where == kinderChangeState.titleButtonColor) this.kindergarten.get('titleButtonColor').setValue(item)
+    if (where == kinderChangeState.groupNameColor) this.kindergarten.get('kindergartenGroup')['controls'][i].get('groupNameColor').setValue(item)
+    if (where == kinderChangeState.groupAgeRangeColor) this.kindergarten.get('kindergartenGroup')['controls'][i].get('groupAgeRangeColor').setValue(item)
+    if (where == kinderChangeState.advantagesTitleColor) this.kindergarten.get('kinderAdvantages')['controls'][i].get('advantagesTitleColor').setValue(item)
+    if (where == kinderChangeState.advantagesTextColor) this.kindergarten.get('kinderAdvantages')['controls'][i].get('advantagesTextColor').setValue(item)
+    if (where == kinderChangeState.addressesTextColor) this.kindergarten.get('kinderAddresses')['controls'][i].get('addressesTextColor').setValue(item)
+    if (where == kinderChangeState.kinderFormTitleColor) this.kindergarten.get('kinderForm')['controls'][i].get('kinderFormTitleColor').setValue(item)
+    if (where == kinderChangeState.kinderFormTextColor) this.kindergarten.get('kinderForm')['controls'][i].get('kinderFormTextColor').setValue(item)
+    if (where == kinderChangeState.kinderFormTitleBackgroundColor) this.kindergarten.get('kinderForm')['controls'][i].get('kinderFormTitleBackgroundColor').setValue(item)
+    if (where == kinderChangeState.kinderFormTextBackgroundColor) this.kindergarten.get('kinderForm')['controls'][i].get('kinderFormTextBackgroundColor').setValue(item)
   }
 
   get getGroup() {
@@ -275,56 +282,8 @@ export class KindergartenComponent implements OnInit {
       name: this.fb.control(''),
       groupNameColor: this.fb.control(''),
       groupAgeRangeColor: this.fb.control(''),
-
+      groupDetails: this.fb.array([])
     }))
-  }
-
-  newGroup(): AbstractControl {
-    return this.fb.group({
-      ageRange: this.fb.control(''),
-      groupImg: this.fb.control(''),
-      name: this.fb.control(''),
-      groupNameColor: this.fb.control(''),
-      groupAgeRangeColor: this.fb.control(''),
-
-    })
-  }
-
-  newAdvantages(): AbstractControl {
-    return this.fb.group({
-      numImg: this.fb.control(''),
-      text: this.fb.control(''),
-      title: this.fb.control(''),
-      advantagesTitleColor: this.fb.control(''),
-      advantagesTextColor: this.fb.control('')
-
-    })
-  }
-
-  newAddresses(): AbstractControl {
-    return this.fb.group({
-      addressName: this.fb.control(''),
-      addressPosImg: this.fb.control(''),
-      addressesTextColor: this.fb.control(''),
-    })
-  }
-  newKinderForm(): AbstractControl {
-    return this.fb.group({
-      formTitleAdditional: this.fb.control(''),
-      formTitlePrice: this.fb.control(''),
-      formTitleTime: this.fb.control(''),
-      formTitleType: this.fb.control(''),
-      kinderFormTitleColor: this.fb.control(''),
-      kinderFormTextColor: this.fb.control(''),
-      kinderFormTitleBackgroundColor: this.fb.control(''),
-      kinderFormTextBackgroundColor: this.fb.control(''),
-      formDescription: this.fb.array([
-        this.fb.group({
-          descText: this.fb.control(''),
-          numImg: this.fb.control('')
-        })
-      ])
-    })
   }
 
   addNewAdvantages() {
@@ -386,6 +345,7 @@ export class KindergartenComponent implements OnInit {
       })
     })
   }
+
   deleteGroupControl(where, i?, j?) {
     if (where == 'kindergartenGroup') {
       this.getGroup.removeAt(i)
@@ -408,9 +368,30 @@ export class KindergartenComponent implements OnInit {
   }
 
   openPhoneDialog() {
-    const dialogRef = this.dialog.open(PhoneModalComponent, {});
+    const dialogRef = this.dialog.open(PhoneModalComponent, {
+      data: this.kindergarten.get('phoneNumber').value
+    });
     dialogRef.afterClosed().subscribe(result => {
-      this.kindergarten.get('phoneNumber').setValue(result);
+      if (result) {
+        this.kindergarten.get('phoneNumber').setValue(result);
+      }
+    });
+  }
+
+  openGroupDetails(group: FormGroup) {
+    const dialogRef = this.dialog.open(GroupDetailsComponent, {
+      data: {
+        groupDetails: group.value.groupDetails
+      }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        const groupDetails = group.controls.groupDetails as FormArray
+        groupDetails.clear();
+        result.map(item => {
+          groupDetails.push(this.fb.group(item));
+        })
+      }
     });
   }
 

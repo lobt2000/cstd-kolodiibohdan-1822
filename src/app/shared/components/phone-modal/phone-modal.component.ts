@@ -15,11 +15,13 @@ export class PhoneModalComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit(): void {
-
+    if(this.data) {
+      this.textInput.get('phone_number').setValue(this.data)
+    }
   }
 
   closeModal(): void {
-    this.dialogRef.close();
+    this.dialogRef.close(undefined);
   }
 
   save() {
@@ -27,7 +29,6 @@ export class PhoneModalComponent implements OnInit {
   }
 
   onClickedOutsideItem(e: Event) {
-    // this.closeModal()
     e.stopPropagation();
   }
 
