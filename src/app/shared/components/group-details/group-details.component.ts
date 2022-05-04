@@ -11,6 +11,7 @@ export class GroupDetailsComponent implements OnInit {
   kinderGroupDetails: FormGroup = new FormGroup({
     groupDetails: this.fb.array([], [Validators.required]),
   });
+  chosenSubGroup: string = '';
   constructor(
     public dialog: MatDialog,
     public dialogRef: MatDialogRef<GroupDetailsComponent>,
@@ -21,8 +22,6 @@ export class GroupDetailsComponent implements OnInit {
   ngOnInit(): void {
     if (this.data.hasOwnProperty('groupDetails')) {
       this.getGroupDetails.reset();
-      console.log(this.data);
-      
       this.data.groupDetails?.forEach(res => {
         this.getGroupDetails.push(this.fb.group({
           childrenInGroup: this.fb.control(res?.childrenInGroup),
@@ -42,7 +41,7 @@ export class GroupDetailsComponent implements OnInit {
   save() {
     const details = this.kinderGroupDetails.controls.groupDetails;
     if (details.valid) {
-      this.dialogRef.close(details.value);
+      this.dialogRef.close(this.data.chooseSubGroup ? this.chosenSubGroup : details.value);
     }
   }
 

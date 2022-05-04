@@ -1,10 +1,12 @@
 import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { debounceTime, map, takeUntil } from 'rxjs/operators';
 import { AuthService } from 'src/app/service/auth.service';
 import { KindergartenApplicationService } from 'src/app/service/kindergarten-application.service';
 import { KindergartenListService } from 'src/app/service/kindergarten-list.service';
+import { GroupDetailsComponent } from 'src/app/shared/components/group-details/group-details.component';
 import { v4 } from 'uuid';
 @Component({
   selector: 'app-group-application',
@@ -13,7 +15,13 @@ import { v4 } from 'uuid';
 })
 export class GroupApplicationComponent implements OnInit, OnDestroy {
 
-  constructor(private kindergartenApplication: KindergartenApplicationService, private route: ActivatedRoute, private kindergartenServise: KindergartenListService, private router: Router, private authService: AuthService) { }
+  constructor(
+    private kindergartenApplication: KindergartenApplicationService,
+    private route: ActivatedRoute,
+    private kindergartenServise: KindergartenListService,
+    private router: Router,
+    private authService: AuthService,
+    private dialog: MatDialog) { }
   applylists: Array<any> = [];
   currentApply;
   windowSize: number = window.innerWidth;
@@ -23,6 +31,7 @@ export class GroupApplicationComponent implements OnInit, OnDestroy {
   group: string = this.route.snapshot.params.name;
   destroy$ = new Subject<any>();
   searchText: string = '';
+  subGroup;
   ngOnInit(): void {
     this.kindergartenServise.menuPosition.subscribe(
       res => {
@@ -52,6 +61,9 @@ export class GroupApplicationComponent implements OnInit, OnDestroy {
         });
       }
     );
+    this.kindergartenApplication.getGroup(user.kinderId, this.group).subscribe(res => {
+      this.subGroup = res;
+    })
 
   }
 
@@ -112,11 +124,31 @@ export class GroupApplicationComponent implements OnInit, OnDestroy {
   }
 
   changeStatusOfApplication(name) {
+    if (name == 'accept' && this.subGroup?.groupDetails?.length) {
+      const dialogRef = this.dialog.open(GroupDetailsComponent, {
+        data: {
+          groupDetails: this.subGroup.groupDetails,
+          chooseSubGroup: true
+        }
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          this.updateStatus(name, result);
+        }
+      });
+    }
+    else {
+      this.updateStatus(name)
+    }
+  }
+
+  updateStatus(status, subGroupName?) {
     const apply = {
       ...this.applyKindergarten,
       listOfApply: this.applyKindergarten.listOfApply.map(res => {
         if (res.groupType.name == this.group && res.id == this.currentApply.id) {
-          res.status = name;
+          res.status = status;
+          res.subGroup = subGroupName || null
         }
         return res;
       })

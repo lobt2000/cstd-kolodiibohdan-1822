@@ -68,6 +68,46 @@
           }
         }
 
+        .chosenGroup {
+          position: absolute;
+          z-index: 3;
+          right: -10px;
+          cursor: pointer;
+          font-size: 11px;
+          top: -12px;
+          border-radius: 50%;
+          height: 25px;
+          width: 25px;
+          background-color: green;
+          text-align: center;
+          line-height: 25px;
+          font-size: 15px;
+        }
+
+        .icon-iconmonstr-plus-6 {
+          &::before {
+            margin-left: 1px;
+          }
+        }
+
+        .subGroupFull {
+          position: absolute;
+          z-index: 3;
+          right: -22px;
+          cursor: pointer;
+          /* font-size: 11px; */
+          top: -8px;
+          border-radius: 5px;
+          height: 25px;
+          width: 47px;
+          background-color: red;
+          text-align: center;
+          line-height: 25px;
+          font-size: 15px;
+          color: white;
+          transform: rotate(45deg);
+        }
+
         .group-info {
           width: 100%;
           height: 100%;
@@ -81,7 +121,9 @@
             align-items: center;
             justify-content: center;
             margin-bottom: 20px;
+            width: 100%;
 
+            span,
             input {
               width: 80%;
               height: 40px;
@@ -109,6 +151,7 @@
             justify-content: space-around;
             margin-bottom: 10px;
             color: white;
+            width: 90%;
 
 
             .write-group-count-range {
@@ -122,6 +165,7 @@
               background-color: transparent;
               border-radius: 30%;
               color: white;
+              line-height: 35px;
             }
 
             input[type=number]::-webkit-inner-spin-button,

@@ -10,13 +10,15 @@ import { map, take } from 'rxjs/operators';
 })
 export class KindergartenApplicationService {
   private dbPath = '/kindergarten-list-apply';
+  private dbPath1 = '/kindergarten';
   kinderApplyRef: AngularFirestoreCollection<any> = null;
-
+  kinderRef: AngularFirestoreCollection<any> = null;
   constructor(private db: AngularFirestore,
     private auth: AngularFireAuth,
     private router: Router,
     private toastr: ToastrService) {
     this.kinderApplyRef = this.db.collection(this.dbPath);
+    this.kinderRef = this.db.collection(this.dbPath1);
   }
 
   getGroupApplyList(id) {
@@ -44,4 +46,19 @@ export class KindergartenApplicationService {
       // take(1)
     )
   }
+
+  getGroup(kinderId, groupName) {
+    return this.kinderRef.snapshotChanges().pipe(
+      map(changes =>
+        changes.map(c =>
+          ({ id: c.payload.doc.id, ...c.payload.doc.data() })
+        )
+      ),
+      map(res => {
+        return res.filter(item => item.id == kinderId).map(item => item.kindergartenGroup.filter(el => el.name == groupName))[0]
+      }),
+      map(res => res[0])
+    )
+  }
+  
 }
