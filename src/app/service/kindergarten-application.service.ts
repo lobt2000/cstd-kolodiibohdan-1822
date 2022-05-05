@@ -47,7 +47,7 @@ export class KindergartenApplicationService {
     )
   }
 
-  getGroup(kinderId, groupName) {
+  getKinder(kinderId) {
     return this.kinderRef.snapshotChanges().pipe(
       map(changes =>
         changes.map(c =>
@@ -55,10 +55,9 @@ export class KindergartenApplicationService {
         )
       ),
       map(res => {
-        return res.filter(item => item.id == kinderId).map(item => item.kindergartenGroup.filter(el => el.name == groupName))[0]
+        return res.filter(item => item.id == kinderId)
       }),
       map(res => res[0])
     )
   }
-  
 }

@@ -144,6 +144,14 @@
     justify-content: flex-start;
     flex-flow: column nowrap;
 
+    h2 {
+      width: 100%;
+      text-align: center;
+      margin-bottom: 5px;
+      font-family: "Poppins";
+      margin: 25px auto;
+    }
+
     .apply-search {
       width: calc(100%);
       // padding: 20px;
@@ -151,6 +159,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      box-shadow: 0px 0px 7px 1px grey;
 
       .icon-search {
         width: 15px;

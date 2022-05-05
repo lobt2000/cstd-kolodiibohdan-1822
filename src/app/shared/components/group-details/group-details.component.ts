@@ -30,7 +30,9 @@ export class GroupDetailsComponent implements OnInit {
         })
         )
       })
-
+      if (this.data.chooseSubGroup && this.data.groupDetails.some(res => res.name == this.data.currApplication.subGroup)) {
+        this.chosenSubGroup = this.data.currApplication.subGroup;
+      }
     }
   }
 

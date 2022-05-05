@@ -23,6 +23,8 @@ export class GroupApplicationComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private dialog: MatDialog) { }
   applylists: Array<any> = [];
+  activeApplyLists: Array<any> = [];
+  archiveApplyLists: Array<any> = [];
   currentApply;
   windowSize: number = window.innerWidth;
   isOpen: boolean;
@@ -32,6 +34,7 @@ export class GroupApplicationComponent implements OnInit, OnDestroy {
   destroy$ = new Subject<any>();
   searchText: string = '';
   subGroup;
+  kindergarten;
   ngOnInit(): void {
     this.kindergartenServise.menuPosition.subscribe(
       res => {
@@ -48,6 +51,8 @@ export class GroupApplicationComponent implements OnInit, OnDestroy {
           };
           this.applyKindergarten = apply;
           this.applylists = apply.listOfApply.filter(res => res.groupType.name == this.group);
+          this.activeApplyLists = apply.listOfApply.filter(res => res.groupType.name == this.group && !res.subGroup);
+          this.archiveApplyLists = apply.listOfApply.filter(res => res.groupType.name == this.group && res.subGroup)
           this.route.queryParams.subscribe((params) => {
             if (params.hasOwnProperty('applicationId')) {
               this.currentApply = this.applylists.find(item => item.id == params.applicationId)
@@ -61,8 +66,9 @@ export class GroupApplicationComponent implements OnInit, OnDestroy {
         });
       }
     );
-    this.kindergartenApplication.getGroup(user.kinderId, this.group).subscribe(res => {
-      this.subGroup = res;
+    this.kindergartenApplication.getKinder(user.kinderId).subscribe(res => {
+      this.subGroup = res.kindergartenGroup.filter(el => el.name == this.group)[0];
+      this.kindergarten = res;
     })
 
   }
@@ -128,11 +134,31 @@ export class GroupApplicationComponent implements OnInit, OnDestroy {
       const dialogRef = this.dialog.open(GroupDetailsComponent, {
         data: {
           groupDetails: this.subGroup.groupDetails,
-          chooseSubGroup: true
+          chooseSubGroup: true,
+          currApplication: this.currentApply
         }
       });
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
+          this.kindergarten.kindergartenGroup = this.kindergarten.kindergartenGroup.map(res => {
+            if (res.name == this.subGroup.name) {
+              res.groupDetails.map(item => {
+                if (item.name == this.currentApply.subGroup && this.currentApply.subGroup != result) {
+                  item.childrenInGroup -= 1;
+                }
+                else if (item.name == result && this.currentApply.subGroup != result) {
+                  item.childrenInGroup += 1;
+                }
+
+                return item;
+              })
+            }
+            return res;
+
+          })
+          if (this.currentApply.subGroup != result) {
+            this.kindergartenServise.updateKindergarten(this.kindergarten.id, this.kindergarten)
+          }
           this.updateStatus(name, result);
         }
       });
@@ -148,7 +174,7 @@ export class GroupApplicationComponent implements OnInit, OnDestroy {
       listOfApply: this.applyKindergarten.listOfApply.map(res => {
         if (res.groupType.name == this.group && res.id == this.currentApply.id) {
           res.status = status;
-          res.subGroup = subGroupName || null
+          res.subGroup = subGroupName || null;
         }
         return res;
       })
