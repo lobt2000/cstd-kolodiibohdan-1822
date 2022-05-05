@@ -3,14 +3,23 @@
     <div class="modal__block--cross w-100 flex m-t-4 m-r-4 aic jcfe" (click)="closeModal()">
       <span class="icon-close"></span>
     </div>
-    <div class="modal__block--title w-100 flex aic jcc nowrap txt-c-blue font-25">
-      {{ data.chooseSubGroup ? 'Subgroup' : 'Group details'}}</div>
-    <div class="modal__block--text w-100 flex aic jcc nowrap font-20 txt-c-black">{{ data.chooseSubGroup ? 'Choose subgroup for child' : 'Set count of current group in
-      kindergarten and max count of children can include current group'}}</div>
+    <ng-container *ngIf="this.data.showMode != 'user'">
+      <div class="modal__block--title w-100 flex aic jcc nowrap txt-c-blue font-25">
+        {{ data.showMode == 'chooseSubGroop' ? 'Subgroup' : 'Group details'}}</div>
+      <div class="modal__block--text w-100 flex aic jcc nowrap font-20 txt-c-black">{{ data.showMode == 'chooseSubGroop' ? 'Choose subgroup for child' : 'Set count of current group in
+        kindergarten and max count of children can include current group'}}</div>
+    </ng-container>
+    <ng-container *ngIf="this.data.showMode == 'user'">
+      <div class="modal__block--title w-100 flex aic jcc nowrap txt-c-blue font-25">
+        Subgroup</div>
+      <div class="modal__block--text w-100 flex aic jcc nowrap font-20 txt-c-black">Here you can see subgroup for
+        '<strong>{{data.group | uppercase}}</strong>' group</div>
+    </ng-container>
+
     <div class="modal__block--content" [formGroup]="kinderGroupDetails"
       *ngIf="kinderGroupDetails.get('groupDetails').value.length">
 
-      <ng-container *ngIf="!data.chooseSubGroup">
+      <ng-container *ngIf="!this.data.showMode">
         <div class="group-content" [formArrayName]="'groupDetails'"
           *ngFor="let group of kinderGroupDetails.get('groupDetails')?.controls;let i=index">
           <ng-container [formGroupName]="i">
@@ -30,12 +39,33 @@
           </ng-container>
         </div>
       </ng-container>
-      <ng-container *ngIf="data.chooseSubGroup">
+      <ng-container *ngIf="data.showMode == 'chooseSubGroop'">
         <div class="group-content" [formArrayName]="'groupDetails'"
-          *ngFor="let group of kinderGroupDetails.get('groupDetails')?.controls;let i=index" (click)="group.value.childrenInGroup == group.value.maxCountOfChildren ?  chosenSubGroup='' : chosenSubGroup=group.value.name">
+          *ngFor="let group of kinderGroupDetails.get('groupDetails')?.controls;let i=index"
+          (click)="group.value.childrenInGroup == group.value.maxCountOfChildren ?  chosenSubGroup='' : chosenSubGroup=group.value.name">
           <ng-container [formGroupName]="i">
-            <div class="subGroupFull" *ngIf="group.value.childrenInGroup == group.value.maxCountOfChildren">Full!!!</div>
+            <div class="subGroupFull" *ngIf="group.value.childrenInGroup == group.value.maxCountOfChildren">Full!!!
+            </div>
             <div class="chosenGroup icon-iconmonstr-plus-6" *ngIf="chosenSubGroup==group.value.name"></div>
+            <div class="group-info">
+              <div class="group-name">
+                <span>{{group.value.name}}</span>
+              </div>
+              <div class="group-count-range">
+                <span type="number" class="write-group-count-range">{{group.value.childrenInGroup}}</span>/
+                <span type="number" class="write-group-count-range">{{group.value.maxCountOfChildren}}</span>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="data.showMode == 'user'">
+        <div class="group-content" [formArrayName]="'groupDetails'"
+          *ngFor="let group of kinderGroupDetails.get('groupDetails')?.controls;let i=index"
+          (click)="group.value.childrenInGroup == group.value.maxCountOfChildren ?  chosenSubGroup='' : chosenSubGroup=group.value.name">
+          <ng-container [formGroupName]="i">
+            <div class="subGroupFull" *ngIf="group.value.childrenInGroup == group.value.maxCountOfChildren">Full!!!
+            </div>
             <div class="group-info">
               <div class="group-name">
                 <span>{{group.value.name}}</span>
@@ -51,11 +81,11 @@
 
     </div>
 
-    <button class="add-groupDetails" *ngIf="!data.chooseSubGroup" (click)="addGroupDetails()">
+    <button class="add-groupDetails" *ngIf="!this.data.showMode" (click)="addGroupDetails()">
       Add new group
     </button>
 
-    <div class="modal__block--button m-b-35 flex aic jcc nowrap">
+    <div class="modal__block--button m-b-35 flex aic jcc nowrap" *ngIf="this.data.showMode != 'user'">
       <button class="btn cancel bc-blue bdc-blue m-r-10 font-13 txt-c-white" (click)="closeModal()">Cancel</button>
       <button class="submit btn bc-red bdc-red font-13" [disabled]="!kinderGroupDetails.controls.groupDetails.valid"
         (click)="save()">Save</button>

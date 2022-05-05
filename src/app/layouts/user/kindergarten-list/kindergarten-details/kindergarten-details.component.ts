@@ -1,11 +1,13 @@
 import { Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { debounceTime, map, takeUntil } from 'rxjs/operators';
 import { AuthService } from 'src/app/service/auth.service';
 import { KindergartenListService } from 'src/app/service/kindergarten-list.service';
+import { GroupDetailsComponent } from 'src/app/shared/components/group-details/group-details.component';
 import { v4 } from 'uuid';
 
 @Component({
@@ -25,7 +27,14 @@ export class KindergartenDetailsComponent implements OnInit, OnDestroy {
   regExpEmail = /^[a-z0-9\-\.]{1,}@gmail\.com|net\.us|org\.ua$/i;
   destroy$ = new Subject<any>();
   @ViewChild('content') content: ElementRef;
-  constructor(private kindergartenServise: KindergartenListService, private route: ActivatedRoute, private fb: FormBuilder, private router: Router, private authService: AuthService, private toastrService: ToastrService) { }
+  constructor(
+    private kindergartenServise: KindergartenListService,
+    private route: ActivatedRoute,
+    private fb: FormBuilder,
+    private router: Router,
+    private authService: AuthService,
+    private toastrService: ToastrService,
+    private dialog: MatDialog) { }
 
   @HostListener('window:resize', ['$event'])
   onResize(event) {
@@ -172,6 +181,16 @@ export class KindergartenDetailsComponent implements OnInit, OnDestroy {
   copyNumber() {
     navigator.clipboard.writeText(this.currkinder.phoneNumber);
     this.toastrService.success('Text copied')
+  }
+
+  openGroupDetails(group) {
+    const dialogRef = this.dialog.open(GroupDetailsComponent, {
+      data: {
+        groupDetails: group.groupDetails,
+        showMode: 'user',
+        group: group.name
+      }
+    });
   }
 
   ngOnDestroy(): void {

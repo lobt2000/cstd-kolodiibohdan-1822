@@ -134,7 +134,7 @@ export class GroupApplicationComponent implements OnInit, OnDestroy {
       const dialogRef = this.dialog.open(GroupDetailsComponent, {
         data: {
           groupDetails: this.subGroup.groupDetails,
-          chooseSubGroup: true,
+          showMode: 'chooseSubGroop',
           currApplication: this.currentApply
         }
       });

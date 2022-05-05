@@ -30,7 +30,7 @@ export class GroupDetailsComponent implements OnInit {
         })
         )
       })
-      if (this.data.chooseSubGroup && this.data.groupDetails.some(res => res.name == this.data.currApplication.subGroup)) {
+      if (this.data.showMode == 'chooseSubGroop' && this.data.groupDetails.some(res => res.name == this.data.currApplication.subGroup)) {
         this.chosenSubGroup = this.data.currApplication.subGroup;
       }
     }
@@ -43,7 +43,7 @@ export class GroupDetailsComponent implements OnInit {
   save() {
     const details = this.kinderGroupDetails.controls.groupDetails;
     if (details.valid) {
-      this.dialogRef.close(this.data.chooseSubGroup ? this.chosenSubGroup : details.value);
+      this.dialogRef.close(this.data.showMode == 'chooseSubGroop' ? this.chosenSubGroup : details.value);
     }
   }
 

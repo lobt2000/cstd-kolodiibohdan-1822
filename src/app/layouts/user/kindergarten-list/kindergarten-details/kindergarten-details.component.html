@@ -31,6 +31,7 @@
         <div class="group-name" [style.color]="(item?.groupNameColor + '!important')">{{item?.name}}</div>
         <div class="group-age-range" [style.color]="(item?.ageRange + '!important')">{{item?.ageRange}}
         </div>
+        <button class="group-detail" (click)="openGroupDetails(item)">Go to Details</button>
       </div>
     </div>
   </section>
