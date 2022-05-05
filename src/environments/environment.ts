@@ -10,7 +10,7 @@ export const environment = {
     projectId: "kindergarten-daed8",
     storageBucket: "kindergarten-daed8.appspot.com",
     messagingSenderId: "180925751357",
-    appId: "1:180925751357:web:ae2802aa11481ba73fca54"
+    appId: "1:180925751357:web:4d42322f6aab04473fca54"
   }
 };
 
