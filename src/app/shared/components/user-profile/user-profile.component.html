@@ -67,7 +67,12 @@
         <div class="application-status">
           Status: <span *ngIf="item?.isRead" [style.color]="'green'"> Reviewed</span>
           <span *ngIf="!item?.isRead" [style.color]="'gray'"> Unreviewed</span>
-          <span *ngIf="item?.status" [style.color]="item?.status == 'accept' ? 'green' : 'red'"> {{item?.status}}</span>
+          <span *ngIf="item?.status" [style.color]="item?.status == 'accept' ? 'green' : 'red'">
+            {{item?.status | uppercase}}</span>
+          <span *ngIf="item?.subGroup" [style.color]="item?.status == 'accept' ? 'green' : 'red'">
+            {{item?.subGroup | uppercase}}</span>
+          <span *ngIf="item?.status && !item?.subGroup" [style.color]="item?.status == 'accept' ? 'green' : 'red'">
+            Please, wait for email from kindergarten agent</span>
         </div>
       </div>
     </ng-container>

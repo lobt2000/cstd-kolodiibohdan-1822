@@ -51,8 +51,8 @@ export class GroupApplicationComponent implements OnInit, OnDestroy {
           };
           this.applyKindergarten = apply;
           this.applylists = apply.listOfApply.filter(res => res.groupType.name == this.group);
-          this.activeApplyLists = apply.listOfApply.filter(res => res.groupType.name == this.group && !res.subGroup);
-          this.archiveApplyLists = apply.listOfApply.filter(res => res.groupType.name == this.group && res.subGroup)
+          this.activeApplyLists = apply.listOfApply.filter(res => res.groupType.name == this.group && res.status == 'decline');
+          this.archiveApplyLists = apply.listOfApply.filter(res => res.groupType.name == this.group && res.status == 'accept')
           this.route.queryParams.subscribe((params) => {
             if (params.hasOwnProperty('applicationId')) {
               this.currentApply = this.applylists.find(item => item.id == params.applicationId)

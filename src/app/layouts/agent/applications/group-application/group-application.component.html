@@ -27,14 +27,20 @@
           <input type="text" name="searchText" id="" class="search" [(ngModel)]="searchText">
         </div>
         <h2>Without Subgroup</h2>
-        <div class="short-apply-info"
-          *ngFor="let applylist of activeApplyLists | searchApplication: searchText; let i=index"
-          (click)="openApplyDetails(applylist, i)"
-          [style.background-color]="applylist?.id == currentApply?.id ? 'white' : ''">
-          <p class="child-info"><span>{{applylist?.childName}}</span><span>{{applylist?.childYear}} years old</span></p>
-          <p class="child-info"><span>{{applylist?.typeOfReg?.formTitleType}}</span> <span *ngIf="!applylist?.isRead"
-              class="not-read bc-blue"></span></p>
-        </div>
+        <ng-container *ngIf="activeApplyLists.length; else withoutActiveApply">
+          <div class="short-apply-info"
+            *ngFor="let applylist of activeApplyLists | searchApplication: searchText; let i=index"
+            (click)="openApplyDetails(applylist, i)"
+            [style.background-color]="applylist?.id == currentApply?.id ? 'white' : ''">
+            <p class="child-info"><span>{{applylist?.childName}}</span><span>{{applylist?.childYear}} years old</span>
+            </p>
+            <p class="child-info"><span>{{applylist?.typeOfReg?.formTitleType}}</span> <span *ngIf="!applylist?.isRead"
+                class="not-read bc-blue"></span></p>
+          </div>
+        </ng-container>
+        <ng-template #withoutActiveApply>
+          <div class="withoutActiveApply">Your kindergarten doesn`t have any applications</div>
+        </ng-template>
         <h2>With Subgroup</h2>
         <div class="short-apply-info"
           *ngFor="let applylist of archiveApplyLists | searchApplication: searchText; let i=index"

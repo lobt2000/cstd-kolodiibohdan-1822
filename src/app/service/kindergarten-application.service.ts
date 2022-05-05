@@ -26,7 +26,13 @@ export class KindergartenApplicationService {
   }
 
   update(id: string, data: any): Promise<void> {
-    return this.kinderApplyRef.doc(id).update({ ...data });
+    return this.kinderApplyRef.doc(id).update({ ...data }).then(
+      () => {
+        this.toastr.success(`Success`, 'Your application was updated sucessful');
+      }
+    ).catch(e => {
+      this.toastr.error(`Denied`, 'Smth go wrong try again later');
+    });
   }
 
   getUsersApplications(userId) {
