@@ -516,11 +516,19 @@ h1 {
       line-height: 40px;
       margin-top: 70px;
       background: attr(data);
-      display: flex;
-      align-items: center;
-      justify-content: center;
       position: relative;
+      text-align: center;
       z-index: 3;
+
+      .choose-color:nth-child(1) {
+        top: -33px;
+        left: 1%;
+      }
+
+      .choose-color:nth-child(2) {
+        left: 90%;
+        top: -63px;
+      }
     }
 
     @media (max-width: 568px) {
@@ -1419,6 +1427,12 @@ h1 {
           align-self: self-end;
           margin-top: 15px;
         }
+
+        .first-choose-color {
+          position: absolute;
+          top: 5px;
+          left: 5%;
+        }
       }
 
       .form-description-block {
@@ -1495,6 +1509,12 @@ h1 {
           left: 0%;
           align-self: self-end;
           margin-top: 15px;
+        }
+
+        .choose-color:last-child {
+          position: absolute;
+          top: -5px;
+          left: 2%;
         }
 
         .form-description-content {

@@ -184,7 +184,7 @@ export class KindergartenComponent implements OnInit {
     else if (item == kinderChangeState.titleButtonTextColor && this.kinderStyleState.chooseTitleButtonTextColor) {
       this.kinderStyleState.chooseTitleButtonTextColor = false;
     }
-    else if (item == kinderChangeState.titleButtonColor && this.kinderStyleState.chooseTitleButtonColor && !e.target['className'].includes('choose-color')) {
+    else if (item == kinderChangeState.titleButtonColor && this.kinderStyleState.chooseTitleButtonColor) {
       this.kinderStyleState.chooseTitleButtonColor = false;
     }
     else if (item == kinderChangeState.groupNameColor && this.kinderStyleState.chooseGroupName == i) {
@@ -214,10 +214,10 @@ export class KindergartenComponent implements OnInit {
     else if (item == kinderChangeState.kinderFormTextColor && this.kinderStyleState.chooseKinderFormText == i) {
       this.kinderStyleState.chooseKinderFormText = null;
     }
-    else if (item == kinderChangeState.kinderFormTitleBackgroundColor && this.kinderStyleState.chooseKinderFormTitleBackground == i && !e.target['className'].includes('choose-color')) {
+    else if (item == kinderChangeState.kinderFormTitleBackgroundColor && this.kinderStyleState.chooseKinderFormTitleBackground == i) {
       this.kinderStyleState.chooseKinderFormTitleBackground = null;
     }
-    else if (item == kinderChangeState.kinderFormTextBackgroundColor && this.kinderStyleState.chooseKinderFormTextBackground == i && !e.target['className'].includes('choose-color')) {
+    else if (item == kinderChangeState.kinderFormTextBackgroundColor && this.kinderStyleState.chooseKinderFormTextBackground == i) {
       this.kinderStyleState.chooseKinderFormTextBackground = null;
     }
   }

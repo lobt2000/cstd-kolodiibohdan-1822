@@ -71,11 +71,9 @@
       </div>
       <button class="btn record"
         [ngStyle]="{'background-color': (kindergarten.value?.titleButtonColor || 'green'), 'color' : (kindergarten.value?.titleButtonTextColor || 'black')}"
-        [matTooltip]="'Click on the button to choose the title color'" [matTooltipPosition]="'below'"
-        matTooltipClass="mat-custom-tooltip-below" (clickOutside)="onClickedOutsideItem($event, 'titleButtonColor')"
-        (click)="$event.target['className'].includes('choose-color') ? kinderStyleState.chooseTitleButtonColor=false : kinderStyleState.chooseTitleButtonColor=true">Apply
+        (clickOutside)="onClickedOutsideItem($event, 'titleButtonColor')">Apply
         to kindergarten
-        <div class="choose-color" [matTooltip]="'Click to rainbow to choose title color'"
+        <div class="choose-color" [matTooltip]="'Click to rainbow to choose text color'"
           (clickOutside)="onClickedOutsideItem($event, 'titleButtonTextColor')" [matTooltipPosition]="'below'"
           matTooltipClass="mat-custom-tooltip-below" (click)="kinderStyleState.chooseTitleButtonTextColor=true">
           <div class="color-rainbow" [style.display]="kinderStyleState.chooseTitleButtonTextColor ? 'flex' : 'none'">
@@ -90,15 +88,19 @@
             </div>
           </div>
         </div>
-        <div class="color-rainbow" [style.display]="kinderStyleState.chooseTitleButtonColor ? 'flex' : 'none'">
-          <div class="close icon-close" (click)="onClickedOutsideItem($event, 'titleButtonColor')"></div>
-          <div class="write-color">
-            <input type="text" placeholder="write here title color(hex)" [formControlName]="'titleButtonColor'">
-          </div>
-          <div class="color-range">
-            <div *ngFor="let item of items" [style.background-color]="item"
-              (mouseover)="changeColor(item, 'titleButtonColor')"
-              (click)="onClickedOutsideItem($event, 'titleButtonColor')"></div>
+        <div class="choose-color" [matTooltip]="'Click to rainbow to choose button color'"
+          (clickOutside)="onClickedOutsideItem($event, 'titleButtonColor')" [matTooltipPosition]="'below'"
+          matTooltipClass="mat-custom-tooltip-below" (click)="kinderStyleState.chooseTitleButtonColor=true">
+          <div class="color-rainbow" [style.display]="kinderStyleState.chooseTitleButtonColor ? 'flex' : 'none'">
+            <div class="close icon-close" (click)="onClickedOutsideItem($event, 'titleButtonColor')"></div>
+            <div class="write-color">
+              <input type="text" placeholder="write here title color(hex)" [formControlName]="'titleButtonColor'">
+            </div>
+            <div class="color-range">
+              <div *ngFor="let item of items" [style.background-color]="item"
+                (mouseover)="changeColor(item, 'titleButtonColor')"
+                (click)="onClickedOutsideItem($event, 'titleButtonColor')"></div>
+            </div>
           </div>
         </div>
       </button>
@@ -340,10 +342,7 @@
           *ngFor="let form of kindergarten.get('kinderForm')?.controls; let i=index">
           <ng-container [formGroupName]="i">
             <div class="closed icon-close" (click)="deleteGroupControl('kinderForm', i)"></div>
-            <div class="form-title-info" [matTooltip]="'Click to the corner of block to choose color of part of block'"
-              [matTooltipPosition]="'above'" matTooltipClass="mat-custom-tooltip"
-              (click)="$event.target['className'].includes('choose-color') ? kinderStyleState.chooseKinderFormTitleBackground=null : kinderStyleState.chooseKinderFormTitleBackground=i"
-              [style.background-color]="form.value?.kinderFormTitleBackgroundColor">
+            <div class="form-title-info" [style.background-color]="form.value?.kinderFormTitleBackgroundColor">
               <input type="text" class="form-title-type" [style.color]="form.value?.kinderFormTitleColor"
                 [formControlName]="'formTitleType'" placeholder="Part-time day">
               <input type="text" class="form-title-time" [style.color]="form.value?.kinderFormTitleColor"
@@ -352,28 +351,36 @@
                 [formControlName]="'formTitlePrice'" placeholder="5000-5500 grn/month">
               <input type="text" class="form-title-additional" [style.color]="form.value?.kinderFormTitleColor"
                 [formControlName]="'formTitleAdditional'" placeholder="(Depends by location)">
-              <div class="color-rainbow"
-                [style.display]="kinderStyleState.chooseKinderFormTitleBackground==i ? 'flex' : 'none'">
-                <div class="close icon-close"
-                  (click)="onClickedOutsideItem($event, 'kinderFormTitleBackgroundColor', i)">
-                </div>
-                <div class="write-color">
-                  <input type="text" placeholder="write here title color(hex)"
-                    [formControlName]="'kinderFormTitleBackgroundColor'">
-                </div>
-                <div class="color-range">
-                  <div *ngFor="let item of items" [style.background-color]="item"
-                    (mouseover)="changeColor(item, 'kinderFormTitleBackgroundColor', i)"
+              <div class="choose-color first-choose-color"
+                [matTooltip]="'Click to the corner of block to choose color of part of block'"
+                [matTooltipPosition]="'above'" matTooltipClass="mat-custom-tooltip"
+                (clickOutside)="onClickedOutsideItem($event, 'kinderFormTitleBackgroundColor', i)"
+                (click)="kinderStyleState.chooseKinderFormTitleBackground=i">
+                <div class="color-rainbow"
+                  [style.display]="kinderStyleState.chooseKinderFormTitleBackground==i ? 'flex' : 'none'">
+                  <div class="close icon-close"
                     (click)="onClickedOutsideItem($event, 'kinderFormTitleBackgroundColor', i)">
+                  </div>
+                  <div class="write-color">
+                    <input type="text" placeholder="write here title color(hex)"
+                      [formControlName]="'kinderFormTitleBackgroundColor'">
+                  </div>
+                  <div class="color-range">
+                    <div *ngFor="let item of items" [style.background-color]="item"
+                      (mouseover)="changeColor(item, 'kinderFormTitleBackgroundColor', i)"
+                      (click)="onClickedOutsideItem($event, 'kinderFormTitleBackgroundColor', i)">
+                    </div>
                   </div>
                 </div>
               </div>
+
               <div class="choose-color" [matTooltip]="'Click to rainbow to choose all title text color'"
                 (clickOutside)="onClickedOutsideItem($event, 'kinderFormTitleColor', i)" [matTooltipPosition]="'below'"
                 matTooltipClass="mat-custom-tooltip-below" (click)="kinderStyleState.chooseKinderFormTitle=i">
                 <div class="color-rainbow"
                   [style.display]="kinderStyleState.chooseKinderFormTitle==i ? 'flex' : 'none'">
-                  <div class="close icon-close" (click)="onClickedOutsideItem($event, 'kinderFormTitleColor', i)"></div>
+                  <div class="close icon-close" (click)="onClickedOutsideItem($event, 'kinderFormTitleColor', i)">
+                  </div>
                   <div class="write-color">
                     <input type="text" placeholder="write here title color(hex)"
                       [formControlName]="'kinderFormTitleColor'">
@@ -387,11 +394,7 @@
                 </div>
               </div>
             </div>
-            <div class="form-description-block"
-              (click)="$event.target['className'].includes('choose-color') ? kinderStyleState.chooseKinderFormTextBackground=null : kinderStyleState.chooseKinderFormTextBackground=i"
-              [style.background-color]="form.value?.kinderFormTextBackgroundColor"
-              [matTooltip]="'Click to the corner of block to choose color of part of block'"
-              [matTooltipPosition]="'above'" matTooltipClass="mat-custom-tooltip">
+            <div class="form-description-block" [style.background-color]="form.value?.kinderFormTextBackgroundColor">
               <div class="form-description-content" [formArrayName]="'formDescription'"
                 *ngFor="let description of form?.get('formDescription')['controls']; let j=index">
                 <ng-container [formGroupName]="j">
@@ -415,7 +418,8 @@
                 (clickOutside)="onClickedOutsideItem($event, 'kinderFormTextColor', i)" [matTooltipPosition]="'below'"
                 matTooltipClass="mat-custom-tooltip-below" (click)="kinderStyleState.chooseKinderFormText=i">
                 <div class="color-rainbow" [style.display]="kinderStyleState.chooseKinderFormText==i ? 'flex' : 'none'">
-                  <div class="close icon-close" (click)="onClickedOutsideItem($event, 'kinderFormTextColor', i)"></div>
+                  <div class="close icon-close" (click)="onClickedOutsideItem($event, 'kinderFormTextColor', i)">
+                  </div>
                   <div class="write-color">
                     <input type="text" placeholder="write here title color(hex)"
                       [formControlName]="'kinderFormTextColor'">
@@ -436,19 +440,24 @@
                 <button class="ask-for-details btn" disabled>Ask for details</button>
                 <button class="recort-to-kinder btn" (click)="goToApply()">Apply into group</button>
               </div>
-              <div class="color-rainbow"
-                [style.display]="kinderStyleState.chooseKinderFormTextBackground==i ? 'flex' : 'none'">
-                <div class="close icon-close"
-                  (click)="onClickedOutsideItem($event, 'kinderFormTextBackgroundColor', i)">
-                </div>
-                <div class="write-color">
-                  <input type="text" placeholder="write here title color(hex)"
-                    [formControlName]="'kinderFormTextBackgroundColor'">
-                </div>
-                <div class="color-range">
-                  <div *ngFor="let item of items" [style.background-color]="item"
-                    (mouseover)="changeColor(item, 'kinderFormTextBackgroundColor', i)"
+              <div class="choose-color" [matTooltip]="'Click to the corner of block to choose color of part of block'"
+                [matTooltipPosition]="'below'" matTooltipClass="mat-custom-tooltip"
+                (clickOutside)="onClickedOutsideItem($event, 'kinderFormTextBackgroundColor', i)"
+                (click)="kinderStyleState.chooseKinderFormTextBackground=i">
+                <div class="color-rainbow"
+                  [style.display]="kinderStyleState.chooseKinderFormTextBackground==i ? 'flex' : 'none'">
+                  <div class="close icon-close"
                     (click)="onClickedOutsideItem($event, 'kinderFormTextBackgroundColor', i)">
+                  </div>
+                  <div class="write-color">
+                    <input type="text" placeholder="write here title color(hex)"
+                      [formControlName]="'kinderFormTextBackgroundColor'">
+                  </div>
+                  <div class="color-range">
+                    <div *ngFor="let item of items" [style.background-color]="item"
+                      (mouseover)="changeColor(item, 'kinderFormTextBackgroundColor', i)"
+                      (click)="onClickedOutsideItem($event, 'kinderFormTextBackgroundColor', i)">
+                    </div>
                   </div>
                 </div>
               </div>
