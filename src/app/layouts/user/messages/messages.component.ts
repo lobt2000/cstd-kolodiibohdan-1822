@@ -4,6 +4,7 @@ import { debounceTime, map, takeUntil } from 'rxjs/operators';
 import { AuthService } from 'src/app/service/auth.service';
 import { KindergartenListService } from 'src/app/service/kindergarten-list.service';
 import { contacts } from 'src/app/shared/interfaces/contacts.interface';
+import { Users } from 'src/app/shared/interfaces/users.interface';
 
 @Component({
   selector: 'app-messages',
@@ -12,7 +13,7 @@ import { contacts } from 'src/app/shared/interfaces/contacts.interface';
 })
 export class MessagesComponent implements OnInit, OnDestroy {
   userContacts: Array<contacts> = [];
-  allUsers: Array<any> = [];
+  allUsers: Array<Users> = [];
   windowSize: number = window.innerWidth;
   isOpen: boolean;
   isConversationOpen: boolean = false;

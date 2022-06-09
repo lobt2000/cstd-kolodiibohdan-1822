@@ -19,7 +19,6 @@ export class UserComponent implements OnInit {
   onResize(event) {
     this.menuWidth = (window.innerWidth < 768 || this.checkSizeOfEvent) ? 70 : 270;
     this.windowWidth = window.innerWidth;
-
   }
 
   onResizeValue(event) {

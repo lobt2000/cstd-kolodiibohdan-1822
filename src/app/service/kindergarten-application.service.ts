@@ -21,7 +21,7 @@ export class KindergartenApplicationService {
     this.kinderRef = this.db.collection(this.dbPath1);
   }
 
-  getGroupApplyList(id) {
+  getGroupApplyList(id: string) {
     return this.kinderApplyRef.ref.where('kinderId', '==', id)
   }
 
@@ -35,7 +35,7 @@ export class KindergartenApplicationService {
     });
   }
 
-  getUsersApplications(userId) {
+  getUsersApplications(userId: string) {
     return this.kinderApplyRef.snapshotChanges().pipe(
       map(changes =>
         changes.map(c =>
@@ -53,7 +53,7 @@ export class KindergartenApplicationService {
     )
   }
 
-  getKinder(kinderId) {
+  getKinder(kinderId: string) {
     return this.kinderRef.snapshotChanges().pipe(
       map(changes =>
         changes.map(c =>

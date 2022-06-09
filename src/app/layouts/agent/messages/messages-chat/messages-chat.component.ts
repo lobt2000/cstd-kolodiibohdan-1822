@@ -23,7 +23,7 @@ export class MessagesChatComponent implements OnInit {
   isDisabled: boolean = false;
   currMesUser: contacts;
   currDate: string = '';
-  allUsers: Array<any>;
+  allUsers: Array<Users>;
   userContacts: Array<contacts> = [];
   checkOption: number = null;
   deleteIndex: number = null;
@@ -35,7 +35,6 @@ export class MessagesChatComponent implements OnInit {
   })
   subject: Subject<string> = new Subject<string>();
   userMessname: string;
-  // month: Array<Month> = [];
   editMessage: number = null;
   isEdit: boolean = false;
   isModal: boolean = false;
@@ -61,7 +60,6 @@ export class MessagesChatComponent implements OnInit {
     })
     this.currDate = moment().format('D MMMM YYYY');
     this.backInLocation(true)
-    // console.log(moment().format('D MMMM YYYY'));
     this.textInput.valueChanges.subscribe(res => {
       if ((res.text && res.text.charCodeAt(0) !== 32) || this.uplFile) {
         this.isDisabled = true;
@@ -102,11 +100,11 @@ export class MessagesChatComponent implements OnInit {
         id: user.id,
         icon: user.icon,
         username: user?.username,
-        time: user?.messages?.length ? user?.messages[0]?.time : '',
+        time: '',
         missing: 0,
-        text: user?.messages?.length ? user?.messages[0]?.text : '',
+        text: '',
         url: user.url,
-        messages: user.messages || []
+        messages: []
       };
     }
   }
@@ -168,7 +166,10 @@ export class MessagesChatComponent implements OnInit {
         time: this.currMesUser.messages[this.currMesUser.messages.length - 1].time,
         text: this.currMesUser.messages[this.currMesUser.messages.length - 1].text,
       }
-      this.mainUser.contacts[this.mainUser.contacts.map((res, i) => { if (res.id == this.currMesUser.id) { return i } })[0]] = this.currMesUser
+      this.mainUser.contacts = this.mainUser.contacts.map((res, i) => {
+        if (res.id == this.currMesUser.id) { res = this.currMesUser }
+        return res;
+      })
     }
     const user = {
       ...this.mainUser
@@ -179,10 +180,14 @@ export class MessagesChatComponent implements OnInit {
 
   }
 
+  @HostListener('window:keydown.enter', ['$event'])
+  keyDownSending() {
+    this.isEdit ? this.sendEditMessage() : this.sendMessage();
+  }
+
+
   getFile(event): void {
     const file = event.target ? event.target.files[0] : event;
-    console.log(file);
-
     const filePath = `message-file/${file.name}`;
     const upload = this.storage.upload(filePath, file);
     this.isDisabled = true;
@@ -241,7 +246,16 @@ export class MessagesChatComponent implements OnInit {
 
   delete(): void {
     this.currMesUser.messages.splice(this.deleteIndex, 1);
-    this.mainUser.contacts[this.mainUser.contacts.map((res, i) => { if (res.id == this.currMesUser.id) { return i } })[0]] = this.currMesUser
+    const lengthOfMess: number = this.currMesUser.messages.length;
+    this.currMesUser = {
+      ...this.currMesUser,
+      time: this.currMesUser.messages.length ? this.currMesUser.messages[lengthOfMess - 1].time : '',
+      text: this.currMesUser.messages.length ? this.currMesUser.messages[lengthOfMess - 1].text : '',
+    }
+    this.mainUser.contacts = this.mainUser.contacts.map((res, i) => {
+      if (res.id == this.currMesUser.id) { res = this.currMesUser }
+      return res;
+    })
     const user: Users = {
       ...this.mainUser
     }
@@ -257,20 +271,20 @@ export class MessagesChatComponent implements OnInit {
 
   closeModal(): void {
     this.isModal = false;
-    // this.deleteIndex = null;
     this.deleteForm.reset();
   }
 
   updUser(): void {
     let reciewUser = this.allUsers.find(res => res.username == this.currMesUser.username);
+    const lengthOfMess: number = this.currMesUser.messages.length;
     if (!reciewUser.contacts.some(res => res.id == this.mainUser.id)) {
       reciewUser.contacts.push({
         id: this.mainUser.id,
         icon: this.mainUser.icon,
         username: this.mainUser.username,
-        time: this.currMesUser.messages[this.currMesUser.messages.length - 1].time,
+        time: this.currMesUser.messages[lengthOfMess - 1].time,
         missing: 0,
-        text: this.currMesUser.messages[this.currMesUser.messages.length - 1].text,
+        text: this.currMesUser.messages[lengthOfMess - 1].text,
         url: this.mainUser.url,
         messages: this.currMesUser.messages
       })
@@ -279,8 +293,8 @@ export class MessagesChatComponent implements OnInit {
       let index = reciewUser.contacts.findIndex((res, i) => res.id == this.mainUser.id);
       reciewUser.contacts[index] = {
         ...reciewUser.contacts[index],
-        time: this.currMesUser.messages[this.currMesUser.messages.length - 1].time,
-        text: this.currMesUser.messages[this.currMesUser.messages.length - 1].text,
+        time: this.currMesUser.messages[lengthOfMess - 1] ? this.currMesUser.messages[lengthOfMess - 1].time : '',
+        text: this.currMesUser.messages[lengthOfMess - 1] ? this.currMesUser.messages[lengthOfMess - 1].text : '',
         messages: this.currMesUser.messages
       }
     }

@@ -9,8 +9,10 @@ export interface Users {
     password: string
     firstname: string,
     secondname: string,
-    userPos: string
+    userPos: string,
     contacts?: Array<contacts>,
     kinderId?: string,
-    phone?: string
+    phone?: string,
+    username?: string,
+    url?: string,
 }

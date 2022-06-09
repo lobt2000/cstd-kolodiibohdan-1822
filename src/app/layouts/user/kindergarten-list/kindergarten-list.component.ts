@@ -1,6 +1,7 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { map, take } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { map, take, takeUntil } from 'rxjs/operators';
 import { KindergartenListService } from 'src/app/service/kindergarten-list.service';
 
 @Component({
@@ -8,12 +9,13 @@ import { KindergartenListService } from 'src/app/service/kindergarten-list.servi
   templateUrl: './kindergarten-list.component.html',
   styleUrls: ['./kindergarten-list.component.scss']
 })
-export class KindergartenListComponent implements OnInit {
+export class KindergartenListComponent implements OnInit, OnDestroy {
   kinderLists: Array<any> = [];
   isLoading: boolean = true;
   windowSize: number = window.innerWidth;
   isOpen: boolean;
   searchText: string;
+  destroy$ = new Subject<any>();
   constructor(private kindergartenService: KindergartenListService, private router: Router) { }
 
   ngOnInit(): void {
@@ -36,7 +38,7 @@ export class KindergartenListComponent implements OnInit {
           ({ id: c.payload.doc.id, ...c.payload.doc.data() })
         )
       ),
-      // take(1)
+      takeUntil(this.destroy$)
     ).subscribe(data => {
       this.kinderLists = data;
       this.isLoading = false;
@@ -46,5 +48,11 @@ export class KindergartenListComponent implements OnInit {
   onGoToDetails(kinderElem) {
     this.router.navigate(['/user', 'kindergarten-list', kinderElem.title])
   }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.unsubscribe();
+  }
+
 
 }

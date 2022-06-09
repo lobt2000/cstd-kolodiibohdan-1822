@@ -49,12 +49,8 @@ export class KindergartenDetailsComponent implements OnInit, OnDestroy {
         this.isOpen = res;
       }
     )
-
     this.getKindergarten();
-
   }
-
-
 
   getKindergarten() {
     this.kindergartenServise.getOne(this.kinderTitle)
@@ -77,7 +73,6 @@ export class KindergartenDetailsComponent implements OnInit, OnDestroy {
       childYear: ['', [Validators.required, Validators.min(0), Validators.max(6)]],
       childSex: ['', [Validators.required]]
     });
-    // console.log(this.form.get('email'));
     if (this.currkinder.kindergartenGroup) {
       this.form.addControl(
         'groupType', new FormControl('', Validators.required)

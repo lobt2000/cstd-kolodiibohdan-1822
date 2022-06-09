@@ -86,7 +86,7 @@ export class KindergartenListService {
     });
   }
 
-  updateKinderApply(id, data) {
+  updateKinderApply(id: string, data) {
     try {
       this.kinderListApplyRef.ref.where('title', '==', id).get().then(res => {
         if (res.size == 0) {
@@ -121,7 +121,7 @@ export class KindergartenListService {
     }
   }
 
-  updateKinder(id, data) {
+  updateKinder(id: string, data) {
     if (id) {
       const kinder = {
         ...data,

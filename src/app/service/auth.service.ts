@@ -6,6 +6,8 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/comp
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
+import { SignIn } from '../shared/interfaces/login.interface';
+import { SignUp } from '../shared/interfaces/signUp.interface';
 import { Users } from '../shared/interfaces/users.interface';
 // import { Users } from '../shared/interfaces/users.interface';
 
@@ -37,18 +39,18 @@ export class AuthService {
       )
   }
 
-  signUp(email: string, password: string, userFname: string, userSname: string, userPos): void {
-    this.auth.createUserWithEmailAndPassword(email, password)
+  signUp(signUp: SignUp): void {
+    this.auth.createUserWithEmailAndPassword(signUp.email, signUp.pass)
 
       .then(userResponse => {
-        const user = {
+        const user: Users = {
           email: userResponse.user.email,
-          password: password,
-          firstname: userFname,
-          secondname: userSname,
-          userPos: userPos,
-          username: `${userFname} ${userSname}`,
-          url: `${userFname}_${userSname}`,
+          password: signUp.pass,
+          firstname: signUp.firstname,
+          secondname: signUp.secondname,
+          userPos: signUp.checkPosition,
+          username: `${signUp.firstname} ${signUp.secondname}`,
+          url: `${signUp.firstname}_${signUp.secondname}`,
           icon: '',
           contacts: []
         }
@@ -85,8 +87,8 @@ export class AuthService {
 
 
 
-  signIn(email: string, password: string): void {
-    this.auth.signInWithEmailAndPassword(email, password)
+  signIn(login: SignIn): void {
+    this.auth.signInWithEmailAndPassword(login.email, login.pass)
       .then(userResponse => {
         this.db.collection('users').ref.where('email', '==', userResponse.user.email).onSnapshot(
           snap => {
@@ -94,7 +96,7 @@ export class AuthService {
               const myUser = {
                 id: userRef.id,
                 ...userRef.data() as Users,
-                password: password,
+                password: login.pass,
 
               }
               if (!JSON.parse(localStorage.getItem('mainuser'))) {

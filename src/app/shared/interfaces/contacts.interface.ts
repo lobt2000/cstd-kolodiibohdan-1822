@@ -1,3 +1,5 @@
+import { Messages } from "./messages.interface";
+
 export interface contacts {
     id?: string,
     icon: string,
@@ -6,5 +8,5 @@ export interface contacts {
     missing: number,
     text: string,
     url: string,
-    messages?: Array<any>
+    messages?: Array<Messages>
 }
