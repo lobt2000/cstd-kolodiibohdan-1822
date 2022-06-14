@@ -143,7 +143,7 @@
         </div>
         <div class="group-info">
           <div class="group-name"><input type="text" class="write-group-name" [formControlName]="'name'"
-              [style.color]="group.value?.groupNameColor || ''">
+              [style.color]="group.value?.groupNameColor || ''" placeholder="Group name">
             <div class="choose-color" [matTooltip]="'Click to rainbow to choose title color'"
               (clickOutside)="onClickedOutsideItem($event, 'groupNameColor', i)" [matTooltipPosition]="'below'"
               matTooltipClass="mat-custom-tooltip-below" (click)="kinderStyleState.chooseGroupName=i">
@@ -162,7 +162,7 @@
             </div>
           </div>
           <div class="group-age-range"><input type="text" class="write-group-age-range" [formControlName]="'ageRange'"
-              [style.color]="group.value?.groupAgeRangeColor || ''">
+              [style.color]="group.value?.groupAgeRangeColor || ''" placeholder="Age range (from 0 to 1)">
             <div class="choose-color" [matTooltip]="'Click to rainbow to choose group age range color'"
               (clickOutside)="onClickedOutsideItem($event, 'groupAgeRangeColor', i)" [matTooltipPosition]="'below'"
               matTooltipClass="mat-custom-tooltip-below" (click)="kinderStyleState.chooseGroupAgeRange=i">

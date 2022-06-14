@@ -12,7 +12,7 @@ import { ClickOutsideModule } from 'ng-click-outside';
 import { KindergartenListService } from 'src/app/service/kindergarten-list.service';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { environment } from 'src/environments/environment';
-import { KindergartenListRoutingModule } from '../kindergarten-list/kindergarten-list-routing.module';
+// import { KindergartenListRoutingModule } from '../kindergarten-list/kindergarten-list-routing.module';
 
 import { MessagesComponent } from './messages.component';
 
@@ -33,7 +33,7 @@ describe('MessagesComponent', () => {
         AngularFireStorageModule,
         AngularFireAuthModule,
         CommonModule,
-        KindergartenListRoutingModule,
+        // KindergartenListRoutingModule,
         SharedModule,
         FormsModule,
         ReactiveFormsModule,
@@ -143,7 +143,7 @@ describe('MessagesComponent', () => {
       username: "Bogdan Kolodiy"
     }
     localStorage.setItem('mainuser', JSON.stringify(mainuser))
-    component.getMesUsers()
+    // component.getMesUsers()
     expect(component.userContacts.length).toBe(1);
   });
 

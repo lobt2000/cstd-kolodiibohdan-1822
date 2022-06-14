@@ -18,6 +18,7 @@ export class MessagesComponent implements OnInit, OnDestroy {
   isOpen: boolean;
   isConversationOpen: boolean = false;
   destroy$ = new Subject<any>();
+  isLoading: boolean = false;
   constructor(private kindergartenListService: KindergartenListService, private authService: AuthService) { }
 
   ngOnInit(): void {
@@ -38,6 +39,7 @@ export class MessagesComponent implements OnInit, OnDestroy {
 
 
   getAllUsers(): void {
+    this.isLoading = true;
     this.authService.getAllusers().snapshotChanges().pipe(
       map(changes =>
         changes.map(c =>
@@ -50,7 +52,8 @@ export class MessagesComponent implements OnInit, OnDestroy {
       let user = JSON.parse(localStorage.getItem('mainuser'));
       this.userContacts = res.find(item => item.id == user.id).contacts;
       this.allUsers = res.filter(item => !this.userContacts.some(el => el.id == item.id)).filter(item => item.id != user.id);
-      localStorage.setItem('mainuser', JSON.stringify({ ...user, contacts: this.userContacts }))
+      localStorage.setItem('mainuser', JSON.stringify({ ...user, contacts: this.userContacts }));
+      this.isLoading = false;
     })
   }
 

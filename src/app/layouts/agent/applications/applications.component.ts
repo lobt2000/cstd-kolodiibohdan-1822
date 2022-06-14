@@ -35,6 +35,9 @@ export class ApplicationsComponent implements OnInit, OnDestroy {
       }
       this.isLoading = false;
     })
+    else {
+      this.isLoading = false;
+    }
   }
 
 

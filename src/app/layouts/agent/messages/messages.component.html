@@ -2,52 +2,60 @@
   <section class="users col nowrap jcsb aic" [style.display]="checkDisplayType()">
     <div class="users__all w-100 flex col nowrap jcsb aic">
       <div class="users-title">Users contacts</div>
-      <div class="users__all--members w-100 flex nowrap jcfe aic" *ngFor="let item of userContacts"
-        [style.background-color]="item.missing == 0 ? 'white' : '#fdf5ec' " routerLinkActive="select-item"
-        [routerLink]="[ item.id ]">
-        <span routerLinkActive="choose"></span>
-        <div class="person w-100 flex nowrap jcsa aic" [routerLink]="[ item.id ]">
-          <div class="person__logo m-r-12 m-l-5">
-            <img class="person__logo--img user-logo" [src]="item.icon" alt="">
-            <span class="person__logo--active bdc-white bc-green"
-              [style.display]="item.missing == 0 ? 'none' : 'block' "></span>
-          </div>
-          <div class="person__person-data flex col nowrap jcc aifs">
-            <p class="person__person-data--title m-b-5 font-15" routerLinkActive="txt-c-blue">
-              {{item.username}}
-            </p>
-            <p class="txt-c-initial txt-overflow font-12 w-100">
-              {{item.text}}
-            </p>
-          </div>
-          <div class="person__other-data flex col nowrap m-r-5 jcc aic">
-            <p class="person__other-data--time m-b-5 font-12 txt-c-initial">
-              {{item.time}}
-            </p>
-            <p class="person__other-data--missing bdc-blue font-11 bc-white txt-c-blue flex nowrap jcc aic"
-              *ngIf="item.missing > 0">
-              {{item.missing}}
-            </p>
+      <ng-container *ngIf="!isLoading">
+        <div class="users__all--members w-100 flex nowrap jcfe aic" *ngFor="let item of userContacts"
+          [style.background-color]="item.missing == 0 ? 'white' : '#fdf5ec' " routerLinkActive="select-item"
+          [routerLink]="[ item.id ]">
+          <span routerLinkActive="choose"></span>
+          <div class="person w-100 flex nowrap jcsa aic" [routerLink]="[ item.id ]">
+            <div class="person__logo m-r-12 m-l-5">
+              <img class="person__logo--img user-logo" [src]="item.icon" alt="">
+              <span class="person__logo--active bdc-white bc-green"
+                [style.display]="item.missing == 0 ? 'none' : 'block' "></span>
+            </div>
+            <div class="person__person-data flex col nowrap jcc aifs">
+              <p class="person__person-data--title m-b-5 font-15" routerLinkActive="txt-c-blue">
+                {{item.username}}
+              </p>
+              <p class="txt-c-initial txt-overflow font-12 w-100">
+                {{item.text}}
+              </p>
+            </div>
+            <div class="person__other-data flex col nowrap m-r-5 jcc aic">
+              <p class="person__other-data--time m-b-5 font-12 txt-c-initial">
+                {{item.time}}
+              </p>
+              <p class="person__other-data--missing bdc-blue font-11 bc-white txt-c-blue flex nowrap jcc aic"
+                *ngIf="item.missing > 0">
+                {{item.missing}}
+              </p>
+            </div>
           </div>
         </div>
-      </div>
+      </ng-container>
+      <ng-container *ngIf="isLoading">
+        <div class="loader-overlay">
+          <mat-spinner></mat-spinner>
+        </div>
+      </ng-container>
       <div class="users-title">All users</div>
-      <div class="users__all--members w-100 flex nowrap jcfe aic bc-white" *ngFor="let item of allUsers"
-        routerLinkActive="select-item" [routerLink]="[ item.id ]">
-        <span routerLinkActive="choose"></span>
-        <div class="person w-100 flex nowrap jcsa aic" [routerLink]="[ item.id ]">
-          <div class="person__logo m-r-12 m-l-5">
-            <img class="person__logo--img user-logo" [src]="item.icon" alt="">
-          </div>
-          <div class="person__person-data flex col nowrap jcc aifs">
-            <p class="person__person-data--title m-b-5 font-15" routerLinkActive="txt-c-blue">
-              {{item.username}}
-            </p>
-            <!-- <p class="txt-c-initial txt-overflow font-12 w-100">
+      <ng-container *ngIf="!isLoading">
+        <div class="users__all--members w-100 flex nowrap jcfe aic bc-white" *ngFor="let item of allUsers"
+          routerLinkActive="select-item" [routerLink]="[ item.id ]">
+          <span routerLinkActive="choose"></span>
+          <div class="person w-100 flex nowrap jcsa aic" [routerLink]="[ item.id ]">
+            <div class="person__logo m-r-12 m-l-5">
+              <img class="person__logo--img user-logo" [src]="item.icon" alt="">
+            </div>
+            <div class="person__person-data flex col nowrap jcc aifs">
+              <p class="person__person-data--title m-b-5 font-15" routerLinkActive="txt-c-blue">
+                {{item.username}}
+              </p>
+              <!-- <p class="txt-c-initial txt-overflow font-12 w-100">
               {{item.text}}
             </p> -->
-          </div>
-          <!-- <div class="person__other-data flex col nowrap m-r-5 jcc aic">
+            </div>
+            <!-- <div class="person__other-data flex col nowrap m-r-5 jcc aic">
             <p class="person__other-data--time m-b-5 font-12 txt-c-initial">
               {{item.time}}
             </p>
@@ -56,8 +64,14 @@
               {{item.missing}}
             </p>
           </div> -->
+          </div>
         </div>
-      </div>
+      </ng-container>
+      <ng-container *ngIf="isLoading">
+        <div class="loader-overlay">
+          <mat-spinner></mat-spinner>
+        </div>
+      </ng-container>
     </div>
   </section>
   <section class="users-messages bc-gray"
@@ -69,4 +83,5 @@
   <section class="under-constraction">
     {{'Under constraction' | uppercase}}
   </section> -->
+
 </main>
