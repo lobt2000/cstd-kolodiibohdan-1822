@@ -35,6 +35,7 @@ export class GroupApplicationComponent implements OnInit, OnDestroy {
   searchText: string = '';
   subGroup;
   kindergarten;
+  isLoading: boolean;
   ngOnInit(): void {
     this.kindergartenServise.menuPosition.subscribe(
       res => {
@@ -42,6 +43,7 @@ export class GroupApplicationComponent implements OnInit, OnDestroy {
       }
     )
     const user = JSON.parse(localStorage.getItem('mainuser'));
+    this.isLoading = true;
     this.kindergartenApplication.getGroupApplyList(user.kinderId).onSnapshot(
       document => {
         document.forEach(prod => {
@@ -50,9 +52,9 @@ export class GroupApplicationComponent implements OnInit, OnDestroy {
             ...prod.data()
           };
           this.applyKindergarten = apply;
-          this.applylists = apply.listOfApply.filter(res => res.groupType.name == this.group);
-          this.activeApplyLists = apply.listOfApply.filter(res => res.groupType.name == this.group && res.status == 'decline');
-          this.archiveApplyLists = apply.listOfApply.filter(res => res.groupType.name == this.group && res.status == 'accept')
+          this.applylists = apply.listOfApply.filter(res => res.groupType.name == this.group);          
+          this.activeApplyLists = apply.listOfApply.filter(res => res.groupType.name == this.group && !res.status);
+          this.archiveApplyLists = apply.listOfApply.filter(res => res.groupType.name == this.group && res.status)
           this.route.queryParams.subscribe((params) => {
             if (params.hasOwnProperty('applicationId')) {
               this.currentApply = this.applylists.find(item => item.id == params.applicationId)
@@ -63,6 +65,7 @@ export class GroupApplicationComponent implements OnInit, OnDestroy {
               this.isApplicationOpen = false;
             }
           })
+          this.isLoading = false;
         });
       }
     );
@@ -113,18 +116,18 @@ export class GroupApplicationComponent implements OnInit, OnDestroy {
   checkDisplayType(where) {
     if (where == 'applyDetails') {
       if ((this.windowSize < 1020 && !this.isOpen) || this.windowSize < 945) {
-        return (this.isApplicationOpen ? 'flex' : 'none')
+        return (this.isApplicationOpen ? 'block' : 'none')
       }
       else {
-        return 'flex';
+        return 'block';
       }
     }
     else {
       if ((this.windowSize < 1020 && !this.isOpen) || this.windowSize < 945) {
-        return (this.isApplicationOpen ? 'none' : 'flex')
+        return (this.isApplicationOpen ? 'none' : 'block')
       }
       else {
-        return 'flex';
+        return 'block';
       }
     }
   }
@@ -157,6 +160,9 @@ export class GroupApplicationComponent implements OnInit, OnDestroy {
 
           })
           if (this.currentApply.subGroup != result) {
+            console.log('kjhgfghjk', this.kindergarten);
+            
+            localStorage.setItem('kindergarten', JSON.stringify(this.kindergarten))
             this.kindergartenServise.updateKindergarten(this.kindergarten.id, this.kindergarten)
           }
           this.updateStatus(name, result);
@@ -164,6 +170,20 @@ export class GroupApplicationComponent implements OnInit, OnDestroy {
       });
     }
     else {
+      this.kindergarten.kindergartenGroup = this.kindergarten.kindergartenGroup.map(res => {
+        if (res.name == this.subGroup.name) {
+          res.groupDetails.map(item => {
+            if (item.name == this.currentApply.subGroup) {
+              item.childrenInGroup -= 1;
+            }
+
+            return item;
+          })
+        }
+        return res;
+      })
+      localStorage.setItem('kindergarten', JSON.stringify(this.kindergarten))
+      this.kindergartenServise.updateKindergarten(this.kindergarten.id, this.kindergarten)
       this.updateStatus(name)
     }
   }
@@ -179,6 +199,7 @@ export class GroupApplicationComponent implements OnInit, OnDestroy {
         return res;
       })
     }
+    
     this.kindergartenApplication.update(this.applyKindergarten.id, apply)
   }
 

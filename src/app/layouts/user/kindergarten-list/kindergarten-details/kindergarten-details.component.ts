@@ -23,6 +23,7 @@ export class KindergartenDetailsComponent implements OnInit, OnDestroy {
   windowSize: number = window.innerWidth;
   isOpen: boolean;
   isGroupCheck: boolean;
+  isChildSexCheck: boolean;
   isType: boolean;
   regExpEmail = /^[a-z0-9\-\.]{1,}@gmail\.com|net\.us|org\.ua$/i;
   destroy$ = new Subject<any>();
@@ -92,6 +93,9 @@ export class KindergartenDetailsComponent implements OnInit, OnDestroy {
     else if (item == 'typeOfReg') {
       this.isType = !this.isType;
     }
+    else if (item == 'childSex') {
+      this.isChildSexCheck = !this.isChildSexCheck;
+    }
   }
 
   onClickedOutsideItem(e: Event, item: string) {
@@ -103,10 +107,15 @@ export class KindergartenDetailsComponent implements OnInit, OnDestroy {
     else if (item == 'typeOfReg') {
       this.isType = false;
     }
+    else if (item == 'childSex') {
+      this.isChildSexCheck = false;
+    }
   }
 
   groupCheckType(item, kind) {
-    kind === 'groupType' ? this.form.get('groupType').setValue(item) : this.form.get('typeOfReg').setValue(item);
+    if (kind === 'groupType') { this.form.get('groupType').setValue(item) }
+    else if (kind === 'typeOfReg') { this.form.get('typeOfReg').setValue(item); }
+    else if (kind === 'childSex') { this.form.get('childSex').setValue(item); }
   }
 
   scrollToBottom() {

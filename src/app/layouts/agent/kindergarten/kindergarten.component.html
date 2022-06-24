@@ -1,7 +1,25 @@
 <main class="main-block" #content [formGroup]="kindergarten">
-  <h1>Kindergarten main view</h1>
+  <div class="main-view-title">Kindergarten main view <div [matTooltip]="'Click to choose kindergarten type'"
+      [matTooltipPosition]="'above'" matTooltipClass="mat-custom-tooltip" class="kindergarten-type-button"
+      (clickOutside)="onClickedOutsideItem($event, 'chooseKinderType')" (click)="kinderStyleState.chooseKinderType=true">
+      Type
+      <div class="type-option" *ngIf="kinderStyleState.chooseKinderType">
+        <div class="radio-button">
+          Private
+          <input type="radio" value="Private" [formControlName]="'kidergartenType'">
+        </div>
+        <div class="radio-button">
+          State
+          <input type="radio" value="State" [formControlName]="'kidergartenType'">
+        </div>
+      </div>
+    </div>
+  </div>
   <section class="kindergarten">
     <div class="kindergarten-list">
+      <div class="kindergarten-type">
+        {{ kindergarten.value?.kidergartenType }}
+      </div>
       <div class="input kindergarten-logo">
         <div class="input__upload">
           <div class="upload-btn-wrapper">
@@ -224,7 +242,8 @@
                 matTooltipClass="mat-custom-tooltip-below" (click)="kinderStyleState.chooseAdvantagesTitle=i">
                 <div class="color-rainbow"
                   [style.display]="kinderStyleState.chooseAdvantagesTitle==i ? 'flex' : 'none'">
-                  <div class="close icon-close" (click)="onClickedOutsideItem($event, 'advantagesTitleColor', i)"></div>
+                  <div class="close icon-close" (click)="onClickedOutsideItem($event, 'advantagesTitleColor', i)">
+                  </div>
                   <div class="write-color">
                     <input type="text" placeholder="write here title color(hex)"
                       [formControlName]="'advantagesTitleColor'">
@@ -294,7 +313,7 @@
                   <span class="address-pos"
                     [style.background-image]="'url(' + ( kinderAddress.value.addressPosImg || 'assets/image/crown.jpg') + ')'"></span>
                   <input type="text" class="address-name" [formControlName]="'addressName'"
-                    [style.color]="kinderAddress.value?.addressesTextColor">
+                    [style.color]="kinderAddress.value?.addressesTextColor" placeholder="Write your address">
                   <div class="choose-color" [matTooltip]="'Click to rainbow to choose street text color'"
                     (clickOutside)="onClickedOutsideItem($event, 'addressesTextColor', i)"
                     [matTooltipPosition]="'below'" matTooltipClass="mat-custom-tooltip-below"
@@ -411,7 +430,7 @@
                     </div>
                   </div>
                   <input class="form-name" type="text" [formControlName]="'descText'"
-                    [style.color]="form.value?.kinderFormTextColor">
+                    [style.color]="form.value?.kinderFormTextColor" placeholder="Write here form description">
                 </ng-container>
               </div>
               <div class="choose-color" [matTooltip]="'Click to rainbow to choose all title text color'"
@@ -497,12 +516,12 @@
         <span>Field should be required</span>
       </div>
       <div class="form-elem">
-        <label for="">Your child year old</label>
+        <label for="">Your child years old</label>
         <input type="number" disabled>
         <span>Field should be required</span>
       </div>
       <div class="form-elem">
-        <label for="">Your child sex</label>
+        <label for="">Your child gender</label>
         <input type="text" disabled>
         <span>Field should be required</span>
       </div>

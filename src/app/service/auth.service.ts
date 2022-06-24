@@ -51,7 +51,7 @@ export class AuthService {
           userPos: signUp.checkPosition,
           username: `${signUp.firstname} ${signUp.secondname}`,
           url: `${signUp.firstname}_${signUp.secondname}`,
-          icon: '',
+          icon: 'https://firebasestorage.googleapis.com/v0/b/kindergarten-daed8.appspot.com/o/images%2Fprofile.svg?alt=media&token=f3dfad23-c23a-4fdf-8ac8-4fad5ca93f49',
           contacts: []
         }
 
@@ -80,12 +80,6 @@ export class AuthService {
         }
       )
   }
-
-
-
-
-
-
 
   signIn(login: SignIn): void {
     this.auth.signInWithEmailAndPassword(login.email, login.pass)

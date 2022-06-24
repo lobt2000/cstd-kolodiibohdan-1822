@@ -1,5 +1,5 @@
 <main class="main-block">
-  <section class="header">
+  <section class="header" *ngIf="!isLoading">
     <button class="back-apply-list icon-arrowhead-thin-outline-to-the-left" (click)="backToApplyList()"
       [style.display]="checkDisplayType('applyDetails')">
       <!-- <span aria-hidden=" true" class="icon-arrowhead-thin-outline-to-the-left"></span> -->
@@ -18,13 +18,13 @@
       </div>
     </div>
   </section>
-  <section class="application-details">
+  <section class="application-details" *ngIf="!isLoading">
     <ng-container *ngIf="applylists.length; else withoutApply">
       <div class="apply-list" [style.display]="checkDisplayType('applylist')"
         [style.width]="(windowSize < 1020 && !isOpen) || windowSize < 850 ? '100%' : ''">
         <div class="apply-search">
           <span aria-hidden="true" class="icon-search icon-icons8-search txt-c-blue"></span>
-          <input type="text" name="searchText" id="" class="search" [(ngModel)]="searchText">
+          <input type="text" name="searchText" id="" class="search" [(ngModel)]="searchText" placeholder="Search application">
         </div>
         <h2>Without Subgroup</h2>
         <ng-container *ngIf="activeApplyLists.length; else withoutActiveApply">
@@ -87,4 +87,8 @@
     </ng-template>
 
   </section>
+  <div *ngIf="isLoading" class="loader-overlay">
+    <mat-spinner></mat-spinner>
+  </div>
 </main>
+

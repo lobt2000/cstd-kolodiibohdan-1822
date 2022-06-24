@@ -6,6 +6,9 @@
 <div class="kindergarten" *ngIf="!isLoading">
   <div class="kindergarten-list" *ngFor="let kinderElem of kinderLists | searchKindergarten: searchText"
     [style.width]="(windowSize < 1120 && !isOpen) || windowSize < 850 ? '90%' : '46%'">
+    <div class="kindergarten-type" *ngIf="kinderElem?.kidergartenType">
+      {{ kinderElem?.kidergartenType }}
+    </div>
     <div class="kindergarten-logo" [style.background-image]="'url(' + kinderElem['logo-img'] + ')'" alt=""></div>
     <div class="kindergarten-title header-title"><img class="logo" [src]="kinderElem?.logo" alt="">
       <div class="logo-title">{{kinderElem?.title}}</div>

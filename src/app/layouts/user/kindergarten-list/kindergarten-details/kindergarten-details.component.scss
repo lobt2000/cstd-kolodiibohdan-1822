@@ -276,6 +276,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      text-align: center;
 
       @media (max-width: 568px) {
         font-size: 18px;
@@ -291,9 +292,10 @@
     font-family: 'Poppins';
     color: black;
     line-height: 1.5;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    // display: flex;
+    // align-items: center;
+    // justify-content: center;
+    padding-right: 15px;
     overflow-y: auto;
     text-align: justify;
 

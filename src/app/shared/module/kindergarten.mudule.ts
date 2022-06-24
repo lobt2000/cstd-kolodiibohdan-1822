@@ -12,5 +12,6 @@ export enum kinderChangeState {
     kinderFormTitleColor = 'kinderFormTitleColor',
     kinderFormTextColor = 'kinderFormTextColor',
     kinderFormTitleBackgroundColor = 'kinderFormTitleBackgroundColor',
-    kinderFormTextBackgroundColor = 'kinderFormTextBackgroundColor'
+    kinderFormTextBackgroundColor = 'kinderFormTextBackgroundColor',
+    chooseKinderType = 'chooseKinderType',
 }

@@ -14,27 +14,10 @@ export class MainPageComponent implements OnInit {
   isLoading: boolean = false;
   constructor(private kindergartenService: KindergartenListService, private router: Router, private s: AuthService) { }
 
-  ngOnInit(): void {
-    // this.getFirstKindergarten();
-  }
+  ngOnInit(): void {}
 
-  // getFirstKindergarten() {
-  //   this.kindergartenService.getAllKindergartenList().snapshotChanges().pipe(
-  //     map(changes =>
-  //       changes.map(c =>
-  //         ({ id: c.payload.doc.id, ...c.payload.doc.data() })
-  //       )
-  //     ),
-  //     take(1)
-  //   ).subscribe(data => {
-  //     this.firstKinder = data[0];
-  //   }, (e) => { }, () => {
-  //     this.isLoading = false;
-  //   });
-  // }
-
-  onGoToDetails(kinderElem) {
-    // this.router.navigate(['/user', 'kindergarten', kinderElem.title])
+  onGoToFrom(kinderElem) {
+    this.router.navigate(['/agent', `${kinderElem}`])
   }
 
   onGoToAnotherPage(page) {

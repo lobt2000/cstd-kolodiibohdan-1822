@@ -81,6 +81,19 @@
       visibility: visible;
     }
 
+    .kindergarten-type {
+      position: absolute;
+      width: 140px;
+      height: 30px;
+      background: black;
+      z-index: 3;
+      transform: rotate(45deg);
+      top: 25px;
+      color: white;
+      right: -31px;
+      line-height: 30px;
+    }
+
     .kindergarten-logo {
       width: 100%;
       height: 100%;

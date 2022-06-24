@@ -36,10 +36,11 @@ export class KindergartenComponent implements OnInit {
     chooseKinderFormText: null,
     chooseKinderFormTitleBackground: null,
     chooseKinderFormTextBackground: null,
+    chooseKinderType: false,
     isGroupCheck: false,
     isType: false
   }
-  items = ['white', 'blue', 'black', 'brown', 'pink', 'purple', 'red', 'green', 'gold', 'white', 'blue', 'black', 'brown', 'pink', 'purple', 'red', 'green', 'gold', 'white', 'blue', 'black', 'brown', 'pink', 'purple', 'red', 'green', 'gold', 'white', 'blue', 'black', 'brown', 'pink', 'purple', 'red', 'green', 'gold']
+  items = ['white', 'blue', 'black', 'brown', 'pink', 'purple', 'red', 'green', 'gold', 'aqua', 'coral', 'crimson', 'forestgreen', 'greenyellow', 'yellow', 'olive', 'tomato']
   constructor(private fb: FormBuilder, private kindergartenServise: KindergartenListService, private storage: AngularFireStorage, private toastr: ToastrService, private authService: AuthService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
@@ -95,7 +96,8 @@ export class KindergartenComponent implements OnInit {
       logo: '',
       "logo-description": '',
       "logo-img": '',
-      phoneNumber: ''
+      phoneNumber: '',
+      kidergartenType: ''
     })
     // if (localStorage.getItem('kindergarten')) {
     //   const storage = JSON.parse(localStorage.getItem('kindergarten'));
@@ -219,6 +221,9 @@ export class KindergartenComponent implements OnInit {
     }
     else if (item == kinderChangeState.kinderFormTextBackgroundColor && this.kinderStyleState.chooseKinderFormTextBackground == i) {
       this.kinderStyleState.chooseKinderFormTextBackground = null;
+    }
+    else if (item == kinderChangeState.chooseKinderType && this.kinderStyleState.chooseKinderType) {
+      this.kinderStyleState.chooseKinderType = false;
     }
   }
 

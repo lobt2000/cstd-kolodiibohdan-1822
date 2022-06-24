@@ -21,7 +21,11 @@ export class ContactComponent implements OnInit {
 
   ngOnInit(): void {
     this.getComments();
+    const user = JSON.parse(localStorage.getItem('mainuser'));
     this.buildForm();
+    if(user) {
+      this.updateForm(user);
+    }
     window.scrollTo(0, 0);
 
   }
@@ -47,6 +51,14 @@ export class ContactComponent implements OnInit {
       message: this.fb.control('', [Validators.required])
     })
 
+  }
+
+  updateForm(user) {
+    this.commentFrom.patchValue({
+      email: user.email,
+      firstName: user.firstname,
+      secondName: user.secondname,
+    })
   }
 
   save(): void {

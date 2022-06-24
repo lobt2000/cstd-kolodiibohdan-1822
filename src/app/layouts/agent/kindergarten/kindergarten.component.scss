@@ -14,6 +14,21 @@
 }
 
 h1 {
+  font-size: 35px;
+  font-family: "Poppins";
+  font-weight: bolder;
+  width: 100%;
+  min-height: 100px;
+  line-height: 100px;
+  text-align: center;
+  color: blueviolet;
+  font-style: italic;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.main-view-title {
   // margin-top: 40px;
   font-size: 35px;
   font-family: "Poppins";
@@ -24,6 +39,64 @@ h1 {
   text-align: center;
   color: blueviolet;
   font-style: italic;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .kindergarten-type-button {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    position: relative;
+    background-color: #00835e;
+    margin-left: 30px;
+    font-size: 16px;
+    text-align: center;
+    line-height: 50px;
+    color: white;
+
+    .type-option {
+      position: absolute;
+      top: -20px;
+      left: 55px;
+      height: 100px;
+      width: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      flex-flow: column;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0px 2px 7px 1px gray;
+      color: #240b36;
+
+
+      .radio-button {
+        width: 100%;
+        height: 50px;
+        border-bottom: 1px solid;
+
+        &:last-child {
+          border-bottom: unset;
+        }
+
+        input[type=radio] {
+          width: 100%;
+          height: 100%;
+          opacity: 0;
+          position: absolute;
+          left: 0px;
+          cursor: pointer;
+        }
+
+        input[type=radio]:hover {
+          background-color: rgb(219, 215, 215);
+          box-shadow: 0px 2px 7px 1px gray;
+        }
+
+      }
+    }
+  }
 }
 
 .kindergarten {
@@ -73,6 +146,19 @@ h1 {
       width: 90%;
       align-items: flex-end;
       visibility: visible;
+    }
+
+    .kindergarten-type {
+      position: absolute;
+      width: 140px;
+      height: 30px;
+      background: black;
+      z-index: 3;
+      transform: rotate(45deg);
+      top: 25px;
+      color: white;
+      right: -31px;
+      line-height: 30px;
     }
 
     .kindergarten-logo-img {
@@ -1070,7 +1156,7 @@ h1 {
       justify-content: space-around;
 
       .advantages-write-title {
-        width: 80%;
+        width: 90%;
         height: 100%;
         font-size: 20px;
         font-weight: bolder;
@@ -1103,6 +1189,7 @@ h1 {
     text-align: justify;
     border: none;
     resize: none;
+    padding-right: 15px;
 
     @media (max-width: 568px) {
       font-size: 16px;
@@ -1338,8 +1425,7 @@ h1 {
     .form-content {
       width: 550px;
       min-height: 50px;
-      margin-bottom: 30px;
-      margin-top: 30px;
+      margin: 20px 30px;
       position: relative;
 
       .closed {
