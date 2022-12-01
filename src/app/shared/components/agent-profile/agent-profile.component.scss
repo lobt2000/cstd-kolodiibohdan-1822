@@ -1,0 +1,286 @@
+.profile {
+  padding-top: 6rem;
+
+  width: 100%;
+  height: calc(100% - 6rem);
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: stretch;
+  overflow: hidden;
+  overflow-y: auto;
+  //   @include flexbox(row, wrap, space-around, stretch);
+
+  h1 {
+    width: 100%;
+    height: 60px;
+    // text-shadow: ;
+    text-transform: uppercase;
+    font-size: 30px;
+    // color: $color;
+    text-align: center;
+  }
+
+  &__container {
+    width: 100%;
+    // @include flexbox(row, wrap, space-between, center);
+    display: flex;
+    flex-flow: row, wrap;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 10px;
+
+    @media (max-width: 956px) {
+      flex-flow: column;
+    }
+
+    &--photo {
+      width: 30%;
+      min-height: 100px;
+      //   @include flexbox(row, wrap, center, center);
+      display: flex;
+      flex-flow: row, wrap;
+      justify-content: center;
+      align-items: center;
+
+      img {
+        width: 200px;
+        height: 200px;
+        border-radius: 30%;
+
+      }
+
+    }
+
+    &--inform {
+      width: 65%;
+      min-height: 10px;
+      display: flex;
+
+      @media (max-width: 869px) {
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        font-size: 22px;
+      }
+
+      .userTitle {
+        width: 30%;
+        min-height: 10px;
+        color: slateblue;
+
+        p {
+          display: flex;
+          align-items: center;
+          font-size: 30px;
+          width: 100%;
+          min-height: 60px;
+          border: none;
+          margin-top: 10px;
+
+
+          @media (max-width:1400px) {
+            font-size: 26px;
+          }
+
+          @media (max-width: 1069px) {
+            font-size: 22px;
+          }
+        }
+      }
+
+      .userData {
+        width: 60%;
+        min-height: 10px;
+        color: seagreen;
+
+        p {
+          display: flex;
+          align-items: center;
+          font-size: 30px;
+          width: 100%;
+          min-height: 60px;
+          border: none;
+          margin-top: 10px;
+          border-bottom: 1px solid salmon;
+          font-style: italic;
+
+
+          @media (max-width:1400px) {
+            font-size: 26px;
+          }
+
+          @media (max-width: 1069px) {
+            font-size: 22px;
+          }
+        }
+
+        input {
+          font-size: 30px;
+          width: 100%;
+          min-height: 55px;
+          border: none;
+          margin-top: 10px;
+          background-color: transparent;
+          //   color: white;
+          border-bottom: 1px solid salmon;
+        }
+
+        .upload-btn-wrapper {
+          position: relative;
+          overflow: hidden;
+          display: inline-block;
+          margin-top: 20px;
+          cursor: pointer;
+
+        }
+
+        .btn {
+          border: 2px solid #fe8c00;
+          //   color: $color;
+          background: #fe8c00;
+          background: -webkit-linear-gradient(to right, #f83600, #fe8c00);
+          background: linear-gradient(to right, #f83600, #fe8c00);
+          padding: 8px 20px;
+          border-radius: 8px;
+          font-size: 20px;
+          font-weight: bold;
+          cursor: pointer;
+          transition: background .250s linear, color .250s linear, border .250s linear;
+        }
+
+        .upload-btn-wrapper input[type=file] {
+          font-size: 100px;
+          position: absolute;
+          left: 0;
+          top: 0;
+          opacity: 0;
+          width: 200px;
+          height: 50px;
+          margin-top: 0px;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  &__button {
+    width: 100%;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-right: 100px;
+
+    button {
+      width: 100px;
+      height: 50px;
+      border-radius: 10px;
+      background-color: orangered;
+      color: white;
+      border: 1px solid orangered;
+      transition: background .250s linear, color .250s linear, border .250s linear;
+      margin-left: 10px;
+    }
+
+    &--cancel {
+      background-color: red !important;
+    }
+
+    &--cancel:hover {
+      background-color: transparent !important;
+    }
+
+
+
+    button:hover {
+      background-color: transparent;
+      color: orangered;
+    }
+
+    button:focus {
+      outline: none;
+      box-shadow: 0 0 0 0.25rem orangered;
+      border: 1px solid orangered;
+
+    }
+  }
+}
+
+
+@media screen and (max-width: 769px) {
+  .profile {
+    &__container {
+      flex-flow: column;
+
+      &--photo {
+        width: 100%;
+      }
+
+      &--inform {
+        margin-top: 10px;
+        width: 100%;
+        justify-content: center;
+
+        .userTitle {
+          p {
+            font-size: 18px;
+          }
+        }
+
+        .userData {
+          p {
+            font-size: 18px;
+          }
+
+          input {
+            font-size: 18px;
+
+          }
+        }
+
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 369px) {
+  .profile {
+    &__container {
+      flex-flow: column;
+
+      &--photo {
+        width: 100%;
+      }
+
+      &--inform {
+        margin-top: 10px;
+        width: 100%;
+        justify-content: center;
+        // flex-flow: column;
+        align-items: center;
+
+        .userTitle {
+          p {
+            font-size: 18px;
+            // text-align: center;
+          }
+        }
+
+        .userData {
+          p {
+            text-align: center;
+            font-size: 18px;
+            word-break: break-all;
+          }
+
+          input {
+            font-size: 18px;
+
+          }
+        }
+
+      }
+    }
+  }
+}

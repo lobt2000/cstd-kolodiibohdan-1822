@@ -6,6 +6,8 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/comp
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
+import { SignIn } from '../shared/interfaces/login.interface';
+import { SignUp } from '../shared/interfaces/signUp.interface';
 import { Users } from '../shared/interfaces/users.interface';
 // import { Users } from '../shared/interfaces/users.interface';
 
@@ -13,7 +15,7 @@ import { Users } from '../shared/interfaces/users.interface';
   providedIn: 'root'
 })
 export class AuthService {
-  localUser: any;
+  // localUser: any;
   private dbPath = '/users';
   updUser: Subject<any> = new Subject<any>();
   profRef: AngularFirestoreCollection<any> = null;
@@ -37,48 +39,20 @@ export class AuthService {
       )
   }
 
-  signUp(email: string, password: string, userFname: string, userSname: string, userPos): void {
-    this.auth.createUserWithEmailAndPassword(email, password)
+  signUp(signUp: SignUp): void {
+    this.auth.createUserWithEmailAndPassword(signUp.email, signUp.pass)
 
       .then(userResponse => {
-        const user = {
+        const user: Users = {
           email: userResponse.user.email,
-          password: password,
-          firstname: userFname,
-          secondname: userSname,
-          userPos: userPos,
-          username: `${userFname} ${userSname}`,
-          url: `${userFname}_${userSname}`,
-          icon: 'assets/images/profile.svg',
-          contacts: [
-            {
-              "time": "11:15",
-              "url": "Guy_Hawkins",
-              "messages": [
-                {
-                  "userIcon": "https://firebasestorage.googleapis.com/v0/b/skillcheckers-ac855.appspot.com/o/userImg%2Fuser1.png?alt=media&token=5338afc7-46ed-408a-b3e4-db03ed8303c2",
-                  "time": "10:45 AM",
-                  "date": "6 JULY 2020",
-                  "user": "Guy Hawkins",
-                  "text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eget",
-                  "file": ""
-                },
-                {
-                  "user": "Bogdan Kolodiy",
-                  "time": "10:45 AM",
-                  "userIcon": "assets/images/profile.svg",
-                  "file": "",
-                  "text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eget",
-                  "date": "6 JULY 2020"
-                }
-              ],
-              "id": "",
-              "text": "Please give us feedback...",
-              "img": "https://firebasestorage.googleapis.com/v0/b/skillcheckers-ac855.appspot.com/o/userImg%2Fuser1.png?alt=media&token=5338afc7-46ed-408a-b3e4-db03ed8303c2",
-              "missing": "0",
-              "name": "Guy Hawkins"
-            }
-          ]
+          password: signUp.pass,
+          firstname: signUp.firstname,
+          secondname: signUp.secondname,
+          userPos: signUp.checkPosition,
+          username: `${signUp.firstname} ${signUp.secondname}`,
+          url: `${signUp.firstname}_${signUp.secondname}`,
+          icon: 'https://firebasestorage.googleapis.com/v0/b/kindergarten-daed8.appspot.com/o/images%2Fprofile.svg?alt=media&token=f3dfad23-c23a-4fdf-8ac8-4fad5ca93f49',
+          contacts: []
         }
 
         this.db.collection('users').add(user)
@@ -89,10 +63,11 @@ export class AuthService {
                   id: user.id,
                   ...user.data() as Users
                 }
+                this.update(user.id, myUser)
                 this.toastr.success(`Hello ${myUser.firstname} ${myUser.secondname}`, 'Sing up success');
                 localStorage.setItem('mainuser', JSON.stringify(myUser))
-                this.localUser = JSON.parse(localStorage.getItem('user'))
-                this.router.navigate(['user'])
+                // this.localUser = JSON.parse(localStorage.getItem('user'))
+                myUser.userPos == 'user' ? this.router.navigate(['user']) : this.router.navigate(['agent']);
               })
           })
 
@@ -106,14 +81,8 @@ export class AuthService {
       )
   }
 
-
-
-
-
-
-
-  signIn(email: string, password: string): void {
-    this.auth.signInWithEmailAndPassword(email, password)
+  signIn(login: SignIn): void {
+    this.auth.signInWithEmailAndPassword(login.email, login.pass)
       .then(userResponse => {
         this.db.collection('users').ref.where('email', '==', userResponse.user.email).onSnapshot(
           snap => {
@@ -121,15 +90,16 @@ export class AuthService {
               const myUser = {
                 id: userRef.id,
                 ...userRef.data() as Users,
-                password: password,
+                password: login.pass,
 
               }
-              this.update(userRef.id, myUser)
-              this.toastr.success(`Hello ${myUser.firstname} ${myUser.secondname}`, 'Login success');
-              this.updUser.next(myUser)
-              localStorage.setItem('mainuser', JSON.stringify(myUser))
-              this.localUser = JSON.parse(localStorage.getItem('user'))
-              this.router.navigate(['user']);
+              if (!JSON.parse(localStorage.getItem('mainuser'))) {
+                this.toastr.success(`Hello ${myUser.firstname} ${myUser.secondname}`, 'Login success');
+                this.updUser.next(myUser)
+                localStorage.setItem('mainuser', JSON.stringify(myUser))
+                // this.localUser = JSON.parse(localStorage.getItem('mainuser'))
+                myUser.userPos == 'user' ? this.router.navigate(['user']) : this.router.navigate(['agent']);
+              }
             })
           }
         )
@@ -145,7 +115,7 @@ export class AuthService {
   signOut(): void {
     this.auth.signOut()
       .then(() => {
-        localStorage.removeItem('mainuser');
+        localStorage.clear();
         this.router.navigate(['login']);
         this.toastr.success(`Bay`, 'Logout success');
       })

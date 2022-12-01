@@ -27,7 +27,7 @@ export class MainPageComponent implements OnInit {
       ),
       take(1)
     ).subscribe(data => {
-      this.firstKinder = data[0];
+      this.firstKinder = data[1];
     }, (e) => { }, () => {
       this.isLoading = false;
     });

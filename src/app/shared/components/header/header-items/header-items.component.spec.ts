@@ -56,8 +56,7 @@ describe('HeaderItemsComponent', () => {
       userPos: "user"
     }
     localStorage.setItem('mainuser', JSON.stringify(user))
-    service.updUser.next(user);
-    console.log(component.currUser);
+    // service.updUser.next(user);
     expect(component.currUser.hasOwnProperty('id')).toBeTrue();
   });
 
@@ -67,7 +66,7 @@ describe('HeaderItemsComponent', () => {
   });
 
   it('should be with user', () => {
-    mockAuthService.updUser.next(null)
+    // mockAuthService.updUser.next(null)
     expect(component.currUser).toBeNull();
   });
 

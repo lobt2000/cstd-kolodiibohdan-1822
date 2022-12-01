@@ -1,0 +1,434 @@
+.profile {
+  padding-top: 6rem;
+
+  width: 100%;
+  height: calc(100% - 6rem);
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: stretch;
+  overflow: hidden;
+  overflow-y: auto;
+  //   @include flexbox(row, wrap, space-around, stretch);
+
+  h1 {
+    width: 100%;
+    height: 60px;
+    // text-shadow: ;
+    text-transform: uppercase;
+    font-size: 30px;
+    // color: $color;
+    text-align: center;
+  }
+
+  &__container {
+    width: 100%;
+    // @include flexbox(row, wrap, space-between, center);
+    display: flex;
+    flex-flow: row, wrap;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 10px;
+
+    @media (max-width: 956px) {
+      flex-flow: column;
+    }
+
+    &--photo {
+      width: 30%;
+      min-height: 100px;
+      //   @include flexbox(row, wrap, center, center);
+      display: flex;
+      flex-flow: row, wrap;
+      justify-content: center;
+      align-items: center;
+
+      img {
+        width: 200px;
+        height: 200px;
+        border-radius: 30%;
+
+      }
+
+    }
+
+    &--inform {
+      width: 65%;
+      min-height: 10px;
+      display: flex;
+
+      @media (max-width: 869px) {
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        font-size: 22px;
+      }
+
+      .userTitle {
+        width: 30%;
+        min-height: 10px;
+        color: slateblue;
+
+        p {
+          display: flex;
+          align-items: center;
+          font-size: 30px;
+          width: 100%;
+          min-height: 60px;
+          border: none;
+          margin-top: 10px;
+
+
+          @media (max-width:1400px) {
+            font-size: 26px;
+          }
+
+          @media (max-width: 1069px) {
+            font-size: 22px;
+          }
+        }
+      }
+
+      .userData {
+        width: 60%;
+        min-height: 10px;
+        color: seagreen;
+
+        p {
+          display: flex;
+          align-items: center;
+          font-size: 30px;
+          width: 100%;
+          min-height: 60px;
+          border: none;
+          margin-top: 10px;
+          border-bottom: 1px solid salmon;
+          font-style: italic;
+
+
+          @media (max-width:1400px) {
+            font-size: 26px;
+          }
+
+          @media (max-width: 1069px) {
+            font-size: 22px;
+          }
+        }
+
+        input {
+          font-size: 30px;
+          width: 100%;
+          min-height: 55px;
+          border: none;
+          margin-top: 10px;
+          background-color: transparent;
+          //   color: white;
+          border-bottom: 1px solid salmon;
+        }
+
+        .upload-btn-wrapper {
+          position: relative;
+          overflow: hidden;
+          display: inline-block;
+          margin-top: 20px;
+          cursor: pointer;
+
+        }
+
+        .btn {
+          border: 2px solid #fe8c00;
+          //   color: $color;
+          background: #fe8c00;
+          background: -webkit-linear-gradient(to right, #f83600, #fe8c00);
+          background: linear-gradient(to right, #f83600, #fe8c00);
+          padding: 8px 20px;
+          border-radius: 8px;
+          font-size: 20px;
+          font-weight: bold;
+          cursor: pointer;
+          transition: background .250s linear, color .250s linear, border .250s linear;
+        }
+
+        .upload-btn-wrapper input[type=file] {
+          font-size: 100px;
+          position: absolute;
+          left: 0;
+          top: 0;
+          opacity: 0;
+          width: 200px;
+          height: 50px;
+          margin-top: 0px;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  &__button {
+    width: 100%;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-right: 100px;
+
+    button {
+      width: 100px;
+      height: 50px;
+      border-radius: 10px;
+      background-color: orangered;
+      color: white;
+      border: 1px solid orangered;
+      transition: background .250s linear, color .250s linear, border .250s linear;
+      margin-left: 10px;
+    }
+
+    &--cancel {
+      background-color: red !important;
+    }
+
+    &--cancel:hover {
+      background-color: transparent !important;
+    }
+
+
+
+    button:hover {
+      background-color: transparent;
+      color: orangered;
+    }
+
+    button:focus {
+      outline: none;
+      box-shadow: 0 0 0 0.25rem orangered;
+      border: 1px solid orangered;
+
+    }
+  }
+
+  .user-application-container {
+    width: calc(97% - 20px);
+    min-height: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    // overflow-x: auto;
+    flex-flow: row wrap;
+    box-shadow: 0px 2px 7px 1px gray;
+    margin: 10px auto;
+    padding: 10px;
+
+    .user-application-block {
+      width: 700px;
+      height: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      flex-flow: column nowrap;
+      margin: 20px auto;
+      box-shadow: 0px 2px 7px 1px gray;
+      border: 1px solid slateblue;
+      border-radius: 10px;
+
+      @media (max-width: 656px) {
+        height: 400px;
+      }
+
+
+      .application-title {
+        width: 90%;
+        min-height: 50px;
+        font-size: 20px;
+        font-weight: bold;
+        line-height: 50px;
+        text-align: center;
+        color: crimson;
+      }
+
+      .application-details {
+        width: calc(100% - 20px);
+        padding: 10px;
+        height: calc(100% - 120px);
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+
+        @media (max-width: 656px) {
+          flex-flow: column;
+        }
+
+        .application-children-details {
+          width: 40%;
+          height: 90%;
+          display: flex;
+          align-items: flex-start;
+          justify-content: space-around;
+          flex-flow: column nowrap;
+
+          @media (max-width: 656px) {
+            width: 100%;
+          }
+
+          .child-info {
+            width: 100%;
+            height: 100%;
+            font-size: 18px;
+            display: flex;
+            font-weight: bold;
+            align-items: center;
+            color: maroon;
+
+            @media (max-width: 656px) {
+              justify-content: center;
+
+            }
+
+
+            span {
+              margin-left: 10px;
+              font-style: italic;
+              font-weight: lighter;
+            }
+          }
+        }
+
+        .application-kindergarten-details {
+          width: 40%;
+          height: 90%;
+          display: flex;
+          align-items: flex-start;
+          justify-content: space-around;
+          flex-flow: column nowrap;
+
+          @media (max-width: 656px) {
+            width: 100%;
+          }
+
+          .kindergarten-info {
+            width: 100%;
+            height: 100%;
+            font-size: 18px;
+            display: flex;
+            font-weight: bold;
+            align-items: center;
+            color: steelblue;
+
+            @media (max-width: 656px) {
+              justify-content: center;
+              font-size: 16px;
+            }
+
+            span {
+              margin-left: 10px;
+              font-style: italic;
+              font-weight: lighter;
+            }
+          }
+        }
+      }
+
+      .application-status {
+        width: 100%;
+        height: 50px;
+        font-size: 16px;
+        text-align: center;
+
+        span {
+          margin-left: 10px;
+          font-weight: 300;
+        }
+      }
+    }
+
+    .withoutApply {
+      width: 100%;
+      // height: 500px;
+      font-size: 30px;
+      line-height: 1.5;
+      text-align: center;
+      align-self: center;
+
+      @media (max-width: 578px) {
+        font-size: 24px;
+      }
+    }
+  }
+}
+
+
+@media screen and (max-width: 769px) {
+  .profile {
+    &__container {
+      flex-flow: column;
+
+      &--photo {
+        width: 100%;
+      }
+
+      &--inform {
+        margin-top: 10px;
+        width: 100%;
+        justify-content: center;
+
+        .userTitle {
+          p {
+            font-size: 18px;
+          }
+        }
+
+        .userData {
+          p {
+            font-size: 18px;
+          }
+
+          input {
+            font-size: 18px;
+
+          }
+        }
+
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 369px) {
+  .profile {
+    &__container {
+      flex-flow: column;
+
+      &--photo {
+        width: 100%;
+      }
+
+      &--inform {
+        margin-top: 10px;
+        width: 100%;
+        justify-content: center;
+        // flex-flow: column;
+        align-items: center;
+
+        .userTitle {
+          p {
+            font-size: 18px;
+            // text-align: center;
+          }
+        }
+
+        .userData {
+          p {
+            text-align: center;
+            font-size: 18px;
+            word-break: break-all;
+          }
+
+          input {
+            font-size: 18px;
+
+          }
+        }
+
+      }
+    }
+  }
+}

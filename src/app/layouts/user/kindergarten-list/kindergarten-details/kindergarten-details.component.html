@@ -28,9 +28,11 @@
         [style.background-image]="'url(' + (item?.groupImg || 'assets/image/nursery-group-default.jpg') + ')'">
       </div>
       <div class="group-info">
-        <div class="group-name">{{item?.name}}</div>
-        <div class="group-age-range">{{item?.ageRange}}</div>
-        <button class="group-detail">Go to Details</button>
+        <div class="group-name" [style.color]="(item?.groupNameColor + '!important')">{{item?.name}}</div>
+        <div class="group-age-range" [style.color]="(item?.ageRange + '!important')">{{item?.ageRange}}
+        </div>
+        <button class="group-detail" *ngIf="item?.groupDetails?.length" (click)="openGroupDetails(item)">Go to
+          Details</button>
       </div>
     </div>
   </section>
@@ -39,9 +41,10 @@
     <div class="advantage-content" *ngFor="let advantage of currkinder?.kinderAdvantages; let i=index">
       <div class="advantage-title"><span [class]="advantage?.numImg ? 'numImg' : 'number'"
           [style.background-image]="'url(' + (advantage?.numImg || '') + ')'">{{advantage?.numImg ? '' : (i+1)}}</span><span
-          class="title">{{advantage.title}}</span>
+          class="title" [style.color]="(advantage?.advantagesTitleColor + '!important')">{{advantage.title}}</span>
       </div>
-      <div class="advantage-text">{{advantage.text}}</div>
+      <div class="advantage-text" [style.color]="(advantage?.advantagesTextColor + '!important')">{{advantage.text}}
+      </div>
     </div>
   </section>
 
@@ -52,7 +55,8 @@
       <div class="address-content" *ngFor="let kinderAddress of currkinder?.kinderAddresses">
         <span class="address-pos"
           [style.background-image]="'url(' + ( kinderAddress.addressPosImg || 'assets/image/crown.jpg') + ')'"></span>
-        <span class="address-name">{{kinderAddress?.addressName}}</span>
+        <span class="address-name"
+          [style.color]="(kinderAddress?.addressesTextColor + '!important')">{{kinderAddress?.addressName}}</span>
       </div>
     </div>
   </section>
@@ -61,20 +65,22 @@
     <div class="form-header">Forms of stay in {{currkinder?.title}}</div>
     <div class="form-container">
       <div class="form-content" *ngFor="let form of currkinder?.kinderForm">
-        <div class="form-title-info">
+        <div class="form-title-info"
+          [ngStyle]="{'background-color': form?.kinderFormTitleBackgroundColor, 'color' : form?.kinderFormTitleColor}">
           <div class="form-title-type">{{form?.formTitleType}}</div>
           <div class="form-title-time">{{form?.formTitleTime}}</div>
           <div class="form-title-price">{{form?.formTitlePrice}}</div>
           <div class="form-title-additional">{{form?.formTitleAdditional}}</div>
         </div>
-        <div class="form-description-block">
+        <div class="form-description-block"
+          [ngStyle]="{'background-color': form?.kinderFormTextBackgroundColor, 'color' : form?.kinderFormTextColor}">
           <div class="form-description-content" *ngFor="let description of form?.formDescription; let j=index">
             <span [class]="description?.numImg ? 'form-pos-img' : 'form-pos-num'"
-              [style.background-image]="'url(' + (description?.numImg || '') + ')'">{{description?.numImg ? '' : '❤'}}</span>
+              [style.background-image]="'url(' + (description?.numImg || '') + ')'">{{description?.numImg ? '' : (j+1)}}</span>
             <span class="form-name">{{description.descText}}</span>
           </div>
           <div class="form-description-button">
-            <button class="ask-for-details btn">Ask for details</button>
+            <button class="ask-for-details btn" (click)="goToKinderAgent()">Ask for details</button>
             <button class="recort-to-kinder btn" (click)="goToApply()">Apply into group</button>
           </div>
         </div>
@@ -83,42 +89,60 @@
   </section>
 
   <section class="child-registr-block">
-    <div class="child-registr-header">Fill out the form</div>
+    <div class="child-registr-header">Fill out the form for child registration</div>
     <form class="child-registr-form" [formGroup]="form">
       <div class="form-elem">
         <label for="">Your first name</label>
         <input type="text" [formControlName]="'firstName'"
-          [style.border-bottom]="form.get('firstName').valid ? '' : '2px solid red'">
+          [style.border-bottom]="form.get('firstName').valid ? '' : '2px solid red'"
+          placeholder="Write your first name ">
         <span *ngIf="this.form.get('firstName').getError('required')">Field should be required</span>
       </div>
       <div class="form-elem">
         <label for="">Your last name</label>
         <input type="text" [formControlName]="'lastName'"
-          [style.border-bottom]="form.get('lastName').valid ? '' : '2px solid red'">
+          [style.border-bottom]="form.get('lastName').valid ? '' : '2px solid red'" placeholder="Write your last name ">
         <span *ngIf="this.form.get('lastName').getError('required')">Field should be required</span>
       </div>
       <div class="form-elem">
         <label for="">Your email</label>
         <input type="text" [formControlName]="'email'"
-          [style.border-bottom]="form.get('email').valid ? '' : '2px solid red'">
+          [style.border-bottom]="form.get('email').valid ? '' : '2px solid red'" placeholder="Write your email ">
         <span *ngIf="this.form.get('email').getError('required')">Field should be required</span>
       </div>
       <div class="form-elem">
         <label for="">Your child name</label>
         <input type="text" [formControlName]="'childName'"
-          [style.border-bottom]="form.get('childName').valid ? '' : '2px solid red'">
+          [style.border-bottom]="form.get('childName').valid ? '' : '2px solid red'"
+          placeholder="Write your child name ">
         <span *ngIf="this.form.get('childName').getError('required')">Field should be required</span>
       </div>
       <div class="form-elem">
-        <label for="">Your child year old</label>
+        <label for="">Your child years old</label>
         <input type="number" [formControlName]="'childYear'" min="1" max="6"
-          [style.border-bottom]="form.get('childYear').valid ? '' : '2px solid red'">
+          [style.border-bottom]="form.get('childYear').valid ? '' : '2px solid red'" placeholder="Write your years old">
         <span *ngIf="this.form.get('childYear').getError('required')">Field should be required</span>
       </div>
       <div class="form-elem">
-        <label for="">Your child sex</label>
-        <input type="text" [formControlName]="'childSex'"
-          [style.border-bottom]="form.get('childSex').valid ? '' : '2px solid red'">
+        <label for="">Your child gender</label>
+        <div class="form-elem-select p-l-0 p-r-5 flex wrap aic bc-white"
+          (clickOutside)="onClickedOutsideItem($event, 'childSex')" (click)="openHidden('childSex')"
+          [style.border-bottom]="form.get('childSex')?.valid ? '' : '2px solid red'">
+          <div class="choose-sort p-4 m-l-5 flex nowrap jcsa aic bc-gray"
+            [style.color]="form.get('childSex').value  ? '' : 'gray'"
+            [innerHTML]="form.get('childSex').value || 'Choose your child gender'">
+          </div>
+          <span class="error" *ngIf="this.form.get('childSex').getError('required')">Field should be required</span>
+          <span aria-hidden="true" data-icon="&#xe900;"
+            [class]="!isChildSexCheck ? 'icon-drop-down-arrow' : 'icon-drop-up-arrow'" class="drop-icon"></span>
+          <div class="hidden bc-white" [style.display]="isChildSexCheck ? 'flex' : 'none'"
+            [style.transition]="'display 300ms ease-in-out'">
+            <p class="p-l-10 txt-c-black font-16" (click)="groupCheckType('Man', 'childSex')">Man</p>
+            <p class="p-l-10 txt-c-black font-16" (click)="groupCheckType('Woman', 'childSex')">Woman</p>
+            <p class="p-l-10 txt-c-black font-16" (click)="groupCheckType('Other', 'childSex')"
+              [style.border-bottom]="'none'">Other</p>
+          </div>
+        </div>
         <span *ngIf="this.form.get('childSex').getError('required')">Field should be required</span>
       </div>
       <div class="form-elem" *ngIf="currkinder?.kindergartenGroup">
@@ -127,7 +151,8 @@
           (clickOutside)="onClickedOutsideItem($event, 'groupType')" (click)="openHidden('groupType')"
           [style.border-bottom]="form.get('groupType')?.valid ? '' : '2px solid red'">
           <div class="choose-sort p-4 m-l-5 flex nowrap jcsa aic bc-gray"
-            [innerHTML]="form.get('groupType').value.name">
+            [style.color]="form.get('groupType').value.name  ? '' : 'gray'"
+            [innerHTML]="form.get('groupType').value.name || 'Choose group for your child'">
           </div>
           <span class="error" *ngIf="this.form.get('groupType').getError('required')">Field should be required</span>
           <span aria-hidden="true" data-icon="&#xe900;"
@@ -147,7 +172,8 @@
           (clickOutside)="onClickedOutsideItem($event, 'typeOfReg')" (click)="openHidden('typeOfReg')"
           [style.border-bottom]="form.get('typeOfReg').valid ? '' : '2px solid red'">
           <div class="choose-sort p-4 m-l-5 flex nowrap jcsa aic bc-gray"
-            [innerHTML]="form.get('typeOfReg').value.formTitleType">
+            [style.color]="form.get('typeOfReg').value.formTitleType  ? '' : 'gray'"
+            [innerHTML]="form.get('typeOfReg').value.formTitleType || 'Choose form of stay'">
           </div>
           <span class="error" *ngIf="this.form.get('typeOfReg').getError('required')">Field should be required</span>
           <span aria-hidden="true" data-icon="&#xe900;"
@@ -164,6 +190,13 @@
 
     </form>
     <button class="btn send-child-registr-form" (click)="sendApply()">Send registration form</button>
+  </section>
+  <section class="fixed-section">
+    <button class="button_messager icon-conversation" [matTooltip]="'Click here to contact in messager'"
+      [matTooltipPosition]="'above'" matTooltipClass="mat-custom-tooltip" (click)="goToKinderAgent()"></button>
+    <button class="phone_number" *ngIf="currkinder?.phoneNumber" (click)="copyNumber()"
+      [matTooltip]="'Click here to copy the phone'" [matTooltipPosition]="'above'"
+      matTooltipClass="mat-custom-tooltip"></button>
   </section>
 
 </main>

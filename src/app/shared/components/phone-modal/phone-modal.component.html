@@ -1,0 +1,16 @@
+<section class="modal w-100 flex aic jcc nowrap">
+  <div class="modal__block flex col aic jcsb p-10" (clickOutside)="onClickedOutsideItem($event)">
+    <div class="modal__block--cross w-100 flex m-t-4 m-r-4 aic jcfe" (click)="closeModal()">
+      <span class="icon-close"></span>
+    </div>
+    <div class="modal__block--title w-100 flex aic jcc nowrap txt-c-blue font-25">Input contact number</div>
+    <div class="modal__block--text w-100 flex aic jcc nowrap font-20 txt-c-black">Write the phone number so that the
+      user can contact you</div>
+    <div class="w-100 flex nowrap aic jcc" [formGroup]="textInput">
+      <input type="tel" formControlName="phone_number">
+    </div>
+    <div class="modal__block--button m-b-35 flex aic jcc nowrap"><button
+        class="btn cancel bc-blue bdc-blue m-r-10 font-13 txt-c-white" (click)="closeModal()">Cancel</button> <button
+        class="submit btn bc-red bdc-red font-13" (click)="save()">Save</button></div>
+  </div>
+</section>

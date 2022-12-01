@@ -1,0 +1,87 @@
+<main class="profile">
+  <h1>Account details</h1>
+  <div class="profile__container">
+    <div class="profile__container--photo">
+      <img [attr.src]="userFrom.value?.icon" alt="">
+    </div>
+    <div class="profile__container--inform">
+      <div class="userTitle">
+        <p>Email</p>
+        <p>First Name</p>
+        <p>Second Name</p>
+        <p>Phone</p>
+      </div>
+      <div [style.display]="!isEdit ? 'block' : 'none'" [style.transition]="'display 1s ease-in-out'" class="userData">
+        <p *ngIf="userFrom.value?.email">{{userFrom.value?.email}}</p>
+        <p *ngIf="!userFrom.value?.email">No data</p>
+        <p *ngIf="userFrom.value?.firstname">{{userFrom.value?.firstname}}</p>
+        <p *ngIf="!userFrom.value?.firstname">No data</p>
+        <p *ngIf="userFrom.value?.secondname">{{userFrom.value?.secondname}}</p>
+        <p *ngIf="!userFrom.value?.secondname">No data</p>
+        <p *ngIf="userFrom.value?.phone">{{userFrom.value?.phone}}</p>
+        <p *ngIf="!userFrom.value?.phone">No data</p>
+
+      </div>
+      <!-- <ng-template #data> -->
+      <div class="userData" [style.display]="isEdit ? 'block' : 'none'" [style.transition]="'display 1s ease-in-out'"
+        [formGroup]="userFrom">
+        <input type="text" placeholder="Write data here" [formControlName]="'email'"
+          [style.borderColor]="!userFrom.controls.email?.getError('required') && !userFrom.controls.email?.getError('pattern') ? 'green' : 'red'">
+        <input type="text" placeholder="Write data here" [formControlName]="'firstname'"
+          [style.borderColor]="!userFrom.controls.firstname?.getError('required') && !userFrom.controls.firstname?.getError('pattern') ? 'green' : 'red'">
+        <input type="text" placeholder="Write data here" [formControlName]="'secondname'"
+          [style.borderColor]="!userFrom.controls.secondname?.getError('required') && !userFrom.controls.secondname?.getError('pattern') ? 'green' : 'red'">
+        <input type="text" placeholder="Write data here" [formControlName]="'phone'"
+          [style.borderColor]="!userFrom.controls.phone?.getError('required') && !userFrom.controls.phone?.getError('pattern')  ? 'green' : 'red'">
+        <div class="upload-btn-wrapper">
+          <button class="btn">Upload user Image</button>
+          <input type="file" (change)="uploadFile($event)" name="myfile" />
+        </div>
+      </div>
+
+      <!-- </ng-template> -->
+
+    </div>
+
+  </div>
+  <div class="profile__button">
+    <button *ngIf="!isEdit" (click)="edit()" class="profile__button--edit">Edit</button>
+    <button *ngIf="isEdit" (click)="save()" class="profile__button--save">Save</button>
+    <button *ngIf="isEdit" (click)="edit()" class="profile__button--cancel">Cancel</button>
+  </div>
+
+  <div class="user-application-container">
+    <ng-container *ngIf="userApplies.length; else withoutApplication">
+      <div class="user-application-block" *ngFor="let item of userApplies">
+        <div class="application-title"> Application in {{item?.kinderTitle}} for {{item?.childName}} </div>
+        <div class="application-details">
+          <div class="application-children-details">
+            <div class="child-info">Child age: <span> {{item?.childYear}}</span> </div>
+            <div class="child-info">Child sex: <span> {{item?.childSex}}</span> </div>
+          </div>
+          <div class="application-kindergarten-details">
+            <div class="kindergarten-info">Group type: <span> {{item?.groupType.name}}</span> </div>
+            <div class="kindergarten-info">Type of registration: <span> {{item?.typeOfReg.formTitleType}}</span> </div>
+          </div>
+        </div>
+        <div class="application-status">
+          Status: <span *ngIf="item?.isRead" [style.color]="'green'"> Reviewed</span>
+          <span *ngIf="!item?.isRead" [style.color]="'gray'"> Unreviewed</span>
+          <span *ngIf="item?.status" [style.color]="item?.status == 'accept' ? 'green' : 'red'">
+            {{item?.status | uppercase}}</span>
+          <span *ngIf="item?.subGroup" [style.color]="item?.status == 'accept' ? 'green' : 'red'">
+            {{item?.subGroup | uppercase}}</span>
+          <span *ngIf="item?.status && !item?.subGroup" [style.color]="item?.status == 'accept' ? 'green' : 'red'">
+            Please, wait for email from kindergarten agent</span>
+        </div>
+      </div>
+    </ng-container>
+    <ng-template #withoutApplication>
+      <div class="withoutApply">You doesn`t send any applications
+      </div>
+    </ng-template>
+
+
+  </div>
+
+</main>

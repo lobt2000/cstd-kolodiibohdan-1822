@@ -10,7 +10,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { DateAdapter, MatNativeDateModule, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import { DateAdapter, MatNativeDateModule, MatRippleModule, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MomentDateAdapter, MomentDateModule } from '@angular/material-moment-adapter';
 
 import { AngularFireModule } from '@angular/fire/compat';
@@ -29,14 +29,34 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
 import { LayoutsRoutingModule } from '../layouts/layouts-routing.module';
 import { MatCarouselModule } from '@ngbmodule/material-carousel';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { AgentMenuComponent } from './components/agent-menu/agent-menu.component';
+import { AgentProfileComponent } from './components/agent-profile/agent-profile.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { ContactComponent } from './components/contact/contact.component';
+import { SearchMessagesPipe } from './pipes/search-messages.pipe';
+import { SearchApplicationPipe } from './pipes/search-application.pipe';
+import { SearchKindergartenPipe } from './pipes/search-kindergarten.pipe';
+import { PhoneModalComponent } from './components/phone-modal/phone-modal.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { GroupDetailsComponent } from './components/group-details/group-details.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
+
 // import { MatRadioModule } from '@angular/material/radio';
 @NgModule({
     declarations: [
         HeaderComponent,
         HeaderItemsComponent,
         MenuComponent,
-        ResetPasswordComponent
-
+        ResetPasswordComponent,
+        AgentMenuComponent,
+        AgentProfileComponent,
+        UserProfileComponent,
+        ContactComponent,
+        SearchMessagesPipe,
+        SearchApplicationPipe,
+        SearchKindergartenPipe,
+        PhoneModalComponent,
+        GroupDetailsComponent,
     ],
     imports: [
         CommonModule,
@@ -62,13 +82,21 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
         MatRadioModule,
         LayoutsRoutingModule,
         MatCarouselModule.forRoot(),
-        MatProgressSpinnerModule
+        MatProgressSpinnerModule,
+        MatDialogModule,
+        MatRippleModule,
+        MatTooltipModule,
     ],
     exports: [
         HeaderComponent,
         HeaderItemsComponent,
         MenuComponent,
-        ResetPasswordComponent
+        ResetPasswordComponent,
+        AgentMenuComponent,
+        SearchMessagesPipe,
+        SearchApplicationPipe,
+        SearchKindergartenPipe,
+        PhoneModalComponent
     ],
     providers: [
         { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },

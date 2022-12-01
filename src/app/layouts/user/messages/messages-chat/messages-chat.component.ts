@@ -4,6 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment';
 import { Subject } from 'rxjs';
+import { debounceTime, map, takeUntil } from 'rxjs/operators';
 import { AuthService } from 'src/app/service/auth.service';
 import { KindergartenListService } from 'src/app/service/kindergarten-list.service';
 import { contacts } from 'src/app/shared/interfaces/contacts.interface';
@@ -39,12 +40,18 @@ export class MessagesChatComponent implements OnInit {
   isEdit: boolean = false;
   isModal: boolean = false;
   searchText: string;
-  windowSize: number;
+  windowSize: number = window.innerWidth;
   isOpen: boolean;
+  destroy$ = new Subject<any>();
   constructor(private activatedRoute: ActivatedRoute,
     private router: Router,
     private kindergartenListService: KindergartenListService,
-    private storage: AngularFireStorage) {
+    private storage: AngularFireStorage, private authService: AuthService) {
+    this.router.events.pipe(takeUntil(this.destroy$)).subscribe(res => {
+      if (res.hasOwnProperty('routerEvent')) {
+        this.ngOnInit();
+      }
+    })
   }
 
   ngOnInit(): void {
@@ -52,16 +59,16 @@ export class MessagesChatComponent implements OnInit {
     this.kindergartenListService.menuPosition.subscribe(res => {
       this.isOpen = res;
     })
+    this.currDate = moment().format('D MMMM YYYY');
     this.backInLocation(true)
-    // console.log(moment().format('Do MMMM YYYY'));
-    this.getUser();
-    this.kindergartenListService.applyFile.subscribe(res => {
-      if (res) {
-        setTimeout(() => {
-          this.getFile(res)
-        }, 1000)
+    this.textInput.valueChanges.subscribe(res => {
+      if ((res.text && res.text.charCodeAt(0) !== 32) || this.uplFile) {
+        this.isDisabled = true;
+      } else {
+        this.isDisabled = false
       }
     })
+    this.getAllUsers();
   }
 
   backInLocation(bool = false) {
@@ -89,17 +96,101 @@ export class MessagesChatComponent implements OnInit {
   getUser(): void {
     if (localStorage.getItem('mainuser')) {
       this.mainUser = JSON.parse(localStorage.getItem('mainuser'));
-      this.currMesUser = this.mainUser.contacts.find(res => res.url == this.activatedRoute.snapshot.params.url);
+      const user = this.allUsers.find(res => res.id == this.activatedRoute.snapshot.params.id);
+      this.currMesUser = this.mainUser.contacts.find(res => res.id == this.activatedRoute.snapshot.params.id) || {
+        id: user.id,
+        icon: user.icon,
+        username: user?.username,
+        time: '',
+        missing: 0,
+        text: '',
+        url: user.url,
+        messages: []
+      };
 
+      this.checkDate(0);
     }
   }
 
+  getAllUsers(): void {
+    this.authService.getAllusers().snapshotChanges().pipe(
+      map(changes =>
+        changes.map(c =>
+          ({ id: c.payload.doc.id, ...c.payload.doc.data() })
+        )
+      ),
+      debounceTime(600),
+      takeUntil(this.destroy$)
+    ).subscribe(res => {
+      this.allUsers = res;
+      let user = JSON.parse(localStorage.getItem('mainuser'));
+      localStorage.setItem('mainuser', JSON.stringify(this.allUsers.find(item => item.id == user.id)))
+      this.getUser();
 
+    })
+  }
+
+  sendMessage(): void {
+    if (this.isDisabled) {
+      if ((this.textInput.get('text').value && this.textInput.get('text').value.charCodeAt(0) !== 32) || this.uplFile) {
+        const mess = {
+          user: this.mainUser.username,
+          userIcon: this.mainUser.icon,
+          text: this.textInput.get('text').value ? this.textInput.get('text').value : '',
+          date: moment().format('D MMMM YYYY'),
+          time: moment().format('LT'),
+          file: this.uplFile ? this.uplFile : '',
+          dateForCheck: new Date().toLocaleString().split(', ')[0]
+        }
+        this.currMesUser.messages.push(mess);
+        this.submit();
+      }
+    }
+    this.uplFile = null
+    this.textInput.reset();
+  }
+
+  submit(): void {
+    if (!this.mainUser.contacts.some(res => res.username == this.currMesUser.username)) {
+      this.mainUser.contacts.push({
+        id: this.currMesUser.id,
+        icon: this.currMesUser.icon,
+        username: this.currMesUser.username,
+        time: this.currMesUser.messages[this.currMesUser.messages.length - 1].time,
+        missing: 0,
+        text: this.currMesUser.messages[this.currMesUser.messages.length - 1].text,
+        url: this.currMesUser.url,
+        messages: this.currMesUser.messages
+      })
+
+    } else {
+      this.currMesUser = {
+        ...this.currMesUser,
+        time: this.currMesUser.messages[this.currMesUser.messages.length - 1].time,
+        text: this.currMesUser.messages[this.currMesUser.messages.length - 1].text,
+      }
+      this.mainUser.contacts = this.mainUser.contacts.map((res, i) => {
+        if (res.id == this.currMesUser.id) { res = this.currMesUser }
+        return res;
+      })
+
+    }
+    const user = {
+      ...this.mainUser
+    }
+    localStorage.setItem('mainuser', JSON.stringify(user))
+    this.updUser();
+    this.authService.update(this.mainUser.id, user)
+
+  }
+
+  @HostListener('window:keydown.enter', ['$event'])
+  keyDownSending() {
+    this.isEdit ? this.sendEditMessage() : this.sendMessage();
+  }
 
   getFile(event): void {
     const file = event.target ? event.target.files[0] : event;
-    console.log(file);
-
     const filePath = `message-file/${file.name}`;
     const upload = this.storage.upload(filePath, file);
     this.isDisabled = true;
@@ -156,56 +247,90 @@ export class MessagesChatComponent implements OnInit {
     this.deleteIndex = i;
   }
 
-  // delete(): void {
-  //   this.currMesUser.messages.splice(this.deleteIndex, 1);
-  //   this.messaging[this.messaging.map((res, i) => { if (res.url == this.currMesUser.url) { return i } })[0]] = this.currMesUser
-  //   const user: Users = {
-  //     ...this.mainUser,
-  //     usersMess: this.messaging
-  //   }
-  //   localStorage.setItem('mainuser', JSON.stringify(user))
-  //   this.authService.update(this.mainUser.id, user).finally(() => {
-  //     this.ngOnInit();
-  //   })
-  //   if (this.allUsers.some(res => res.username == this.currMesUser.name) && this.deleteForm.get('checkbox').value) {
-  //     this.updUser();
-  //   }
-  //   this.closeModal();
-  // }
+  delete(): void {
+    this.currMesUser.messages.splice(this.deleteIndex, 1);
+    const lengthOfMess: number = this.currMesUser.messages.length;
+    this.currMesUser = {
+      ...this.currMesUser,
+      time: this.currMesUser.messages.length ? this.currMesUser.messages[lengthOfMess - 1].time : '',
+      text: this.currMesUser.messages.length ? this.currMesUser.messages[lengthOfMess - 1].text : '',
+    }
+    this.mainUser.contacts = this.mainUser.contacts.map((res, i) => {
+      if (res.id == this.currMesUser.id) { res = this.currMesUser }
+      return res;
+    })
+    const user: Users = {
+      ...this.mainUser
+    }
+    localStorage.setItem('mainuser', JSON.stringify(user))
+    this.authService.update(this.mainUser.id, user)
+    if (this.deleteForm.get('checkbox').value) {
+      this.updUser();
+    }
+    this.closeModal();
+  }
 
-  // submit(): void {
-  //   this.messaging[this.messaging.map((res, i) => { if (res.url == this.currMesUser.url) { return i } })[0]] = this.currMesUser
-  //   const user: Users = {
-  //     ...this.mainUser,
-  //     usersMess: this.messaging
-  //   }
-  //   localStorage.setItem('mainuser', JSON.stringify(user))
-  //   this.authService.update(this.mainUser.id, user).finally(() => {
-  //     this.ngOnInit();
-  //   })
-  //   if (this.allUsers.some(res => res.username == this.currMesUser.name)) {
-  //     this.updUser();
-  //   }
-  // }
+
 
   closeModal(): void {
     this.isModal = false;
-    // this.deleteIndex = null;
     this.deleteForm.reset();
   }
 
-  // updUser(): void {
-  //   let reciewUser = this.allUsers.find(res => res.username == this.currMesUser.name);
-  //   let index = reciewUser.usersMess.map((res, i) => { if (res.name == this.mainUser.username) { return i } }).filter(res => res)[0]
-  //   reciewUser.usersMess[index].messages = this.currMesUser.messages;
-  //   this.authService.update(reciewUser.id, reciewUser).finally(() => {
-  //     this.ngOnInit();
-  //   })
-  // }
+  updUser(): void {
+    let reciewUser = this.allUsers.find(res => res.username == this.currMesUser.username);
+    const lengthOfMess: number = this.currMesUser.messages.length;
+    if (!reciewUser.contacts.some(res => res.id == this.mainUser.id)) {
+      reciewUser.contacts.push({
+        id: this.mainUser.id,
+        icon: this.mainUser.icon,
+        username: this.mainUser.username,
+        time: this.currMesUser.messages[lengthOfMess - 1].time,
+        missing: 0,
+        text: this.currMesUser.messages[lengthOfMess - 1].text,
+        url: this.mainUser.url,
+        messages: this.currMesUser.messages
+      })
+    }
+    else {
+      let index = reciewUser.contacts.findIndex((res, i) => res.id == this.mainUser.id);
+      reciewUser.contacts[index] = {
+        ...reciewUser.contacts[index],
+        time: this.currMesUser.messages[lengthOfMess - 1] ? this.currMesUser.messages[lengthOfMess - 1].time : '',
+        text: this.currMesUser.messages[lengthOfMess - 1] ? this.currMesUser.messages[lengthOfMess - 1].text : '',
+        messages: this.currMesUser.messages
+      }
+    }
+    this.authService.update(reciewUser.id, reciewUser)
+  }
+
+  sendEditMessage(): void {
+    if (this.isDisabled) {
+      if ((this.textInput.get('text').value || this.uplFile) && this.textInput.get('text').value.charCodeAt(0) !== 32 && this.deleteIndex !== this.editMessage) {
+        this.currMesUser.messages[this.editMessage].text = this.textInput.get('text').value ? this.textInput.get('text').value : '';
+        this.currMesUser.messages[this.editMessage].file = this.uplFile ? this.uplFile : '';
+        this.submit();
+      } else {
+        this.textInput.reset();
+      }
+    }
+    this.uplFile = null
+    this.textInput.reset();
+    this.isEdit = false;
+  }
 
   onClickedOutsideItem(e: Event) {
     e.stopPropagation()
     this.closeModal();
+  }
+
+  checkDate(i) {
+    return (this.currMesUser?.messages[i - 1]?.dateForCheck) !== this.currMesUser?.messages[i]?.dateForCheck
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.unsubscribe();
   }
 
 }

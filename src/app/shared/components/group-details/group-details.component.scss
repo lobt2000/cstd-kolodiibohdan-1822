@@ -1,0 +1,237 @@
+.modal {
+  position: fixed;
+  top: 0%;
+  left: 0%;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(128, 128, 128, 0.274);
+  // background: gray;
+
+  &__block {
+    width: 678px;
+    height: 535px;
+    background-color: white;
+    border-radius: 10px;
+
+    &--cross {
+      .icon-close {
+        font-size: 12px;
+        color: #6E7585;
+        cursor: pointer;
+      }
+    }
+
+    &--title {
+      font-weight: 600;
+      margin: 10px 0px;
+    }
+
+    &--text {
+      font-weight: 600;
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    &--content {
+      width: 100%;
+      height: 60%;
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+      flex-flow: row wrap;
+      overflow-y: auto;
+
+      .group-content {
+        width: 155px;
+        height: 180px;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        flex-flow: column nowrap;
+        margin: 15px 20px 20px;
+        position: relative;
+        border-radius: 10px;
+        background-color: blueviolet;
+
+        .close {
+          position: absolute;
+          z-index: 3;
+          right: 7px;
+          cursor: pointer;
+          font-size: 11px;
+          top: 10px;
+        }
+
+        .icon-close {
+          &::before {
+            color: white;
+          }
+        }
+
+        .chosenGroup {
+          position: absolute;
+          z-index: 3;
+          right: -10px;
+          cursor: pointer;
+          font-size: 11px;
+          top: -12px;
+          border-radius: 50%;
+          height: 25px;
+          width: 25px;
+          background-color: green;
+          text-align: center;
+          line-height: 25px;
+          font-size: 15px;
+        }
+
+        .icon-iconmonstr-plus-6 {
+          &::before {
+            margin-left: 0px;
+          }
+        }
+
+        .subGroupFull {
+          position: absolute;
+          z-index: 3;
+          right: -22px;
+          cursor: pointer;
+          /* font-size: 11px; */
+          top: -8px;
+          border-radius: 5px;
+          height: 25px;
+          width: 47px;
+          background-color: red;
+          text-align: center;
+          line-height: 25px;
+          font-size: 15px;
+          color: white;
+          transform: rotate(45deg);
+        }
+
+        .group-info {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-flow: column nowrap;
+
+          .group-name {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            width: 100%;
+
+            span,
+            input {
+              width: 80%;
+              height: 40px;
+              text-align: center;
+              background-color: transparent;
+              border: none;
+              font-size: 18px;
+              font-weight: bolder;
+              font-family: 'Poppins';
+              color: white;
+            }
+
+            input::placeholder {
+              color: rgba(255, 255, 255, 0.603);
+            }
+
+          }
+
+          .group-count-range {
+            font-size: 16px;
+            font-weight: bold;
+            font-family: 'Poppins';
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            margin-bottom: 10px;
+            color: white;
+            width: 90%;
+
+
+            .write-group-count-range {
+              width: 30%;
+              height: 35px;
+              font-size: 16px;
+              font-weight: bold;
+              font-family: "Poppins";
+              text-align: center;
+              border: 1px solid white;
+              background-color: transparent;
+              border-radius: 30%;
+              color: white;
+              line-height: 35px;
+            }
+
+            input[type=number]::-webkit-inner-spin-button,
+            input[type=number]::-webkit-outer-spin-button {
+              -webkit-appearance: none;
+              margin: 0;
+            }
+          }
+        }
+
+      }
+
+
+    }
+
+    .add-groupDetails {
+      width: 300px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      flex-flow: column nowrap;
+      margin-bottom: 20px;
+      border: 1px solid palevioletred;
+      border-radius: 25px;
+      font-size: 16px;
+      color: palevioletred;
+      cursor: pointer;
+      font-weight: bolder;
+      transition: all 0.6s ease-in-out;
+
+      &:hover {
+        background-color: palevioletred;
+        color: white;
+      }
+    }
+
+    &--button {
+      .cancel {
+        padding: 0;
+        width: 105px;
+        height: 40px;
+        transition: background-color 600ms ease-in-out, border 600ms ease-in-out, box-shadow 600ms ease-in-out, color 600ms ease-in-out;
+      }
+
+      .submit {
+        padding: 0;
+        width: 105px;
+        height: 40px;
+        transition: background-color 600ms ease-in-out, border 600ms ease-in-out, box-shadow 600ms ease-in-out, color 600ms ease-in-out;
+      }
+
+
+      .submit:hover {
+        background-color: transparent;
+        border: 1px solid #FD6363;
+        box-shadow: 0px 0px 5px 2px #FD6363;
+        color: #FD6363;
+      }
+
+      .cancel:hover {
+        background-color: transparent;
+        border: 1px solid #0CACF8;
+        box-shadow: 0px 0px 5px 2px #0CACF8;
+        color: #0CACF8;
+      }
+    }
+  }
+}

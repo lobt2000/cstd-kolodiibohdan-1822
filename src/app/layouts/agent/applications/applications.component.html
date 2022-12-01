@@ -1,0 +1,21 @@
+<div class="kindergartenApply" *ngIf="!isLoading">
+  <ng-container *ngIf="kinderApplyLists.length; else withoutGroup">
+    <div class="kindergarten-apply-list" *ngFor="let kinderApply of kinderApplyLists"
+      [style.width]="(windowSize < 1120 && !isOpen) || windowSize < 850 ? '90%' : '46%'">
+      <div class="kindergarten-apply-logo" [style.background-image]="'url(' + kinderApply['groupImg'] + ')'" alt=""></div>
+      <div class="kindergarten-apply-title header-title">
+        <div class="logo-apply-title">{{kinderApply?.name}}</div>
+        <div class="logo-description font-15 line-height-one-half">{{kinderApply['ageRange']}}</div>
+        <button class="btn bc-blue go-to-button" (click)="onGoToDetails(kinderApply)">Go to
+          {{kinderApply?.name}}</button>
+      </div>
+    </div>
+  </ng-container>
+  <ng-template #withoutGroup>
+    <div class="withoutGroup">Your kindergarten doesn`t have any groups</div>
+  </ng-template>
+
+</div>
+<div *ngIf="isLoading" class="loader-overlay">
+  <mat-spinner></mat-spinner>
+</div>

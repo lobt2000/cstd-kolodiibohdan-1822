@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from '../service/auth.service';
 
 @Component({
@@ -22,11 +23,30 @@ export class LoginComponent implements OnInit {
   isSign: string = 'signIn';
   confirmPass: string = '';
   resetPassword: string = 'registration';
-  constructor(private fb: FormBuilder, private authService: AuthService) { }
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
+    if (JSON.parse(localStorage.getItem('mainuser'))) {
+      JSON.parse(localStorage.getItem('mainuser')).userPos == 'user' ?
+        this.router.navigateByUrl("/user") :
+        this.router.navigateByUrl('/agent')
+    }
     this.buildFormForSignIn();
   }
+
+  @HostListener('window:keydown.enter', ['$event'])
+  enterKey() {
+    if (this.isSign === 'signUp') {
+      this.signUP();
+    }
+    else if (this.isSign === 'signIn') {
+      this.signIN();
+    }
+    else if (this.resetPassword === 'resetEmail') {
+      this.sendEmailForReset();
+    }
+  }
+
   buildFormForSignIn(): void {
     this.formLogIn = this.fb.group({
       email: ['', [Validators.required, Validators.pattern(this.regExpEmail)]],
@@ -34,22 +54,23 @@ export class LoginComponent implements OnInit {
     });
     this.formLogIn.valueChanges.subscribe(res => {
       if (this.formLogIn.valid) {
-        this.isDisabled = false
+        this.isDisabled = false;
       } else {
-        this.isDisabled = true
+        this.isDisabled = true;
       }
     })
     this.formLogIn.controls.pass.valueChanges.subscribe(res => {
       if (res) {
-        res.match(this.pattern)
+        res.match(this.pattern);
       }
       if (this.formLogIn.valid) {
-        this.isDisabled = false
+        this.isDisabled = false;
       } else {
-        this.isDisabled = true
+        this.isDisabled = true;
       }
     })
   }
+
   buildFormForSignUp(): void {
     this.formLogUp = this.fb.group({
       firstname: ['', [Validators.required, Validators.pattern(this.patternName)]],
@@ -61,9 +82,9 @@ export class LoginComponent implements OnInit {
     });
     this.formLogUp.valueChanges.subscribe(res => {
       if (this.formLogUp.valid) {
-        this.isDisabled = false
+        this.isDisabled = false;
       } else {
-        this.isDisabled = true
+        this.isDisabled = true;
       }
     })
     this.formLogUp.controls.pass.valueChanges.subscribe(res => {
@@ -72,44 +93,46 @@ export class LoginComponent implements OnInit {
         this.confirmPass = res;
       }
       if (this.formLogUp.valid) {
-        this.isDisabled = false
+        this.isDisabled = false;
       } else {
-        this.isDisabled = true
+        this.isDisabled = true;
       }
     })
     this.formLogUp.controls.confirmpass.valueChanges.subscribe(res => {
       if (this.formLogUp.valid) {
-        this.isDisabled = false
+        this.isDisabled = false;
       } else {
-        this.isDisabled = true
+        this.isDisabled = true;
       }
     })
   }
+
   ChangeType(): void {
-    this.isVisible = !this.isVisible
+    this.isVisible = !this.isVisible;
   }
+
   ChangeTypeSignUp(): void {
-    this.isSignUpVisible = !this.isSignUpVisible
+    this.isSignUpVisible = !this.isSignUpVisible;
   }
+
   ChangeTypeConfirm(): void {
-    this.isConfirmVisible = !this.isConfirmVisible
+    this.isConfirmVisible = !this.isConfirmVisible;
   }
+
   signIN(): void {
     if (this.formLogIn.valid) {
-      this.authService.signIn(this.formLogIn.get('email').value, this.formLogIn.get('pass').value)
-      // this.authService.signUp(this.form.get('email').value, this.form.get('pass').value, 'Albert Flores', 'https://firebasestorage.googleapis.com/v0/b/skillcheckers-ac855.appspot.com/o/userImg%2Fuser12.png?alt=media&token=10805ccc-1c2c-402f-a44b-bb7c254ac069')
+      this.authService.signIn(this.formLogIn.getRawValue());
       this.resetForm();
-
     }
     else {
       this.resetForm();
     }
   }
+
   signUP(): void {
     if (this.formLogUp.valid) {
-      this.authService.signUp(this.formLogUp.get('email').value, this.formLogUp.get('pass').value, this.formLogUp.get('firstname').value, this.formLogUp.get('secondname').value, this.formLogUp.get('checkPosition').value)
+      this.authService.signUp(this.formLogUp.getRawValue());
       this.resetForm();
-
     }
     else {
       this.resetForm();

@@ -20,7 +20,7 @@ export class IsUserGuard implements CanActivate {
       return false;
     } else if (userType === "agent") {
       this.router.navigate(['agent'])
-      return false;
+      return true;
     } else {
       return true;
     }
